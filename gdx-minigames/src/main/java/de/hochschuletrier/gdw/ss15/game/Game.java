@@ -2,17 +2,17 @@ package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
@@ -23,14 +23,13 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
-import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 import java.util.function.Consumer;
@@ -39,6 +38,7 @@ public class Game extends InputAdapter {
 
     private final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     private final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
+    private final SmoothCamera camera = new SmoothCamera();
 
     private final PooledEngine engine = new PooledEngine(
             GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE,
@@ -64,6 +64,7 @@ public class Game extends InputAdapter {
 
     public void dispose() {
         togglePhysixDebug.unregister();
+        Main.getInstance().removeScreenListener(camera);
     }
 
     public void init(AssetManagerX assetManager) {
@@ -74,6 +75,9 @@ public class Game extends InputAdapter {
         addContactListeners();
         setupPhysixWorld();
         entityFactory.init(engine, assetManager);
+        
+        camera.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Main.getInstance().addScreenListener(camera);
     }
 
     private void addSystems() {
@@ -81,6 +85,7 @@ public class Game extends InputAdapter {
         engine.addSystem(physixDebugRenderSystem);
         engine.addSystem(animationRenderSystem);
         engine.addSystem(updatePositionSystem);
+        engine.addSystem(new SoundSystem(camera));
     }
 
     private void addContactListeners() {
@@ -103,7 +108,10 @@ public class Game extends InputAdapter {
     }
 
     public void update(float delta) {
-        Main.getInstance().screenCamera.bind();
+        camera.setDestination(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        camera.update(delta);
+        camera.bind();
+        
         engine.update(delta);
     }
 

@@ -3,6 +3,7 @@
         "meta": {},
         "components": {
             "Position": {},
+            "SoundEmitter": {},
             "ImpactSound" : {
                 "sound": "click",
                 "minImpulseStrength": 20,
@@ -25,6 +26,7 @@
         "meta": {},
         "components": {
             "Position": {},
+            "SoundEmitter": {},
             "ImpactSound" : {
                 "sound": "click",
                 "minImpulseStrength": 20,

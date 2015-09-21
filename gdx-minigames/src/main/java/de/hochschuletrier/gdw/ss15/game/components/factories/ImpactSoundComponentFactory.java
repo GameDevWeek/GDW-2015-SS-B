@@ -15,11 +15,10 @@ public class ImpactSoundComponentFactory extends ComponentFactory<EntityFactoryP
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         ImpactSoundComponent component = engine.createComponent(ImpactSoundComponent.class);
-        component.sound = assetManager.getSound(properties.getString("sound", "click"));
+        component.sound = properties.getString("sound", "click");
         component.minImpulseStrength = properties.getFloat("minImpulseStrength", 20);
         component.minSpeed = properties.getFloat("minSpeed", 20);
         component.minDelay = properties.getInt("minDelay", 100);
-        component.lastPlayed.reset();
         entity.add(component);
     }
 }

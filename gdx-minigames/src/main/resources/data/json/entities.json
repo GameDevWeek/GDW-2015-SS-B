@@ -34,11 +34,11 @@
                 "minDelay": 100
             },
             "Texture": {
-                "texture": "texture_dummy_32"
+                "texture": "texture_dummy_64"
             },
             "PhysixBody": {
                 "type": "box",
-                "size": 32,
+                "size": 64,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1

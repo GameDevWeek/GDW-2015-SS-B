@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.game.Game;
+import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.menu.MenuPageRoot;
 
@@ -27,7 +27,7 @@ public class GameplayState extends BaseGameState {
 
     private static final Color OVERLAY_COLOR = new Color(0f, 0f, 0f, 0.5f);
 
-    private final Game game;
+    private final AbstractGame game;
     private final Music music;
 
     private final MenuManager menuManager = new MenuManager(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT, this::onMenuEmptyPop);
@@ -35,7 +35,7 @@ public class GameplayState extends BaseGameState {
     private final InputProcessor menuInputProcessor;
     private final InputProcessor gameInputProcessor;
 
-    public GameplayState(AssetManagerX assetManager, Game game) {
+    public GameplayState(AssetManagerX assetManager, AbstractGame game) {
         this.game = game;
 
         music = assetManager.getMusic("gameplay");

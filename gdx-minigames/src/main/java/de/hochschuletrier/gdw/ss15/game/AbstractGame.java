@@ -27,6 +27,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 import java.util.function.Consumer;
 
@@ -67,6 +68,7 @@ public abstract class AbstractGame extends InputAdapter {
         engine.addSystem(physixSystem);
         engine.addSystem(physixDebugRenderSystem);
         engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
+        engine.addSystem(new TextureRenderSystem());
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
         engine.addSystem(new SoundSystem(camera));
     }

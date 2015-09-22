@@ -22,6 +22,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
@@ -110,6 +111,11 @@ public abstract class AbstractGame extends InputAdapter {
         factoryParam.x = x;
         factoryParam.y = y;
         Entity entity = entityFactory.createEntity(name, factoryParam);
+        
+        SetupComponent setup = engine.createComponent(SetupComponent.class);
+        setup.name = name;
+        entity.add(setup);
+            
         engine.addEntity(entity);
         return entity;
     }

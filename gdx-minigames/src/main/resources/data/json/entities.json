@@ -44,5 +44,23 @@
                 "restitution": 0.1
             }
         }
+    },
+    "player": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "SoundEmitter": {},
+            "Player": {},
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0
+            }
+        }
     }
 }

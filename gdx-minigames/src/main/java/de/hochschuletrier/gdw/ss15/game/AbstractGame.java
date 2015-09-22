@@ -112,8 +112,4 @@ public abstract class AbstractGame {
         return entity;
     }
 
-    public InputProcessor getInputProcessor() {
-        return Gdx.input.getInputProcessor();
-    }
-
 }

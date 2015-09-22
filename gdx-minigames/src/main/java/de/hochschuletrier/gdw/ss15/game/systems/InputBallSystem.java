@@ -32,21 +32,7 @@ public class InputBallSystem extends IteratingSystem {
 	        
 	        if ( InputPuffer.push == true) {
 	        	input.push = InputPuffer.push;
-	        }
-	    	
-//	    	PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
-//	        float strengthX = 10000;
-//	        float strengthY = 20000;
-//	        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-//	            body.applyImpulse(0, -strengthY);
-//	        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN))
-//	            body.applyImpulse(0, strengthY);
-//	        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
-//	            body.applyImpulse(-strengthX, 0);
-//	        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-//	            body.applyImpulse(strengthX, 0);
-//	        
-	        
+	        }	        
 	}
 
 }

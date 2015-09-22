@@ -4,14 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
-import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
-import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
@@ -71,6 +66,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             Vector2 pos = datagram.getPosition();
             position.x = pos.x;
             position.y = pos.y;
+            position.rotation = datagram.getRotation();
         }
     }
     

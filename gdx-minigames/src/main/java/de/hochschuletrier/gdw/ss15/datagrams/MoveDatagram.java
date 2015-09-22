@@ -9,7 +9,6 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetMessageOut;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 
 /**
  * send from server only
@@ -19,6 +18,7 @@ public class MoveDatagram extends NetDatagram {
     private long netId;
     private final Vector2 position = new Vector2();
     private final Vector2 velocity = new Vector2();
+    private float rotation;
 
     public static MoveDatagram create(Entity entity) {
         MoveDatagram datagram = DatagramFactory.create(MoveDatagram.class);
@@ -28,6 +28,7 @@ public class MoveDatagram extends NetDatagram {
         final PhysixBodyComponent physixBody = ComponentMappers.physixBody.get(entity);
         Vector2 velocity = physixBody.getLinearVelocity();
         datagram.velocity.set(velocity.x, velocity.y);
+        datagram.rotation = position.rotation;
         return datagram;
     }
 
@@ -43,6 +44,10 @@ public class MoveDatagram extends NetDatagram {
         return velocity;
     }
 
+    public float getRotation() {
+        return rotation;
+    }
+
     @Override
     public NetMessageType getMessageType() {
         return NetMessageType.NORMAL;
@@ -55,6 +60,7 @@ public class MoveDatagram extends NetDatagram {
         message.putFloat(position.y);
         message.putFloat(velocity.x);
         message.putFloat(velocity.y);
+        message.putFloat(rotation);
     }
 
     public @Override
@@ -64,5 +70,6 @@ public class MoveDatagram extends NetDatagram {
         position.y = message.getFloat();
         velocity.x = message.getFloat();
         velocity.y = message.getFloat();
+        rotation = message.getFloat();
     }
 }

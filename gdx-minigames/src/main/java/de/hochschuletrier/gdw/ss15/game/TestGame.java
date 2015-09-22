@@ -10,10 +10,12 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.input.InputKeyboard;
+import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 
 public class TestGame extends AbstractGame {
@@ -24,11 +26,15 @@ public class TestGame extends AbstractGame {
         setupPhysixWorld();
         
         Gdx.input.setInputProcessor( new InputKeyboard());
+
+        Entity player = createEntity("player", 300, 300);
+        player.add(engine.createComponent(LocalPlayerComponent.class));
     }
 
     @Override
     protected void addSystems() {
         super.addSystems();
+        engine.addSystem(new InputBallSystem());
     }
 
     @Override

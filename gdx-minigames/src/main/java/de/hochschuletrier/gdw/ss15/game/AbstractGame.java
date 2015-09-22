@@ -22,7 +22,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
@@ -30,7 +29,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 import java.util.function.Consumer;
 
-public abstract class AbstractGame extends InputAdapter {
+public abstract class AbstractGame {
 
     protected final PooledEngine engine = new PooledEngine(GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE, GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE);
     protected final EntityFactoryParam factoryParam = new EntityFactoryParam();
@@ -109,20 +108,12 @@ public abstract class AbstractGame extends InputAdapter {
         factoryParam.x = x;
         factoryParam.y = y;
         Entity entity = entityFactory.createEntity(name, factoryParam);
-        
-        SetupComponent setup = engine.createComponent(SetupComponent.class);
-        setup.name = name;
-        entity.add(setup);
-            
         engine.addEntity(entity);
         return entity;
     }
 
-    @Override
-    public abstract boolean touchDown(int screenX, int screenY, int pointer, int button);
-
     public InputProcessor getInputProcessor() {
-        return this;
+        return Gdx.input.getInputProcessor();
     }
 
 }

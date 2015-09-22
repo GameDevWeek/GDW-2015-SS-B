@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -15,6 +16,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.input.InputGamePad;
 import de.hochschuletrier.gdw.ss15.game.input.InputKeyboard;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
@@ -26,7 +28,8 @@ public class TestGame extends AbstractGame {
         super.init(assetManager);
         setupPhysixWorld();
         
-        Gdx.input.setInputProcessor( new InputKeyboard());
+        Gdx.input.setInputProcessor(new InputKeyboard());
+        // Controllers.addListener(new InputGamePad());
 
         Entity player = createEntity("player", 300, 300);
         player.add(engine.createComponent(LocalPlayerComponent.class));
@@ -55,15 +58,5 @@ public class TestGame extends AbstractGame {
         createTrigger(410, 600, 3200, 40, (Entity entity) -> {
             engine.removeEntity(entity);
         });
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == 0) {
-            createEntity("ball", screenX, screenY);
-        } else {
-            createEntity("box", screenX, screenY);
-        }
-        return true;
     }
 }

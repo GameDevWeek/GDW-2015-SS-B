@@ -101,7 +101,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     }
     
     public void handle(WorldSetupDatagram datagram) {
-        game = new NetcodeTestGame(null, netClient, datagram.getPlayerName());
+        game = new NetcodeTestGame(null, netClient);
         game.init(assetManager, datagram.getMapName());
         serverConnection = null;
         status = Status.READY;

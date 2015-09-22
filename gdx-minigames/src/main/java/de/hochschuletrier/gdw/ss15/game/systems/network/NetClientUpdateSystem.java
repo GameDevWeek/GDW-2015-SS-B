@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
@@ -21,7 +20,6 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     private final NetClientSimple netClient;
     private PooledEngine engine;
     private final HashMap<Long, Entity> netEntityMap = new HashMap();
-    private PhysixSystem physixSystem;
     private final AbstractGame game;
 
     public NetClientUpdateSystem(NetClientSimple netClient, AbstractGame game) {
@@ -39,14 +37,14 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     public void onDisconnect() {
 //        Main.getInstance().disconnect();
     }
-    
+
     public void handle(CreateEntityDatagram datagram) {
         System.out.println("test");
         final Vector2 position = datagram.getPosition();
         Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y);
         netEntityMap.put(datagram.getNetId(), entity);
     }
-    
+
     public void handle(RemoveEntityDatagram datagram) {
         Entity entity = netEntityMap.get(datagram.getNetId());
         if (entity != null) {
@@ -55,13 +53,13 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             //fixme: warn?
         }
     }
-    
+
     public void handle(GameStartDatagram datagram) {
     }
-    
+
     public void handle(MoveDatagram datagram) {
         Entity entity = netEntityMap.get(datagram.getNetId());
-        if(entity != null) {
+        if (entity != null) {
             PositionComponent position = ComponentMappers.position.get(entity);
             Vector2 pos = datagram.getPosition();
             position.x = pos.x;
@@ -69,5 +67,5 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             position.rotation = datagram.getRotation();
         }
     }
-    
+
 }

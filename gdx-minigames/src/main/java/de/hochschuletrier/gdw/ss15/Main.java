@@ -242,7 +242,7 @@ public class Main extends StateBasedGame
         if (!isTransitioning()) {
             NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
             if (netServer.start(port, maxPlayers)) {
-                NetcodeTestGame game = new NetcodeTestGame(netServer, null, userName);
+                NetcodeTestGame game = new NetcodeTestGame(netServer, null);
                 game.init(assetManager, "data/maps/demo.tmx");
                 changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
             }

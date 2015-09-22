@@ -25,12 +25,10 @@ import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 public class NetcodeTestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
-    private final String userName;
 
-    public NetcodeTestGame(NetServerSimple netServer, NetClientSimple netClient, String userName) {
+    public NetcodeTestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
         this.netClient = netClient;
-        this.userName = userName;
         if(netClient != null)
             factoryParam.allowPhysics = false;
     }

@@ -149,7 +149,7 @@ public class MapTest extends SandboxGame {
         camera.update(delta);
 
         if(playerBody != null) {
-            float speed = 10000.0f;
+            float speed = 30000.0f;
             float velX = 0, velY = 0;
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 velX -= delta * speed;

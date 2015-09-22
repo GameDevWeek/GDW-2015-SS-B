@@ -8,10 +8,10 @@ public class InputKeyboard implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
-			case Input.Keys.W: System.out.println("OBEN"); break;
-			case Input.Keys.S: System.out.println("UNTEN"); break;
-			case Input.Keys.A: System.out.println("LINKS"); break;
-			case Input.Keys.D: System.out.println("RECHTS"); break;
+			case Input.Keys.W: InputPuffer.horizontal = 1.0f; break;
+			case Input.Keys.S: InputPuffer.horizontal = -1.0f; break;
+			case Input.Keys.A: InputPuffer.vertical = 1.0f; break;
+			case Input.Keys.D: InputPuffer.vertical = -1.0f; break;
 		}
 		return false;
 	}
@@ -36,7 +36,10 @@ public class InputKeyboard implements InputProcessor {
 		 * 	1: right mouse button
 		 * 	2: middle mouse button 
 		 */
-		System.out.println(screenX + " : " + screenY + " : " + pointer + " : " + button);
+		switch (button) {
+			case 0: InputPuffer.pull = true; break;
+			case 1: InputPuffer.push = true; break;
+		}
 		return false;
 	}
 

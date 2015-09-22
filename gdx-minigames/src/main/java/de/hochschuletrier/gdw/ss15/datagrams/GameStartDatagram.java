@@ -1,6 +1,5 @@
 package de.hochschuletrier.gdw.ss15.datagrams;
 
-import com.badlogic.ashley.core.Entity;
 import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageIn;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageOut;
@@ -9,18 +8,24 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 /**
  * send from server only
  */
-public class DestroyEntityDatagram extends NetDatagram {
+public final class GameStartDatagram extends NetDatagram {
 
-    private long netId;
+    private long playerId;
+    private long time;
 
-    public static DestroyEntityDatagram create(Entity entity) {
-        DestroyEntityDatagram datagram = DatagramFactory.create(DestroyEntityDatagram.class);
-        datagram.netId = entity.getId();
+    public static GameStartDatagram create(long playerId, long time) {
+        GameStartDatagram datagram = DatagramFactory.create(GameStartDatagram.class);
+        datagram.playerId = playerId;
+        datagram.time = time;
         return datagram;
     }
 
-    public long getNetId() {
-        return netId;
+    public long getPlayerId() {
+        return playerId;
+    }
+
+    public long getPlayerTime() {
+        return time;
     }
 
     @Override
@@ -30,11 +35,13 @@ public class DestroyEntityDatagram extends NetDatagram {
 
     @Override
     public void writeToMessage(NetMessageOut message) {
-        message.putLong(netId);
+        message.putLong(playerId);
+        message.putLong(time);
     }
 
     public @Override
     void readFromMessage(NetMessageIn message) {
-        netId = message.getLong();
+        playerId = message.getLong();
+        time = message.getLong();
     }
 }

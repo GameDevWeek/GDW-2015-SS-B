@@ -33,6 +33,9 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
+        if(!param.allowPhysics)
+            return;
+        
         final PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");

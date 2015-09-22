@@ -2,8 +2,11 @@ package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 
 public class MenuPageRoot extends MenuPage {
 
@@ -23,12 +26,27 @@ public class MenuPageRoot extends MenuPage {
         int yStep = 55;
         if (type == Type.MAINMENU) {
             addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel Starten", this::startGame);
+            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
+            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
         } else {
             addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Fortsetzen", () -> menuManager.popPage());
             addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel verlassen", this::stopGame);
         }
         addPageEntry(menuManager, x, y - yStep * (i++), "Credits", new MenuPageCredits(skin, menuManager));
         addCenteredButton(menuManager.getWidth() - 80, 54, 100, 40, "Exit", () -> System.exit(-1));
+    }
+
+    private void startServer() {
+        String userName = "Server";
+        int port = 9090;
+        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, userName);
+    }
+
+    private void joinServer() {
+        String server = "localhost";
+        String userName = "Client";
+        int port = 9090;
+        JoinServerEvent.emit(server, port, userName);
     }
 
     private void startGame() {

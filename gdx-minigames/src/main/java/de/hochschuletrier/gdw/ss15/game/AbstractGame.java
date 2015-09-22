@@ -41,6 +41,7 @@ public abstract class AbstractGame extends InputAdapter {
     protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
     protected final SmoothCamera camera = new SmoothCamera();
+    private String mapName;
 
     public AbstractGame() {
         // If this is a build jar file, disable hotkeys
@@ -48,13 +49,18 @@ public abstract class AbstractGame extends InputAdapter {
             togglePhysixDebug.register();
         }
     }
+    
+    public String getMapName() {
+        return mapName;
+    }
 
     public void dispose() {
         togglePhysixDebug.unregister();
         Main.getInstance().removeScreenListener(camera);
     }
 
-    public void init(AssetManagerX assetManager) {
+    public void init(AssetManagerX assetManager, String mapName) {
+        this.mapName = mapName;
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
         addSystems();
@@ -64,9 +70,14 @@ public abstract class AbstractGame extends InputAdapter {
         Main.getInstance().addScreenListener(camera);
     }
 
+    public void start() {
+    }
+
     protected void addSystems() {
-        engine.addSystem(physixSystem);
-        engine.addSystem(physixDebugRenderSystem);
+        if(factoryParam.allowPhysics) {
+            engine.addSystem(physixSystem);
+            engine.addSystem(physixDebugRenderSystem);
+        }
         engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
         engine.addSystem(new TextureRenderSystem());
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
@@ -126,5 +137,4 @@ public abstract class AbstractGame extends InputAdapter {
     public InputProcessor getInputProcessor() {
         return this;
     }
-
 }

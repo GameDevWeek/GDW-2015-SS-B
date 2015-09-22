@@ -13,6 +13,7 @@
             "Animation": {
                 "animation": "ball"
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "circle",
                 "size": 30,
@@ -36,6 +37,7 @@
             "Texture": {
                 "texture": "texture_dummy_64"
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "box",
                 "size": 64,
@@ -54,6 +56,7 @@
             "Animation": {
                 "animation": "box"
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "box",
                 "size": 60,

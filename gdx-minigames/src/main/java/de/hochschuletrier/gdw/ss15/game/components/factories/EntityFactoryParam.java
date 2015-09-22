@@ -5,4 +5,5 @@ import de.hochschuletrier.gdw.ss15.game.TestGame;
 public class EntityFactoryParam {
     public float x;
     public float y;
+    public boolean allowPhysics = true;
 }

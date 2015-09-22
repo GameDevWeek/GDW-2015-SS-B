@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hochschuletrier.gdw.ss15.events.PullEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
@@ -13,7 +14,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.input.InputPuffer;
 
-public class InputBallSystem extends IteratingSystem{
+public class InputBallSystem extends IteratingSystem  {
 	
 	public InputBallSystem() {
 		this(0);
@@ -31,9 +32,20 @@ public class InputBallSystem extends IteratingSystem{
 	      // transfer from puffer
 	      input.vertical = InputPuffer.vertical;
 	      input.horizontal = InputPuffer.horizontal;
-	        
 	      if (input.pull != InputPuffer.pull) { // wechsel hat stattgefunden
+	    	  if (InputPuffer.pull) {
+	    		  PositionComponent pos = ComponentMappers.position.get(entity);
+		    	  
+		    	  float directionX = Gdx.input.getX() - pos.x;
+		    	  float directionY = Gdx.input.getY() - pos.y;
+		    	  
+		    	  PullEvent.emitOn(entity, new Vector2(directionX, directionY).nor()); 
+	    	  }
+	    	  else {
+	    		  PullEvent.emitOff(entity);
+	    	  }
 	    	  
+	    	  input.pull = InputPuffer.pull;
 	      }
 	      
 	      if ( false /* Spieler hat Ball */ ) {

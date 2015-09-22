@@ -26,12 +26,17 @@ import de.hochschuletrier.gdw.commons.gdx.audio.SoundInstance;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.StateBasedGame;
+import de.hochschuletrier.gdw.commons.gdx.state.transition.SplitHorizontalTransition;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.commons.gdx.utils.GdxResourceLocator;
 import de.hochschuletrier.gdw.commons.gdx.utils.KeyUtil;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.utils.ClassUtils;
+import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
+import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.sandbox.SandboxCommand;
+import de.hochschuletrier.gdw.ss15.states.GameplayState;
 import de.hochschuletrier.gdw.ss15.states.LoadGameState;
 import de.hochschuletrier.gdw.ss15.states.MainMenuState;
 import org.apache.commons.cli.CommandLine;
@@ -44,8 +49,9 @@ import org.apache.commons.cli.PosixParser;
  *
  * @author Santo Pfingsten
  */
-public class Main extends StateBasedGame {
-    
+public class Main extends StateBasedGame
+implements DisconnectEvent.Listener, TestGameEvent.Listener {
+
     public static CommandLine cmdLine;
 
     public static final boolean IS_RELEASE = ClassUtils.getClassUrl(Main.class).getProtocol().equals("jar");
@@ -129,6 +135,9 @@ public class Main extends StateBasedGame {
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
+        
+        TestGameEvent.register(this);
+        DisconnectEvent.register(this);
     }
 
     private void onLoadComplete() {
@@ -136,7 +145,7 @@ public class Main extends StateBasedGame {
         addPersistentState(mainMenuState);
         changeState(mainMenuState, null, null);
         SandboxCommand.init(assetManager);
-        
+
         if (cmdLine.hasOption("sandbox")) {
             SandboxCommand.runSandbox(cmdLine.getOptionValue("sandbox"));
         }
@@ -200,6 +209,22 @@ public class Main extends StateBasedGame {
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void onTestGameEvent() {
+        if (!isTransitioning()) {
+            TestGame game = new TestGame();
+            game.init(assetManager);
+            changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
+        }
+    }
+    
+    @Override
+    public void onDisconnectEvent() {
+        if (!isTransitioning()) {
+            changeState(getPersistentState(MainMenuState.class));
+        }
     }
 
     public static void main(String[] args) {

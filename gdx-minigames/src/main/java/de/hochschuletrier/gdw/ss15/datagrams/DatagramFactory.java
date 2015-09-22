@@ -6,7 +6,12 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetDatagramPool;
 public final class DatagramFactory {
 
     public static final NetDatagramPool POOL = new NetDatagramPool(
-            ConnectDatagram.class
+            ConnectDatagram.class,
+            WorldSetupDatagram.class,
+            CreateEntityDatagram.class,
+            RemoveEntityDatagram.class,
+            GameStartDatagram.class,
+            MoveDatagram.class
     );
 
     static <T extends NetDatagram> T create(Class<T> clazz) {

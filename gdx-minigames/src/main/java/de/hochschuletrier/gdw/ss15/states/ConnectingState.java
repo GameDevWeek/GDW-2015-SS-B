@@ -12,6 +12,8 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.game.NetcodeTestGame;
 import java.io.IOException;
@@ -37,15 +39,13 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     private NetcodeTestGame game;
     private final NetClientSimple netClient = new NetClientSimple(DatagramFactory.POOL);
     private NetConnection serverConnection;
-    private final boolean success;
 
     public ConnectingState(AssetManagerX assetManager, String ip, int port, String playerName) throws IOException {
         this.assetManager = assetManager;
         main = Main.getInstance();
         netClient.setHandler(this);
         
-        success = netClient.connect(ip, port);
-        if (success) {
+        if (netClient.connect(ip, port)) {
             serverConnection = netClient.getConnection();
             serverConnection.sendReliable(ConnectDatagram.create(playerName));
             status = Status.CONNECTING;
@@ -53,7 +53,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     }
 
     public boolean isSuccess() {
-        return success;
+        return status != null;
     }
 
     public boolean checkForDisconnect() {
@@ -72,18 +72,8 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
         }
         switch (status) {
             case CONNECTING:
-                if(!checkForDisconnect()) {
-                    while (serverConnection.hasIncoming()) {
-                        NetDatagram datagram = serverConnection.receive();
-//                        if (datagram instanceof WorldSetupDatagram) {
-//                            game = new NetcodeTestGame(null, netClient, datagram.playerName);
-//                            game.init(assetManager);
-//                            serverConnection = null;
-//                            status = Status.READY;
-//                            break;
-//                        }
-                    }
-                }
+                if(!checkForDisconnect())
+                    netClient.update();
                 break;
             case READY:
                 if(!checkForDisconnect()) {
@@ -108,6 +98,13 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
 
         }
         //fixme: draw connection screen
+    }
+    
+    public void handle(WorldSetupDatagram datagram) {
+        game = new NetcodeTestGame(null, netClient, datagram.getPlayerName());
+        game.init(assetManager, datagram.getMapName());
+        serverConnection = null;
+        status = Status.READY;
     }
 
     @Override

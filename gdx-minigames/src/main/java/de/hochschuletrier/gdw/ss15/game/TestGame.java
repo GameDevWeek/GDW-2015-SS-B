@@ -19,8 +19,8 @@ import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 public class TestGame extends AbstractGame {
 
     @Override
-    public void init(AssetManagerX assetManager) {
-        super.init(assetManager);
+    public void init(AssetManagerX assetManager, String mapName) {
+        super.init(assetManager, mapName);
         setupPhysixWorld();
         Entity player = createEntity("player", 300, 300);
         player.add(engine.createComponent(LocalPlayerComponent.class));

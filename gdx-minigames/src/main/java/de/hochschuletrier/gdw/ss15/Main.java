@@ -225,7 +225,7 @@ public class Main extends StateBasedGame
     public void onTestGameEvent() {
         if (!isTransitioning()) {
             TestGame game = new TestGame();
-            game.init(assetManager);
+            game.init(assetManager, "data/maps/demo.tmx");
             changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
         }
     }
@@ -243,7 +243,7 @@ public class Main extends StateBasedGame
             NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
             if (netServer.start(port, maxPlayers)) {
                 NetcodeTestGame game = new NetcodeTestGame(netServer, null, userName);
-                game.init(assetManager);
+                game.init(assetManager, "data/maps/demo.tmx");
                 changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
             }
         }

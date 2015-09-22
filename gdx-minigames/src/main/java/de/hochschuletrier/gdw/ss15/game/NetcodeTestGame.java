@@ -14,6 +14,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
@@ -30,16 +31,31 @@ public class NetcodeTestGame extends AbstractGame {
         this.netServer = netServer;
         this.netClient = netClient;
         this.userName = userName;
+        if(netClient != null)
+            factoryParam.allowPhysics = false;
     }
     
     @Override
-    public void init(AssetManagerX assetManager) {
-        super.init(assetManager);
+    public void init(AssetManagerX assetManager, String mapName) {
+        super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
             Entity player = createEntity("player", 300, 300);
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
+        
+        if(netServer != null) {
+            netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
+            netServer.setListener(engine.getSystem(NetServerUpdateSystem.class));
+        } else if(netClient != null) {
+            netClient.setHandler(engine.getSystem(NetClientUpdateSystem.class));
+            netClient.setListener(engine.getSystem(NetClientUpdateSystem.class));
+        }
+    }
+
+    @Override
+    public void start() {
+        super.start();
     }
 
     @Override
@@ -49,10 +65,10 @@ public class NetcodeTestGame extends AbstractGame {
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
-            engine.addSystem(new NetServerUpdateSystem(netServer));
+            engine.addSystem(new NetServerUpdateSystem(netServer, GameType.MAGNET_BALL, getMapName()));
         } else if(netClient != null) {
             engine.addSystem(new NetClientSendInputSystem(netClient));
-            engine.addSystem(new NetClientUpdateSystem(netClient));
+            engine.addSystem(new NetClientUpdateSystem(netClient, this));
         }
     }
 

@@ -9,7 +9,6 @@ public class InputBallComponent extends Component implements Pool.Poolable {
 	public float vertical;
 	
 	public boolean pull;
-	public boolean push;
 	
 	@Override
 	public void reset() {
@@ -17,7 +16,6 @@ public class InputBallComponent extends Component implements Pool.Poolable {
 		this.vertical = 0.0f;
 		
 		this.pull = false;
-		this.push = false;
 		
 	}
 	

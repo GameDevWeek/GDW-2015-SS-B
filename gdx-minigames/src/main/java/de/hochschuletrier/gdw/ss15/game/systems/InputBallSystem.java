@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.input.InputPuffer;
 
-public class InputBallSystem extends IteratingSystem  {
+public class InputBallSystem extends IteratingSystem {
 	
 	public InputBallSystem() {
 		this(0);

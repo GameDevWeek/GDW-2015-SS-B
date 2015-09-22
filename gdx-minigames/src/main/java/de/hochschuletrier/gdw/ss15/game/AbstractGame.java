@@ -111,5 +111,4 @@ public abstract class AbstractGame {
         engine.addEntity(entity);
         return entity;
     }
-
 }

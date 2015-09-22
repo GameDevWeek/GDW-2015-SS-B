@@ -1,46 +1,56 @@
 package de.hochschuletrier.gdw.ss15.game;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
+import java.util.HashMap;
+
+import com.badlogic.gdx.graphics.Texture;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.input.InputForwarder;
-import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
+import de.hochschuletrier.gdw.commons.gdx.tiled.TiledMapRendererGdx;
+import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
+import de.hochschuletrier.gdw.commons.tiled.LayerObject;
+import de.hochschuletrier.gdw.commons.tiled.TileSet;
+import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
-import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
-import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss15.game.input.InputGamePad;
-import de.hochschuletrier.gdw.ss15.game.input.InputKeyboard;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
-import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
+import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 public class TestGame extends AbstractGame {
-
+	
+	private TiledMap map;
+    private TiledMapRendererGdx mapRenderer;
+    private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
+    
     @Override
     public void init(AssetManagerX assetManager) {
         super.init(assetManager);
+        
+        this.initLoadMap();
+        
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
+        
         setupPhysixWorld();
         
 //        Gdx.input.setInputProcessor(new InputKeyboard());
 //      
         
-        Controllers.addListener(new InputGamePad());
+        // Controllers.addListener(new InputGamePad());
+    }
+    
+    private void initLoadMap() {
+    	map = loadMap("data/maps/demo.tmx");        
         
+        for (TileSet tileset : map.getTileSets()) {
+            TmxImage img = tileset.getImage();
+            String filename = CurrentResourceLocator.combinePaths(tileset.getFilename(), img.getSource());
+            tilesetImages.put(tileset, new Texture(filename));
+        }
         
-        
-        Entity player = createEntity("player", 300, 300);
-        player.add(engine.createComponent(LocalPlayerComponent.class));
-        player.add(engine.createComponent(InputBallComponent.class));
+        mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
     @Override
@@ -57,13 +67,23 @@ public class TestGame extends AbstractGame {
 
     private void setupPhysixWorld() {
         physixSystem.setGravity(0, 24);
-        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
-        Body body = physixSystem.getWorld().createBody(bodyDef);
-        body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(800, 20));
-        PhysixUtil.createHollowCircle(physixSystem, 180, 180, 150, 30, 6);
-
-        createTrigger(410, 600, 3200, 40, (Entity entity) -> {
-            engine.removeEntity(entity);
-        });
+    }
+    
+    public static TiledMap loadMap(String filename) {
+        try {
+            return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalArgumentException("Map konnte nicht geladen werden: ");
+            
+        }
+    }
+    
+    @Override
+    public void update(float delta) {
+    	super.update(delta);
+    	
+    	// Map wird gerendert !
+    	mapRenderer.render(0, 0);
     }
 }

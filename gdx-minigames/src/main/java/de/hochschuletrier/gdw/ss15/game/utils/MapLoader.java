@@ -1,16 +1,15 @@
 package de.hochschuletrier.gdw.ss15.game.utils;
 
-import java.util.HashMap;
 import java.util.function.Consumer;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
+import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
@@ -36,6 +35,21 @@ public class MapLoader
      */
     public MapLoader()
     {
+    }
+    
+    public static void generateWorldFromTileMapX(PooledEngine engine, PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
+    	for (Layer layer : map.getLayers()) 
+        {
+            if(layer.isObjectLayer())
+            {
+                /// pre filtering important objects,
+                /// wich needs to be already existing when loading other Objects
+                for(LayerObject obj : layer.getObjects())
+                {
+                	System.out.println(obj.getName().toLowerCase());
+                }
+            }
+        }
     }
     
     public TiledMap getTiledMap()

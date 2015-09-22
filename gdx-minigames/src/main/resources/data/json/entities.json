@@ -33,12 +33,12 @@
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Animation": {
-                "animation": "box"
+            "Texture": {
+                "texture": "texture_dummy_32"
             },
             "PhysixBody": {
                 "type": "box",
-                "size": 60,
+                "size": 32,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1

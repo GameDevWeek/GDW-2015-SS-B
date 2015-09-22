@@ -1,4 +1,6 @@
 {
     "menu_fg": "data/ui/menu/fg_border.png",
-    "menu_bg": "data/ui/menu/bg_root.png"
+    "menu_bg": "data/ui/menu/bg_root.png",
+    "texture_dummy_32": "data/images/texture_dummy_32x32px.png",
+    "texture_dummy_64": "data/images/texture_dummy_64x64px.png"
 }

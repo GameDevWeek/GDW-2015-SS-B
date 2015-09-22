@@ -29,7 +29,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 import java.util.function.Consumer;
 
-public abstract class AbstractGame extends InputAdapter {
+public abstract class AbstractGame {
 
     protected final PooledEngine engine = new PooledEngine(GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE, GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE);
     protected final EntityFactoryParam factoryParam = new EntityFactoryParam();
@@ -110,13 +110,6 @@ public abstract class AbstractGame extends InputAdapter {
         Entity entity = entityFactory.createEntity(name, factoryParam);
         engine.addEntity(entity);
         return entity;
-    }
-
-    @Override
-    public abstract boolean touchDown(int screenX, int screenY, int pointer, int button);
-
-    public InputProcessor getInputProcessor() {
-        return this;
     }
 
 }

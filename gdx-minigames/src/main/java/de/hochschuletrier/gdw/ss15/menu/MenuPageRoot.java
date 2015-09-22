@@ -2,10 +2,8 @@ package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
-import de.hochschuletrier.gdw.commons.gdx.state.transition.SplitHorizontalTransition;
-import de.hochschuletrier.gdw.ss15.game.TestGame;
-import de.hochschuletrier.gdw.ss15.states.GameplayState;
-import de.hochschuletrier.gdw.ss15.states.MainMenuState;
+import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 
 public class MenuPageRoot extends MenuPage {
 
@@ -34,17 +32,11 @@ public class MenuPageRoot extends MenuPage {
     }
 
     private void startGame() {
-        if (!main.isTransitioning()) {
-            TestGame game = new TestGame();
-            game.init(assetManager);
-            main.changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
-        }
+        TestGameEvent.emit();
     }
 
     private void stopGame() {
-        if (!main.isTransitioning()) {
-            main.changeState(main.getPersistentState(MainMenuState.class));
-        }
+        DisconnectEvent.emit();
     }
 
     protected final void addPageEntry(MenuManager menuManager, int x, int y, String text, MenuPage page) {

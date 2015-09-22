@@ -5,11 +5,11 @@ import com.badlogic.gdx.utils.Pool;
 
 public class InputBallComponent extends Component implements Pool.Poolable {
 	
-	float horizontal;
-	float vertical;
+	public float horizontal;
+	public float vertical;
 	
-	boolean pull;
-	boolean schieben;
+	public boolean pull;
+	public boolean push;
 	
 	@Override
 	public void reset() {
@@ -17,7 +17,7 @@ public class InputBallComponent extends Component implements Pool.Poolable {
 		this.vertical = 0.0f;
 		
 		this.pull = false;
-		this.schieben = false;
+		this.push = false;
 		
 	}
 	

@@ -2,11 +2,14 @@ package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.input.InputForwarder;
+import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
@@ -28,9 +31,13 @@ public class TestGame extends AbstractGame {
         super.init(assetManager);
         setupPhysixWorld();
         
-        Gdx.input.setInputProcessor(new InputKeyboard());
-        // Controllers.addListener(new InputGamePad());
-
+//        Gdx.input.setInputProcessor(new InputKeyboard());
+//      
+        
+        Controllers.addListener(new InputGamePad());
+        
+        
+        
         Entity player = createEntity("player", 300, 300);
         player.add(engine.createComponent(LocalPlayerComponent.class));
         player.add(engine.createComponent(InputBallComponent.class));

@@ -9,9 +9,11 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactList
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 
 public class TestGame extends AbstractGame {
@@ -20,11 +22,14 @@ public class TestGame extends AbstractGame {
     public void init(AssetManagerX assetManager) {
         super.init(assetManager);
         setupPhysixWorld();
+        Entity player = createEntity("player", 300, 300);
+        player.add(engine.createComponent(LocalPlayerComponent.class));
     }
 
     @Override
     protected void addSystems() {
         super.addSystems();
+        engine.addSystem(new TestInputSystem());
     }
 
     @Override

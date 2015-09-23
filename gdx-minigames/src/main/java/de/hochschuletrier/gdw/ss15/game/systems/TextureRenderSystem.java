@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package de.hochschuletrier.gdw.ss15.game.systems;
 
 import com.badlogic.ashley.core.Entity;
@@ -23,9 +22,9 @@ public class TextureRenderSystem extends IteratingSystem {
     public TextureRenderSystem() {
         this(0);
     }
-    
-    public TextureRenderSystem(int priority){
-        super(Family.all(PositionComponent.class,TextureComponent.class).get(),priority);
+
+    public TextureRenderSystem(int priority) {
+        super(Family.all(PositionComponent.class, TextureComponent.class).get(), priority);
     }
 
     @Override
@@ -33,21 +32,19 @@ public class TextureRenderSystem extends IteratingSystem {
         float posX, posY;
         PositionComponent position = ComponentMappers.position.get(entity);
         TextureComponent textureComponent = ComponentMappers.texture.get(entity);
-        
-        
-       
-        if(textureComponent.bUseShadow){
+
+        if (textureComponent.bUseShadow) {
             posX = position.x - textureComponent.shadowTexture.getWidth() / 2;
             posY = position.y - textureComponent.shadowTexture.getHeight() / 2;
-            DrawUtil.draw(textureComponent.shadowTexture,posX, posY);
+            DrawUtil.draw(textureComponent.shadowTexture, posX, posY);
         }
-     
-        posX = position.x - textureComponent.texture.getWidth() / 2;
-        posY = position.y - textureComponent.texture.getHeight() / 2;
-        
-        DrawUtil.rotate(position.x,position.y, position.rotation);
-        DrawUtil.draw(textureComponent.texture, posX, posY, 0,  0, (float)textureComponent.texture.getWidth(), (float)textureComponent.texture.getHeight(),1,1,0);
-        DrawUtil.rotate(position.x, position.y, -position.rotation);
+
+        int w = textureComponent.texture.getWidth();
+        int h = textureComponent.texture.getHeight();
+        posX = position.x - w / 2.0f;
+        posY = position.y - h / 2.0f;
+
+        DrawUtil.batch.draw(textureComponent.texture, posX, posY, w * 0.5f, h * 0.5f, w, h, 1, 1, position.rotation, 0, 0, w, h, false, true);
     }
-    
+
 }

@@ -22,7 +22,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
@@ -32,7 +31,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 import java.util.function.Consumer;
 
-public abstract class AbstractGame extends InputAdapter {
+public abstract class AbstractGame {
 
     protected final PooledEngine engine = new PooledEngine(GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE, GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE);
     protected final EntityFactoryParam factoryParam = new EntityFactoryParam();
@@ -61,7 +60,7 @@ public abstract class AbstractGame extends InputAdapter {
     }
 
     public void init(AssetManagerX assetManager, String mapName) {
-        this.mapName = mapName;
+    	this.mapName = mapName;
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
         addSystems();
@@ -79,10 +78,10 @@ public abstract class AbstractGame extends InputAdapter {
             engine.addSystem(physixSystem);
             engine.addSystem(physixDebugRenderSystem);
         }
-        engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
-        engine.addSystem(new TextureRenderSystem());
-        engine.addSystem(new StateRelatedAnimationsRenderSystem());
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
+        engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
+        engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS+1));
+        engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
         engine.addSystem(new SoundSystem(camera));
     }
 
@@ -124,19 +123,7 @@ public abstract class AbstractGame extends InputAdapter {
         factoryParam.x = x;
         factoryParam.y = y;
         Entity entity = entityFactory.createEntity(name, factoryParam);
-        
-        SetupComponent setup = engine.createComponent(SetupComponent.class);
-        setup.name = name;
-        entity.add(setup);
-            
         engine.addEntity(entity);
         return entity;
-    }
-
-    @Override
-    public abstract boolean touchDown(int screenX, int screenY, int pointer, int button);
-
-    public InputProcessor getInputProcessor() {
-        return this;
     }
 }

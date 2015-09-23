@@ -3,6 +3,7 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -15,7 +16,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
-import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -25,6 +26,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 public class NetcodeTestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
+    private Entity player = null;
 
     public NetcodeTestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
@@ -38,7 +40,7 @@ public class NetcodeTestGame extends AbstractGame {
         super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
-            Entity player = createEntity("player", 300, 300);
+            player = createEntity("player", 300, 300);
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         
@@ -59,7 +61,7 @@ public class NetcodeTestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new TestInputSystem());
+        engine.addSystem(new InputBallSystem());
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
@@ -89,16 +91,13 @@ public class NetcodeTestGame extends AbstractGame {
             });
         }
     }
-
+    
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(netClient == null) {
-            if (button == 0) {
-                createEntity("ball", screenX, screenY);
-            } else {
-                createEntity("box", screenX, screenY);
-            }
-        }
-        return true;
+    public void dispose() {
+        super.dispose();
+        if(netClient != null)
+            netClient.disconnect();
+        else if(netServer != null)
+            netServer.disconnect();
     }
 }

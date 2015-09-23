@@ -77,9 +77,6 @@ public class TestGame extends AbstractGame {
         
         ballmanager = new BallManager(engine);
         
-		// Gdx.input.setInputProcessor(new InputKeyboard());
-        //
-        // Controllers.addListener(new InputGamePad());
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
             netServer.setListener(engine.getSystem(NetServerUpdateSystem.class));
@@ -127,15 +124,6 @@ public class TestGame extends AbstractGame {
             throw new IllegalArgumentException(
                     "Map konnte nicht geladen werden: ");
 
-        }
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            Entity ball = MapLoader.createEntity(engine, "ball", 300, 300, Team.BLUE);
         }
     }
     

@@ -41,7 +41,11 @@ public class NetcodeTestGame extends AbstractGame {
         super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
-            player = createEntity("player", 300, 300, Team.BLUE);
+<<<<<<< Updated upstream
+            player = createEntity("player", 300, 300);
+=======
+            Entity player = createEntity("player", 300, 300, Team.BLUE);
+>>>>>>> Stashed changes
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         

@@ -22,6 +22,7 @@ import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
  * 
@@ -167,7 +168,8 @@ public class MapLoader {
 					String objectName = obj.getName();
 					float xPos = obj.getX();
 					float yPos = obj.getY();
-					resultEnt = game.createEntity(objectName, xPos, yPos);
+                                        Team team = Team.BLUE; //fixme: aus properties auslesen
+					resultEnt = game.createEntity(objectName, xPos, yPos, team);
 
 					Consumer<MapSpecialEntities.CreatorInfo> creator = MapSpecialEntities.specialEntities
 							.get(objectName);
@@ -196,8 +198,9 @@ public class MapLoader {
 									.get(objectName);
 							if (creator != null) { // / eine Spezialbehandlung
 													// gefunden
+                                                            Team team = Team.BLUE; //fixme: aus properties auslesen
 								resultEnt = game.createEntity(objectName, xPos,
-										yPos);
+										yPos, team);
 								creator.accept(new MapSpecialEntities.CreatorInfo(
 										resultEnt, x, y, tiledMap, tileInfo,
 										layer));

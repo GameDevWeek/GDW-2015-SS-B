@@ -60,7 +60,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
 
     public void handle(CreateEntityDatagram datagram) {
         final Vector2 position = datagram.getPosition();
-        Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y);
+        Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y, datagram.getTeam());
         netEntityMap.put(datagram.getNetId(), entity);
     }
 

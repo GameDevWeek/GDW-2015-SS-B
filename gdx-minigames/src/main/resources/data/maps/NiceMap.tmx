@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="128" tileheight="128" nextobjectid="18">
+ <tileset firstgid="1" name="playgroundTileset" tilewidth="128" tileheight="128">
+  <image source="playgroundTileset.png" width="512" height="384"/>
+  <terraintypes>
+   <terrain name="mist" tile="-1"/>
+   <terrain name="ground" tile="-1"/>
+  </terraintypes>
+  <tile id="0" terrain="0,0,0,1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1" terrain="0,0,1,1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2" terrain="0,0,1,0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3" terrain="0,1,0,1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4" terrain="1,1,1,1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5" terrain="1,0,1,0"/>
+  <tile id="6" terrain="0,1,0,0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7" terrain="1,1,0,0"/>
+  <tile id="8" terrain="1,0,0,0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="13" name="balls_and_magnets" tilewidth="128" tileheight="128">
+  <image source="balls_and_magnets.png" width="896" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="Entitytype" value="ballspawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Entitytype" value="ballspawn"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Entitytype" value="ballspawn"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Entitytype" value="magnet"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Entitytype" value="magnet"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Entitytype" value="playerspawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Entitytype" value="playerspawn"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Hintergrund" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftXvA7Ka3vcj2j9o9suweqXlsJNvNCcRcdMTcUHsBC8AKvw==
+  </data>
+ </layer>
+ <objectgroup name="Tore">
+  <object id="4" gid="14" x="1920" y="1024"/>
+  <object id="5" gid="13" x="640" y="1024"/>
+  <object id="7" gid="15" x="3200" y="1024"/>
+  <object id="8" gid="16" x="2688" y="512"/>
+  <object id="9" gid="16" x="2688" y="1536"/>
+  <object id="10" gid="17" x="1920" y="1536"/>
+  <object id="11" gid="17" x="1152" y="1536"/>
+  <object id="12" gid="16" x="1920" y="512"/>
+  <object id="13" gid="17" x="1152" y="512"/>
+  <object id="14" gid="18" x="3584" y="640"/>
+  <object id="15" gid="18" x="3584" y="1408"/>
+  <object id="16" gid="19" x="256" y="640"/>
+  <object id="17" gid="19" x="256" y="1408"/>
+ </objectgroup>
+</map>

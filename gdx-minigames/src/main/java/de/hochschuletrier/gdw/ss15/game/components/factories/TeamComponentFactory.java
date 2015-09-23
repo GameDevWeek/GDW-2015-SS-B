@@ -19,7 +19,7 @@ public class TeamComponentFactory extends ComponentFactory<EntityFactoryParam> {
 		final TeamComponent teamComponent = engine.createComponent(TeamComponent.class);
 		 
 		teamComponent.team = param.team;
-		
+		entity.add(teamComponent);
 	}
 
 }

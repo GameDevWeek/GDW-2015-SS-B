@@ -28,22 +28,24 @@ import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
+import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler,
         NetServerSimple.Listener, ChangeGameStateEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> entities;
-    private ImmutableArray<Entity> spawnPoints;
     private final GameType gameType;
     private final String mapName;
     private ImmutableArray<Entity> animationEntities;
     private GameState gameState = GameState.WARMUP;
     private PooledEngine engine;
+    private final PlayerSpawnManager playerSpawns;
 
-    public NetServerUpdateSystem(NetServerSimple netServer, GameType gameType, String mapName) {
+    public NetServerUpdateSystem(PlayerSpawnManager playerSpawns, NetServerSimple netServer, GameType gameType, String mapName) {
         super(0);
 
+        this.playerSpawns = playerSpawns;
         this.netServer = netServer;
         this.gameType = gameType;
         this.mapName = mapName;
@@ -55,7 +57,6 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         this.engine = (PooledEngine) engine;
         entities = engine.getEntitiesFor(Family.all(SetupComponent.class).get());
         animationEntities = engine.getEntitiesFor(Family.all(StateRelatedAnimationsComponent.class).get());
-        spawnPoints = engine.getEntitiesFor(Family.all(PlayerSpawnComponent.class, PositionComponent.class).get());
         ChangeGameStateEvent.register(this);
     }
 
@@ -63,7 +64,6 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
         entities = null;
-        spawnPoints = null;
         ChangeGameStateEvent.unregister(this);
     }
 
@@ -72,34 +72,9 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         netServer.update();
     }
 
-    private Entity spawnPlayer() {
-        for (Entity entity : spawnPoints) {
-            PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
-            if (spawn.playerId == 0) {
-                PositionComponent pos = ComponentMappers.position.get(entity);
-                Team team = Team.BLUE; //fixme
-                Entity playerEntity = MapLoader.createEntity(engine, "player", pos.x, pos.y, team);
-                spawn.playerId = playerEntity.getId();
-                return playerEntity;
-            }
-        }
-        return null;
-    }
-
-    private void freePlayer(long entityId) {
-        for (Entity entity : spawnPoints) {
-            PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
-            if (spawn.playerId == entityId) {
-                spawn.playerId = 0;
-                engine.removeEntity(entity);
-                return;
-            }
-        }
-    }
-
     @Override
     public boolean onConnect(NetConnection connection) {
-        Entity player = spawnPlayer();
+        Entity player = playerSpawns.spawnPlayer();
         if (player == null) {
             // no free players available
             return false;
@@ -113,7 +88,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void onDisconnect(NetConnection connection) {
         Entity playerEntity = (Entity) connection.getAttachment();
         if (playerEntity != null) {
-            freePlayer(playerEntity.getId());
+            playerSpawns.freePlayer(playerEntity.getId());
         }
     }
 

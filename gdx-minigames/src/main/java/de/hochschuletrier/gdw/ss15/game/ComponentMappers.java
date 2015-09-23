@@ -13,10 +13,12 @@ import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SoundEmitterComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
+import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 
 public class ComponentMappers {
+    public static final ComponentMapper<TeamComponent> team = ComponentMapper.getFor(TeamComponent.class);
     public static final ComponentMapper<SoundEmitterComponent> soundEmitter = ComponentMapper.getFor(SoundEmitterComponent.class);
     public static final ComponentMapper<PositionComponent> position = ComponentMapper.getFor(PositionComponent.class);
     public static final ComponentMapper<TriggerComponent> trigger = ComponentMapper.getFor(TriggerComponent.class);

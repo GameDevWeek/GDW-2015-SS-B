@@ -58,6 +58,16 @@ public class MapLoader {
     }
     public static void generateWorldFromTileMapX(PooledEngine engine,
             PhysixSystem physixSystem, TiledMap map) {
+        
+        // Generate static world
+        int tileWidth = map.getTileWidth();
+        int tileHeight = map.getTileHeight();
+        RectangleGenerator generator = new RectangleGenerator();
+        generator.generate(map,
+                (Layer layer, TileInfo info) -> info.getBooleanProperty("solid", false),
+                (Rectangle rect) -> addShape(physixSystem, rect, tileWidth, tileHeight));
+        
+        
         for (Layer layer : map.getLayers()) {
             if (layer.isObjectLayer()) {
 				// / pre filtering important objects,
@@ -90,30 +100,16 @@ public class MapLoader {
             }
         }
     }
-
-    public TiledMap getTiledMap() {
-        return tiledMap;
-    }
-
-    /**
-     * Ein Shape zur Physik hinzufuegen
-     *
-     * @param rect zu erstellendes Rechteck
-     * @param tileWidth breite eines tile
-     * @param tileHeight hoehe eines tile
-     */
-    private void addShape(PhysixSystem pSystem, Rectangle rect, int tileWidth,
-            int tileHeight) {
+    
+    private static void addShape(PhysixSystem physixSystem, Rectangle rect, int tileWidth, int tileHeight) {
         float width = rect.width * tileWidth;
         float height = rect.height * tileHeight;
         float x = rect.x * tileWidth + width / 2;
         float y = rect.y * tileHeight + height / 2;
 
-        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody,
-                pSystem).position(x, y).fixedRotation(false);
-        Body body = pSystem.getWorld().createBody(bodyDef);
-        body.createFixture(new PhysixFixtureDef(pSystem).density(1)
-                .friction(0.5f).shapeBox(width, height));
+        
+        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(x, y).fixedRotation(false);
+        Body body = physixSystem.getWorld().createBody(bodyDef);
+        body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(width, height));
     }
-
 }

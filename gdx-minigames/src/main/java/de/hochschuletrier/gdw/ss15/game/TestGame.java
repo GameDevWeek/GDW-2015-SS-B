@@ -26,12 +26,14 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
+import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
 
     private TiledMap map;
+    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
 
     public TestGame() {
         this(null, null);
@@ -45,7 +47,7 @@ public class TestGame extends AbstractGame {
     }
     
     private void initLoadMap() {
-        map = loadMap("data/maps/DummyMap_mit_Entitytypes_Fix.tmx");
+        map = loadMap("data/maps/NiceMap.tmx");
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
     }
@@ -62,7 +64,7 @@ public class TestGame extends AbstractGame {
 
         if(netClient == null) {
             /* TEST SPIELER ERSTELLEN */
-            Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+            Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         
@@ -93,7 +95,7 @@ public class TestGame extends AbstractGame {
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
-            engine.addSystem(new NetServerUpdateSystem(netServer, GameType.MAGNET_BALL, getMapName()));
+            engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer, GameType.MAGNET_BALL, getMapName()));
         } else if(netClient != null) {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
@@ -126,7 +128,7 @@ public class TestGame extends AbstractGame {
         super.update(delta);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            Entity ball = MapLoader.createEntity(engine, "ball", 100, 100, Team.BLUE);
+            Entity ball = MapLoader.createEntity(engine, "ball", 300, 300, Team.BLUE);
         }
     }
     

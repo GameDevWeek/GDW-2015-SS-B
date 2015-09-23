@@ -18,6 +18,8 @@ public class InputBallComponent extends Component implements Pool.Poolable {
 		this.horizontal = 0.0f;
 		this.vertical = 0.0f;
 	
+        this.view.x=0;
+        this.view.y=0;
         
 		this.pull = false;
 		

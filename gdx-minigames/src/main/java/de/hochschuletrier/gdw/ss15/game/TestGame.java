@@ -10,13 +10,16 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
+import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
@@ -34,6 +37,8 @@ public class TestGame extends AbstractGame {
 
     private TiledMap map;
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
+    
+    private BallManager ballmanager;
 
     public TestGame() {
         this(null, null);
@@ -69,6 +74,8 @@ public class TestGame extends AbstractGame {
         }
         
         setupPhysixWorld();
+        
+        ballmanager = new BallManager(engine);
         
 		// Gdx.input.setInputProcessor(new InputKeyboard());
         //

@@ -7,7 +7,5 @@
     "magnet_plus": "data/images/magnet_plus.png",
     "magnet_minus": "data/images/magnet_minus.png",
     "texture_dummy_32": "data/images/texture_dummy_32x32px.png",
-    "texture_dummy_64": "data/images/texture_dummy_64x64px.png",
-    "ball_with_alpha": "data/images/dummy_ball_texture.png",
-    "ball_shadow": "data/images/dummy_ball_shadow.png"
+    "texture_dummy_64": "data/images/texture_dummy_64x64px.png"
 }

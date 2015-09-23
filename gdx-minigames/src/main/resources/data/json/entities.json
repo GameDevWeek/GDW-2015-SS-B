@@ -59,8 +59,7 @@
             "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball",
-                "scale": 2.0
+                "animation_shoot": "ball"
             },
             "Movable": {},
             "PhysixBody": {

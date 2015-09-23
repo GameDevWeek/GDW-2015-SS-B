@@ -20,6 +20,7 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
@@ -33,14 +34,13 @@ public class TestGame extends AbstractGame {
 
     private void initLoadMap() {
         map = loadMap("data/maps/DummyMapFix.tmx");
-
         for (TileSet tileset : map.getTileSets()) {
             TmxImage img = tileset.getImage();
             String filename = CurrentResourceLocator.combinePaths(
                     tileset.getFilename(), img.getSource());
             tilesetImages.put(tileset, new Texture(filename));
         }
-
+        engine.getSystem(LimitedSmoothCameraSystem.class).camera.setBounds(0, 0, map.getWidth() * map.getTileWidth(), map.getHeight() * map.getTileHeight());
         mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
@@ -52,11 +52,10 @@ public class TestGame extends AbstractGame {
 
         this.initLoadMap();
 
-        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, engine.getSystem(LimitedSmoothCameraSystem.class).camera);
 
         /* TEST SPIELER ERSTELLEN */
         MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
-        
         setupPhysixWorld();
 
 		// Gdx.input.setInputProcessor(new InputKeyboard());

@@ -11,6 +11,7 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.LimitedSmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
@@ -27,6 +28,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
@@ -42,7 +44,7 @@ public abstract class AbstractGame {
     protected final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
     protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
-    protected final SmoothCamera camera = new SmoothCamera();
+    protected final LimitedSmoothCamera camera = new LimitedSmoothCamera();
     private String mapName;
 
     public AbstractGame() {
@@ -84,7 +86,9 @@ public abstract class AbstractGame {
         engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
         engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS+1));
         engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
+        engine.addSystem(new LimitedSmoothCameraSystem(camera));
         engine.addSystem(new SoundSystem(camera));
+       
     }
 
     private void addContactListeners() {
@@ -97,9 +101,6 @@ public abstract class AbstractGame {
     }
 
     public void update(float delta) {
-        camera.setDestination(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        camera.update(delta);
-        camera.bind();
         engine.update(delta);
     }
 

@@ -7,4 +7,5 @@ public class InputPuffer {
 	
 	public static boolean pull = false;
 	public static boolean push = false;
+    
 }

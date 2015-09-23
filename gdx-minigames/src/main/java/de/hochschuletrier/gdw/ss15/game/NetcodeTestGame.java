@@ -1,24 +1,22 @@
 package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
-import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
-import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -63,7 +61,7 @@ public class NetcodeTestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new TestInputSystem());
+        engine.addSystem(new InputBallSystem());
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
@@ -93,32 +91,7 @@ public class NetcodeTestGame extends AbstractGame {
             });
         }
     }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(netClient == null) {
-            if (button == 0) {
-                createEntity("ball", screenX, screenY);
-            } else {
-                createEntity("box", screenX, screenY);
-            }
-        }
-        return true;
-    }
     
-    @Override
-    public boolean keyDown(int keycode) {
-        if(player != null) {
-            if(keycode == Input.Keys.A){
-                ChangeAnimationStateEvent.emit(EntityAnimationState.SHOOT, player);
-            }
-            if(keycode == Input.Keys.B){
-                ChangeAnimationStateEvent.emit(EntityAnimationState.IDLE, player);
-            }
-        }
-        return true;
-    }
-
     @Override
     public void dispose() {
         super.dispose();
@@ -127,6 +100,4 @@ public class NetcodeTestGame extends AbstractGame {
         else if(netServer != null)
             netServer.disconnect();
     }
-    
-    
 }

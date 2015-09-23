@@ -1,6 +1,8 @@
 package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -148,6 +150,9 @@ public class NetcodeTestGame extends AbstractGame {
 
         super.update(delta);
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            Entity ball = MapLoader.createEntity(engine, "ball", 100, 100, Team.BLUE);
+        }
     }
     
     @Override

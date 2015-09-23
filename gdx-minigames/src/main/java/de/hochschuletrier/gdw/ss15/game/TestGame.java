@@ -21,6 +21,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.WeaponSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -64,6 +65,8 @@ public class TestGame extends AbstractGame {
             /* TEST SPIELER ERSTELLEN */
             Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
             player.add(engine.createComponent(LocalPlayerComponent.class));
+            Entity ball= MapLoader.createEntity(engine, "ball", 500, 500, Team.BLUE);
+           // ball.add(component)
         }
         
         setupPhysixWorld();
@@ -90,6 +93,7 @@ public class TestGame extends AbstractGame {
         super.addSystems();
         engine.addSystem(new InputBallSystem(0));
         engine.addSystem(new MovementSystem(1));
+        engine.addSystem(new WeaponSystem(2));
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));

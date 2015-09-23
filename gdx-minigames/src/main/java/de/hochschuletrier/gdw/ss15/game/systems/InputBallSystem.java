@@ -50,8 +50,11 @@ public class InputBallSystem extends IteratingSystem {
 	    	  input.pull = InputPuffer.pull;
 	      }
 	      
-	      if ( false /* Spieler hat Ball */ ) {
-	    	  ShootEvent.emit(entity, view);	    	  
+	      if ( InputPuffer.push /* Spieler hat Ball */ ) {
+	    	  InputPuffer.pull=false;
+	    	  ShootEvent.emit(entity, view);	
+	    	  InputPuffer.push=false;
+
 	      }	        
 	}
 }

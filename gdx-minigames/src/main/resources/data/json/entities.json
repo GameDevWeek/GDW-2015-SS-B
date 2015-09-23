@@ -22,7 +22,8 @@
                 "friction": 0.2,
                 "restitution": 0.4
             },
-            "Team": {}
+            "Team": {},
+            "Ball":{}
         }
     },
     "box": {

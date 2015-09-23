@@ -36,7 +36,8 @@
                 "minDelay": 100
             },
             "Texture": {
-                "texture": "texture_dummy_64"
+                "texture": "texture_dummy_64",
+                "scale": 0.9
             },
             "Movable": {},
             "PhysixBody": {

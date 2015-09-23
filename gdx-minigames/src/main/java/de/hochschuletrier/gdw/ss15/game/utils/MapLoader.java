@@ -64,9 +64,19 @@ public class MapLoader {
 					if (entitytype != null) {
 						System.out.println(entitytype.toLowerCase());
 						switch (entitytype.toLowerCase()) {
-						case "box":
+						case "box"://fallthrough is intended
+//						case "wall":
+//						case "magnet":
+//							//TEAM
+//						case "gate":
+//							 //TEAM
+//						case "ballspawn":
+//							//TEAM
+						
 							createEntity(engine, entitytype.toLowerCase(),
 									obj.getX()+obj.getWidth()/2.0f, obj.getY()+obj.getHeight()/2.0f);
+							break;//intended
+							default: System.out.println(entitytype+"Nicht bekannt");
 						}
 					}
 				}

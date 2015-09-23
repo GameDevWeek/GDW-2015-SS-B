@@ -26,6 +26,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 public class NetcodeTestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
+    private Entity player = null;
 
     public NetcodeTestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
@@ -39,7 +40,7 @@ public class NetcodeTestGame extends AbstractGame {
         super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
-            Entity player = createEntity("player", 300, 300);
+            player = createEntity("player", 300, 300);
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         
@@ -89,5 +90,14 @@ public class NetcodeTestGame extends AbstractGame {
                 engine.removeEntity(entity);
             });
         }
+    }
+    
+    @Override
+    public void dispose() {
+        super.dispose();
+        if(netClient != null)
+            netClient.disconnect();
+        else if(netServer != null)
+            netServer.disconnect();
     }
 }

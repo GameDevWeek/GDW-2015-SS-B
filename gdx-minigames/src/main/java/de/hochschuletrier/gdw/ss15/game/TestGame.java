@@ -23,25 +23,18 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 public class TestGame extends AbstractGame {
 
     private TiledMap map;
-    private TiledMapRendererGdx mapRenderer;
-    private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
 
     private void initLoadMap() {
         map = loadMap("data/maps/DummyMap_mit_Entitytypes_Fix.tmx");
-        for (TileSet tileset : map.getTileSets()) {
-            TmxImage img = tileset.getImage();
-            String filename = CurrentResourceLocator.combinePaths(
-                    tileset.getFilename(), img.getSource());
-            tilesetImages.put(tileset, new Texture(filename));
-        }
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
-        mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
+        engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
     }
 
     @Override
@@ -95,19 +88,4 @@ public class TestGame extends AbstractGame {
 
         }
     }
-
-    @Override
-    public void update(float delta) {
-        mapRenderer.update(delta);
-        // Map wird gerendert !
-        for (Layer layer : map.getLayers()) {
-            if (layer.isTileLayer()) {
-                mapRenderer.render(0, 0, layer);
-            }
-        }
-
-        super.update(delta);
-
-    }
-
 }

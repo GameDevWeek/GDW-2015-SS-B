@@ -52,9 +52,11 @@
     "player": {
         "meta": {},
         "components": {
+            "LocalPlayer": {},
             "Position": {},
             "SoundEmitter": {},
             "Player": {},
+            "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
                 "animation_shoot": "ball",

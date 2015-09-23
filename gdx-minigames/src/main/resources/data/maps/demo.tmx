@@ -13,7 +13,7 @@
    H4sIAAAAAAAAA2NgoD0AAMrGiJlkAAAA
   </data>
  </layer>
- <objectgroup name="Objektebene 1">
-  <object id="1" name="box" x="57" y="65" width="54" height="46"/>
+ <objectgroup name="player">
+  <object id="1" name="player" x="57" y="65" width="54" height="46"/>
  </objectgroup>
 </map>

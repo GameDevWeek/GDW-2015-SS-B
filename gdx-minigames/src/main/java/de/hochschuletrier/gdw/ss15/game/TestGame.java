@@ -31,6 +31,7 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 public class TestGame extends AbstractGame {
@@ -76,7 +77,8 @@ public class TestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new InputBallSystem());
+        engine.addSystem(new InputBallSystem(0));
+        engine.addSystem(new MovementSystem(1));
     }
 
     @Override
@@ -110,5 +112,5 @@ public class TestGame extends AbstractGame {
     	
     	
     }
-    
+         
 }

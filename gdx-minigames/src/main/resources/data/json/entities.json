@@ -36,7 +36,8 @@
                 "minDelay": 100
             },
             "Texture": {
-                "texture": "texture_dummy_64"
+                "texture": "texture_dummy_64",
+                "scale": 0.9
             },
             "Movable": {},
             "PhysixBody": {
@@ -51,12 +52,15 @@
     "player": {
         "meta": {},
         "components": {
+            "LocalPlayer": {},
             "Position": {},
             "SoundEmitter": {},
             "Player": {},
+            "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball"
+                "animation_shoot": "ball",
+                "scale": 2.0
             },
             "Movable": {},
             "PhysixBody": {

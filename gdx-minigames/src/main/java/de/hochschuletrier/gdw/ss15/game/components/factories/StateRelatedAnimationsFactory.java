@@ -36,7 +36,12 @@ public class StateRelatedAnimationsFactory  extends ComponentFactory<EntityFacto
                assert (animation != null);
                component.animations.put(state,animation);
            }
-       } 
+       }
+       if(!properties.keySet().contains("scale")){
+           component.scale = 1.0f;
+       }else{
+           component.scale = properties.getFloat("scale",1.0f);
+       }
        entity.add(component);
     }
     

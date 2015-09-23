@@ -57,31 +57,31 @@ public class MapLoader {
         return entity;
     }
     public static void generateWorldFromTileMapX(PooledEngine engine,
-            PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
+            PhysixSystem physixSystem, TiledMap map) {
         for (Layer layer : map.getLayers()) {
             if (layer.isObjectLayer()) {
 				// / pre filtering important objects,
                 // / wich needs to be already existing when loading other
                 // Objects
                 for (LayerObject obj : layer.getObjects()) {
-                    String entitytype = obj.getProperty("Entitytype", null);
+                    String entitytype = obj.getProperty("Entitytype", null).toLowerCase();
                     if (entitytype != null) {
-                        System.out.println(entitytype.toLowerCase());
-                        switch (entitytype.toLowerCase()) {
-                            case "box"://fallthrough is intended
-//						case "wall":
-//						case "magnet":
-//							//TEAM
-//						case "gate":
-//							 //TEAM
-//						case "ballspawn":
-//							//TEAM
-                                Team team = Team.BLUE; // einlesen!
-                                createEntity(engine, entitytype.toLowerCase(),
-                                        obj.getX() + obj.getWidth() / 2.0f,
-                                        obj.getY() + obj.getHeight() / 2.0f,
-                                        team);
-                                break;//intended
+                    	Team team = (obj.getIntProperty("Team", 0) == 0) ? Team.BLUE : Team.RED;
+                    	switch (entitytype) {
+                            case "magnet":
+                            	if(team == Team.BLUE) {
+                            		entitytype = "magnet_minus";
+                            	}
+                            	else {
+                            		entitytype = "magnet_plus";
+                            	}
+                            case "playerspawn":
+                            case "ballspawn":
+                            
+                            	createEntity(engine, entitytype, obj.getX() + obj.getWidth() / 2.0f,
+                            			obj.getY() + obj.getHeight() / 2.0f, team
+                            			); 
+                            	break;
                             default:
                                 System.out.println(entitytype + "Nicht bekannt");
                         }

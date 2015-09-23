@@ -54,7 +54,6 @@ public class TestGame extends AbstractGame {
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, engine.getSystem(LimitedSmoothCameraSystem.class).camera);
 
         /* TEST SPIELER ERSTELLEN */
-        MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
         Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
         player.add(engine.createComponent(LocalPlayerComponent.class));
         

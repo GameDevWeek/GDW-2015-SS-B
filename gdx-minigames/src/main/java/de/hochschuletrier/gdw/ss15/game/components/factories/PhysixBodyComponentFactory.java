@@ -42,12 +42,40 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
             switch(type) {
                 case "circle": addCircle(param, entity, properties); break;
                 case "box": addBox(param, entity, properties); break;
+                case "player":addPlayer(param, entity,properties);break;
                 default: logger.error("Unknown type: {}", type); break;
             }
         });
         entity.add(modifyComponent);
     }
 
+    private void addPlayer(EntityFactoryParam param, Entity entity, SafeProperties properties){
+    	
+   	 EntityFactoryParam paramWeapon=new EntityFactoryParam();
+   	 paramWeapon.x=param.x+20.0f;
+   	 paramWeapon.y=param.y+10.0f;
+        PhysixBodyComponent weaponBody=getBodyComponent(paramWeapon, entity);
+   	
+   	PhysixFixtureDef fixtureDefWeapon= new PhysixFixtureDef(physixSystem).shapeCircle(5)
+       .density(properties.getFloat("density", 5))
+       .friction(properties.getFloat("friction", 5))
+       .restitution(properties.getFloat("restitution", 0))
+       .sensor(true);
+   	weaponBody.createFixture(fixtureDefWeapon);
+   	
+   	entity.add(weaponBody);
+    	
+    	PhysixBodyComponent bodyComponent = getBodyComponent(param, entity);
+    	 PhysixFixtureDef fixtureDef = getFixtureDef(properties)
+                 .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
+         bodyComponent.createFixture(fixtureDef);
+         // bodyComponent.applyImpulse(0, 500);
+         entity.add(bodyComponent);   	
+
+
+         
+
+    }
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = getBodyComponent(param, entity);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
@@ -82,6 +110,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         return new PhysixFixtureDef(physixSystem)
                 .density(properties.getFloat("density", 5))
                 .friction(properties.getFloat("friction", 5))
-                .restitution(properties.getFloat("restitution", 0));
+                .restitution(properties.getFloat("restitution", 0))
+                ;
     }
 }

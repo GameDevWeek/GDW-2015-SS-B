@@ -62,7 +62,7 @@
             },
             "Movable": {},
             "PhysixBody": {
-                "type": "box",
+                "type": "player",
                 "size": 60,
                 "density": 10,
                 "friction": 0.5,
@@ -70,4 +70,5 @@
             }
         }
     }
+    
 }

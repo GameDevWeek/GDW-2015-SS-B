@@ -11,8 +11,8 @@
                 "minDelay": 100
             },
             "Texture": {
-                "texture": "ball_with_alpha",
-                "shadow": "ball_shadow"
+                "texture": "ball_plus",
+                "shadow": "ball_base"
             },
             "Movable": {},
             "PhysixBody": {

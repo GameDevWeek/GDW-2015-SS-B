@@ -6,7 +6,10 @@ import com.badlogic.gdx.utils.Pool;
 // Just a marker component
 public class PlayerComponent extends Component implements Pool.Poolable {
 
+    public String name;
+    
     @Override
     public void reset() {
+        name = null;
     }
 }

@@ -22,8 +22,10 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
@@ -117,13 +119,5 @@ public abstract class AbstractGame {
             entity.add(bodyComponent);
         });
         engine.addEntity(entity);
-    }
-
-    public Entity createEntity(String name, float x, float y) {
-        factoryParam.x = x;
-        factoryParam.y = y;
-        Entity entity = entityFactory.createEntity(name, factoryParam);
-        engine.addEntity(entity);
-        return entity;
     }
 }

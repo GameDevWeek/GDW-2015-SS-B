@@ -9,6 +9,7 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
  * send from server only
@@ -18,12 +19,14 @@ public class CreateEntityDatagram extends NetDatagram {
     private long netId;
     private String entityType;
     private final Vector2 position = new Vector2();
+    private Team team;
 
     public static CreateEntityDatagram create(Entity entity) {
         CreateEntityDatagram datagram = DatagramFactory.create(CreateEntityDatagram.class);
         datagram.netId = entity.getId();
         final SetupComponent setup = ComponentMappers.setup.get(entity);
         datagram.entityType = setup.name;
+        datagram.team = setup.team;
         PositionComponent position = ComponentMappers.position.get(entity);
         datagram.position.set(position.x, position.y);
         return datagram;
@@ -40,6 +43,10 @@ public class CreateEntityDatagram extends NetDatagram {
     public Vector2 getPosition() {
         return position;
     }
+    
+    public Team getTeam() {
+        return team;
+    }
 
     @Override
     public NetMessageType getMessageType() {
@@ -52,6 +59,7 @@ public class CreateEntityDatagram extends NetDatagram {
         message.putString(entityType);
         message.putFloat(position.x);
         message.putFloat(position.y);
+        message.putEnum(team);
     }
 
     public @Override
@@ -60,5 +68,6 @@ public class CreateEntityDatagram extends NetDatagram {
         entityType = message.getString();
         position.x = message.getFloat();
         position.y = message.getFloat();
+        team = message.getEnum(Team.class);
     }
 }

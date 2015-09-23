@@ -18,12 +18,14 @@ public class StateRelatedAnimationsComponent extends Component implements Pool.P
     public EntityAnimationState currentState =EntityAnimationState.IDLE;
     public float stateTime;
     public int layer;
+    public float scale;
 
     @Override
     public void reset() {
         animations.clear();
         stateTime = 0;
         layer = 0;
+        scale = 1.0f;
     }
 }
 

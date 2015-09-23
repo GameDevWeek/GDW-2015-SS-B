@@ -78,10 +78,10 @@ public abstract class AbstractGame {
             engine.addSystem(physixSystem);
             engine.addSystem(physixDebugRenderSystem);
         }
-        engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
-        engine.addSystem(new TextureRenderSystem());
-        engine.addSystem(new StateRelatedAnimationsRenderSystem());
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
+        engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
+        engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS+1));
+        engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
         engine.addSystem(new SoundSystem(camera));
     }
 

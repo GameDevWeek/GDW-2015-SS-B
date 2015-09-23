@@ -35,7 +35,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
 
     private final Main main;
     private final AssetManagerX assetManager;
-    private Status status;
+    private Status status = Status.CONNECTING;
     private NetcodeTestGame game;
     private final NetClientSimple netClient = new NetClientSimple(DatagramFactory.POOL);
     private NetConnection serverConnection;

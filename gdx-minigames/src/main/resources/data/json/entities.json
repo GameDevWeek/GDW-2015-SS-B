@@ -53,8 +53,9 @@
             "Position": {},
             "SoundEmitter": {},
             "Player": {},
-            "Animation": {
-                "animation": "box"
+            "StateRelatedAnimations": {
+                "animation_idle": "box",
+                "animation_shoot": "ball"
             },
             "Movable": {},
             "PhysixBody": {

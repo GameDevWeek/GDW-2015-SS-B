@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -8,21 +9,24 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 
 public class TestGame extends AbstractGame {
+    private Entity player;
 
     @Override
     public void init(AssetManagerX assetManager, String mapName) {
         super.init(assetManager, mapName);
         setupPhysixWorld();
-        Entity player = createEntity("player", 300, 300);
+        player = createEntity("player", 300, 300);
         player.add(engine.createComponent(LocalPlayerComponent.class));
     }
 
@@ -59,4 +63,17 @@ public class TestGame extends AbstractGame {
         }
         return true;
     }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.A){
+            ChangeAnimationStateEvent.emit(EntityAnimationState.SHOOT, player);
+        }
+        if(keycode == Input.Keys.B){
+            ChangeAnimationStateEvent.emit(EntityAnimationState.IDLE, player);
+        }
+        return true;
+    }
+    
+    
 }

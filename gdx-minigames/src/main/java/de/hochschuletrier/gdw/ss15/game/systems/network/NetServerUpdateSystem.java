@@ -91,13 +91,13 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
 
     @Override
     public boolean onConnect(NetConnection connection) {
-        Entity player = spawnPlayer();
-        if (player == null) {
-            // no free players available
-            return false;
-        }
-
-        connection.setAttachment(player);
+//        Entity player = spawnPlayer();
+//        if (player == null) {
+//            // no free players available
+//            return false;
+//        }
+//
+//        connection.setAttachment(player);
         return true;
     }
 

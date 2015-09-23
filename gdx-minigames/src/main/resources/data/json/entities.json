@@ -52,7 +52,6 @@
     "player": {
         "meta": {},
         "components": {
-            "LocalPlayer": {},
             "Position": {},
             "SoundEmitter": {},
             "Player": {},

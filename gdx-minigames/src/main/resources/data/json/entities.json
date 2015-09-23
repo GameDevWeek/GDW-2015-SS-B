@@ -10,8 +10,9 @@
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Animation": {
-                "animation": "ball"
+            "Texture": {
+                "texture": "ball_with_alpha",
+                "shadow": "ball_shadow"
             },
             "Movable": {},
             "PhysixBody": {

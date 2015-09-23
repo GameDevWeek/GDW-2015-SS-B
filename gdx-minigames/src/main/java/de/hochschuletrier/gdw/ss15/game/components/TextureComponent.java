@@ -16,10 +16,14 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class TextureComponent extends Component implements Pool.Poolable  {
    public Texture texture;
+   public boolean bUseShadow;
+   public Texture shadowTexture;
     
     @Override
     public void reset() {
         texture = null;
+        bUseShadow = false;
+        shadowTexture = null;
     }
     
 }

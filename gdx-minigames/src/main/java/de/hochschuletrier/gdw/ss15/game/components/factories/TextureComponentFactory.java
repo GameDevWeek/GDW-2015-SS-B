@@ -26,6 +26,13 @@ public class TextureComponentFactory extends ComponentFactory<EntityFactoryParam
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         TextureComponent component = engine.createComponent(TextureComponent.class);
         component.texture = assetManager.getTexture(properties.getString("texture"));
+        if(properties.getString("shadow",null) != null){
+            component.bUseShadow = true;
+            component.shadowTexture = assetManager.getTexture(properties.getString("shadow"));
+            assert (component.shadowTexture != null);
+        }else{
+            component.bUseShadow = false;
+        }
         assert (component.texture != null);
         entity.add(component);
     }

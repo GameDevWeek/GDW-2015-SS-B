@@ -9,7 +9,7 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
-import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
@@ -72,7 +72,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         }
     }
 
-    public void handle(GameStartDatagram datagram) {
+    public void handle(PlayerIdDatagram datagram) {
     }
 
     public void handle(MoveDatagram datagram) {

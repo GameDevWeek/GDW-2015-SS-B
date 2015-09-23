@@ -12,7 +12,7 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.game.NetcodeTestGame;

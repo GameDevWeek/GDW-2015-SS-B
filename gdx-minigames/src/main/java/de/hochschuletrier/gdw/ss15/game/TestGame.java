@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ss15.game;
+﻿package de.hochschuletrier.gdw.ss15.game;
 
 import java.util.HashMap;
 
@@ -15,6 +15,7 @@ import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
@@ -29,8 +30,6 @@ public class TestGame extends AbstractGame {
     private TiledMap map;
     private TiledMapRendererGdx mapRenderer;
     private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
-
-    private Entity player;
 
     private void initLoadMap() {
         map = loadMap("data/maps/DummyMapFix.tmx");
@@ -56,6 +55,9 @@ public class TestGame extends AbstractGame {
 
         /* TEST SPIELER ERSTELLEN */
         MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        player.add(engine.createComponent(LocalPlayerComponent.class));
+        
         setupPhysixWorld();
 
 		// Gdx.input.setInputProcessor(new InputKeyboard());

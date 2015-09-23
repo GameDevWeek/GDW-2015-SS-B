@@ -8,18 +8,23 @@ public class InputKeyboard implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
-			case Input.Keys.W: InputPuffer.horizontal = 1.0f; break;
-			case Input.Keys.S: InputPuffer.horizontal = -1.0f; break;
-			case Input.Keys.A: InputPuffer.vertical = 1.0f; break;
-			case Input.Keys.D: InputPuffer.vertical = -1.0f; break;
+			case Input.Keys.W: InputPuffer.vertical += -1.0f; break;
+			case Input.Keys.S: InputPuffer.vertical += 1.0f; break;
+			case Input.Keys.A: InputPuffer.horizontal += -1.0f; break;
+			case Input.Keys.D: InputPuffer.horizontal += 1.0f; break;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
+		switch (keycode) {
+			case Input.Keys.W: InputPuffer.vertical += 1.0f; break;
+			case Input.Keys.S: InputPuffer.vertical += -1.0f; break;
+			case Input.Keys.A: InputPuffer.horizontal += 1.0f; break;
+			case Input.Keys.D: InputPuffer.horizontal += -1.0f; break;
+		}
+		return true;
 	}
 
 	@Override

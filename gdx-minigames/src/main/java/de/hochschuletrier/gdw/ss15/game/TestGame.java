@@ -19,88 +19,90 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 public class TestGame extends AbstractGame {
 
-	private TiledMap map;
-	private TiledMapRendererGdx mapRenderer;
-	private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
+    private TiledMap map;
+    private TiledMapRendererGdx mapRenderer;
+    private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
 
-	private Entity player;
+    private Entity player;
 
-	private void initLoadMap() {
-		map = loadMap("data/maps/DummyMapFix.tmx");
+    private void initLoadMap() {
+        map = loadMap("data/maps/DummyMapFix.tmx");
 
-		for (TileSet tileset : map.getTileSets()) {
-			TmxImage img = tileset.getImage();
-			String filename = CurrentResourceLocator.combinePaths(
-					tileset.getFilename(), img.getSource());
-			tilesetImages.put(tileset, new Texture(filename));
-		}
+        for (TileSet tileset : map.getTileSets()) {
+            TmxImage img = tileset.getImage();
+            String filename = CurrentResourceLocator.combinePaths(
+                    tileset.getFilename(), img.getSource());
+            tilesetImages.put(tileset, new Texture(filename));
+        }
 
-		mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
-	}
+        mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
+    }
 
-	@Override
-	public void init(AssetManagerX assetManager, String mapName) {
-		super.init(assetManager, mapName);
+    @Override
+    public void init(AssetManagerX assetManager, String mapName) {
+        super.init(assetManager, mapName);
 
-		MapLoader.entityFactory.init(engine, assetManager);
+        MapLoader.entityFactory.init(engine, assetManager);
 
-		this.initLoadMap();
+        this.initLoadMap();
 
-		MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
 
-		setupPhysixWorld();
+        setupPhysixWorld();
 
 		// Gdx.input.setInputProcessor(new InputKeyboard());
-		//
+        //
+        // Controllers.addListener(new InputGamePad());
+    }
 
-		// Controllers.addListener(new InputGamePad());
-	}
+    @Override
+    protected void addSystems() {
+        super.addSystems();
+        engine.addSystem(new InputBallSystem(0));
+        engine.addSystem(new MovementSystem(1));
+    }
 
-	@Override
-	protected void addSystems() {
-		super.addSystems();
-		engine.addSystem(new InputBallSystem());
-	}
+    @Override
+    protected void addContactListeners(
+            PhysixComponentAwareContactListener contactListener) {
+        contactListener.addListener(ImpactSoundComponent.class,
+                new ImpactSoundListener());
+        contactListener.addListener(TriggerComponent.class,
+                new TriggerListener());
+    }
 
-	@Override
-	protected void addContactListeners(
-			PhysixComponentAwareContactListener contactListener) {
-		contactListener.addListener(ImpactSoundComponent.class,
-				new ImpactSoundListener());
-		contactListener.addListener(TriggerComponent.class,
-				new TriggerListener());
-	}
+    private void setupPhysixWorld() {
+        physixSystem.setGravity(0, 0);
+    }
 
-	private void setupPhysixWorld() {
-		physixSystem.setGravity(0, 0);
-	}
+    public static TiledMap loadMap(String filename) {
+        try {
+            return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalArgumentException(
+                    "Map konnte nicht geladen werden: ");
 
-	public static TiledMap loadMap(String filename) {
-		try {
-			return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new IllegalArgumentException(
-					"Map konnte nicht geladen werden: ");
+        }
+    }
 
-		}
-	}
+    @Override
+    public void update(float delta) {
+        mapRenderer.update(delta);
+        // Map wird gerendert !
+        for (Layer layer : map.getLayers()) {
+            if (layer.isTileLayer()) {
+                mapRenderer.render(0, 0, layer);
+            }
+        }
 
-	@Override
-	public void update(float delta) {
-		mapRenderer.update(delta);
-		// Map wird gerendert !
-                for(Layer layer: map.getLayers()) {
-                    if(layer.isTileLayer())
-                        mapRenderer.render(0, 0, layer);
-                }
+        super.update(delta);
 
-		super.update(delta);
-
-	}
+    }
 
 }

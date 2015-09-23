@@ -49,7 +49,7 @@ public class GameplayState extends BaseGameState {
         menuInputProcessor = menuManager.getInputProcessor();
         gameInputProcessor = new InputInterceptor( new InputKeyboard() );
         
-        gameInputProcessor.setActive(false);
+        gameInputProcessor.setActive(true);
 
         menuManager.addLayer(new DecoImage(assetManager.getTexture("menu_fg")));
         menuManager.pushPage(menuPageRoot);

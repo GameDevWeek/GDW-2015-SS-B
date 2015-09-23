@@ -1,26 +1,19 @@
 package de.hochschuletrier.gdw.ss15.game.utils;
 
-import java.util.function.Consumer;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
-import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
-import de.hochschuletrier.gdw.commons.tiled.TileInfo;
-import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
-import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
@@ -60,14 +53,24 @@ public class MapLoader {
             PhysixSystem physixSystem, TiledMap map) {
         for (Layer layer : map.getLayers()) {
             if (layer.isObjectLayer()) {
-				// / pre filtering important objects,
+                // / pre filtering important objects,
                 // / wich needs to be already existing when loading other
                 // Objects
                 for (LayerObject obj : layer.getObjects()) {
                     String entitytype = obj.getProperty("Entitytype", null).toLowerCase();
                     if (entitytype != null) {
-                    	Team team = (obj.getIntProperty("Team", 0) == 0) ? Team.BLUE : Team.RED;
-                    	switch (entitytype) {
+                        
+                        int tmp = obj.getIntProperty("Team", -1);
+                        Team team;
+                        
+                        if(tmp == -1) {
+                            team = null;
+                        }
+                        else {
+                            team  = (tmp == 0) ? Team.RED : Team.BLUE;
+                        }
+                         
+                        switch (entitytype) {
                             case "magnet":
                             	if(team == Team.BLUE) {
                             		entitytype = "magnet_minus";

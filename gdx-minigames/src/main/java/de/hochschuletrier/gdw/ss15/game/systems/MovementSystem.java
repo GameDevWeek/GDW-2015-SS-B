@@ -30,7 +30,7 @@ public class MovementSystem extends IteratingSystem {
         PhysixBodyComponent physBody = ComponentMappers.physixBody.get(entity);
         InputBallComponent input = ComponentMappers.input.get(entity);
 
-        physBody.setX(physBody.getX() + input.horizontal * 5);
-        physBody.setY(physBody.getY() + input.vertical * 5);
+        float speed = 500;
+        physBody.setLinearVelocity(input.horizontal * speed, input.vertical * speed);
     }
 }

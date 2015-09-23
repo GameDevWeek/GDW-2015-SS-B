@@ -1,8 +1,8 @@
 package de.hochschuletrier.gdw.ss15.game;
 
+
 import java.util.HashMap;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -16,11 +16,13 @@ import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
@@ -30,18 +32,15 @@ public class TestGame extends AbstractGame {
     private TiledMapRendererGdx mapRenderer;
     private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
 
-    private Entity player;
-
     private void initLoadMap() {
         map = loadMap("data/maps/DummyMapFix.tmx");
-
         for (TileSet tileset : map.getTileSets()) {
             TmxImage img = tileset.getImage();
             String filename = CurrentResourceLocator.combinePaths(
                     tileset.getFilename(), img.getSource());
             tilesetImages.put(tileset, new Texture(filename));
         }
-
+        engine.getSystem(LimitedSmoothCameraSystem.class).camera.setBounds(0, 0, map.getWidth() * map.getTileWidth(), map.getHeight() * map.getTileHeight());
         mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
@@ -53,10 +52,11 @@ public class TestGame extends AbstractGame {
 
         this.initLoadMap();
 
-        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
-        
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, engine.getSystem(LimitedSmoothCameraSystem.class).camera);
+
         /* TEST SPIELER ERSTELLEN */
-        MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        player.add(engine.createComponent(LocalPlayerComponent.class));
         
         setupPhysixWorld();
 

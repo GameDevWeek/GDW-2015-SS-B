@@ -8,26 +8,20 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 /**
  * send from server only
  */
-public final class GameStartDatagram extends NetDatagram {
+public final class PlayerIdDatagram extends NetDatagram {
 
     private long playerId;
-    private long time;
 
-    public static GameStartDatagram create(long playerId, long time) {
-        GameStartDatagram datagram = DatagramFactory.create(GameStartDatagram.class);
+    public static PlayerIdDatagram create(long playerId) {
+        PlayerIdDatagram datagram = DatagramFactory.create(PlayerIdDatagram.class);
         datagram.playerId = playerId;
-        datagram.time = time;
         return datagram;
     }
 
     public long getPlayerId() {
         return playerId;
     }
-
-    public long getPlayerTime() {
-        return time;
-    }
-
+    
     @Override
     public NetMessageType getMessageType() {
         return NetMessageType.NORMAL;
@@ -36,12 +30,10 @@ public final class GameStartDatagram extends NetDatagram {
     @Override
     public void writeToMessage(NetMessageOut message) {
         message.putLong(playerId);
-        message.putLong(time);
     }
 
     public @Override
     void readFromMessage(NetMessageIn message) {
         playerId = message.getLong();
-        time = message.getLong();
     }
 }

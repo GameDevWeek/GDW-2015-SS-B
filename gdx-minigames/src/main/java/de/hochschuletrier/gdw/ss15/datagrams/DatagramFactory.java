@@ -10,7 +10,8 @@ public final class DatagramFactory {
             WorldSetupDatagram.class,
             CreateEntityDatagram.class,
             RemoveEntityDatagram.class,
-            GameStartDatagram.class,
+            GameStateDatagram.class,
+            PlayerIdDatagram.class,
             MoveDatagram.class,
             AnimationStateChangeDatagram.class
     );

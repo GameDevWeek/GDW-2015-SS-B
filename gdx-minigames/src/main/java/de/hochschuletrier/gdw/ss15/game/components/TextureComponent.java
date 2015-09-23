@@ -18,12 +18,14 @@ public class TextureComponent extends Component implements Pool.Poolable  {
    public Texture texture;
    public boolean bUseShadow;
    public Texture shadowTexture;
+   public float scale;
     
     @Override
     public void reset() {
         texture = null;
         bUseShadow = false;
         shadowTexture = null;
+        scale = 1.0f;
     }
     
 }

@@ -34,6 +34,12 @@ public class TextureComponentFactory extends ComponentFactory<EntityFactoryParam
             component.bUseShadow = false;
         }
         assert (component.texture != null);
+       
+        if(!properties.keySet().contains("scale")){
+           component.scale = 1.0f;
+       }else{
+           component.scale = properties.getFloat("scale",1.0f);
+       }       
         entity.add(component);
     }
     

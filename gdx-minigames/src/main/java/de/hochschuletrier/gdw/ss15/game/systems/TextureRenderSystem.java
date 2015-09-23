@@ -30,12 +30,21 @@ public class TextureRenderSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        float posX, posY;
         PositionComponent position = ComponentMappers.position.get(entity);
         TextureComponent textureComponent = ComponentMappers.texture.get(entity);
         
-        float posX, posY;
+        
+       
+        if(textureComponent.bUseShadow){
+            posX = position.x - textureComponent.shadowTexture.getWidth() / 2;
+            posY = position.y - textureComponent.shadowTexture.getHeight() / 2;
+            DrawUtil.draw(textureComponent.shadowTexture,posX, posY);
+        }
+     
         posX = position.x - textureComponent.texture.getWidth() / 2;
-        posY = position.y - textureComponent.texture.getHeight() / 2; 
+        posY = position.y - textureComponent.texture.getHeight() / 2;
+        
         DrawUtil.rotate(position.x,position.y, position.rotation);
         DrawUtil.draw(textureComponent.texture, posX, posY, 0,  0, (float)textureComponent.texture.getWidth(), (float)textureComponent.texture.getHeight(),1,1,0);
         DrawUtil.rotate(position.x, position.y, -position.rotation);

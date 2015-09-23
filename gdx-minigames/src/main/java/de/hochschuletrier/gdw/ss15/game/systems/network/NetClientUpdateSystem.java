@@ -15,6 +15,7 @@ import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
@@ -73,6 +74,10 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     }
 
     public void handle(PlayerIdDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getPlayerId());
+        if (entity != null) {
+            entity.add(engine.createComponent(LocalPlayerComponent.class));
+        }
     }
 
     public void handle(MoveDatagram datagram) {

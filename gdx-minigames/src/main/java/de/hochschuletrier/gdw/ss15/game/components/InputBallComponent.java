@@ -5,24 +5,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
 public class InputBallComponent extends Component implements Pool.Poolable {
-	
-	public float horizontal;
-	public float vertical;
-    
-	public Vector2 view;
-    
-	public boolean pull;
-	
-	@Override
-	public void reset() {
-		this.horizontal = 0.0f;
-		this.vertical = 0.0f;
-	
-        this.view.x=0;
-        this.view.y=0;
-        
-		this.pull = false;
-		
-	}
-	
+
+    public final Vector2 move = new Vector2();
+    public final Vector2 view = new Vector2();
+
+    public boolean pull;
+    public long packetId; // netcode
+
+    @Override
+    public void reset() {
+        move.setZero();
+        view.setZero();
+        pull = false;
+        packetId = 0;
+    }
 }

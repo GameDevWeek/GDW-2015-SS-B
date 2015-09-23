@@ -13,6 +13,7 @@ public final class DatagramFactory {
             GameStateDatagram.class,
             PlayerIdDatagram.class,
             MoveDatagram.class,
+            BallPlayerInputDatagram.class,
             AnimationStateChangeDatagram.class
     );
 

@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.systems.network;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
@@ -35,6 +36,22 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     public void update(float deltaTime) {
         netClient.update();
     }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        
+        this.engine = (PooledEngine)engine;
+    }
+
+    @Override
+    public void removedFromEngine(Engine engine) {
+        super.removedFromEngine(engine);
+        
+        this.engine = null;
+    }
+    
+    
 
     @Override
     public void onDisconnect() {

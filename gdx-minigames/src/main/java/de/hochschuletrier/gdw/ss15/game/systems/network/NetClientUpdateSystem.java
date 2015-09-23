@@ -6,13 +6,16 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
+import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import java.util.HashMap;
 
 public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHandler, NetClientSimple.Listener {
@@ -39,7 +42,6 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     }
 
     public void handle(CreateEntityDatagram datagram) {
-        System.out.println("test");
         final Vector2 position = datagram.getPosition();
         Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y);
         netEntityMap.put(datagram.getNetId(), entity);
@@ -65,6 +67,13 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             position.x = pos.x;
             position.y = pos.y;
             position.rotation = datagram.getRotation();
+        }
+    }
+
+    public void handle(AnimationStateChangeDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            ChangeAnimationStateEvent.emit(datagram.getState(), entity);
         }
     }
 

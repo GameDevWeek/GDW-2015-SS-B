@@ -11,7 +11,8 @@ public final class DatagramFactory {
             CreateEntityDatagram.class,
             RemoveEntityDatagram.class,
             GameStartDatagram.class,
-            MoveDatagram.class
+            MoveDatagram.class,
+            AnimationStateChangeDatagram.class
     );
 
     static <T extends NetDatagram> T create(Class<T> clazz) {

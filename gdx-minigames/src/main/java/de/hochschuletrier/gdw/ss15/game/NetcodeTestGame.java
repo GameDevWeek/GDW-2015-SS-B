@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -9,11 +10,13 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactList
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.systems.TestInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
@@ -25,6 +28,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 public class NetcodeTestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
+    private Entity player = null;
 
     public NetcodeTestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
@@ -38,7 +42,7 @@ public class NetcodeTestGame extends AbstractGame {
         super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
-            Entity player = createEntity("player", 300, 300);
+            player = createEntity("player", 300, 300);
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         
@@ -101,4 +105,28 @@ public class NetcodeTestGame extends AbstractGame {
         }
         return true;
     }
+    
+    @Override
+    public boolean keyDown(int keycode) {
+        if(player != null) {
+            if(keycode == Input.Keys.A){
+                ChangeAnimationStateEvent.emit(EntityAnimationState.SHOOT, player);
+            }
+            if(keycode == Input.Keys.B){
+                ChangeAnimationStateEvent.emit(EntityAnimationState.IDLE, player);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        if(netClient != null)
+            netClient.disconnect();
+        else if(netServer != null)
+            netServer.disconnect();
+    }
+    
+    
 }

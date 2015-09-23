@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
+import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
@@ -30,4 +31,7 @@ public class ComponentMappers {
 
     /* Spawnpunkte für die Spieler */
     public static final ComponentMapper<PlayerSpawnComponent> playerSpawn = ComponentMapper.getFor(PlayerSpawnComponent.class);
+
+    /* Spawnpunkte für den Ball */
+    public static final ComponentMapper<BallSpawnComponent> ballSpawn = ComponentMapper.getFor(BallSpawnComponent.class);
 }

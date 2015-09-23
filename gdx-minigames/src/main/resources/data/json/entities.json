@@ -71,5 +71,40 @@
                 "restitution": 0
             }
         }
+    },
+    "playerspawn": {
+    	"meta": {},
+    	"components": {
+    		"PlayerSpawn": {},
+    		"Position": {},
+    		"Texture": {
+                "texture": "p_spawn_dumy",
+                "scale": 0.9
+            }
+    	}
+    },
+    "ballspawn": {
+    	"meta": {},
+    	"components": {
+    		"Position": {}
+    	}
+    },
+    "gate": {
+    	"meta": {},
+    	"components": {
+    		"Position": {}
+    	}
+    },
+    "wall": {
+    	"meta": {},
+    	"components": {
+    		"Position": {}
+    	}
+    }, 
+    "magnet": {
+    	"meta": {},
+    	"components": {
+    		"Position": {}
+    	}
     }
 }

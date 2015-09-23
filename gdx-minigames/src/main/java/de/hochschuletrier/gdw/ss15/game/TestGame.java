@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ss15.game;
 
 import java.util.HashMap;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -53,7 +54,7 @@ public class TestGame extends AbstractGame {
         this.initLoadMap();
 
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
-
+        
         /* TEST SPIELER ERSTELLEN */
         MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
         

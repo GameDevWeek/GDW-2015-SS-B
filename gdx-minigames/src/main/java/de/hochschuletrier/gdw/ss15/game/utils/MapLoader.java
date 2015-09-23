@@ -66,15 +66,21 @@ public class MapLoader {
                 for (LayerObject obj : layer.getObjects()) {
                     String entitytype = obj.getProperty("Entitytype", null).toLowerCase();
                     if (entitytype != null) {
-                        switch (entitytype) {
+                    	Team team = (obj.getIntProperty("Team", 0) == 0) ? Team.BLUE : Team.RED;
+                    	switch (entitytype) {
+                            case "magnet":
+                            	if(team == Team.BLUE) {
+                            		entitytype = "magnet_minus";
+                            	}
+                            	else {
+                            		entitytype = "magnet_plus";
+                            	}
                             case "playerspawn":
                             case "ballspawn":
-                            case "gate":
-                            case "wall":
-                            case "magnet":
+                            
                             	createEntity(engine, entitytype, obj.getX() + obj.getWidth() / 2.0f,
-                            			obj.getY() + obj.getHeight() / 2.0f,
-                            			(obj.getIntProperty("Team", 0) == 0) ? Team.values()[0] : Team.RED); 
+                            			obj.getY() + obj.getHeight() / 2.0f, team
+                            			); 
                             	break;
                             default:
                                 System.out.println(entitytype + "Nicht bekannt");

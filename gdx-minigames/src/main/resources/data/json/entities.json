@@ -21,7 +21,8 @@
                 "density": 5,
                 "friction": 0.2,
                 "restitution": 0.4
-            }
+            },
+            "Team": {}
         }
     },
     "box": {
@@ -67,7 +68,8 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0
-            }
+            },
+            "Team": {}
         }
     },
     "playerspawn": {
@@ -78,31 +80,45 @@
     		"Texture": {
                 "texture": "p_spawn_dumy",
                 "scale": 0.9
-            }
+            },
+       		"Team": {}
     	}
     },
     "ballspawn": {
     	"meta": {},
     	"components": {
-    		"Position": {}
+    		"Position": {},
+    		"Team": {},
+    		"BallSpawn": {},
+    		"Texture": {
+                "texture": "p_spawn_dumy",
+                "scale": 0.9
+            }
     	}
     },
-    "gate": {
+    "magnet_plus": {
     	"meta": {},
     	"components": {
-    		"Position": {}
+    		"Position": {},
+    		"Team": {},
+    		"Texture": {
+                "texture": "magnet_plus",
+                "scale": 0.9
+            },
+            "Magnet": {}
     	}
     },
-    "wall": {
+    "magnet_minus": {
     	"meta": {},
     	"components": {
-    		"Position": {}
-    	}
-    }, 
-    "magnet": {
-    	"meta": {},
-    	"components": {
-    		"Position": {}
+    		"Position": {},
+    		"Team": {},
+    		"Texture": {
+                "texture": "magnet_minus",
+                "scale": 0.9
+            },
+            "Magnet": {}
     	}
     }
+}
 }

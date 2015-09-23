@@ -33,7 +33,7 @@ public class TestGame extends AbstractGame {
     private final HashMap<TileSet, Texture> tilesetImages = new HashMap<>();
 
     private void initLoadMap() {
-        map = loadMap("data/maps/DummyMapFix.tmx");
+        map = loadMap("data/maps/DummyMap_mit_Entitytypes_Fix.tmx");
         for (TileSet tileset : map.getTileSets()) {
             TmxImage img = tileset.getImage();
             String filename = CurrentResourceLocator.combinePaths(

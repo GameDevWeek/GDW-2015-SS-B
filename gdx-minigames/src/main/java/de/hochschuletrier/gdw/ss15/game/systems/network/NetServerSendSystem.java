@@ -8,14 +8,17 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
+import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 
-public class NetServerSendSystem extends EntitySystem implements EntityListener {
+public class NetServerSendSystem extends EntitySystem implements EntityListener, ChangeAnimationStateEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> movables;
@@ -31,6 +34,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener 
         super.addedToEngine(engine);
         engine.addEntityListener(Family.all(SetupComponent.class).get(), this);
         movables = engine.getEntitiesFor(Family.all(MovableComponent.class, PositionComponent.class, PhysixBodyComponent.class).get());
+        ChangeAnimationStateEvent.register(this);
     }
 
     @Override
@@ -38,6 +42,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener 
         super.removedFromEngine(engine);
         engine.removeEntityListener(this);
         movables = null;
+        ChangeAnimationStateEvent.unregister(this);
     }
 
     @Override
@@ -55,5 +60,10 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener 
     @Override
     public void entityRemoved(Entity entity) {
         netServer.broadcastReliable(RemoveEntityDatagram.create(entity));
+    }
+
+    @Override
+    public void onAnimationStateChangedEvent(EntityAnimationState newState, Entity entity) {
+        netServer.broadcastReliable(AnimationStateChangeDatagram.create(entity, newState));
     }
 }

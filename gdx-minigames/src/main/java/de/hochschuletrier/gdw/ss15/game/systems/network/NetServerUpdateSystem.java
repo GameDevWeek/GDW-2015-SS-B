@@ -8,11 +8,14 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
+import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
+import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
+import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler, NetServerSimple.Listener {
@@ -22,6 +25,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     private ImmutableArray<Entity> players;
     private final GameType gameType;
     private final String mapName;
+    private ImmutableArray<Entity> animationEntities;
 
     public NetServerUpdateSystem(NetServerSimple netServer, GameType gameType, String mapName) {
         super(0);
@@ -35,6 +39,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         entities = engine.getEntitiesFor(Family.all(SetupComponent.class).get());
+        animationEntities = engine.getEntitiesFor(Family.all(StateRelatedAnimationsComponent.class).get());
 //        players = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
     }
     @Override
@@ -76,6 +81,11 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         
         for (Entity entity : entities) {
             connection.sendReliable(CreateEntityDatagram.create(entity));
+        }
+        
+        for(Entity entity: animationEntities) {
+            StateRelatedAnimationsComponent anim = ComponentMappers.stateRelatedAnimations.get(entity);
+            connection.sendReliable(AnimationStateChangeDatagram.create(entity, anim.currentState));
         }
         
         connection.sendReliable(GameStartDatagram.create(0, 0));

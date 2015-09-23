@@ -256,8 +256,10 @@ public class Main extends StateBasedGame
                 ConnectingState connectingState = new ConnectingState(assetManager, server, port, userName);
                 if(connectingState.isSuccess())
                     changeState(connectingState);
-                else
+                else {
+                    connectingState.dispose();
                     DisconnectEvent.emit();
+                }
             } catch(IOException e) {
                 //fixme
             }

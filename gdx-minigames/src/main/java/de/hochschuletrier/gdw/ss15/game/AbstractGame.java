@@ -44,7 +44,6 @@ public abstract class AbstractGame {
     protected final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
     protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
-    protected final LimitedSmoothCamera camera = new LimitedSmoothCamera();
     private String mapName;
 
     public AbstractGame() {
@@ -60,7 +59,6 @@ public abstract class AbstractGame {
 
     public void dispose() {
         togglePhysixDebug.unregister();
-        Main.getInstance().removeScreenListener(camera);
     }
 
     public void init(AssetManagerX assetManager, String mapName) {
@@ -70,8 +68,6 @@ public abstract class AbstractGame {
         addSystems();
         addContactListeners();
         entityFactory.init(engine, assetManager);
-        camera.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Main.getInstance().addScreenListener(camera);
     }
 
     public void start() {
@@ -86,8 +82,8 @@ public abstract class AbstractGame {
         engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
         engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS+1));
         engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
-        engine.addSystem(new LimitedSmoothCameraSystem(camera));
-        engine.addSystem(new SoundSystem(camera));
+        engine.addSystem(new LimitedSmoothCameraSystem(GameConstants.PRIORITY_CAMERA));
+        engine.addSystem(new SoundSystem(GameConstants.PRIORITY_CAMERA));
        
     }
 

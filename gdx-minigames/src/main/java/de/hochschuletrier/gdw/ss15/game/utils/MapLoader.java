@@ -57,7 +57,7 @@ public class MapLoader {
         return entity;
     }
     public static void generateWorldFromTileMapX(PooledEngine engine,
-            PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
+            PhysixSystem physixSystem, TiledMap map) {
         for (Layer layer : map.getLayers()) {
             if (layer.isObjectLayer()) {
 				// / pre filtering important objects,

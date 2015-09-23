@@ -40,7 +40,7 @@ public class TestGame extends AbstractGame {
                     tileset.getFilename(), img.getSource());
             tilesetImages.put(tileset, new Texture(filename));
         }
-        engine.getSystem(LimitedSmoothCameraSystem.class).camera.setBounds(0, 0, map.getWidth() * map.getTileWidth(), map.getHeight() * map.getTileHeight());
+        engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
@@ -52,7 +52,7 @@ public class TestGame extends AbstractGame {
 
         this.initLoadMap();
 
-        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, engine.getSystem(LimitedSmoothCameraSystem.class).camera);
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map);
 
         /* TEST SPIELER ERSTELLEN */
         Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);

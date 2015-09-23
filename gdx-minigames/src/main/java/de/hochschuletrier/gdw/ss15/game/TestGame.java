@@ -29,6 +29,8 @@ public class TestGame extends AbstractGame {
     public void init(AssetManagerX assetManager) {
         super.init(assetManager);
         
+        MapLoader.entityFactory.init(engine, assetManager);
+        
         this.initLoadMap();
         
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
@@ -66,7 +68,7 @@ public class TestGame extends AbstractGame {
     }
 
     private void setupPhysixWorld() {
-        physixSystem.setGravity(0, 24);
+        physixSystem.setGravity(0, 0);
     }
     
     public static TiledMap loadMap(String filename) {
@@ -81,9 +83,13 @@ public class TestGame extends AbstractGame {
     
     @Override
     public void update(float delta) {
-    	super.update(delta);
-    	
+    	mapRenderer.update(delta);
     	// Map wird gerendert !
     	mapRenderer.render(0, 0);
+    	
+    	super.update(delta);
+    	
+    	
+    	
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
+import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
@@ -18,7 +19,9 @@ import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
+import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
+import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 
 /**
  * 
@@ -30,11 +33,24 @@ import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 public class MapLoader
 {    
     private TiledMap tiledMap;
+    
+    public final static EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Main.class);
+    private final static EntityFactoryParam factoryParam = new EntityFactoryParam();
+    
     /**
      * Standard Konstruktor
      */
     public MapLoader()
     {
+    }
+    
+    public static Entity createEntity(PooledEngine engine, String name, float x, float y) {
+        factoryParam.x = x;
+        factoryParam.y = y;
+        Entity entity = entityFactory.createEntity(name, factoryParam);
+        
+        engine.addEntity(entity);        
+        return entity;
     }
     
     public static void generateWorldFromTileMapX(PooledEngine engine, PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
@@ -47,6 +63,9 @@ public class MapLoader
                 for(LayerObject obj : layer.getObjects())
                 {
                 	System.out.println(obj.getName().toLowerCase());
+                	switch (obj.getName().toLowerCase()) {
+                		case "box": createEntity(engine, obj.getName().toLowerCase(), obj.getX(), obj.getY());
+                	}
                 }
             }
         }

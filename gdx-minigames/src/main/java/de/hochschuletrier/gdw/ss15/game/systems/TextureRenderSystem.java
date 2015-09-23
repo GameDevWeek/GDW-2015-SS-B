@@ -44,7 +44,7 @@ public class TextureRenderSystem extends IteratingSystem {
         posX = position.x - w / 2.0f;
         posY = position.y - h / 2.0f;
 
-        DrawUtil.batch.draw(textureComponent.texture, posX, posY, w * 0.5f, h * 0.5f, w, h, 1, 1, position.rotation, 0, 0, w, h, false, true);
+        DrawUtil.batch.draw(textureComponent.texture, posX, posY, w * 0.5f, h * 0.5f, w, h, textureComponent.scale, textureComponent.scale, position.rotation, 0, 0, w, h, false, true);
     }
 
 }

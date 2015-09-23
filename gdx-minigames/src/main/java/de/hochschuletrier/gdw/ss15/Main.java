@@ -26,14 +26,26 @@ import de.hochschuletrier.gdw.commons.gdx.audio.SoundInstance;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.StateBasedGame;
+import de.hochschuletrier.gdw.commons.gdx.state.transition.SplitHorizontalTransition;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.commons.gdx.utils.GdxResourceLocator;
 import de.hochschuletrier.gdw.commons.gdx.utils.KeyUtil;
+import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.utils.ClassUtils;
+import de.hochschuletrier.gdw.ss15.datagrams.DatagramFactory;
+import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
+import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
+import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
+import de.hochschuletrier.gdw.ss15.game.NetcodeTestGame;
+import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.sandbox.SandboxCommand;
+import de.hochschuletrier.gdw.ss15.states.ConnectingState;
+import de.hochschuletrier.gdw.ss15.states.GameplayState;
 import de.hochschuletrier.gdw.ss15.states.LoadGameState;
 import de.hochschuletrier.gdw.ss15.states.MainMenuState;
+import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.OptionBuilder;
@@ -44,8 +56,10 @@ import org.apache.commons.cli.PosixParser;
  *
  * @author Santo Pfingsten
  */
-public class Main extends StateBasedGame {
-    
+public class Main extends StateBasedGame
+    implements DisconnectEvent.Listener, TestGameEvent.Listener,
+        CreateServerEvent.Listener, JoinServerEvent.Listener {
+
     public static CommandLine cmdLine;
 
     public static final boolean IS_RELEASE = ClassUtils.getClassUrl(Main.class).getProtocol().equals("jar");
@@ -129,6 +143,11 @@ public class Main extends StateBasedGame {
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
+        
+        TestGameEvent.register(this);
+        DisconnectEvent.register(this);
+        CreateServerEvent.register(this);
+        JoinServerEvent.register(this);
     }
 
     private void onLoadComplete() {
@@ -136,7 +155,7 @@ public class Main extends StateBasedGame {
         addPersistentState(mainMenuState);
         changeState(mainMenuState, null, null);
         SandboxCommand.init(assetManager);
-        
+
         if (cmdLine.hasOption("sandbox")) {
             SandboxCommand.runSandbox(cmdLine.getOptionValue("sandbox"));
         }
@@ -201,6 +220,52 @@ public class Main extends StateBasedGame {
     @Override
     public void resume() {
     }
+
+    @Override
+    public void onTestGameEvent() {
+        if (!isTransitioning()) {
+            TestGame game = new TestGame();
+            game.init(assetManager, "data/maps/demo.tmx");
+            changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
+        }
+    }
+    
+    @Override
+    public void onDisconnectEvent() {
+        if (!isTransitioning()) {
+            changeState(getPersistentState(MainMenuState.class));
+        }
+    }
+
+    @Override
+    public void onCreateServerEvent(int port, int maxPlayers, String userName) {
+        if (!isTransitioning()) {
+            NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
+            if (netServer.start(port, maxPlayers)) {
+                NetcodeTestGame game = new NetcodeTestGame(netServer, null);
+                game.init(assetManager, "data/maps/demo.tmx");
+                changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
+            }
+        }
+    }
+
+    @Override
+    public void onJoinServerEvent(String server, int port, String userName) {
+        if (!isTransitioning()) {
+            try {
+                ConnectingState connectingState = new ConnectingState(assetManager, server, port, userName);
+                if(connectingState.isSuccess())
+                    changeState(connectingState);
+                else {
+                    connectingState.dispose();
+                    DisconnectEvent.emit();
+                }
+            } catch(IOException e) {
+                //fixme
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();

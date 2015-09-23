@@ -1,18 +1,22 @@
 package de.hochschuletrier.gdw.ss15.game.systems.network;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
-import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
-import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import java.util.HashMap;
 
 public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHandler, NetClientSimple.Listener {
@@ -20,15 +24,13 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     private final NetClientSimple netClient;
     private PooledEngine engine;
     private final HashMap<Long, Entity> netEntityMap = new HashMap();
-    private PhysixSystem physixSystem;
+    private final AbstractGame game;
 
-    public NetClientUpdateSystem(NetClientSimple netClient) {
+    public NetClientUpdateSystem(NetClientSimple netClient, AbstractGame game) {
         super(0);
         this.netClient = netClient;
+        this.game = game;
     }
-
-//        netClient.setHandler(this);
-//        netClient.setListener(this);
 
     @Override
     public void update(float deltaTime) {
@@ -36,7 +38,60 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     }
 
     @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        
+        this.engine = (PooledEngine)engine;
+    }
+
+    @Override
+    public void removedFromEngine(Engine engine) {
+        super.removedFromEngine(engine);
+        
+        this.engine = null;
+    }
+    
+    
+
+    @Override
     public void onDisconnect() {
 //        Main.getInstance().disconnect();
     }
+
+    public void handle(CreateEntityDatagram datagram) {
+        final Vector2 position = datagram.getPosition();
+        Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y);
+        netEntityMap.put(datagram.getNetId(), entity);
+    }
+
+    public void handle(RemoveEntityDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            engine.removeEntity(entity);
+        } else {
+            //fixme: warn?
+        }
+    }
+
+    public void handle(GameStartDatagram datagram) {
+    }
+
+    public void handle(MoveDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            PositionComponent position = ComponentMappers.position.get(entity);
+            Vector2 pos = datagram.getPosition();
+            position.x = pos.x;
+            position.y = pos.y;
+            position.rotation = datagram.getRotation();
+        }
+    }
+
+    public void handle(AnimationStateChangeDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            ChangeAnimationStateEvent.emit(datagram.getState(), entity);
+        }
+    }
+
 }

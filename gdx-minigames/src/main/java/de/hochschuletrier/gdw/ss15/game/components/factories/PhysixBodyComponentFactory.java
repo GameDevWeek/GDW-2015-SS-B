@@ -33,6 +33,9 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
+        if(!param.allowPhysics)
+            return;
+        
         final PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");
@@ -50,7 +53,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeCircle(properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
+       // bodyComponent.applyImpulse(0, 50000);
         entity.add(bodyComponent);
     }
 
@@ -59,7 +62,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
+        // bodyComponent.applyImpulse(0, 500);
         entity.add(bodyComponent);
     }
 

@@ -10,9 +10,11 @@
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Animation": {
-                "animation": "ball"
+            "Texture": {
+                "texture": "ball_plus",
+                "shadow": "ball_base"
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "circle",
                 "size": 30,
@@ -33,12 +35,14 @@
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Animation": {
-                "animation": "box"
+            "Texture": {
+                "texture": "texture_dummy_64",
+                "scale": 0.9
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "box",
-                "size": 60,
+                "size": 64,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -51,9 +55,12 @@
             "Position": {},
             "SoundEmitter": {},
             "Player": {},
-            "Animation": {
-                "animation": "box"
+            "StateRelatedAnimations": {
+                "animation_idle": "box",
+                "animation_shoot": "ball",
+                "scale": 2.0
             },
+            "Movable": {},
             "PhysixBody": {
                 "type": "box",
                 "size": 60,

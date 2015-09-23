@@ -25,45 +25,47 @@ import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
- * 
+ *
  * @author tobidot (Tobias Gepp)
  *
  */
-
 public class MapLoader {
-	private TiledMap tiledMap;
 
-	public final static EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory(
-			"data/json/entities.json", Main.class);
-	private final static EntityFactoryParam factoryParam = new EntityFactoryParam();
-	/**
-	 * Standard Konstruktor
-	 */
-	public MapLoader() {
-	}
-	public static Entity createEntity(PooledEngine engine, String name,
-			float x, float y) {
-		factoryParam.x = x;
-		factoryParam.y = y;
-		Entity entity = entityFactory.createEntity(name, factoryParam);
+    private TiledMap tiledMap;
 
-		engine.addEntity(entity);
-		return entity;
-	}
+    public final static EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory(
+            "data/json/entities.json", Main.class);
+    private final static EntityFactoryParam factoryParam = new EntityFactoryParam();
 
-	public static void generateWorldFromTileMapX(PooledEngine engine,
-			PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
-		for (Layer layer : map.getLayers()) {
-			if (layer.isObjectLayer()) {
+    /**
+     * Standard Konstruktor
+     */
+    public MapLoader() {
+    }
+
+    public static Entity createEntity(PooledEngine engine, String name,
+            float x, float y) {
+        factoryParam.x = x;
+        factoryParam.y = y;
+        Entity entity = entityFactory.createEntity(name, factoryParam);
+
+        engine.addEntity(entity);
+        return entity;
+    }
+
+    public static void generateWorldFromTileMapX(PooledEngine engine,
+            PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
+        for (Layer layer : map.getLayers()) {
+            if (layer.isObjectLayer()) {
 				// / pre filtering important objects,
-				// / wich needs to be already existing when loading other
-				// Objects
-				for (LayerObject obj : layer.getObjects()) {
-					String entitytype = obj.getProperty("Entitytype", null);
-					if (entitytype != null) {
-						System.out.println(entitytype.toLowerCase());
-						switch (entitytype.toLowerCase()) {
-						case "box"://fallthrough is intended
+                // / wich needs to be already existing when loading other
+                // Objects
+                for (LayerObject obj : layer.getObjects()) {
+                    String entitytype = obj.getProperty("Entitytype", null);
+                    if (entitytype != null) {
+                        System.out.println(entitytype.toLowerCase());
+                        switch (entitytype.toLowerCase()) {
+                            case "box"://fallthrough is intended
 //						case "wall":
 //						case "magnet":
 //							//TEAM
@@ -71,44 +73,42 @@ public class MapLoader {
 //							 //TEAM
 //						case "ballspawn":
 //							//TEAM
-						
-							createEntity(engine, entitytype.toLowerCase(),
-									obj.getX()+obj.getWidth()/2.0f, obj.getY()+obj.getHeight()/2.0f);
-							break;//intended
-							default: System.out.println(entitytype+"Nicht bekannt");
-						}
-					}
-				}
-			}
-		}
-	}
 
-	public TiledMap getTiledMap() {
-		return tiledMap;
-	}
+                                createEntity(engine, entitytype.toLowerCase(),
+                                        obj.getX() + obj.getWidth() / 2.0f, obj.getY() + obj.getHeight() / 2.0f);
+                                break;//intended
+                            default:
+                                System.out.println(entitytype + "Nicht bekannt");
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * Ein Shape zur Physik hinzufuegen
-	 * 
-	 * @param rect
-	 *            zu erstellendes Rechteck
-	 * @param tileWidth
-	 *            breite eines tile
-	 * @param tileHeight
-	 *            hoehe eines tile
-	 */
-	private void addShape(PhysixSystem pSystem, Rectangle rect, int tileWidth,
-			int tileHeight) {
-		float width = rect.width * tileWidth;
-		float height = rect.height * tileHeight;
-		float x = rect.x * tileWidth + width / 2;
-		float y = rect.y * tileHeight + height / 2;
+    public TiledMap getTiledMap() {
+        return tiledMap;
+    }
 
-		PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody,
-				pSystem).position(x, y).fixedRotation(false);
-		Body body = pSystem.getWorld().createBody(bodyDef);
-		body.createFixture(new PhysixFixtureDef(pSystem).density(1)
-				.friction(0.5f).shapeBox(width, height));
-	}
+    /**
+     * Ein Shape zur Physik hinzufuegen
+     *
+     * @param rect zu erstellendes Rechteck
+     * @param tileWidth breite eines tile
+     * @param tileHeight hoehe eines tile
+     */
+    private void addShape(PhysixSystem pSystem, Rectangle rect, int tileWidth,
+            int tileHeight) {
+        float width = rect.width * tileWidth;
+        float height = rect.height * tileHeight;
+        float x = rect.x * tileWidth + width / 2;
+        float y = rect.y * tileHeight + height / 2;
+
+        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody,
+                pSystem).position(x, y).fixedRotation(false);
+        Body body = pSystem.getWorld().createBody(bodyDef);
+        body.createFixture(new PhysixFixtureDef(pSystem).density(1)
+                .friction(0.5f).shapeBox(width, height));
+    }
 
 }

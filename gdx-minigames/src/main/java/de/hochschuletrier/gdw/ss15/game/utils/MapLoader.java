@@ -54,23 +54,21 @@ public class MapLoader
     }
     
     public static void generateWorldFromTileMapX(PooledEngine engine, PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
-    	for (Layer layer : map.getLayers()) 
-        {
-            if(layer.isObjectLayer())
-            {
+        for (Layer layer : map.getLayers()) {
+            if (layer.isObjectLayer()) {
                 /// pre filtering important objects,
                 /// wich needs to be already existing when loading other Objects
-                for(LayerObject obj : layer.getObjects())
-                {
-                	System.out.println(obj.getName().toLowerCase());
-                	switch (obj.getName().toLowerCase()) {
-                		case "box": createEntity(engine, obj.getName().toLowerCase(), obj.getX(), obj.getY());
-                	}
+                for (LayerObject obj : layer.getObjects()) {
+                    System.out.println(obj.getName().toLowerCase());
+                    createEntity(engine, obj.getName().toLowerCase(), obj.getX(), obj.getY());
+
                 }
             }
         }
     }
-    
+
+
+
     public TiledMap getTiledMap()
     {
         return tiledMap;

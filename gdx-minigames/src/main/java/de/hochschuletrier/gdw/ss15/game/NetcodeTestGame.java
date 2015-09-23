@@ -16,11 +16,13 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
+import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.utils.PhysixUtil;
 
 public class NetcodeTestGame extends AbstractGame {
@@ -40,7 +42,7 @@ public class NetcodeTestGame extends AbstractGame {
         super.init(assetManager, mapName);
         setupPhysixWorld();
         if(netClient == null) {
-            player = createEntity("player", 300, 300);
+            player = MapLoader.createEntity(engine, "player", 300, 300, Team.BLUE);
             player.add(engine.createComponent(LocalPlayerComponent.class));
         }
         
@@ -68,7 +70,7 @@ public class NetcodeTestGame extends AbstractGame {
             engine.addSystem(new NetServerUpdateSystem(netServer, GameType.MAGNET_BALL, getMapName()));
         } else if(netClient != null) {
             engine.addSystem(new NetClientSendInputSystem(netClient));
-            engine.addSystem(new NetClientUpdateSystem(netClient, this));
+            engine.addSystem(new NetClientUpdateSystem(netClient));
         }
     }
 

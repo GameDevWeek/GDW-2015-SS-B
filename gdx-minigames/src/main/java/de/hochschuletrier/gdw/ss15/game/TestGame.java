@@ -18,6 +18,7 @@ import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
@@ -53,6 +54,9 @@ public class TestGame extends AbstractGame {
 
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, camera);
 
+        /* TEST SPIELER ERSTELLEN */
+        MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        
         setupPhysixWorld();
 
 		// Gdx.input.setInputProcessor(new InputKeyboard());

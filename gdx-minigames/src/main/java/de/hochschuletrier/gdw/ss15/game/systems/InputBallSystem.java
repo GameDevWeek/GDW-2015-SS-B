@@ -32,14 +32,15 @@ public class InputBallSystem extends IteratingSystem {
 	      // transfer from puffer
 	      input.vertical = InputPuffer.vertical;
 	      input.horizontal = InputPuffer.horizontal;
+          PositionComponent pos = ComponentMappers.position.get(entity);
+		    	  
+		  float directionX = Gdx.input.getX() - pos.x;
+		  float directionY = Gdx.input.getY() - pos.y;
+          Vector2 view = new Vector2(directionX,directionY).nor();
+		  input.view = view;
 	      if (input.pull != InputPuffer.pull) { // wechsel hat stattgefunden
 	    	  if (InputPuffer.pull) {
-	    		  PositionComponent pos = ComponentMappers.position.get(entity);
-		    	  
-		    	  float directionX = Gdx.input.getX() - pos.x;
-		    	  float directionY = Gdx.input.getY() - pos.y;
-		    	  
-		    	  PullEvent.emitOn(entity, new Vector2(directionX, directionY).nor()); 
+		    	  PullEvent.emitOn(entity, view); 
 	    	  }
 	    	  else {
 	    		  PullEvent.emitOff(entity);
@@ -49,14 +50,7 @@ public class InputBallSystem extends IteratingSystem {
 	      }
 	      
 	      if ( false /* Spieler hat Ball */ ) {
-	    	  
-	    	  PositionComponent pos = ComponentMappers.position.get(entity);
-	    	  
-	    	  float directionX = Gdx.input.getX() - pos.x;
-	    	  float directionY = Gdx.input.getY() - pos.y;
-	    	  
-	    	  ShootEvent.emit(entity, new Vector2(directionX, directionY).nor());
-	    	  
+	    	  ShootEvent.emit(entity, view);	    	  
 	      }	        
 	}
 }

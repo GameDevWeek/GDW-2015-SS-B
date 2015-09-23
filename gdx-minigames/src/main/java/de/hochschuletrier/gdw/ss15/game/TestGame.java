@@ -9,6 +9,7 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.tiled.TiledMapRendererGdx;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
+import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
@@ -93,7 +94,10 @@ public class TestGame extends AbstractGame {
 	public void update(float delta) {
 		mapRenderer.update(delta);
 		// Map wird gerendert !
-		mapRenderer.render(0, 0);
+                for(Layer layer: map.getLayers()) {
+                    if(layer.isTileLayer())
+                        mapRenderer.render(0, 0, layer);
+                }
 
 		super.update(delta);
 

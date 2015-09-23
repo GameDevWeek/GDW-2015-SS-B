@@ -10,6 +10,8 @@ import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SoundEmitterComponent;
+import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
+import de.hochschuletrier.gdw.ss15.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 
 public class ComponentMappers {
@@ -20,6 +22,8 @@ public class ComponentMappers {
     public static final ComponentMapper<PhysixModifierComponent> physixModifier = ComponentMapper.getFor(PhysixModifierComponent.class);
     public static final ComponentMapper<ImpactSoundComponent> impactSound = ComponentMapper.getFor(ImpactSoundComponent.class);
     public static final ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
+    public static final ComponentMapper<StateRelatedAnimationsComponent> stateRelatedAnimations = ComponentMapper.getFor(StateRelatedAnimationsComponent.class);
+    public static final ComponentMapper<TextureComponent> texture = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<SetupComponent> setup = ComponentMapper.getFor(SetupComponent.class);
     public static final ComponentMapper<InputBallComponent> input = ComponentMapper.getFor(InputBallComponent.class);
 }

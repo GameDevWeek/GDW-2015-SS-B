@@ -72,6 +72,7 @@ public class GameplayState extends BaseGameState {
                 return super.keyUp(keycode);
             }
         };
+        game.start();
     }
 
     private void onMenuEmptyPop() {

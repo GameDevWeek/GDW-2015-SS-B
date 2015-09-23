@@ -22,4 +22,5 @@ public class GameConstants {
     public static final int BOX2D_SCALE = 40;
     
     public static float MUSIC_FADE_TIME = 2;
+    public static int MAX_PLAYERS = 8;
 }

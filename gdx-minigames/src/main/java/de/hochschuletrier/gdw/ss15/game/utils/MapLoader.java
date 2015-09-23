@@ -21,6 +21,7 @@ import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
+import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
@@ -44,15 +45,17 @@ public class MapLoader {
     }
 
     public static Entity createEntity(PooledEngine engine, String name,
-            float x, float y) {
+            float x, float y, Team team) {
         factoryParam.x = x;
         factoryParam.y = y;
+        factoryParam.team = team;
         Entity entity = entityFactory.createEntity(name, factoryParam);
-
+        SetupComponent setup = engine.createComponent(SetupComponent.class);
+        setup.name = name;
+        entity.add(setup);
         engine.addEntity(entity);
         return entity;
     }
-
     public static void generateWorldFromTileMapX(PooledEngine engine,
             PhysixSystem physixSystem, TiledMap map, SmoothCamera camera) {
         for (Layer layer : map.getLayers()) {
@@ -73,9 +76,11 @@ public class MapLoader {
 //							 //TEAM
 //						case "ballspawn":
 //							//TEAM
-
+                                Team team = Team.BLUE; // einlesen!
                                 createEntity(engine, entitytype.toLowerCase(),
-                                        obj.getX() + obj.getWidth() / 2.0f, obj.getY() + obj.getHeight() / 2.0f);
+                                        obj.getX() + obj.getWidth() / 2.0f,
+                                        obj.getY() + obj.getHeight() / 2.0f,
+                                        team);
                                 break;//intended
                             default:
                                 System.out.println(entitytype + "Nicht bekannt");

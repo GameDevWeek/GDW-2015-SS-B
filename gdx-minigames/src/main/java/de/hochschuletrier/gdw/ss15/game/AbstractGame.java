@@ -120,16 +120,4 @@ public abstract class AbstractGame {
         });
         engine.addEntity(entity);
     }
-
-    public Entity createEntity(String name, float x, float y, Team team) {
-        factoryParam.x = x;
-        factoryParam.y = y;
-        factoryParam.team = team;
-        Entity entity = entityFactory.createEntity(name, factoryParam);
-        SetupComponent setup = engine.createComponent(SetupComponent.class);
-        setup.name = name;
-        entity.add(setup);
-        engine.addEntity(entity);
-        return entity;
-    }
 }

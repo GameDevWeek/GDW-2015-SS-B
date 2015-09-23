@@ -17,6 +17,7 @@ import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
+import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import java.util.HashMap;
 
 public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHandler, NetClientSimple.Listener {
@@ -24,12 +25,10 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     private final NetClientSimple netClient;
     private PooledEngine engine;
     private final HashMap<Long, Entity> netEntityMap = new HashMap();
-    private final AbstractGame game;
 
-    public NetClientUpdateSystem(NetClientSimple netClient, AbstractGame game) {
+    public NetClientUpdateSystem(NetClientSimple netClient) {
         super(0);
         this.netClient = netClient;
-        this.game = game;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
 
     public void handle(CreateEntityDatagram datagram) {
         final Vector2 position = datagram.getPosition();
-        Entity entity = game.createEntity(datagram.getEntityType(), position.x, position.y, datagram.getTeam());
+        Entity entity = MapLoader.createEntity(engine, datagram.getEntityType(), position.x, position.y, datagram.getTeam());
         netEntityMap.put(datagram.getNetId(), entity);
     }
 

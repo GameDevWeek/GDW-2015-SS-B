@@ -11,36 +11,59 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.events.*;
 
-public class WeaponSystem extends IteratingSystem{
+public class WeaponSystem extends IteratingSystem implements PullEvent.Listener, ShootEvent.Listener {
+	
+	boolean isPulling=false;
 	
 	public WeaponSystem() {
         this(0);
     }
 
-    public WeaponSystem(int priority) {
+    public WeaponSystem(int priority)  {
         super(Family.all(PositionComponent.class, PhysixBodyComponent.class, BallComponent.class, WeaponInfluenceComponent.class).get(), priority);
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        PhysixBodyComponent physix = ComponentMappers.physixBody.get(entity);
-        PositionComponent position = ComponentMappers.position.get(entity);
-        WeaponInfluenceComponent weapons = ComponentMappers.weaponInfluence.get(entity);
-        
-        for (int i = 0; i < weapons.weaponFields.size(); i++) {
-			Vector2 otherPos = new Vector2();
-			otherPos.x = weapons.weaponFields.get(i).getComponent(PositionComponent.class).x;
-			otherPos.y = weapons.weaponFields.get(i).getComponent(PositionComponent.class).y;
-			Vector2 weaponForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
-			if( weapons.weaponFields.get(i).getComponent(WeaponComponent.class).isPulling == entity.getComponent(WeaponComponent.class).isPulling)
-				weaponForce.scl(-1f);
-			
-			weaponForce.nor();
-			weaponForce.scl(50.f);
-			physix.getBody().applyForceToCenter(weaponForce, true);
-		}
+//        PhysixBodyComponent physix = ComponentMappers.physixBody.get(entity);
+//        PositionComponent position = ComponentMappers.position.get(entity);
+//        WeaponInfluenceComponent weapons = ComponentMappers.weaponInfluence.get(entity);
+//        
+//        for (int i = 0; i < weapons.weaponFields.size(); i++) {
+//			Vector2 otherPos = new Vector2();
+//			otherPos.x = weapons.weaponFields.get(i).getComponent(PositionComponent.class).x;
+//			otherPos.y = weapons.weaponFields.get(i).getComponent(PositionComponent.class).y;
+//			Vector2 weaponForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
+//			if( weapons.weaponFields.get(i).getComponent(WeaponComponent.class).isPulling == entity.getComponent(WeaponComponent.class).isPulling)
+//				weaponForce.scl(-1f);
+//			
+//			weaponForce.nor();
+//			weaponForce.scl(50.f);
+//			physix.getBody().applyForceToCenter(weaponForce, true);
+//		}
     }
+
+	@Override
+	public void onShootEvent(Entity entity, Vector2 direction) {
+		// TODO Auto-generated method stub
+		isPulling=true;
+		
+	}
+
+	@Override
+	public void onPullEventOn(Entity entity, Vector2 direction) {
+		// TODO Auto-generated method stub
+		isPulling=true;
+		
+	}
+
+	@Override
+	public void onPullEventOff(Entity entity) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 

@@ -13,11 +13,10 @@ import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
-import de.hochschuletrier.gdw.ss15.game.AbstractGame;
+import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import java.util.HashMap;
 
@@ -55,7 +54,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
 
     @Override
     public void onDisconnect() {
-//        Main.getInstance().disconnect();
+        DisconnectEvent.emit();
     }
 
     public void handle(CreateEntityDatagram datagram) {

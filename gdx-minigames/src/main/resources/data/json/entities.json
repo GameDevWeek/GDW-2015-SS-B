@@ -79,7 +79,7 @@
     		"PlayerSpawn": {},
     		"Position": {},
     		"Texture": {
-                "texture": "p_spawn_dumy",
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             },
        		"Team": {}
@@ -92,7 +92,7 @@
     		"Team": {},
     		"BallSpawn": {},
     		"Texture": {
-                "texture": "p_spawn_dumy",
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             }
     	}

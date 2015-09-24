@@ -1,5 +1,10 @@
 package de.hochschuletrier.gdw.ss14.sandbox.maptest;
 
+import java.util.HashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
@@ -8,9 +13,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.LimitedSmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
+import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
@@ -28,10 +35,19 @@ import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.GameConstants;
+import de.hochschuletrier.gdw.ss14.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MagnetComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MagneticFieldComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.BallListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss14.game.systems.MagneticForceSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.sandbox.SandboxGame;
-import java.util.HashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -66,6 +82,12 @@ public class MapTest extends SandboxGame {
     public MapTest() {
         engine.addSystem(physixSystem);
         engine.addSystem(physixDebugRenderSystem);
+        engine.addSystem(new MagneticForceSystem());
+        engine.addSystem(new UpdatePositionSystem());
+        
+        PhysixComponentAwareContactListener contactListener = new PhysixComponentAwareContactListener();
+        physixSystem.getWorld().setContactListener(contactListener);
+        contactListener.addListener(BallComponent.class, new BallListener());
     }
 
     @Override
@@ -86,6 +108,7 @@ public class MapTest extends SandboxGame {
                 (Layer layer, TileInfo info) -> info.getBooleanProperty("blocked", false),
                 (Rectangle rect) -> addShape(rect, tileWidth, tileHeight));
 
+        //create entities
         // create a simple player ball
         Entity player = engine.createEntity();
         PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
@@ -95,12 +118,59 @@ public class MapTest extends SandboxGame {
             playerBody = engine.createComponent(PhysixBodyComponent.class);
             PhysixBodyDef bodyDef = new PhysixBodyDef(BodyType.DynamicBody, physixSystem).position(100, 100).fixedRotation(true);
             playerBody.init(bodyDef, physixSystem, player);
-            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(30);
+            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(20);
             playerBody.createFixture(fixtureDef);
             player.add(playerBody);
         });
+        player.add(engine.createComponent(PositionComponent.class));
+        player.add(engine.createComponent(BallComponent.class));
+        player.add(engine.createComponent(MagneticInfluenceComponent.class));
+        MagnetComponent magnetComp = engine.createComponent(MagnetComponent.class);
+        magnetComp.positiv = true;
+        player.add(magnetComp);
         engine.addEntity(player);
+        
+        //magnets
+        Entity magnet = engine.createEntity();
+        PhysixModifierComponent modifyComponent2 = engine.createComponent(PhysixModifierComponent.class);
+        magnet.add(modifyComponent2);
 
+        modifyComponent2.schedule(() -> {
+        	PhysixBodyComponent magnetBody = engine.createComponent(PhysixBodyComponent.class);
+            PhysixBodyDef bodyDef = new PhysixBodyDef(BodyType.DynamicBody, physixSystem).position(500, 100).fixedRotation(true);
+            magnetBody.init(bodyDef, physixSystem, magnet);
+            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(60).sensor(true);
+            magnetBody.createFixture(fixtureDef);
+            magnet.add(magnetBody);
+        });
+        magnet.add(engine.createComponent(PositionComponent.class));
+        magnet.add(engine.createComponent(MagneticFieldComponent.class));
+        
+        MagnetComponent magnetComp2 = engine.createComponent(MagnetComponent.class);
+        magnetComp2.positiv = false;
+        magnet.add(magnetComp2);
+        engine.addEntity(magnet);
+
+        Entity magnet2 = engine.createEntity();
+        PhysixModifierComponent modifyComponent3 = engine.createComponent(PhysixModifierComponent.class);
+        magnet2.add(modifyComponent3);
+
+        modifyComponent3.schedule(() -> {
+        	PhysixBodyComponent magnetBody = engine.createComponent(PhysixBodyComponent.class);
+            PhysixBodyDef bodyDef = new PhysixBodyDef(BodyType.DynamicBody, physixSystem).position(800, 100).fixedRotation(true);
+            magnetBody.init(bodyDef, physixSystem, magnet2);
+            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(200).sensor(true);
+            magnetBody.createFixture(fixtureDef);
+            magnet2.add(magnetBody);
+        });
+        magnet2.add(engine.createComponent(PositionComponent.class));
+        magnet2.add(engine.createComponent(MagneticFieldComponent.class));
+        
+        MagnetComponent magnetComp3 = engine.createComponent(MagnetComponent.class);
+        magnetComp3.positiv = true;
+        magnet2.add(magnetComp3);
+        engine.addEntity(magnet2);
+        
         // Setup camera
         camera.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         totalMapWidth = map.getWidth() * map.getTileWidth();
@@ -149,7 +219,7 @@ public class MapTest extends SandboxGame {
         camera.update(delta);
 
         if(playerBody != null) {
-            float speed = 30000.0f;
+            float speed = 300.0f;
             float velX = 0, velY = 0;
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 velX -= delta * speed;
@@ -164,7 +234,8 @@ public class MapTest extends SandboxGame {
                 velY += delta * speed;
             }
 
-            playerBody.setLinearVelocity(velX, velY);
+            //playerBody.setLinearVelocity(velX, velY);
+            playerBody.applyImpulse(velX,velY);
             camera.setDestination(playerBody.getPosition());
         }
     }

@@ -8,14 +8,11 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.transition.FadeTransition;
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
-import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.Main;
-import de.hochschuletrier.gdw.ss15.datagrams.GameStartDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
-import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
-import de.hochschuletrier.gdw.ss15.game.NetcodeTestGame;
+import de.hochschuletrier.gdw.ss15.game.TestGame;
 import java.io.IOException;
 
 /**
@@ -36,7 +33,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     private final Main main;
     private final AssetManagerX assetManager;
     private Status status = Status.CONNECTING;
-    private NetcodeTestGame game;
+    private TestGame game;
     private final NetClientSimple netClient = new NetClientSimple(DatagramFactory.POOL);
     private NetConnection serverConnection;
 
@@ -101,7 +98,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     }
     
     public void handle(WorldSetupDatagram datagram) {
-        game = new NetcodeTestGame(null, netClient);
+        game = new TestGame(null, netClient);
         game.init(assetManager, datagram.getMapName());
         serverConnection = null;
         status = Status.READY;

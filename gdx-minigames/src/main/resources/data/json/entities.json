@@ -21,7 +21,8 @@
                 "density": 5,
                 "friction": 0.2,
                 "restitution": 0.4
-            }
+            },
+            "Team": {}
         }
     },
     "box": {
@@ -52,15 +53,13 @@
     "player": {
         "meta": {},
         "components": {
-            "LocalPlayer": {},
             "Position": {},
             "SoundEmitter": {},
             "Player": {},
             "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball",
-                "scale": 2.0
+                "animation_shoot": "ball"
             },
             "Movable": {},
             "PhysixBody": {
@@ -69,7 +68,56 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0
-            }
+            },
+            "Team": {}
         }
+    },
+    "playerspawn": {
+    	"meta": {},
+    	"components": {
+    		"PlayerSpawn": {},
+    		"Position": {},
+    		"Texture": {
+                "texture": "p_spawn_dumy",
+                "scale": 0.9
+            },
+       		"Team": {}
+    	}
+    },
+    "ballspawn": {
+    	"meta": {},
+    	"components": {
+    		"Position": {},
+    		"Team": {},
+    		"BallSpawn": {},
+    		"Texture": {
+                "texture": "p_spawn_dumy",
+                "scale": 0.9
+            }
+    	}
+    },
+    "magnet_plus": {
+    	"meta": {},
+    	"components": {
+    		"Position": {},
+    		"Team": {},
+    		"Texture": {
+                "texture": "magnet_plus",
+                "scale": 0.9
+            },
+            "Magnet": {}
+    	}
+    },
+    "magnet_minus": {
+    	"meta": {},
+    	"components": {
+    		"Position": {},
+    		"Team": {},
+    		"Texture": {
+                "texture": "magnet_minus",
+                "scale": 0.9
+            },
+            "Magnet": {}
+    	}
     }
 }

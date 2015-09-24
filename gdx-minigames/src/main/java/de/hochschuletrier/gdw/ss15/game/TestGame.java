@@ -38,6 +38,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
@@ -107,6 +108,7 @@ public class TestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
+        engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MovementSystem(1));
         engine.addSystem(new loadHUD());
         engine.addSystem(new WeaponSystem(3));

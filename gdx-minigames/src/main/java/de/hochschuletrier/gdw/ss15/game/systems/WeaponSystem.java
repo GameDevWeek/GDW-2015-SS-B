@@ -30,23 +30,25 @@ public class WeaponSystem extends IteratingSystem implements  ShootEvent.Listene
 		
 	}
 
-	@Override
-	public void shootEvent(Entity entity, Vector2 direction) {
-		// TODO Auto-generated method stub
-		System.out.println("es soll geschossen werden:richtung:"+direction.x+"/"+ direction.y);
-	}
 
 	@Override
-	public void pullEventOn(Entity entity, Vector2 direction) {
+	public void onPullEventOn(Entity entity, Vector2 direction) {
 		// TODO Auto-generated method stub
 		System.out.println("pullOn");
 	}
 
 	@Override
-	public void pullEventOff(Entity entity) {
+	public void onPullEventOff(Entity entity) {
 		// TODO Auto-generated method stub
 		System.out.println("pollOff off");
-		
+
+	}
+
+	@Override
+	public void onShootEvent(Entity entity, Vector2 direction) {
+		// TODO Auto-generated method stub
+
+		System.out.println("es soll geschossen werden:richtung:"+direction.x+"/"+ direction.y);
 	}
 
 }

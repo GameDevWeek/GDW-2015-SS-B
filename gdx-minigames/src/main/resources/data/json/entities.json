@@ -23,7 +23,8 @@
                 "restitution": 0.4
             },
             "Team": {},
-            "Ball":{}
+            "Ball":{},
+            "MagneticInfluence":{}
         }
     },
     "box": {
@@ -106,7 +107,11 @@
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "magnet",
+                "size":60
+            }
     	}
     },
     "magnet_minus": {
@@ -118,7 +123,11 @@
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "magnet",
+                "size":60
+            }
     	}
     }
     

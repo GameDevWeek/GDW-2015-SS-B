@@ -8,15 +8,20 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.WeaponSystem;
@@ -69,7 +74,9 @@ public class TestGame extends AbstractGame {
             /* TEST SPIELER ERSTELLEN */
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
-            Entity ball= MapLoader.createEntity(engine, "ball", 500, 500, Team.BLUE);
+ 
+            //Nur zum testen der Ballphysik
+            Entity ball= MapLoader.createEntity(engine, "ball", 3000, 500, Team.BLUE);
            // ball.add(component)
         }
         
@@ -96,7 +103,8 @@ public class TestGame extends AbstractGame {
         super.addSystems();
         engine.addSystem(new InputBallSystem(0));
         engine.addSystem(new MovementSystem(1));
-        engine.addSystem(new WeaponSystem(2));
+        engine.addSystem(new WeaponSystem(3));
+        engine.addSystem(new MagneticForceSystem(2));
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
@@ -111,6 +119,7 @@ public class TestGame extends AbstractGame {
     protected void addContactListeners(PhysixComponentAwareContactListener contactListener) {
         contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
+        contactListener.addListener(BallComponent.class, new BallListener());
     }
 
     private void setupPhysixWorld() {

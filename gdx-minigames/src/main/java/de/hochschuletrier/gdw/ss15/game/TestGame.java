@@ -56,6 +56,7 @@ public class TestGame extends AbstractGame {
 
         /* TEST SPIELER ERSTELLEN */
         MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+        MapLoader.createEntity(engine, "player", 100, 100, Team.RED);
         
         setupPhysixWorld();
 

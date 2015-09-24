@@ -8,10 +8,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
+
 
 public class BallListener implements PhysixContactListener {
 
@@ -72,8 +74,8 @@ public class BallListener implements PhysixContactListener {
 		// TODO Auto-generated method stub
 		
 	}
-	public void playerPulling(PhysixContact contact){
-		PhysixBodyComponent comp = contact.getMyComponent();
+	public void playerPulling(Entity entity){
+		WeaponInfluenceComponent weapons = ComponentMappers.weaponInfluence.get(entity);
 		if(){
 			
 		}

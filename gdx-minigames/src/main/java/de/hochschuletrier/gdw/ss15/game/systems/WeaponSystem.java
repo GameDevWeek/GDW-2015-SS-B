@@ -11,14 +11,9 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
-import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
-import de.hochschuletrier.gdw.ss15.game.components.WeaponComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
-import de.hochschuletrier.gdw.ss15.events.PullEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
-import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 
 public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener {
     float speed = 200f;

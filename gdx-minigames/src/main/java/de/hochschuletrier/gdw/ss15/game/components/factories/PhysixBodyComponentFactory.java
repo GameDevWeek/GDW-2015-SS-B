@@ -1,4 +1,4 @@
-﻿package de.hochschuletrier.gdw.ss15.game.components.factories;
+package de.hochschuletrier.gdw.ss15.game.components.factories;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

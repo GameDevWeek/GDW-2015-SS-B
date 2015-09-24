@@ -17,9 +17,8 @@ public class TeamComponentFactory extends ComponentFactory<EntityFactoryParam> {
 	@Override
 	public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
 		final TeamComponent teamComponent = engine.createComponent(TeamComponent.class);
-		 
 		teamComponent.team = param.team;
-		
+		entity.add(teamComponent);
 	}
 
 }

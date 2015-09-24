@@ -10,13 +10,16 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
+import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
@@ -27,12 +30,16 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
+import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
 
     private TiledMap map;
+    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
+    
+    private BallManager ballmanager;
 
     public TestGame() {
         this(null, null);
@@ -46,7 +53,7 @@ public class TestGame extends AbstractGame {
     }
     
     private void initLoadMap() {
-        map = loadMap("data/maps/DummyMap_mit_Entitytypes_Fix.tmx");
+        map = loadMap("data/maps/NiceMap.tmx");
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
     }
@@ -63,7 +70,7 @@ public class TestGame extends AbstractGame {
 
         if(netClient == null) {
             /* TEST SPIELER ERSTELLEN */
-            Entity player = MapLoader.createEntity(engine, "player", 100, 100, Team.BLUE);
+            Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
             Entity ball= MapLoader.createEntity(engine, "ball", 500, 500, Team.BLUE);
            // ball.add(component)
@@ -71,9 +78,8 @@ public class TestGame extends AbstractGame {
         
         setupPhysixWorld();
         
-		// Gdx.input.setInputProcessor(new InputKeyboard());
-        //
-        // Controllers.addListener(new InputGamePad());
+        ballmanager = new BallManager(engine);
+        
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
             netServer.setListener(engine.getSystem(NetServerUpdateSystem.class));
@@ -97,7 +103,7 @@ public class TestGame extends AbstractGame {
         
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
-            engine.addSystem(new NetServerUpdateSystem(netServer, GameType.MAGNET_BALL, getMapName()));
+            engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer, GameType.MAGNET_BALL, getMapName()));
         } else if(netClient != null) {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
@@ -122,15 +128,6 @@ public class TestGame extends AbstractGame {
             throw new IllegalArgumentException(
                     "Map konnte nicht geladen werden: ");
 
-        }
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            Entity ball = MapLoader.createEntity(engine, "ball", 100, 100, Team.BLUE);
         }
     }
     

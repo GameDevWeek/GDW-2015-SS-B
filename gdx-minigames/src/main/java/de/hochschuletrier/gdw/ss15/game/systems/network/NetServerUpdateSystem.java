@@ -10,6 +10,7 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.BallPlayerInputDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
@@ -17,26 +18,30 @@ import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler,
         NetServerSimple.Listener, ChangeGameStateEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> entities;
-    private ImmutableArray<Entity> spawnPoints;
     private final GameType gameType;
     private final String mapName;
     private ImmutableArray<Entity> animationEntities;
     private GameState gameState = GameState.WARMUP;
     private PooledEngine engine;
+    private final PlayerSpawnManager playerSpawns;
 
-    public NetServerUpdateSystem(NetServerSimple netServer, GameType gameType, String mapName) {
+    public NetServerUpdateSystem(PlayerSpawnManager playerSpawns, NetServerSimple netServer, GameType gameType, String mapName) {
         super(0);
 
+        this.playerSpawns = playerSpawns;
         this.netServer = netServer;
         this.gameType = gameType;
         this.mapName = mapName;
@@ -48,7 +53,6 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         this.engine = (PooledEngine) engine;
         entities = engine.getEntitiesFor(Family.all(SetupComponent.class).get());
         animationEntities = engine.getEntitiesFor(Family.all(StateRelatedAnimationsComponent.class).get());
-//        spawnPoints = engine.getEntitiesFor(Family.all(PlayerSpawnComponent.class, PositionComponent.class).get());
         ChangeGameStateEvent.register(this);
     }
 
@@ -56,7 +60,6 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
         entities = null;
-        spawnPoints = null;
         ChangeGameStateEvent.unregister(this);
     }
 
@@ -65,39 +68,15 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         netServer.update();
     }
 
-    private Entity spawnPlayer() {
-//        for (Entity entity : spawnPoints) {
-//            PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
-//            if (!spawn.playerId) {
-//                PositionComponent pos = ComponentMappers.position.get(entity);
-//                Entity playerEntity = MapLoader.createEntity(engine, "player", pos.x, pos.y);
-//                spawn.playerId = playerEntity.getId();
-//                return playerEntity;
-//            }
-//        }
-        return null;
-    }
-
-    private void freePlayer(long entityId) {
-//        for (Entity entity : spawnPoints) {
-//            PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
-//            if (spawn.playerId == entityId) {
-//                spawn.playerId = 0;
-//                engine.removeEntity(entity);
-//                return;
-//            }
-//        }
-    }
-
     @Override
     public boolean onConnect(NetConnection connection) {
-//        Entity player = spawnPlayer();
-//        if (player == null) {
-//            // no free players available
-//            return false;
-//        }
-//
-//        connection.setAttachment(player);
+        Entity player = playerSpawns.spawnPlayer();
+        if (player == null) {
+            // no free players available
+            return false;
+        }
+
+        connection.setAttachment(player);
         return true;
     }
 
@@ -105,15 +84,14 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void onDisconnect(NetConnection connection) {
         Entity playerEntity = (Entity) connection.getAttachment();
         if (playerEntity != null) {
-            freePlayer(playerEntity.getId());
+            playerSpawns.freePlayer(playerEntity.getId());
         }
     }
 
     public void sendWorldSetup(NetConnection connection, ConnectDatagram datagram) {
         String playerName = datagram.getPlayerName();
-//        final Entity playerEntity = (Entity) connection.getAttachment();
+        final Entity playerEntity = (Entity) connection.getAttachment();
         connection.sendReliable(WorldSetupDatagram.create(gameType, gameState, mapName, playerName));
-//        connection.sendReliable(PlayerUpdatesDatagram.create(players));
 
         for (Entity entity : entities) {
             connection.sendReliable(CreateEntityDatagram.create(entity));
@@ -124,17 +102,28 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
             connection.sendReliable(AnimationStateChangeDatagram.create(entity, anim.currentState));
         }
 
-        connection.sendReliable(PlayerIdDatagram.create(0));
+        connection.sendReliable(PlayerIdDatagram.create(playerEntity.getId()));
     }
 
     public void handle(ConnectDatagram datagram) {
         NetConnection connection = datagram.getConnection();
         if (connection.isConnected()) {
-//            Entity playerEntity = (Entity) connection.getAttachment();
-//            PlayerComponent player = ComponentMappers.player.get(playerEntity);
-//            player.name = datagram.getPlayerName();
+            Entity playerEntity = (Entity) connection.getAttachment();
+            PlayerComponent player = ComponentMappers.player.get(playerEntity);
+            player.name = datagram.getPlayerName();
             sendWorldSetup(connection, datagram);
-            netServer.broadcastReliable(PlayerIdDatagram.create(0));//Fixme
+        }
+    }
+    public void handle(BallPlayerInputDatagram datagram) {
+        NetConnection connection = datagram.getConnection();
+        if (connection.isConnected()) {
+            Entity playerEntity = (Entity) connection.getAttachment();
+            InputBallComponent input = ComponentMappers.input.get(playerEntity);
+            if(datagram.getPacketId() > input.packetId) {
+                input.move.set(datagram.getMove());
+                input.view.set(datagram.getView());
+                input.packetId = datagram.getPacketId();
+            }
         }
     }
 

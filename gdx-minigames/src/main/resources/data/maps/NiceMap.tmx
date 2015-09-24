@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="128" tileheight="128" nextobjectid="18">
+ <tileset firstgid="1" source="playgroundTileset.tsx"/>
+ <tileset firstgid="13" source="balls_and_magnets.tsx"/>
+ <layer name="Hintergrund" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftXvA7Ka3vcj2j9o9suweqXlsJNvNCcRcdMTcUHsBC8AKvw==
+  </data>
+ </layer>
+ <objectgroup name="Tore">
+  <object id="4" gid="14" x="1920" y="1024"/>
+  <object id="5" gid="13" x="640" y="1024"/>
+  <object id="7" gid="15" x="3200" y="1024"/>
+  <object id="8" gid="16" x="2688" y="512"/>
+  <object id="9" gid="16" x="2688" y="1536"/>
+  <object id="10" gid="17" x="1920" y="1536"/>
+  <object id="11" gid="17" x="1152" y="1536"/>
+  <object id="12" gid="16" x="1920" y="512"/>
+  <object id="13" gid="17" x="1152" y="512"/>
+  <object id="14" gid="18" x="3584" y="640"/>
+  <object id="15" gid="18" x="3584" y="1408"/>
+  <object id="16" gid="19" x="256" y="640"/>
+  <object id="17" gid="19" x="256" y="1408"/>
+ </objectgroup>
+</map>

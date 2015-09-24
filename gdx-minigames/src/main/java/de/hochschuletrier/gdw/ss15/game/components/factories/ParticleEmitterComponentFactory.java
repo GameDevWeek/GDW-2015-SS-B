@@ -28,7 +28,6 @@ public class ParticleEmitterComponentFactory extends ComponentFactory<EntityFact
         ParticleEmitterComponent component = engine.createComponent(ParticleEmitterComponent.class);
         component.effect = assetManager.getParticleEffect(properties.getString("effect"));
         component.effect.start();
-        component.batch = new SpriteBatch();
         
         entity.add(component);
         

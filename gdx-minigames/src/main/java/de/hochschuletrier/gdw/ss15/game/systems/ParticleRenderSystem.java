@@ -9,6 +9,7 @@ package de.hochschuletrier.gdw.ss15.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.ParticleEmitterComponent;
@@ -28,6 +29,7 @@ public class ParticleRenderSystem extends IteratingSystem{
     protected void processEntity(Entity entity, float deltaTime) {
         ParticleEmitterComponent particleComponent = ComponentMappers.particleEmitter.get(entity);
         PositionComponent position = ComponentMappers.position.get(entity);
+        PhysixBodyComponent g = ComponentMappers.physixBody.get(entity); 
         particleComponent.effect.update(deltaTime);
         particleComponent.effect.setPosition(position.x,position.y);
         particleComponent.effect.draw(DrawUtil.batch);

@@ -17,14 +17,11 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class ParticleEmitterComponent extends Component implements Pool.Poolable {
     public ParticleEffect effect;
-    public SpriteBatch batch;
     
     @Override
     public void reset() {
         effect.dispose();
         effect = null;
-        batch.dispose();
-        batch = null;
     }
     
 }

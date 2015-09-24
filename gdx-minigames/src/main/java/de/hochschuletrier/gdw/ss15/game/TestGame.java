@@ -34,6 +34,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.HudRender;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 
 public class TestGame extends AbstractGame {
@@ -43,6 +44,8 @@ public class TestGame extends AbstractGame {
     private TiledMap map;
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
     private final TeamManager teamManager = new TeamManager();
+    
+    private HudRender hudRender;
     
     private BallManager ballManager;
 
@@ -120,6 +123,13 @@ public class TestGame extends AbstractGame {
         
         /* Camera System muss schon existieren */
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
+        hudRender = new HudRender(engine.getSystem(LimitedSmoothCameraSystem.class).getCamera());
+    }
+    
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+        hudRender.update();
     }
 
     @Override

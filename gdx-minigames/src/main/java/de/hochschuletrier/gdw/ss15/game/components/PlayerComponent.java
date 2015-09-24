@@ -12,5 +12,6 @@ public class PlayerComponent extends Component implements Pool.Poolable {
     @Override
     public void reset() {
         name = null;
+        hasBall = false;
     }
 }

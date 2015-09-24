@@ -21,6 +21,7 @@ import java.util.List;
 /**
  *
  * @author Santo Pfingsten
+ * float force hinzugefügt
  */
 public class PhysixSystem extends IteratingSystem implements EntityListener {
 
@@ -128,6 +129,8 @@ public class PhysixSystem extends IteratingSystem implements EntityListener {
         }
     }
 
+   
+    
     public void ropeConnect(PhysixBodyComponent a, PhysixBodyComponent b, float length) {
         RopeJointDef ropeJointDef = new RopeJointDef();
         ropeJointDef.bodyA = a.getBody();

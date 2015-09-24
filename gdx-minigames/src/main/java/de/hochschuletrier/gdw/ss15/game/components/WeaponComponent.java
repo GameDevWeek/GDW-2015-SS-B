@@ -5,9 +5,11 @@ import com.badlogic.gdx.utils.Pool;
 
 public class WeaponComponent extends Component implements Pool.Poolable {
 
+	public boolean on;
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
+		on = true;
 		
 	}
 

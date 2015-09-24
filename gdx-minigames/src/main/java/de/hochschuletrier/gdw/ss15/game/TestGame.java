@@ -82,8 +82,8 @@ public class TestGame extends AbstractGame {
         }
         
         setupPhysixWorld();
-        
-        ballManager = new BallManager(engine);
+        if(netClient == null)
+            ballManager = new BallManager(engine);
         
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
@@ -143,7 +143,8 @@ public class TestGame extends AbstractGame {
     public void dispose() {
         super.dispose();
         teamManager.dispose();
-        ballManager.dispose();
+        if(ballManager != null)
+            ballManager.dispose();
         if(netClient != null)
             netClient.disconnect();
         else if(netServer != null)

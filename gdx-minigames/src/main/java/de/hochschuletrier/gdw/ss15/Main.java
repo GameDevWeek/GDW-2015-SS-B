@@ -39,7 +39,6 @@ import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.TestGame;
-import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.sandbox.SandboxCommand;
 import de.hochschuletrier.gdw.ss15.states.ConnectingState;
 import de.hochschuletrier.gdw.ss15.states.GameplayState;

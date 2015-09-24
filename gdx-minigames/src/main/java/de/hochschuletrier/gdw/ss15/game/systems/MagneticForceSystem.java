@@ -49,7 +49,7 @@ public class MagneticForceSystem extends IteratingSystem {
 
             magneticForce.nor();
             magneticForce.scl(50.f);
-            physix.getBody().applyForceToCenter(magneticForce, true);
+            physix.simpleForceApply(magneticForce);
         }
 
     }

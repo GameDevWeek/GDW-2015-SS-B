@@ -1,46 +1,95 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.events.PullEvent;
+import de.hochschuletrier.gdw.ss15.events.ShootEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 
-public class WeaponSystem extends IteratingSystem{
-	
-	public WeaponSystem() {
+public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener {
+    float speed = 200f;
+    float pullRange = 500f;
+    private ImmutableArray<Entity> balls;
+    private float force =100;
+
+    public WeaponSystem() {
         this(0);
     }
 
     public WeaponSystem(int priority) {
-        super(Family.all(PositionComponent.class, PhysixBodyComponent.class, BallComponent.class, WeaponInfluenceComponent.class).get(), priority);
+        super(Family.all(PositionComponent.class, PhysixBodyComponent.class,
+                PlayerComponent.class).get(), priority);
+    }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        ShootEvent.register(this);
+        
+        balls = engine.getEntitiesFor(Family.all(BallComponent.class).get());
+    }
+
+    @Override
+    public void removedFromEngine(Engine engine) {
+        super.removedFromEngine(engine);
+        ShootEvent.unregister(this);
+        balls = null;
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        PhysixBodyComponent physix = ComponentMappers.physixBody.get(entity);
-        PositionComponent position = ComponentMappers.position.get(entity);
-        WeaponInfluenceComponent weapons = ComponentMappers.weaponInfluence.get(entity);
-        
-        for (int i = 0; i < weapons.weaponFields.size(); i++) {
-			Vector2 otherPos = new Vector2();
-			otherPos.x = weapons.weaponFields.get(i).getComponent(PositionComponent.class).x;
-			otherPos.y = weapons.weaponFields.get(i).getComponent(PositionComponent.class).y;
-			Vector2 weaponForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
-			if( weapons.weaponFields.get(i).getComponent(WeaponComponent.class).isPulling == entity.getComponent(WeaponComponent.class).isPulling)
-				weaponForce.scl(-1f);
-			
-			weaponForce.nor();
-			weaponForce.scl(50.f);
-			physix.getBody().applyForceToCenter(weaponForce, true);
-		}
+        Entity ball = balls.size() > 0 ? balls.first() : null;
+        if (ball != null) {
+            InputBallComponent input = entity.getComponent(InputBallComponent.class);
+            if (input.pull) {
+                Vector2 direction = input.view;
+                PositionComponent ballPos = ball
+                        .getComponent(PositionComponent.class);
+                PositionComponent entPos = entity.getComponent(PositionComponent.class);
+                Vector2 differences = new Vector2(ballPos.x - entPos.x, ballPos.y - entPos.y);
+                float dirAngle = differences.angle();
+                float viewAngle = direction.angle();
+                float diff = dirAngle - viewAngle;
+                if(diff < -180)
+                    diff += 360;
+                else if(diff > 180)
+                    diff -= 360;
+                if(Math.abs(diff) < 30) {
+                    float dist = differences.len();
+                    if(dist < pullRange) {
+                        differences.nor().scl(-force * (pullRange/dist));
+                        PhysixBodyComponent physix = ComponentMappers.physixBody.get(ball);
+                        physix.simpleForceApply(differences);
+                    }
+                }
+            }
+
+        }
     }
 
-}
+    @Override
+    public void onShootEvent(Entity entityFrom, Vector2 direction) {
+        // TODO Auto-generated method stub
 
+        // schießen
+//            // physix.applyImpulse(direktion.x, direktion.y);
+//            System.out.println("test" + direction.x + "/" + direction.y);
+//            physix.setLinearVelocity(direction.x * speed, direction.y
+//                    * speed);
+
+    }
+}

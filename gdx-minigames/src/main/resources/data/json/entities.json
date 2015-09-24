@@ -2,6 +2,7 @@
     "ball": {
         "meta": {},
         "components": {
+            "Ball": {},
             "Position": {},
             "SoundEmitter": {},
             "ImpactSound" : {

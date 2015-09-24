@@ -118,7 +118,7 @@
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {},
+            "MagneticField": {},
             "PhysixBody": {
                 "type": "magnet",
                 "size":60
@@ -134,7 +134,7 @@
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {},
+            "MagneticField": {},
             "PhysixBody": {
                 "type": "magnet",
                 "size":60

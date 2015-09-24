@@ -55,8 +55,17 @@
         "columns": 2,
         "rows" : 1
     },
+    
+    "player_walk_blue": {
+        "filename": "data/animations/blue_character_spreadsheet.png",
+        "frames" : 17,
+        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+        "playType" : "LOOP",
+        "columns": 17,
+        "rows" : 1
+    },
 
-    "player_walk": {
+    "player_walk_red": {
         "filename": "data/animations/charakter_animation_Spreadsheet2.png",
         "frames" : 9,
         "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],

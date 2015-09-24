@@ -1,91 +1,139 @@
 {
     "textStyles" : {
-        "title": { "color": "FF8C00", "font": "verdana_32", "align": "left" },
-        "text": { "color": "FFFFFF", "font": "verdana_32", "align": "right" }
+        "title": { "color": "F8BB08", "font": "verdana_32", "align": "center" },
+        "name": { "color": "FFFFFF", "font": "verdana_32", "align": "center" }
+
     },
-    
     "paths" : {
-        "title-text": {
+        "left": {
             "type": "linear",
             "destinations": [
-                {"x": 50, "y": 120, "speed": 25 },
-                {"x": 350, "y": 700, "speed": 25 }
+                {"x": -1200, "y": 18, "speed": 1500 },
+                {"x": 312, "y": 100, "speed": 100 },
+                {"x": 780, "y": 568, "speed": 1500 },
+                {"x": 810, "y": 868, "speed": 1500 }
             ]
         },
-        
-        "text-text": {
+        "right": {
             "type": "linear",
             "destinations": [
-                {"x": 900, "y": 120, "speed": 25 },
-                {"x": 600, "y": 700, "speed": 25 }
+                {"x": 1800, "y": 18, "speed": 1500 },
+                {"x": 312, "y": 100, "speed": 100 },
+                {"x": 780, "y": 568, "speed": 1500 },
+                {"x": 810, "y": 868, "speed": 1500 }
             ]
         },
-        
-        "Gamename": {
+        "middle": {
             "type": "linear",
             "destinations": [
-                {"x": 400, "y": 120, "speed": 25 },
-                {"x": 400, "y": 700, "speed": 25 }
+                {"x": 312, "y": -382, "speed": 450 },
+                {"x": 312, "y": 100, "speed": 100 },
+                {"x": 780, "y": 568, "speed": 1500 },
+                {"x": 810, "y": 868, "speed": 1500 }
             ]
         },
-        
-        "GDW": {
+        "player": {
             "type": "linear",
             "destinations": [
-                {"x": 300, "y": 120, "speed": 25 },
-                {"x": 300, "y": 700, "speed": 25 }
+                {"x": -60, "y": 568, "speed": 250 },
+                {"x": 550, "y": 568, "speed": 250 },
+                {"x": 60, "y": 118, "speed": 250 },
+                {"x": -60, "y": 118, "speed": 250 }
+            ]
+        },
+        "player_reverse": {
+            "type": "linear",
+            "destinations": [
+                {"x": -60, "y": 118, "speed": 250 },
+                {"x": 60, "y": 118, "speed": 250 },
+                {"x": 650, "y": 668, "speed": 1500 },
+                {"x": 810, "y": 868, "speed": 1500 }
+            ]
+        },
+        "player2": {
+            "type": "linear",
+            "destinations": [
+                {"x": 1100, "y": 538, "speed": 250 },
+                {"x": 940, "y": 538, "speed": 250 },
+                {"x": 600, "y": 118, "speed": 250 },
+                {"x": 1100, "y": 118, "speed": 250 }
+            ]
+        },
+        "player2_reverse": {
+            "type": "linear",
+            "destinations": [
+                {"x": 1100, "y": 118, "speed": 250 },
+                {"x": 300, "y": 118, "speed": 250 },
+                {"x": 100, "y": 518, "speed": 250 },
+                {"x": 700, "y": 318, "speed": 250 },
+                {"x": 800, "y": 568, "speed": 1500 },
+                {"x": 800, "y": 868, "speed": 1500 }
+            ]
+        },
+        "player2_reverse_pizza": {
+            "type": "linear",
+            "destinations": [
+                {"x": 1100, "y": 118, "speed": 250 },
+                {"x": 300, "y": 118, "speed": 250 },
+                {"x": 100, "y": 518, "speed": 250 },
+                {"x": 700, "y": 318, "speed": 250 },
+                {"x": 800, "y": 508, "speed": 150 },
+                {"x": 800, "y": 538, "speed": 50 },
+                {"x": 800, "y": 548, "speed": 100 },
+                {"x": 800, "y": 528, "speed": 50 },
+                {"x": 800, "y": 488, "speed": 150 },
+                {"x": 800, "y": 518, "speed": 250 },
+                {"x": 800, "y": 528, "speed": 500 },
+                {"x": 800, "y": 538, "speed": 1500 },
+                {"x": 800, "y": 868, "speed": 1500 }
             ]
         }
     },
-    
     "queues": {
-        "test-text": {
+        "texts": {
+            "layer": 0,
             "time": 0,
             "items" : [
-                { "type": "text", "path" : "GDW", "style" : "title", "text": "Game Development Week", "delay": "0" },
-                { "type": "text", "path" : "Gamename", "style" : "title", "text": "Magnetball", "delay": "1000" },
+                { "type": "text", "style" : "title", "path": "middle", "text": "Organisation", "delay": "100" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Johannes Strack", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Santo Pfingsten", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Robin Dick", "delay": "750" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Organisation", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Santo Pfingsten", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Meier", "delay": "1100" },
+                { "type": "text", "style" : "title", "path": "middle", "text": "Design", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Janina Nöll", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Annalena Weber", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Jens Dreyer", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Veronika Dittrich", "delay": "750" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Gamelogic", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Thierbach", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Oetzkan", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Bennet Pieper", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Input", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Meier", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Erik Antes", "delay": "1100" },
-
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Menu/HUD", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Mercel Schillen", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Rendering", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Moritz Goertz", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Physics", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Max Groß", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Netcode", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Santo Pfingsten", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Level Design", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": " Niklas Schütze", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Erik Antes", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Audio Design", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Özgür Tastekin", "delay": "1100" },
- 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Graphic Design", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Anja Regnery", "delay": "1100" },
+                { "type": "text", "style" : "title", "path": "middle", "text": "Programmierung", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Robert Rößger", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Tobias Krumholz", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Johannes Strack", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Santo Pfingsten", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Robin Dick", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Torsten Scholer", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Kevin Korte", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Attila Djerdj", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Stefan Probst", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Ben Michel Raus", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Patrick Monville", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Susanne Kühn", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Wendelin Lehr", "delay": "750" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Credits", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schütze", "delay": "1100" }
- 
+                { "type": "text", "style" : "title", "path": "middle", "text": "Sound & Music", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "tekgnosis (Countdown Voice)", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Fortadelis (Ingame Music)", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "8 Bit Weapon (Menu Music)", "delay": "750" }
+            ]
+        },
+        "animations": {
+            "layer": 1,
+            "time": 0,
+            "items" : [
+                { "type": "animation", "path": "player", "resource": "box", "scale": "0.35", "oriented": "false", "delay": "0" },
+                { "type": "animation", "path": "player", "resource": "box", "scale": "0.4", "angle": "-90", "oriented": "true", "delay": "500" },
+                { "type": "animation", "path": "player", "resource": "box", "scale": "0.53", "angle": "-90", "oriented": "true", "delay": "500" }
             ]
         }
     }
-    
-    
 }

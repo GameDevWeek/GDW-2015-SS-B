@@ -32,6 +32,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
+import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
@@ -81,8 +82,8 @@ public class TestGame extends AbstractGame {
         }
         
         setupPhysixWorld();
-        
-        ballManager = new BallManager(engine);
+        if(netClient == null)
+            ballManager = new BallManager(engine);
         
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
@@ -104,6 +105,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new InputBallSystem(0));
         engine.addSystem(new MovementSystem(1));
         engine.addSystem(new WeaponSystem(3));
+        engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(2));
         
         if(netServer != null) {
@@ -141,7 +143,8 @@ public class TestGame extends AbstractGame {
     public void dispose() {
         super.dispose();
         teamManager.dispose();
-        ballManager.dispose();
+        if(ballManager != null)
+            ballManager.dispose();
         if(netClient != null)
             netClient.disconnect();
         else if(netServer != null)

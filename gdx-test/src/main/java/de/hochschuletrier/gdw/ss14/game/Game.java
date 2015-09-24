@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
@@ -31,8 +32,10 @@ import de.hochschuletrier.gdw.ss14.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
+
 import java.util.function.Consumer;
 
 public class Game extends InputAdapter {
@@ -51,6 +54,7 @@ public class Game extends InputAdapter {
     private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
     private final AnimationRenderSystem animationRenderSystem = new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
+    private final MagneticForceSystem magneticForceSystem = new MagneticForceSystem();// TO DO Priorität angeben
 
     private final EntityFactoryParam factoryParam = new EntityFactoryParam();
     private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Game.class);
@@ -81,6 +85,7 @@ public class Game extends InputAdapter {
         engine.addSystem(physixDebugRenderSystem);
         engine.addSystem(animationRenderSystem);
         engine.addSystem(updatePositionSystem);
+        engine.addSystem(magneticForceSystem);
     }
 
     private void addContactListeners() {
@@ -91,8 +96,12 @@ public class Game extends InputAdapter {
     }
 
     private void setupPhysixWorld() {
-        physixSystem.setGravity(0, 24);
+        physixSystem.setGravity(0, 0);
         PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
+        
+        
+       // bodyDef = PhysixBodyComponent.setForce(200, 30);
+        
         Body body = physixSystem.getWorld().createBody(bodyDef);
         body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(800, 20));
         PhysixUtil.createHollowCircle(physixSystem, 180, 180, 150, 30, 6);
@@ -141,6 +150,7 @@ public class Game extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(button == 0)
             createEntity("ball", screenX, screenY);
+           //Entity entity = entityFactory.createEntity("ball", factoryParam);
         else
             createEntity("box", screenX, screenY);
         return true;

@@ -2,6 +2,7 @@
     "ball": {
         "meta": {},
         "components": {
+            "Ball": {},
             "Position": {},
             "SoundEmitter": {},
             "ImpactSound" : {
@@ -59,7 +60,10 @@
             "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball"
+                "animation_shoot": "ball",
+                "animation_idle_shadow": "ball",
+                "animation_shoot_shadow": "ball",
+                "initial_state": "idle"
             },
             "Movable": {},
             "PhysixBody": {
@@ -78,7 +82,7 @@
     		"PlayerSpawn": {},
     		"Position": {},
     		"Texture": {
-                "texture": "p_spawn_dumy",
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             },
        		"Team": {}
@@ -91,7 +95,7 @@
     		"Team": {},
     		"BallSpawn": {},
     		"Texture": {
-                "texture": "p_spawn_dumy",
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             }
     	}

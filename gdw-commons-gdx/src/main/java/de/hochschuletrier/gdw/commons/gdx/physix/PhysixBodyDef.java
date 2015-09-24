@@ -103,4 +103,8 @@ public class PhysixBodyDef extends BodyDef {
         gravityScale = value;
         return this;
     }
+    
+   
+    
+    
 }

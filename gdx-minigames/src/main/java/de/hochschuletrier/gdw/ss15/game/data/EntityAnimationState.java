@@ -15,5 +15,8 @@ public enum EntityAnimationState {
     WALK,
     SHOOT,
     JUMP,
-    DAZED
+    DAZED,
+    BALL_NEUTRAL,
+    BALL_PLUS,
+    BALL_MINUS
 }

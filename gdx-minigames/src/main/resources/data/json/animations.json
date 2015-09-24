@@ -15,6 +15,38 @@
         "columns": 2,
         "rows" : 1
     },
+    "ball_base": {
+        "filename": "data/images/ball_base.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_neutral": {
+        "filename": "data/images/ball_neutral.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_plus": {
+        "filename": "data/images/ball_plus.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_minus": {
+        "filename": "data/images/ball_minus.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
     "box": {
         "filename": "data/animations/box.png",
         "frames" : 2,

@@ -85,7 +85,7 @@
             ],
             
             "animations": [
-    			{ "time": 5, "animation": "fade_in", "animationTime": 1000, "group": "*" }
+    			{ "time": 0, "animation": "fade_in", "animationTime": 1000, "group": "*" }
     		] 
         }
     }

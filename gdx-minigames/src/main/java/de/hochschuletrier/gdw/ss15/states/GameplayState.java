@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.input.InputForwarder;
@@ -14,6 +15,7 @@ import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
+import de.hochschuletrier.gdw.commons.utils.FpsCalculator;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
@@ -29,6 +31,8 @@ import de.hochschuletrier.gdw.ss15.menu.MenuPageRoot;
 public class GameplayState extends BaseGameState {
 
     private static final Color OVERLAY_COLOR = new Color(0f, 0f, 0f, 0.5f);
+    private final FpsCalculator fpsCalc = new FpsCalculator(200, 100, 16);
+    private final BitmapFont font;
 
     private final AbstractGame game;
     private final Music music;
@@ -40,6 +44,7 @@ public class GameplayState extends BaseGameState {
 
     public GameplayState(AssetManagerX assetManager, AbstractGame game) {
         this.game = game;
+        font = assetManager.getFont("verdana_32");
 
         music = assetManager.getMusic("gameplay");
 
@@ -81,6 +86,7 @@ public class GameplayState extends BaseGameState {
 
     @Override
     public void update(float delta) {
+        fpsCalc.addFrame();
         game.update(delta);
         if (inputForwarder.get() == menuInputProcessor) {
             menuManager.update(delta);
@@ -88,6 +94,9 @@ public class GameplayState extends BaseGameState {
             DrawUtil.fillRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), OVERLAY_COLOR);
             menuManager.render();
         }
+        Main.getInstance().screenCamera.bind();
+        font.setColor(Color.WHITE);
+        font.draw(DrawUtil.batch, String.format("%.2f FPS", fpsCalc.getFps()), 0, 0);
     }
 
     @Override

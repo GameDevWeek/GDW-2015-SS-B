@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -126,6 +127,8 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
             if(datagram.getPacketId() > input.packetId) {
                 input.move.set(datagram.getMove());
                 input.view.set(datagram.getView());
+                PhysixBodyComponent physBody = ComponentMappers.physixBody.get(playerEntity);
+                physBody.setAngle(input.view.angleRad() + ((float)Math.PI / 2.0f));
                 input.packetId = datagram.getPacketId();
             }
         }

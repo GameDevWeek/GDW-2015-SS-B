@@ -7,22 +7,12 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
-import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
-import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 
-/**
- * Created by isik on 23.09.15.
- */
-public class MovementSystem extends IteratingSystem {
+public class PlayerAnimationSystem extends IteratingSystem {
 
-
-
-    public MovementSystem() {
-        this(0);
-    }
-
-    public MovementSystem(int priority) {
+    public PlayerAnimationSystem(int priority) {
         super(Family.all(InputBallComponent.class, PhysixBodyComponent.class).get(), priority);
     }
 
@@ -32,7 +22,19 @@ public class MovementSystem extends IteratingSystem {
         PhysixBodyComponent physBody = ComponentMappers.physixBody.get(entity);
         InputBallComponent input = ComponentMappers.input.get(entity);
 
-        float speed = 500;
-        physBody.setLinearVelocity(input.move.x * speed, input.move.y * speed);
+        if(physBody.getLinearVelocity().len() >= 10f)
+            ChangeAnimationStateEvent.emit(getWalkState(entity), entity);
+        else
+            ChangeAnimationStateEvent.emit(getIdleState(entity), entity);
+    }
+    
+    private EntityAnimationState getWalkState(Entity entity) {
+        Team team = ComponentMappers.team.get(entity).team;
+        return team == Team.BLUE ? EntityAnimationState.WALK_MINUS : EntityAnimationState.WALK_PLUS;
+    }
+    
+    private EntityAnimationState getIdleState(Entity entity) {
+        Team team = ComponentMappers.team.get(entity).team;
+        return team == Team.BLUE ? EntityAnimationState.IDLE_MINUS : EntityAnimationState.IDLE_PLUS;
     }
 }

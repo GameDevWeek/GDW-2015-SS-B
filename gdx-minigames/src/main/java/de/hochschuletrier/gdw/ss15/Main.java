@@ -38,7 +38,7 @@ import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
-import de.hochschuletrier.gdw.ss15.game.NetcodeTestGame;
+import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.sandbox.SandboxCommand;
 import de.hochschuletrier.gdw.ss15.states.ConnectingState;
@@ -242,7 +242,7 @@ public class Main extends StateBasedGame
         if (!isTransitioning()) {
             NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
             if (netServer.start(port, maxPlayers)) {
-                NetcodeTestGame game = new NetcodeTestGame(netServer, null);
+                TestGame game = new TestGame(netServer, null);
                 game.init(assetManager, "data/maps/demo.tmx");
                 changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
             }

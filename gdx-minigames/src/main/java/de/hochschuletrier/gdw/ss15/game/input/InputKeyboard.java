@@ -3,6 +3,11 @@ package de.hochschuletrier.gdw.ss15.game.input;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalEvent;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
+
 public class InputKeyboard implements InputProcessor {
 
 	@Override
@@ -12,6 +17,12 @@ public class InputKeyboard implements InputProcessor {
 			case Input.Keys.S: InputPuffer.vertical += 1.0f; break;
 			case Input.Keys.A: InputPuffer.horizontal += -1.0f; break;
 			case Input.Keys.D: InputPuffer.horizontal += 1.0f; break;
+			
+			/* Ausprobieren */
+            case Input.Keys.I: GoalEvent.emit(Team.RED); break;
+			case Input.Keys.O: ChangeGameStateEvent.emit(GameState.GAME); break;
+			case Input.Keys.P: GoalEvent.emit(Team.BLUE); break;
+
 		}
 		return true;
 	}

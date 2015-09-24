@@ -6,11 +6,11 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
-import de.hochschuletrier.gdw.ss14.game.components.BallComponent;
-import de.hochschuletrier.gdw.ss14.game.components.MagnetComponent;
-import de.hochschuletrier.gdw.ss14.game.components.MagneticInfluenceComponent;
-import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagnetComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 
 public class MagneticForceSystem extends IteratingSystem{
 	

@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
 import com.badlogic.ashley.core.Component;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
@@ -8,8 +9,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss14.game.components.MagneticFieldComponent;
-import de.hochschuletrier.gdw.ss14.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 
 public class BallListener implements PhysixContactListener {
 

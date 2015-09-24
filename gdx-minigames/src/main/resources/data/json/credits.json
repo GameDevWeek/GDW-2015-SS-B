@@ -92,7 +92,7 @@
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Gamelogic", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Thierbach", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Oetzkan", "delay": "1100" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Özkan", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Bennet Pieper", "delay": "1100" },
  
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Input", "delay": "2000" },

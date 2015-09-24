@@ -54,5 +54,15 @@
         "playType" : "LOOP",
         "columns": 2,
         "rows" : 1
+    },
+
+    "player_walk": {
+        "filename": "data/animations/charakter_animation_Spreadsheet2.png",
+        "frames" : 9,
+        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+        "playType" : "LOOP",
+        "columns": 9,
+        "rows" : 1
     }
+    
 }

@@ -76,11 +76,7 @@
             },
             "Movable": {},
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0
+                "type": "player"
             },
             "Team": {}
         }
@@ -121,7 +117,8 @@
             "MagneticField": {},
             "PhysixBody": {
                 "type": "magnet",
-                "size":60
+                "size":50, 
+                "sensor": 250
             }
     	}
     },
@@ -137,7 +134,8 @@
             "MagneticField": {},
             "PhysixBody": {
                 "type": "magnet",
-                "size":60
+                "size":50,
+                "sensor": 250
             }
     	}
     }

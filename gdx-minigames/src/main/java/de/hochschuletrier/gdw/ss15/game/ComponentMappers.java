@@ -5,7 +5,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
+import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
+import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
@@ -22,6 +24,8 @@ import de.hochschuletrier.gdw.ss15.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 
 public class ComponentMappers {
+    public static final ComponentMapper<BallComponent> ball = ComponentMapper.getFor(BallComponent.class);
+    public static final ComponentMapper<GoalShotComponent> goalShot = ComponentMapper.getFor(GoalShotComponent.class);
     public static final ComponentMapper<TeamComponent> team = ComponentMapper.getFor(TeamComponent.class);
     public static final ComponentMapper<SoundEmitterComponent> soundEmitter = ComponentMapper.getFor(SoundEmitterComponent.class);
     public static final ComponentMapper<PositionComponent> position = ComponentMapper.getFor(PositionComponent.class);

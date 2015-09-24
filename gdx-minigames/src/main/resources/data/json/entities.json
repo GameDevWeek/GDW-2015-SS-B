@@ -5,7 +5,7 @@
             "Ball": {},
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -37,7 +37,7 @@
         "components": {
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -83,51 +83,69 @@
         }
     },
     "playerspawn": {
-    	"meta": {},
-    	"components": {
-    		"PlayerSpawn": {},
-    		"Position": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "PlayerSpawn": {},
+            "Position": {},
+            "Texture": {
                 "texture": "p_spawn_dummy",
                 "scale": 0.9
             },
-       		"Team": {}
-    	}
+            "Team": {}
+        }
     },
     "ballspawn": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"BallSpawn": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "BallSpawn": {},
+            "Texture": {
                 "texture": "p_spawn_dummy",
                 "scale": 0.9
             }
-    	}
+        }
     },
     "magnet_plus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {}
-    	}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "circle",
+                "size": 30,
+                "density": 5,
+                "friction": 0.2,
+                "restitution": 0.4,
+                "bodyType": "StaticBody"
+            },
+            "Team": {}
+        }
     },
     "magnet_minus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {}
-    	}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "circle",
+                "size": 30,
+                "density": 5,
+                "friction": 0.2,
+                "restitution": 0.4,
+                "bodyType": "StaticBody"
+            },
+            "Team": {}
+        }
     }
 }

@@ -3,6 +3,7 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -102,7 +103,6 @@ public class TestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new InputBallSystem(0));
         engine.addSystem(new MovementSystem(1));
         engine.addSystem(new WeaponSystem(3));
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
@@ -115,6 +115,9 @@ public class TestGame extends AbstractGame {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
+        
+        /* Camera System muss schon existieren */
+        engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
     }
 
     @Override

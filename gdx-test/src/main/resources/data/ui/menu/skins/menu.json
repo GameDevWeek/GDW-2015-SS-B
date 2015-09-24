@@ -1,6 +1,6 @@
 {
     "com.badlogic.gdx.graphics.g2d.BitmapFont": {
-        "default-font": {"file": "data/fonts/verdana_32.fnt"},
+        "default-font": {"file": "data/fonts/quartz_40.fnt"},
         "verdana_32": {"file": "data/fonts/verdana_32.fnt"}
     },
     "com.badlogic.gdx.graphics.Color": {

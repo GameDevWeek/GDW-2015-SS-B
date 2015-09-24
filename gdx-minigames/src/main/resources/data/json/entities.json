@@ -11,9 +11,15 @@
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Texture": {
-                "texture": "ball_plus",
-                "shadow": "ball_base"
+            "StateRelatedAnimations": {
+                "initial_state": "ball_neutral",
+                "animation_ball_plus": "ball_plus",
+                "animation_ball_plus_shadow": "ball_base",
+                "animation_ball_minus": "ball_minus",
+                "animation_ball_minus_shadow": "ball_base",
+                "animation_ball_neutral": "ball_neutral",
+                "animation_ball_neutral_shadow": "ball_base",
+                "scale": 0.6
             },
             "Movable": {},
             "PhysixBody": {

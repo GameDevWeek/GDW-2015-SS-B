@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
@@ -14,6 +15,7 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
@@ -82,7 +84,11 @@ public final class BallManager implements ChangeGameStateEvent.Listener, GoalEve
         else
             pos = getRandomSpawn(start_spawns);
         
-        MapLoader.createEntity(engine, "ball", pos.x, pos.y, team);
+        Entity ball = MapLoader.createEntity(engine, "ball", pos.x, pos.y, team);
+        if(team == Team.BLUE)
+            ChangeAnimationStateEvent.emit(EntityAnimationState.BALL_MINUS, ball);
+        else if(team == Team.RED)
+            ChangeAnimationStateEvent.emit(EntityAnimationState.BALL_PLUS, ball);
     }
 
     @Override

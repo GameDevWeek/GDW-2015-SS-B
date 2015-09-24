@@ -135,7 +135,8 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private PhysixBodyDef getBodyDef(EntityFactoryParam param) {
         return new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem)
-                .position(param.x, param.y).fixedRotation(false);
+                .position(param.x, param.y).fixedRotation(false)
+                .linearDamping(0.25f).angularDamping(0.25f);
     }
 
     private PhysixFixtureDef getFixtureDef(SafeProperties properties) {

@@ -1,7 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
 import com.badlogic.ashley.core.Component;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
@@ -11,6 +10,8 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactListener;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.game.components.WeaponFieldComponent;
+import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
 
 public class BallListener implements PhysixContactListener {
 
@@ -24,6 +25,11 @@ public class BallListener implements PhysixContactListener {
 		{
 			System.out.println("MAGNETFELD REIN");
 			contact.getMyComponent().getEntity().getComponent(MagneticInfluenceComponent.class).magneticFields.add(entity);
+		}else if(comp != null)
+			entity = comp.getEntity();
+		if(entity != null && entity.getComponent(WeaponFieldComponent.class) != null){
+			contact.getMyComponent().getEntity().getComponent(WeaponInfluenceComponent.class).weaponFields.add(entity);
+		System.out.println("un waffel feld");
 		}
 	}
 
@@ -33,11 +39,14 @@ public class BallListener implements PhysixContactListener {
 		Entity entity = null;
 		if(comp != null)
 			entity = comp.getEntity();
-		if(entity != null && entity.getComponent(MagneticFieldComponent.class) != null)
-		{
+		if(entity != null && entity.getComponent(MagneticFieldComponent.class) != null) {
 			contact.getMyComponent().getEntity().getComponent(MagneticInfluenceComponent.class).magneticFields.remove(entity);
 		}
-		System.out.println("MAGNETFELD RAUS");
+		else if(comp != null)
+			entity = comp.getEntity();
+		if(entity != null && entity.getComponent(WeaponFieldComponent.class) != null) {
+			contact.getMyComponent().getEntity().getComponent(WeaponInfluenceComponent.class).weaponFields.remove(entity);
+		}
 	}
 
 	@Override
@@ -63,6 +72,11 @@ public class BallListener implements PhysixContactListener {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public void playerPulling(PhysixContact contact){
+		PhysixBodyComponent comp = contact.getMyComponent();
+		if(){
+			
+		}
+	}
 	
 }

@@ -261,7 +261,7 @@ public class Main extends StateBasedGame
                     DisconnectEvent.emit();
                 }
             } catch(IOException e) {
-                //fixme
+                DisconnectEvent.emit();
             }
         }
     }

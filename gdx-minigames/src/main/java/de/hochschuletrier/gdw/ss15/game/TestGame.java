@@ -78,7 +78,7 @@ public class TestGame extends AbstractGame {
             player.add(engine.createComponent(LocalPlayerComponent.class));
  
             //Nur zum testen der Ballphysik
-            Entity ball= MapLoader.createEntity(engine, "ball", 3000, 500, Team.BLUE);
+            Entity ball= MapLoader.createEntity(engine, "ball", 3200, 500, Team.BLUE);
            // ball.add(component)
         }
         

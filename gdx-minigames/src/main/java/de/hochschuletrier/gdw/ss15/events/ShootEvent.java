@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 
 public class ShootEvent {
 	public static interface Listener {
-		void shootEvent(Entity entity, Vector2 direction);
+		void onShootEvent(Entity entity, Vector2 direction);
 	}
 
 	private static final SnapshotArray<Listener> listeners = new SnapshotArray<Listener>();
@@ -14,7 +14,7 @@ public class ShootEvent {
 	public static void emit(Entity entity, Vector2 direction) {
 		Object[] items = listeners.begin();
 	    for (int i = 0, n = listeners.size; i < n; i++) {
-	    	((Listener)items[i]).shootEvent(entity, direction);
+	    	((Listener)items[i]).onShootEvent(entity, direction);
 	    }
 	    listeners.end();
 	}

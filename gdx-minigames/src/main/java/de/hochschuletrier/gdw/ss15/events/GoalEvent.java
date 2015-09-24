@@ -6,7 +6,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class GoalEvent {
     public static interface Listener {
-        void goal(Team team);
+        void onGoalEvent(Team team);
     }
 
     private static final SnapshotArray<Listener> listeners = new SnapshotArray<Listener>();
@@ -14,7 +14,7 @@ public class GoalEvent {
     public static void emit(Team team) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener)items[i]).goal(team);
+            ((Listener)items[i]).onGoalEvent(team);
         }
         listeners.end();
     }

@@ -68,7 +68,7 @@ public class BallManager implements ChangeGameStateEvent.Listener, GoalEvent.Lis
 	}
 
     @Override
-    public void goal(Team team) {
+    public void onGoalEvent(Team team) {
         int random;
         Entity spawn;
         Team spawnTeam;

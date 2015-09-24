@@ -57,7 +57,7 @@
     },
     
     "player_walk_blue": {
-        "filename": "data/animations/blue_character_spreadsheet.png",
+        "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
         "frames" : 17,
         "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
         "playType" : "LOOP",
@@ -66,7 +66,7 @@
     },
 
     "player_walk_red": {
-        "filename": "data/animations/charakter_animation_Spreadsheet2.png",
+        "filename": "data/animations/charakter_animation_Spreadsheet_orange.png",
         "frames" : 9,
         "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
         "playType" : "LOOP",

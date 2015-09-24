@@ -24,7 +24,7 @@ import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
-import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
+import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler,
         NetServerSimple.Listener, ChangeGameStateEvent.Listener {

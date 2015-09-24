@@ -29,7 +29,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
-import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
+import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;

@@ -67,7 +67,7 @@
             "Player": {},
             "Input": {},
             "StateRelatedAnimations": {
-                "animation_idle": "player_walk",
+                "animation_idle": "player_walk_red",
                 "animation_shoot": "box",
                 "animation_idle_shadow": "ball",
                 "animation_shoot_shadow": "ball",

@@ -2,7 +2,9 @@ package de.hochschuletrier.gdw.ss14.game.components.factories;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
@@ -11,6 +13,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,12 +49,12 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
     }
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
-        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity);
+        PhysixBodyComponent bodyComponent1 = getBodyComponent(param, entity);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeCircle(properties.getFloat("size", 5));
-        bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
-        entity.add(bodyComponent);
+        bodyComponent1.createFixture(fixtureDef);
+        bodyComponent1.applyImpulse(0, 100);
+        entity.add(bodyComponent1);
     }
 
     private void addBox(EntityFactoryParam param, Entity entity, SafeProperties properties) {
@@ -59,7 +62,8 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
+        bodyComponent.applyImpulse(0, 100);
+        bodyComponent.setGravityScale(-2000);
         entity.add(bodyComponent);
     }
 

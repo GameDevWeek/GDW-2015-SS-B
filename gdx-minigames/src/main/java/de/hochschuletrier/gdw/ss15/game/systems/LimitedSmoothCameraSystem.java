@@ -23,7 +23,7 @@ import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
  */
 public class LimitedSmoothCameraSystem extends IteratingSystem {
     
-    private final LimitedSmoothCamera camera = new LimitedSmoothCamera();;
+    private final LimitedSmoothCamera camera = new LimitedSmoothCamera();
     
     public LimitedSmoothCameraSystem(int priority) {
         super(Family.all(LocalPlayerComponent.class,PositionComponent.class).get(), priority);
@@ -54,7 +54,7 @@ public class LimitedSmoothCameraSystem extends IteratingSystem {
         camera.bind();
     }       
 
-    LimitedSmoothCamera getCamera() {
+    public LimitedSmoothCamera getCamera() {
         return camera;
     }
 }

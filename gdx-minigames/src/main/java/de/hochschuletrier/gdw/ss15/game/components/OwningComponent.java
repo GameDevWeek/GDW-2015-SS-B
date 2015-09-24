@@ -3,16 +3,15 @@ package de.hochschuletrier.gdw.ss15.game.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 
-
-
-public class WeaponComponent extends Component implements Pool.Poolable{
-
-	public boolean isPulling;
+public class OwningComponent extends Component implements Pool.Poolable{
 	
+	public boolean owned;
+
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		isPulling=false;
+		owned = true;
+		
 	}
 
 }

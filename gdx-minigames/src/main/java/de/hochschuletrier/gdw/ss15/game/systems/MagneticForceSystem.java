@@ -12,6 +12,8 @@ import de.hochschuletrier.gdw.ss15.game.components.MagnetComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
+import de.hochschuletrier.gdw.ss15.game.components.OwningComponent;
+import de.hochschuletrier.gdw.ss15.game.components.WeaponComponent;
 
 public class MagneticForceSystem extends IteratingSystem{
 	
@@ -22,7 +24,7 @@ public class MagneticForceSystem extends IteratingSystem{
     }
 
     public MagneticForceSystem(int priority) {
-        super(Family.all(PositionComponent.class, PhysixBodyComponent.class,  MagneticInfluenceComponent.class).get(), priority);
+        super(Family.all(PositionComponent.class, PhysixBodyComponent.class,  MagneticInfluenceComponent.class, BallComponent.class, OwningComponent.class, WeaponComponent.class).get(), priority);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class MagneticForceSystem extends IteratingSystem{
 			magneticForce.scl(50.f);
 			physix.getBody().applyForceToCenter(magneticForce, true);
 		}
+        
     }
 
 }

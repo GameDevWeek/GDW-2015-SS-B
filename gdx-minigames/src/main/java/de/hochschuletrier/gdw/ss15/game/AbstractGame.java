@@ -70,6 +70,7 @@ public abstract class AbstractGame {
         if(factoryParam.allowPhysics) {
             engine.addSystem(physixSystem);
             engine.addSystem(physixDebugRenderSystem);
+            
         }
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
         engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));

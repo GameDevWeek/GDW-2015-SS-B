@@ -27,12 +27,13 @@ public class WeaponSystem extends IteratingSystem implements  ShootEvent.Listene
 	protected void processEntity(Entity entity, float deltaTime) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
 	public void shootEvent(Entity entity, Vector2 direction) {
 		// TODO Auto-generated method stub
-		System.out.println("es soll geschossen werden");
+		System.out.println("es soll geschossen werden:richtung:"+direction.x+"/"+ direction.y);
 	}
 
 	@Override

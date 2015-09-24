@@ -1,4 +1,4 @@
-{
+﻿{
     "ball": {
         "meta": {},
         "components": {
@@ -29,7 +29,9 @@
                 "friction": 0.2,
                 "restitution": 0.4
             },
-            "Team": {}
+            "Team": {},
+            "Ball":{},
+            "MagneticInfluence":{}
         }
     },
     "box": {
@@ -117,15 +119,10 @@
             },
             "Magnet": {},
             "PhysixBody": {
-                "type": "circle",
-                "size": 30,
-                "density": 5,
-                "friction": 0.2,
-                "restitution": 0.4,
-                "bodyType": "StaticBody"
-            },
-            "Team": {}
-        }
+                "type": "magnet",
+                "size":60
+            }
+    	}
     },
     "magnet_minus": {
         "meta": {},
@@ -138,14 +135,10 @@
             },
             "Magnet": {},
             "PhysixBody": {
-                "type": "circle",
-                "size": 30,
-                "density": 5,
-                "friction": 0.2,
-                "restitution": 0.4,
-                "bodyType": "StaticBody"
-            },
-            "Team": {}
-        }
+                "type": "magnet",
+                "size":60
+            }
+    	}
     }
+    
 }

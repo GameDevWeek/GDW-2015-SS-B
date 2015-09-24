@@ -2,17 +2,24 @@
     "ball": {
         "meta": {},
         "components": {
+            "Ball": {},
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Texture": {
-                "texture": "ball_plus",
-                "shadow": "ball_base"
+            "StateRelatedAnimations": {
+                "initial_state": "ball_neutral",
+                "animation_ball_plus": "ball_plus",
+                "animation_ball_plus_shadow": "ball_base",
+                "animation_ball_minus": "ball_minus",
+                "animation_ball_minus_shadow": "ball_base",
+                "animation_ball_neutral": "ball_neutral",
+                "animation_ball_neutral_shadow": "ball_base",
+                "scale": 0.6
             },
             "Movable": {},
             "PhysixBody": {
@@ -30,7 +37,7 @@
         "components": {
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -59,7 +66,10 @@
             "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball"
+                "animation_shoot": "ball",
+                "animation_idle_shadow": "ball",
+                "animation_shoot_shadow": "ball",
+                "initial_state": "idle"
             },
             "Movable": {},
             "PhysixBody": {
@@ -73,51 +83,69 @@
         }
     },
     "playerspawn": {
-    	"meta": {},
-    	"components": {
-    		"PlayerSpawn": {},
-    		"Position": {},
-    		"Texture": {
-                "texture": "p_spawn_dumy",
+        "meta": {},
+        "components": {
+            "PlayerSpawn": {},
+            "Position": {},
+            "Texture": {
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             },
-       		"Team": {}
-    	}
+            "Team": {}
+        }
     },
     "ballspawn": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"BallSpawn": {},
-    		"Texture": {
-                "texture": "p_spawn_dumy",
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "BallSpawn": {},
+            "Texture": {
+                "texture": "p_spawn_dummy",
                 "scale": 0.9
             }
-    	}
+        }
     },
     "magnet_plus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {}
-    	}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "circle",
+                "size": 30,
+                "density": 5,
+                "friction": 0.2,
+                "restitution": 0.4,
+                "bodyType": "StaticBody"
+            },
+            "Team": {}
+        }
     },
     "magnet_minus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {}
-    	}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "circle",
+                "size": 30,
+                "density": 5,
+                "friction": 0.2,
+                "restitution": 0.4,
+                "bodyType": "StaticBody"
+            },
+            "Team": {}
+        }
     }
 }

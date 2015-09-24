@@ -15,7 +15,9 @@ import java.util.Map;
 public class StateRelatedAnimationsComponent extends Component implements Pool.Poolable {
 
     public Map<EntityAnimationState, AnimationExtended> animations;
-    public EntityAnimationState currentState =EntityAnimationState.IDLE;
+    public Map<EntityAnimationState, AnimationExtended> shadows;
+    
+    public EntityAnimationState currentState = EntityAnimationState.IDLE;
     public float stateTime;
     public int layer;
     public float scale;
@@ -23,9 +25,11 @@ public class StateRelatedAnimationsComponent extends Component implements Pool.P
     @Override
     public void reset() {
         animations.clear();
+        shadows.clear();
         stateTime = 0;
         layer = 0;
         scale = 1.0f;
+        currentState = EntityAnimationState.IDLE;
     }
 }
 

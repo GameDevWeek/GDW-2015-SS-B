@@ -7,86 +7,98 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
+import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
-import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;;
+import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
-public class BallManager implements ChangeGameStateEvent.Listener, GoalEvent.Listener {
-	
-	ArrayList<Entity> start_spawns = new ArrayList<Entity>();
-	ArrayList<Entity> team_0_spawns = new ArrayList<Entity>();
-	ArrayList<Entity> team_1_spawns = new ArrayList<Entity>();
-	
-	private PooledEngine engine;
-	
-	public BallManager(PooledEngine engine) {
-		this.engine = engine;
-		
-		distributeSpawns();
-		
-		ChangeGameStateEvent.register(this);
-		GoalEvent.register(this);
-		
-	}
-	
-	public void distributeSpawns() {
-	    
-	    ImmutableArray<Entity> spawns = engine.getEntitiesFor(Family.all(BallSpawnComponent.class, TeamComponent.class).get());
-	    
-	    for (Entity entity : spawns) {
-	        TeamComponent team = entity.getComponent(TeamComponent.class);
-	        
-	        if( team.team == null) {
-                start_spawns.add(entity);
-            }
-	        else if(team.team == Team.BLUE) {
-	            team_0_spawns.add(entity);
-	        }
-	        else if(team.team == Team.RED) {
-	            team_1_spawns.add(entity);
-	        }
-        }
-	}
+public final class BallManager implements ChangeGameStateEvent.Listener, GoalEvent.Listener {
 
-	@Override
-	public void onChangeGameStateEvent(GameState newState) {
+    ArrayList<Entity> start_spawns = new ArrayList<Entity>();
+    ArrayList<Entity> team_0_spawns = new ArrayList<Entity>();
+    ArrayList<Entity> team_1_spawns = new ArrayList<Entity>();
 
-		if (newState == GameState.GAME) {
-		    int random = Math.round((float)Math.random() * (start_spawns.size() - 1));
-		    
-		    Entity spawn = start_spawns.get(random);
-		    PositionComponent pos = spawn.getComponent(PositionComponent.class);
-		    
-		    MapLoader.createEntity(engine, "ball", pos.x, pos.y, null);
-		}
-	}
+    private final PooledEngine engine;
+    private final ImmutableArray<Entity> balls;
 
-    @Override
-    public void goal(Team team) {
-        int random;
-        Entity spawn;
-        Team spawnTeam;
-        
-        if(team != Team.BLUE) {
-            random = Math.round((float)Math.random() * (team_0_spawns.size() - 1));
-            spawn = team_0_spawns.get(random);
-            spawnTeam = Team.BLUE;
-        }
-        else {
-            random = Math.round((float)Math.random() * (team_1_spawns.size() - 1));
-            spawn = team_1_spawns.get(random);
-            spawnTeam = Team.RED;
-        }
-         
-        PositionComponent pos = spawn.getComponent(PositionComponent.class);
-        
-        MapLoader.createEntity(engine, "ball", pos.x, pos.y, spawnTeam);
+    public BallManager(PooledEngine engine) {
+        this.engine = engine;
+
+        distributeSpawns();
+        balls = engine.getEntitiesFor(Family.all(BallComponent.class).get());
+
+        ChangeGameStateEvent.register(this);
+        GoalEvent.register(this);
+
     }
 
+    public void dispose() {
+        ChangeGameStateEvent.unregister(this);
+        GoalEvent.unregister(this);
+    }
+
+    public void distributeSpawns() {
+
+        ImmutableArray<Entity> spawns = engine.getEntitiesFor(Family.all(BallSpawnComponent.class, TeamComponent.class).get());
+
+        for (Entity entity : spawns) {
+            TeamComponent team = entity.getComponent(TeamComponent.class);
+
+            if (team.team == null) {
+                start_spawns.add(entity);
+            } else if (team.team == Team.BLUE) {
+                team_0_spawns.add(entity);
+            } else if (team.team == Team.RED) {
+                team_1_spawns.add(entity);
+            }
+        }
+    }
+    
+    private void removeBalls() {
+        for(Entity ball: balls) 
+            engine.removeEntity(ball);
+    }
+    
+    private PositionComponent getRandomSpawn(ArrayList<Entity> spawns) {
+        int random = Math.round((float) Math.random() * (spawns.size() - 1));
+
+        Entity spawn = spawns.get(random);
+        return spawn.getComponent(PositionComponent.class);
+    }
+    
+    private void resetBall(Team team) {
+        removeBalls();
+        PositionComponent pos;
+        if(team == Team.BLUE)
+            pos = getRandomSpawn(team_0_spawns);
+        else if(team == Team.RED)
+            pos = getRandomSpawn(team_1_spawns);
+        else
+            pos = getRandomSpawn(start_spawns);
+        
+        Entity ball = MapLoader.createEntity(engine, "ball", pos.x, pos.y, team);
+        if(team == Team.BLUE)
+            ChangeAnimationStateEvent.emit(EntityAnimationState.BALL_MINUS, ball);
+        else if(team == Team.RED)
+            ChangeAnimationStateEvent.emit(EntityAnimationState.BALL_PLUS, ball);
+    }
+
+    @Override
+    public void onChangeGameStateEvent(GameState newState) {
+        if (newState == GameState.GAME)
+            resetBall(null);
+    }
+
+    @Override
+    public void onGoalEvent(Team team) {
+        resetBall(team == Team.BLUE ? Team.RED : Team.BLUE);
+    }
 }

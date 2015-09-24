@@ -8,6 +8,7 @@ package de.hochschuletrier.gdw.ss15.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Texture;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
@@ -27,24 +28,24 @@ public class TextureRenderSystem extends IteratingSystem {
         super(Family.all(PositionComponent.class, TextureComponent.class).get(), priority);
     }
 
+    private void drawTexture(Texture texture, float x, float y, float scale, float rotation) {
+        int w = texture.getWidth();
+        int h = texture.getHeight();
+        x -= w / 2.0f;
+        y -= h / 2.0f;
+
+        DrawUtil.batch.draw(texture, x, y, w * 0.5f, h * 0.5f, w, h, scale, scale, rotation, 0, 0, w, h, false, true);
+    }
+    
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        float posX, posY;
         PositionComponent position = ComponentMappers.position.get(entity);
         TextureComponent textureComponent = ComponentMappers.texture.get(entity);
 
         if (textureComponent.bUseShadow) {
-            posX = position.x - textureComponent.shadowTexture.getWidth() / 2;
-            posY = position.y - textureComponent.shadowTexture.getHeight() / 2;
-            DrawUtil.draw(textureComponent.shadowTexture, posX, posY);
+            drawTexture(textureComponent.shadowTexture, position.x, position.y, textureComponent.scale, 0);
         }
-
-        int w = textureComponent.texture.getWidth();
-        int h = textureComponent.texture.getHeight();
-        posX = position.x - w / 2.0f;
-        posY = position.y - h / 2.0f;
-
-        DrawUtil.batch.draw(textureComponent.texture, posX, posY, w * 0.5f, h * 0.5f, w, h, textureComponent.scale, textureComponent.scale, position.rotation, 0, 0, w, h, false, true);
+        drawTexture(textureComponent.texture, position.x, position.y, textureComponent.scale, position.rotation);
     }
 
 }

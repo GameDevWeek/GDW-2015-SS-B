@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ss15.game.utils;
+package de.hochschuletrier.gdw.ss15.game.manager;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -9,6 +9,7 @@ import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
+import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 public class PlayerSpawnManager {
 

@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.MassData;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool.Poolable;
+
+import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 
@@ -216,4 +218,17 @@ public final class PhysixBodyComponent extends Component implements Poolable {
         Vector2 pos = body.getPosition();
         body.setTransform(pos.x, pos.y, angle);
     }
-}
+    
+    public void setForce(Vector2 force){
+    	//Vector2 pos = body.getWorldCenter();
+    	body.applyForceToCenter(force, true);
+    	
+    }
+
+	
+
+		
+	}
+    
+  
+    

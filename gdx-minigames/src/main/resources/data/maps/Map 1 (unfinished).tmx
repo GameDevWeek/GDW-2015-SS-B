@@ -62,13 +62,13 @@
   </object>
  </objectgroup>
  <objectgroup name="Gate">
-  <object id="9" type="Gate" x="96" y="1376" width="260" height="704">
+  <object id="9" type="Gate" x="96" y="1416" width="260" height="616">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="10" type="Gate" x="6688" y="1400" width="248" height="680">
+  <object id="10" type="Gate" x="6688" y="1416" width="248" height="616">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="1"/>

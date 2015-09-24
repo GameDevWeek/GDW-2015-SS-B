@@ -15,6 +15,38 @@
         "columns": 2,
         "rows" : 1
     },
+    "ball_base": {
+        "filename": "data/images/ball_base.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_neutral": {
+        "filename": "data/images/ball_neutral.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_plus": {
+        "filename": "data/images/ball_plus.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
+    "ball_minus": {
+        "filename": "data/images/ball_minus.png",
+        "frames" : 1,
+        "frameDuration": [1],
+        "playType" : "LOOP",
+        "columns": 1,
+        "rows" : 1
+    },
     "box": {
         "filename": "data/animations/box.png",
         "frames" : 2,
@@ -22,5 +54,24 @@
         "playType" : "LOOP",
         "columns": 2,
         "rows" : 1
+    },
+    
+    "player_walk_blue": {
+        "filename": "data/animations/blue_character_spreadsheet.png",
+        "frames" : 17,
+        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+        "playType" : "LOOP",
+        "columns": 17,
+        "rows" : 1
+    },
+
+    "player_walk_red": {
+        "filename": "data/animations/charakter_animation_Spreadsheet2.png",
+        "frames" : 9,
+        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+        "playType" : "LOOP",
+        "columns": 9,
+        "rows" : 1
     }
+    
 }

@@ -11,6 +11,9 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagnetComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
+import de.hochschuletrier.gdw.ss15.game.components.OwningComponent;
+import de.hochschuletrier.gdw.ss15.game.components.WeaponComponent;
 
 public class MagneticForceSystem extends IteratingSystem{
 	
@@ -21,7 +24,7 @@ public class MagneticForceSystem extends IteratingSystem{
     }
 
     public MagneticForceSystem(int priority) {
-        super(Family.all(PositionComponent.class, PhysixBodyComponent.class, BallComponent.class, MagneticInfluenceComponent.class).get(), priority);
+        super(Family.all(PositionComponent.class, PhysixBodyComponent.class,  MagneticInfluenceComponent.class, BallComponent.class, OwningComponent.class, WeaponComponent.class).get(), priority);
     }
 
     @Override
@@ -37,13 +40,15 @@ public class MagneticForceSystem extends IteratingSystem{
 			otherPos.y = magnets.magneticFields.get(i).getComponent(PositionComponent.class).y;
 			//vom Magnet weg, falls gleiche Polarität
 			Vector2 magneticForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
-			if( magnets.magneticFields.get(i).getComponent(MagnetComponent.class).positiv == entity.getComponent(MagnetComponent.class).positiv)
+			System.out.println("im Magnetsystem test");
+			if( magnets.magneticFields.get(i).getComponent(TeamComponent.class).team == entity.getComponent(TeamComponent.class).team)
 				magneticForce.scl(-1f);
 			
 			magneticForce.nor();
 			magneticForce.scl(50.f);
 			physix.getBody().applyForceToCenter(magneticForce, true);
 		}
+        
     }
 
 }

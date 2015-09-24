@@ -5,15 +5,21 @@
             "Ball": {},
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
                 "minDelay": 100
             },
-            "Texture": {
-                "texture": "ball_plus",
-                "shadow": "ball_base"
+            "StateRelatedAnimations": {
+                "initial_state": "ball_neutral",
+                "animation_ball_plus": "ball_plus",
+                "animation_ball_plus_shadow": "ball_base",
+                "animation_ball_minus": "ball_minus",
+                "animation_ball_minus_shadow": "ball_base",
+                "animation_ball_neutral": "ball_neutral",
+                "animation_ball_neutral_shadow": "ball_base",
+                "scale": 0.6
             },
             "Movable": {},
             "PhysixBody": {
@@ -23,7 +29,9 @@
                 "friction": 0.2,
                 "restitution": 0.4
             },
-            "Team": {}
+            "Team": {},
+            "Ball":{},
+            "MagneticInfluence":{}
         }
     },
     "box": {
@@ -31,7 +39,7 @@
         "components": {
             "Position": {},
             "SoundEmitter": {},
-            "ImpactSound" : {
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -59,11 +67,12 @@
             "Player": {},
             "Input": {},
             "StateRelatedAnimations": {
-                "animation_idle": "box",
-                "animation_shoot": "ball",
+                "animation_idle": "player_walk",
+                "animation_shoot": "box",
                 "animation_idle_shadow": "ball",
                 "animation_shoot_shadow": "ball",
-                "initial_state": "idle"
+                "initial_state": "idle",
+                "scale": 1.5
             },
             "Movable": {},
             "ParticleEmitter": {
@@ -80,51 +89,60 @@
         }
     },
     "playerspawn": {
-    	"meta": {},
-    	"components": {
-    		"PlayerSpawn": {},
-    		"Position": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "PlayerSpawn": {},
+            "Position": {},
+            "Texture": {
                 "texture": "p_spawn_dummy",
                 "scale": 0.9
             },
-       		"Team": {}
-    	}
+            "Team": {}
+        }
     },
     "ballspawn": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"BallSpawn": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "BallSpawn": {},
+            "Texture": {
                 "texture": "p_spawn_dummy",
                 "scale": 0.9
             }
-    	}
+        }
     },
     "magnet_plus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "magnet",
+                "size":60
+            }
     	}
     },
     "magnet_minus": {
-    	"meta": {},
-    	"components": {
-    		"Position": {},
-    		"Team": {},
-    		"Texture": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Team": {},
+            "Texture": {
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {}
+            "Magnet": {},
+            "PhysixBody": {
+                "type": "magnet",
+                "size":60
+            }
     	}
     }
+    
 }

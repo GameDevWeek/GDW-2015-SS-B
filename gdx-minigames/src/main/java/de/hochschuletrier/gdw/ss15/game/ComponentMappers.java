@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ss15.game;
+﻿package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
@@ -10,6 +10,7 @@ import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ParticleEmitterComponent;
+import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
@@ -36,6 +37,7 @@ public class ComponentMappers {
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<MagneticInfluenceComponent> magneticInfluence = ComponentMapper.getFor(MagneticInfluenceComponent.class);
     public static final ComponentMapper<ParticleEmitterComponent> particleEmitter = ComponentMapper.getFor(ParticleEmitterComponent.class);
+    public static final ComponentMapper<WeaponInfluenceComponent> weaponInfluence = ComponentMapper.getFor(WeaponInfluenceComponent.class);
 
     /* Spawnpunkte für die Spieler */
     public static final ComponentMapper<PlayerSpawnComponent> playerSpawn = ComponentMapper.getFor(PlayerSpawnComponent.class);

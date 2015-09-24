@@ -25,7 +25,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.WeaponSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.PullSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -106,7 +106,7 @@ public class TestGame extends AbstractGame {
         super.addSystems();
         engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MovementSystem(1));
-        engine.addSystem(new WeaponSystem(3));
+        engine.addSystem(new PullSystem(3));
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(2));
         
@@ -126,7 +126,7 @@ public class TestGame extends AbstractGame {
     protected void addContactListeners(PhysixComponentAwareContactListener contactListener) {
         contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
-        contactListener.addListener(BallComponent.class, new BallListener());
+        contactListener.addListener(BallComponent.class, new BallListener(engine));
     }
 
     private void setupPhysixWorld() {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Pool;
 public class PlayerComponent extends Component implements Pool.Poolable {
 
     public String name;
+    public boolean hasBall;
     
     @Override
     public void reset() {

@@ -13,19 +13,19 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 
-public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener {
+public class PullSystem extends IteratingSystem {
+
     float speed = 200f;
     float pullRange = 500f;
     private ImmutableArray<Entity> balls;
-    private float force =100;
+    private final float force = 100;
 
-    public WeaponSystem() {
+    public PullSystem() {
         this(0);
     }
 
-    public WeaponSystem(int priority) {
+    public PullSystem(int priority) {
         super(Family.all(PositionComponent.class, PhysixBodyComponent.class,
                 PlayerComponent.class).get(), priority);
     }
@@ -33,15 +33,13 @@ public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        ShootEvent.register(this);
-        
+
         balls = engine.getEntitiesFor(Family.all(BallComponent.class).get());
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
-        ShootEvent.unregister(this);
         balls = null;
     }
 
@@ -52,21 +50,21 @@ public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener
             InputBallComponent input = entity.getComponent(InputBallComponent.class);
             if (input.pull) {
                 Vector2 direction = input.view;
-                PositionComponent ballPos = ball
-                        .getComponent(PositionComponent.class);
+                PositionComponent ballPos = ball.getComponent(PositionComponent.class);
                 PositionComponent entPos = entity.getComponent(PositionComponent.class);
                 Vector2 differences = new Vector2(ballPos.x - entPos.x, ballPos.y - entPos.y);
                 float dirAngle = differences.angle();
                 float viewAngle = direction.angle();
                 float diff = dirAngle - viewAngle;
-                if(diff < -180)
+                if (diff < -180) {
                     diff += 360;
-                else if(diff > 180)
+                } else if (diff > 180) {
                     diff -= 360;
-                if(Math.abs(diff) < 30) {
+                }
+                if (Math.abs(diff) < 30) {
                     float dist = differences.len();
-                    if(dist < pullRange) {
-                        differences.nor().scl(-force * (pullRange/dist));
+                    if (dist < pullRange) {
+                        differences.nor().scl(-force * (pullRange / dist));
                         PhysixBodyComponent physix = ComponentMappers.physixBody.get(ball);
                         physix.simpleForceApply(differences);
                     }
@@ -74,17 +72,5 @@ public class WeaponSystem extends IteratingSystem implements ShootEvent.Listener
             }
 
         }
-    }
-
-    @Override
-    public void onShootEvent(Entity entityFrom, Vector2 direction) {
-        // TODO Auto-generated method stub
-
-        // schießen
-//            // physix.applyImpulse(direktion.x, direktion.y);
-//            System.out.println("test" + direction.x + "/" + direction.y);
-//            physix.setLinearVelocity(direction.x * speed, direction.y
-//                    * speed);
-
     }
 }

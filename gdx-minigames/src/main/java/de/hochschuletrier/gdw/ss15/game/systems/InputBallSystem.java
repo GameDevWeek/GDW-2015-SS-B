@@ -27,7 +27,7 @@ public class InputBallSystem extends IteratingSystem {
 
     @SuppressWarnings("unchecked")
     public InputBallSystem(int priority, SmoothCamera camera) {
-        super(Family.all(PhysixBodyComponent.class, LocalPlayerComponent.class, InputBallComponent.class).get(), priority);
+        super(Family.all(LocalPlayerComponent.class, InputBallComponent.class).get(), priority);
         this.camera = camera;
     }
 
@@ -60,7 +60,7 @@ public class InputBallSystem extends IteratingSystem {
         }
         
         PhysixBodyComponent physBody = ComponentMappers.physixBody.get(entity);
-        physBody.setAngle((float)(Math.atan2(input.view.y, input.view.x ) + (Math.PI / 2)));
-        
+        if(physBody != null)
+            physBody.setAngle(input.view.angleRad() + ((float)Math.PI / 2.0f));
     }
 }

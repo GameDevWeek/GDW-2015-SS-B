@@ -17,7 +17,7 @@ public class StateRelatedAnimationsComponent extends Component implements Pool.P
     public Map<EntityAnimationState, AnimationExtended> animations;
     public Map<EntityAnimationState, AnimationExtended> shadows;
     
-    public EntityAnimationState currentState = EntityAnimationState.IDLE;
+    public EntityAnimationState currentState;
     public float stateTime;
     public int layer;
     public float scale;
@@ -29,7 +29,7 @@ public class StateRelatedAnimationsComponent extends Component implements Pool.P
         stateTime = 0;
         layer = 0;
         scale = 1.0f;
-        currentState = EntityAnimationState.IDLE;
+        currentState = null;
     }
 }
 

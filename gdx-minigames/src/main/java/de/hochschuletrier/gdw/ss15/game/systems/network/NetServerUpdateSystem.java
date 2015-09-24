@@ -15,8 +15,12 @@ import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.PullChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.ShootDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.PullEvent;
+import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
@@ -124,6 +128,26 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
                 input.view.set(datagram.getView());
                 input.packetId = datagram.getPacketId();
             }
+        }
+    }
+    
+    public void handle(PullChangeDatagram datagram) {
+        NetConnection connection = datagram.getConnection();
+        if (connection.isConnected()) {
+            Entity entity = (Entity) connection.getAttachment();
+            if(datagram.getOn())
+                PullEvent.emitOn(entity, datagram.getDirection().nor());
+            else
+                PullEvent.emitOff(entity);
+        }
+    }
+    
+    public void handle(ShootDatagram datagram) {
+        NetConnection connection = datagram.getConnection();
+        if (connection.isConnected()) {
+            Entity entity = (Entity) connection.getAttachment();
+            //fixme: check if player still has the ball?
+            ShootEvent.emit(entity, datagram.getDirection().nor());
         }
     }
 

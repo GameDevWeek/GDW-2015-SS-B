@@ -18,12 +18,16 @@ import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author rftpool11
  */
 public class StateRelatedAnimationsRenderSystem extends IteratingSystem implements ChangeAnimationStateEvent.Listener  {
+    private static final Logger logger = LoggerFactory.getLogger(StateRelatedAnimationsRenderSystem.class);
+     
     public StateRelatedAnimationsRenderSystem(){
         this(0);
     }
@@ -36,13 +40,31 @@ public class StateRelatedAnimationsRenderSystem extends IteratingSystem implemen
     protected void processEntity(Entity entity, float deltaTime) {
         StateRelatedAnimationsComponent animation = ComponentMappers.stateRelatedAnimations.get(entity);
         PositionComponent position = ComponentMappers.position.get(entity);
-
+        AnimationExtended currentAnimation;
+        TextureRegion keyFrame;
+        int w, h;
         animation.stateTime += deltaTime;
-        AnimationExtended s = animation.animations.get(animation.currentState);
-        TextureRegion keyFrame = animation.animations.get(animation.currentState).getKeyFrame(animation.stateTime);
-        int w = keyFrame.getRegionWidth();
-        int h = keyFrame.getRegionHeight();
-        DrawUtil.batch.draw(keyFrame, position.x - w * 0.5f, position.y - h * 0.5f, w * 0.5f, h * 0.5f, w, h, animation.scale, animation.scale, position.rotation);
+        
+        //render shadow if available
+        currentAnimation = animation.shadows.get(animation.currentState);
+        if(currentAnimation != null){
+            keyFrame = currentAnimation.getKeyFrame(animation.stateTime);
+            w = keyFrame.getRegionWidth();
+            h = keyFrame.getRegionHeight();
+            DrawUtil.batch.draw(keyFrame, position.x - w * 0.5f, position.y - h * 0.5f, w * 0.5f, h * 0.5f, w, h, animation.scale, animation.scale, 0);
+        }
+        
+        //render animation
+        currentAnimation = animation.animations.get(animation.currentState);
+        if(currentAnimation != null){
+            keyFrame = currentAnimation.getKeyFrame(animation.stateTime);
+            w = keyFrame.getRegionWidth();
+            h = keyFrame.getRegionHeight();
+            DrawUtil.batch.draw(keyFrame, position.x - w * 0.5f, position.y - h * 0.5f, w * 0.5f, h * 0.5f, w, h, animation.scale, animation.scale, position.rotation);
+        }else{
+            logger.warn(entity.toString() + "has no animation for state " + animation.currentState.name());
+        }
+       
     }
 
     @Override

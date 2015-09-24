@@ -60,7 +60,10 @@
             "Input": {},
             "StateRelatedAnimations": {
                 "animation_idle": "box",
-                "animation_shoot": "ball"
+                "animation_shoot": "ball",
+                "animation_idle_shadow": "ball",
+                "animation_shoot_shadow": "ball",
+                "initial_state": "idle"
             },
             "Movable": {},
             "PhysixBody": {

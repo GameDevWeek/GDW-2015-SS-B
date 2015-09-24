@@ -1,8 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -10,15 +8,12 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
-import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
-import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
@@ -30,7 +25,8 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
-import de.hochschuletrier.gdw.ss15.game.utils.PlayerSpawnManager;
+import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
+import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
@@ -38,8 +34,9 @@ public class TestGame extends AbstractGame {
 
     private TiledMap map;
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
+    private final TeamManager teamManager = new TeamManager();
     
-    private BallManager ballmanager;
+    private BallManager ballManager;
 
     public TestGame() {
         this(null, null);
@@ -78,7 +75,7 @@ public class TestGame extends AbstractGame {
         
         setupPhysixWorld();
         
-        ballmanager = new BallManager(engine);
+        ballManager = new BallManager(engine);
         
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
@@ -134,6 +131,8 @@ public class TestGame extends AbstractGame {
     @Override
     public void dispose() {
         super.dispose();
+        teamManager.dispose();
+        ballManager.dispose();
         if(netClient != null)
             netClient.disconnect();
         else if(netServer != null)

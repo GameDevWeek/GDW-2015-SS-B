@@ -68,7 +68,7 @@ public class BallManager implements ChangeGameStateEvent.Listener, GoalEvent.Lis
 	}
 
     @Override
-    public void goal(Team team) {
+    public void onGoalEvent(Team team) {
         int random;
         Entity spawn;
         Team spawnTeam;
@@ -89,4 +89,8 @@ public class BallManager implements ChangeGameStateEvent.Listener, GoalEvent.Lis
         MapLoader.createEntity(engine, "ball", pos.x, pos.y, spawnTeam);
     }
 
+    public void dispose() {
+        ChangeGameStateEvent.unregister(this);
+        GoalEvent.unregister(this);
+    }
 }

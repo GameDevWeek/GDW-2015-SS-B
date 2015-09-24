@@ -4,15 +4,24 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 
 
+<<<<<<< HEAD
+	public boolean on;
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		on = true;
+		
+=======
 
 public class WeaponComponent extends Component implements Pool.Poolable{
 
-	public boolean isPulling;
+	boolean isPulling;
 	
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
 		isPulling=false;
+>>>>>>> 4e697f1b6d1ebf66403a187b2ea1670cdf88b8c2
 	}
 
 }

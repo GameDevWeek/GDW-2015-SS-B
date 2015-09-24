@@ -142,6 +142,8 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
                 PullEvent.emitOn(entity, datagram.getDirection().nor());
             else
                 PullEvent.emitOff(entity);
+            InputBallComponent input = ComponentMappers.input.get(entity);
+            input.pull = datagram.getOn();
         }
     }
     
@@ -149,7 +151,6 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         NetConnection connection = datagram.getConnection();
         if (connection.isConnected()) {
             Entity entity = (Entity) connection.getAttachment();
-            //fixme: check if player still has the ball?
             ShootEvent.emit(entity, datagram.getDirection().nor());
         }
     }

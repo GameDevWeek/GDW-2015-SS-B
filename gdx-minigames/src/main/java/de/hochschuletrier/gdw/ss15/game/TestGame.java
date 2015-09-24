@@ -3,7 +3,6 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -13,7 +12,6 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
-import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;

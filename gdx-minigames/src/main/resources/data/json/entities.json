@@ -67,11 +67,12 @@
             "Player": {},
             "Input": {},
             "StateRelatedAnimations": {
-                "animation_idle": "box",
-                "animation_shoot": "ball",
+                "animation_idle": "player_walk",
+                "animation_shoot": "box",
                 "animation_idle_shadow": "ball",
                 "animation_shoot_shadow": "ball",
-                "initial_state": "idle"
+                "initial_state": "idle",
+                "scale": 1.5
             },
             "Movable": {},
             "PhysixBody": {

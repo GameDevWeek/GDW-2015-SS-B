@@ -3,6 +3,7 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -33,6 +34,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
@@ -77,7 +79,7 @@ public class TestGame extends AbstractGame {
             player.add(engine.createComponent(LocalPlayerComponent.class));
  
             //Nur zum testen der Ballphysik
-            Entity ball= MapLoader.createEntity(engine, "ball", 3000, 500, Team.BLUE);
+            Entity ball= MapLoader.createEntity(engine, "ball", 3200, 500, Team.BLUE);
            // ball.add(component)
         }
         
@@ -102,7 +104,7 @@ public class TestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new InputBallSystem(0));
+        engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MovementSystem(1));
         engine.addSystem(new WeaponSystem(3));
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
@@ -115,6 +117,9 @@ public class TestGame extends AbstractGame {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
+        
+        /* Camera System muss schon existieren */
+        engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
     }
 
     @Override

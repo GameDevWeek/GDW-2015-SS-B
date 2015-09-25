@@ -125,11 +125,11 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
             Entity playerEntity = (Entity) connection.getAttachment();
             InputBallComponent input = ComponentMappers.input.get(playerEntity);
             if(datagram.getPacketId() > input.packetId) {
+                input.packetId = datagram.getPacketId();
                 input.move.set(datagram.getMove());
                 input.view.set(datagram.getView());
                 PhysixBodyComponent physBody = ComponentMappers.physixBody.get(playerEntity);
                 physBody.setAngle(input.view.angleRad() + ((float)Math.PI / 2.0f));
-                input.packetId = datagram.getPacketId();
             }
         }
     }

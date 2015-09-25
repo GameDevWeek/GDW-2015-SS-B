@@ -17,6 +17,9 @@ import de.hochschuletrier.gdw.ss15.game.GameConstants;
  */
 public class MenuPageJoinServer extends MenuPage {
     private final TextField username;
+    private final TextField serverIP;
+    private final TextField mapname;
+    private final TextField serverPort;
     
     
     public MenuPageJoinServer(Skin skin, MenuManager menuManager) {
@@ -30,33 +33,34 @@ public class MenuPageJoinServer extends MenuPage {
         int width = 300;
         int height = 50;
         
-        createLabel(50, 50, 300, 50, "hallo welt");
+        
+        createLabel(50, 50, 300, 50, "Enter Server IP");
+        serverIP = createTextField(50, 100, 300, 50, "111.111.111.111");
+        createLabel(50, 50, 300, 50, "Enter Server Port");
+        serverPort = createTextField(50, 100, 300, 50, "");
+        createLabel(50, 50, 300, 50, "Enter Username");
         username = createTextField(50, 100, 300, 50, "default");
+        createLabel(50, 50, 300, 50, "Select Map");
+        mapname = createTextField(50, 100, 300, 50, "default");
+        //addCenteredButton(..., this::joinServer);
         
-        //createTextField()
-        //ip
-        //port
-        //username
-        //mapname
-        //connet -> join server
-        
-        
-        
-        addCenteredButton(x, y - yStep * (i++), 400, 50, "Enter Server IP and Nickname", this::enterIP);
-        //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
+        //addCenteredButton(x, y - yStep * (i++), 400, 50, "Enter Server IP and Nickname", this::enterIP);
+        /*
+        addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
         //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
+        
         
         addCenteredButton(x, y - yStep * (i++), 400, 50, "Back To Menu", () -> menuManager.popPage());
         
         addCenteredButton(x, y - yStep * (i++), 400, 50, "Exit Client", () -> System.exit(-1));
-    }  
+                */
+    }
+
     private void enterIP() {
         
         
     }
-    
-    
-    
+
     private void startServer() {
         String userName = "Server";
         int port = 9090;
@@ -71,8 +75,6 @@ public class MenuPageJoinServer extends MenuPage {
     }
     
     private void enterNickname() {
-        MyTextInputListener listener = new MyTextInputListener();
-        Gdx.input.getTextInput(listener, "Enter Server IP", "111.111.111.111", "");
         
         //*.emit();      
     }

@@ -27,7 +27,7 @@ public class MenuPageRoot extends MenuPage {
         if (type == Type.MAINMENU) {
             addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel Starten", this::startGame);
             addPageEntry(menuManager, x, y - yStep * (i++), "Join Server", new MenuPageJoinServer(skin, menuManager));
-            
+            addPageEntry(menuManager, x, y - yStep * (i++), "Host Server", new MenuPageHostServer(skin, menuManager));
             
         } else {
             addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Fortsetzen", () -> menuManager.popPage());

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="12">
+ <tileset firstgid="1" source="balls_and_magnets.tsx"/>
+ <tileset firstgid="11" source="Bande_Tileset.tsx"/>
+ <tileset firstgid="26" source="Dummy Gate.tsx"/>
+ <tileset firstgid="82" source="playgroundTileset.tsx"/>
+ <layer name="Kachelebene 1" width="55" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztmEkOwjAMRb0vlRBTYMOwKbBhOA33vwmOREQXTdRm+E6iLt7657V2ZKchogWAlmlAWSZvyXwArIBZ6DwJty2zYzaVuK1/Por+PXCoxG1Pc7+VmmXLM/UauwdTuLnOOpSXql71naUS/BvbfTHkdmROib5zbMwZz8xlhFvHXAtzuzH3zNz6/eKDytjN9HbozJijm2RNmnnMF9Qc5+MWupOg5ri5JokezLMwtxfzHuHW3xFiu+kabyO72XY018yVol9i14LrrDnM5jVkSbih3hRQbhJvCig3iTcFlJtEloRb6Mw4dSdB5emsL3rglY0=
+  </data>
+ </layer>
+</map>

@@ -19,7 +19,7 @@
                 "animation_ball_minus_shadow": "ball_base",
                 "animation_ball_neutral": "ball_neutral",
                 "animation_ball_neutral_shadow": "ball_base",
-                "scale": 0.6
+                "scale": 0.4
             },
             "ballParticles":{
                 "effect": "statedBall",
@@ -28,7 +28,7 @@
             "Movable": {},
             "PhysixBody": {
                 "type": "circle",
-                "size": 30,
+                "size": 20,
                 "density": 5,
                 "friction": 0.2,
                 "restitution": 0.6
@@ -76,11 +76,12 @@
                 "animation_idle_minus": "player_idle_minus",
                 "animation_walk_minus": "player_walk_minus",
                 "initial_state": "idle_plus",
-                "scale": 1.5
+                "scale": 1
             },
             "Movable": {},
             "PhysixBody": {
-                "type": "player"
+                "type": "player",
+                "scale": 0.66
             },
             "Team": {}
         }

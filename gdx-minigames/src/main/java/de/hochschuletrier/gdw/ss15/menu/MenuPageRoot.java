@@ -37,10 +37,22 @@ public class MenuPageRoot extends MenuPage {
         addCenteredButton(menuManager.getWidth() - 80, 54, 100, 40, "Exit", () -> System.exit(-1));
     }
 
-    
+    private void startServer() {
+        String userName = "Server";
+        String mapName = "data/maps/NiceMap.tmx";
+        int port = 9090;
+        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
+    }
+
+    private void joinServer() {
+        String server = "localhost";
+        String userName = "Client";
+        int port = 9090;
+        JoinServerEvent.emit(server, port, userName);
+    }
 
     private void startGame() {
-        TestGameEvent.emit();
+        TestGameEvent.emit("data/maps/NiceMap.tmx");
     }
 
     private void stopGame() {

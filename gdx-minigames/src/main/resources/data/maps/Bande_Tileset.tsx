@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="Bande_Tileset_korrektur" tilewidth="128" tileheight="128" tilecount="15">
- <image source="Bande_Tileset_korrektur.png" trans="ffffff" width="640" height="384"/>
+<tileset name="Bande_Tileset" tilewidth="64" tileheight="64" tilecount="15">
+ <image source="bande_tileset" trans="ffffff" width="320" height="192"/>
  <tile id="0">
   <properties>
    <property name="solid" value="true"/>

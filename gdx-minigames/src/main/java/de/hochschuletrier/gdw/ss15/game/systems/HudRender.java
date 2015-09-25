@@ -51,7 +51,7 @@ public class HudRender {
         
         // EXAMPLE how to display text for the hud // 
         String tmp = "team"+ teamManager.getScore(Team.BLUE);
-        String tmp1 = "team"+goalblue;
+        String tmp1 = "team"+teamManager.getScore(Team.RED);
         font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);

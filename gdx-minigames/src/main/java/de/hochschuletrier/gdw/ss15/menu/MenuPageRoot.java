@@ -38,8 +38,9 @@ public class MenuPageRoot extends MenuPage {
 
     private void startServer() {
         String userName = "Server";
+        String mapName = "data/maps/NiceMap.tmx";
         int port = 9090;
-        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, userName);
+        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
     }
 
     private void joinServer() {
@@ -50,7 +51,7 @@ public class MenuPageRoot extends MenuPage {
     }
 
     private void startGame() {
-        TestGameEvent.emit();
+        TestGameEvent.emit("data/maps/NiceMap.tmx");
     }
 
     private void stopGame() {

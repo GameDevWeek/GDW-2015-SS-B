@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ss15;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.loaders.BitmapFontLoader.BitmapFontParameter;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
@@ -19,17 +21,20 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
-import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundInstance;
+import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
+import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
+import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.StateBasedGame;
 import de.hochschuletrier.gdw.commons.gdx.state.transition.SplitHorizontalTransition;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.commons.gdx.utils.GdxResourceLocator;
 import de.hochschuletrier.gdw.commons.gdx.utils.KeyUtil;
+import de.hochschuletrier.gdw.commons.gdx.utils.ScreenUtil;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.utils.ClassUtils;
@@ -38,7 +43,6 @@ import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
-import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.game.TestGame;
 import de.hochschuletrier.gdw.ss15.sandbox.SandboxCommand;
 import de.hochschuletrier.gdw.ss15.states.ConnectingState;
@@ -76,6 +80,7 @@ public class Main extends StateBasedGame
     public static final InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
+    private final Hotkey toggleFullscreen = new Hotkey(()->ScreenUtil.toggleFullscreen(), Input.Keys.ENTER, HotkeyModifier.ALT);
 
     public Main() {
         super(new BaseGameState());
@@ -105,6 +110,7 @@ public class Main extends StateBasedGame
         assetManager.loadAssetList("data/json/images.json", Texture.class, param);
         assetManager.loadAssetList("data/json/sounds.json", Sound.class, null);
         assetManager.loadAssetList("data/json/music.json", Music.class, null);
+        assetManager.loadAssetList("data/json/particleEffects.json", ParticleEffect.class, null);
         assetManager.loadAssetListWithParam("data/json/animations.json", AnimationExtended.class,
                 AnimationExtendedLoader.AnimationExtendedParameter.class);
         BitmapFontParameter fontParam = new BitmapFontParameter();
@@ -148,6 +154,8 @@ public class Main extends StateBasedGame
         DisconnectEvent.register(this);
         CreateServerEvent.register(this);
         JoinServerEvent.register(this);
+        
+        toggleFullscreen.register();
     }
 
     private void onLoadComplete() {
@@ -222,10 +230,10 @@ public class Main extends StateBasedGame
     }
 
     @Override
-    public void onTestGameEvent() {
+    public void onTestGameEvent(String mapName) {
         if (!isTransitioning()) {
             TestGame game = new TestGame();
-            game.init(assetManager, "data/maps/demo.tmx");
+            game.init(assetManager, mapName);
             changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
         }
     }
@@ -238,12 +246,12 @@ public class Main extends StateBasedGame
     }
 
     @Override
-    public void onCreateServerEvent(int port, int maxPlayers, String userName) {
+    public void onCreateServerEvent(int port, int maxPlayers, String mapName, String userName) {
         if (!isTransitioning()) {
             NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
             if (netServer.start(port, maxPlayers)) {
                 TestGame game = new TestGame(netServer, null);
-                game.init(assetManager, "data/maps/demo.tmx");
+                game.init(assetManager, mapName);
                 changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
             }
         }
@@ -269,7 +277,7 @@ public class Main extends StateBasedGame
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-        cfg.title = "LibGDX Test";
+        cfg.title = "Balls of Steel";
         cfg.width = WINDOW_WIDTH;
         cfg.height = WINDOW_HEIGHT;
         cfg.useGL30 = false;

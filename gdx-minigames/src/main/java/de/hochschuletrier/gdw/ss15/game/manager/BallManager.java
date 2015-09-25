@@ -16,6 +16,7 @@ import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
@@ -125,6 +126,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     public void onShootEvent(Entity entityFrom, Vector2 direction) {
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
+            SoundEvent.emit("ball_shot", entityFrom);
             player.hasBall = false;
             PositionComponent pos = ComponentMappers.position.get(entityFrom);
             TeamComponent team = ComponentMappers.team.get(entityFrom);

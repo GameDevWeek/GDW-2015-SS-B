@@ -53,8 +53,8 @@ public class InputKeyboard implements InputProcessor {
 		 * 	2: middle mouse button 
 		 */
 		switch (button) {
-			case 0: InputPuffer.pull = true; break;
-			case 1: InputPuffer.push = true; break;
+			case 0: InputPuffer.push = true; break;
+			case 1: InputPuffer.pull = true; break;
 		}
 		return false;
 	}
@@ -62,7 +62,7 @@ public class InputKeyboard implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		switch (button) {
-			case 0: InputPuffer.pull = false; break;
+			case 1: InputPuffer.pull = false; break;
 		}
 		return false;
 	}

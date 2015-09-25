@@ -1,7 +1,7 @@
 {
     "textStyles" : {
-        "title": { "color": "FF8C00", "font": "verdana_32", "align": "left" },
-        "text": { "color": "FFFFFF", "font": "verdana_32", "align": "right" }
+        "title": { "color": "FF0000", "font": "verdana_32", "align": "left" },
+        "text": { "color": "0000FF", "font": "verdana_32", "align": "right" }
     },
     
     "paths" : {
@@ -24,8 +24,8 @@
         "Gamename": {
             "type": "linear",
             "destinations": [
-                {"x": 400, "y": 120, "speed": 25 },
-                {"x": 400, "y": 700, "speed": 25 }
+                {"x": 350, "y": 120, "speed": 25 },
+                {"x": 350, "y": 700, "speed": 25 }
             ]
         },
         
@@ -84,7 +84,7 @@
             "time": 0,
             "items" : [
                 { "type": "text", "path" : "GDW", "style" : "title", "text": "Game Development Week", "delay": "0" },
-                { "type": "text", "path" : "Gamename", "style" : "title", "text": "Magnetball", "delay": "1000" },
+                { "type": "text", "path" : "Gamename", "style" : "title", "text": "BALLS OF STEEL", "delay": "1000" },
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Organisation", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Santo Pfingsten", "delay": "1100" },

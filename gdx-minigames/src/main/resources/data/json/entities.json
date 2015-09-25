@@ -91,10 +91,6 @@
         "components": {
             "PlayerSpawn": {},
             "Position": {},
-            "Texture": {
-                "texture": "p_spawn_dummy",
-                "scale": 0.9
-            },
             "Team": {}
         }
     },

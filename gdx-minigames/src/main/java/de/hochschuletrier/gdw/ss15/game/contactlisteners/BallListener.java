@@ -26,7 +26,7 @@ public class BallListener extends PhysixContactAdapter {
         if (otherEntity != null) {
             if (ComponentMappers.magneticField.has(otherEntity)) {
                 ComponentMappers.magneticInfluence.get(myEntity).magneticFields.add(otherEntity);
-            } else if (!myEntity.isScheduledForRemoval()) {
+            } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
                 PlayerComponent player = ComponentMappers.player.get(otherEntity);
                 if (player != null) {
                     player.hasBall = true;

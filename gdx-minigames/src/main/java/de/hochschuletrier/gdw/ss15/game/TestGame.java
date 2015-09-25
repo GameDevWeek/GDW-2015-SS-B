@@ -3,7 +3,6 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -13,7 +12,6 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
-import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
@@ -25,7 +23,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.WeaponSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.PullSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -106,7 +104,7 @@ public class TestGame extends AbstractGame {
         super.addSystems();
         engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MovementSystem(1));
-        engine.addSystem(new WeaponSystem(3));
+        engine.addSystem(new PullSystem(3));
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(2));
         
@@ -126,7 +124,7 @@ public class TestGame extends AbstractGame {
     protected void addContactListeners(PhysixComponentAwareContactListener contactListener) {
         contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
-        contactListener.addListener(BallComponent.class, new BallListener());
+        contactListener.addListener(BallComponent.class, new BallListener(engine));
     }
 
     private void setupPhysixWorld() {

@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.systems.network;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -20,6 +21,22 @@ public class NetClientSendInputSystem extends IteratingSystem implements PullEve
     public NetClientSendInputSystem(NetClientSimple netClient) {
         super(Family.all(LocalPlayerComponent.class).get(), 0);
         this.netClient = netClient;
+    }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        
+        ShootEvent.register(this);
+        PullEvent.register(this);
+    }
+
+    @Override
+    public void removedFromEngine(Engine engine) {
+        super.removedFromEngine(engine);
+        
+        ShootEvent.unregister(this);
+        PullEvent.unregister(this);
     }
 
     @Override

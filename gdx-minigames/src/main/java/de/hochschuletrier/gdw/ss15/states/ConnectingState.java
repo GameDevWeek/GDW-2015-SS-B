@@ -32,7 +32,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
 
     private final Main main;
     private final AssetManagerX assetManager;
-    private Status status = Status.CONNECTING;
+    private Status status = Status.DISCONNECTED;
     private TestGame game;
     private final NetClientSimple netClient = new NetClientSimple(DatagramFactory.POOL);
     private NetConnection serverConnection;
@@ -50,7 +50,7 @@ public class ConnectingState extends BaseGameState implements NetDatagramHandler
     }
 
     public boolean isSuccess() {
-        return status != null;
+        return status != Status.DISCONNECTED;
     }
 
     public boolean checkForDisconnect() {

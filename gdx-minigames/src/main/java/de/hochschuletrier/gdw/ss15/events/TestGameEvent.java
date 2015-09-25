@@ -5,15 +5,15 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class TestGameEvent {
 
     public static interface Listener {
-        void onTestGameEvent();
+        void onTestGameEvent(String mapName);
     }
 
     private static final SnapshotArray<Listener> listeners = new SnapshotArray();
 
-    public static void emit() {
+    public static void emit(String mapName) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener)items[i]).onTestGameEvent();
+            ((Listener)items[i]).onTestGameEvent(mapName);
         }
         listeners.end();
     }

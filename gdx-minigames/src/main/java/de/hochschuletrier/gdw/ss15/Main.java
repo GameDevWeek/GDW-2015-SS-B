@@ -222,10 +222,10 @@ public class Main extends StateBasedGame
     }
 
     @Override
-    public void onTestGameEvent() {
+    public void onTestGameEvent(String mapName) {
         if (!isTransitioning()) {
             TestGame game = new TestGame();
-            game.init(assetManager, "data/maps/demo.tmx");
+            game.init(assetManager, mapName);
             changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
         }
     }
@@ -238,12 +238,12 @@ public class Main extends StateBasedGame
     }
 
     @Override
-    public void onCreateServerEvent(int port, int maxPlayers, String userName) {
+    public void onCreateServerEvent(int port, int maxPlayers, String mapName, String userName) {
         if (!isTransitioning()) {
             NetServerSimple netServer = new NetServerSimple(DatagramFactory.POOL);
             if (netServer.start(port, maxPlayers)) {
                 TestGame game = new TestGame(netServer, null);
-                game.init(assetManager, "data/maps/demo.tmx");
+                game.init(assetManager, mapName);
                 changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
             }
         }

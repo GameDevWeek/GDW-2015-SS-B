@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
+import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 
 /**
  * Not a system but must be called every frame, so it is close to a System ;)
@@ -23,6 +25,9 @@ public class HudRender {
     private BitmapFont font;
     private int goalred = 0;
     private int goalblue = 0;
+    
+    private TeamManager teamManager = new TeamManager();
+    
     
     public HudRender(SmoothCamera camera) {
     	
@@ -45,12 +50,12 @@ public class HudRender {
         
         
         // EXAMPLE how to display text for the hud // 
-        String tmp = "team"+goalred;
+        String tmp = "team"+ teamManager.getScore(Team.BLUE);
         String tmp1 = "team"+goalblue;
         font.setColor(Color.RED);
-        font.draw(DrawUtil.batch, tmp, 100, 50);
+        font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);
-        font.draw(DrawUtil.batch, tmp1, 500, 50);
+        font.draw(DrawUtil.batch, tmp1,Gdx.graphics.getWidth()-200, 50);
 //        font.draw(DrawUtil.batch,"" )
         
     }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="64" tileheight="64" nextobjectid="27">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="64" tileheight="64" nextobjectid="31">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
  <tileset firstgid="13" source="balls_and_magnets.tsx"/>
  <tileset firstgid="23" source="tileset_ground_SpawnsAndArea.tsx"/>
+ <tileset firstgid="35" source="Goal_Spawn.tsx"/>
  <layer name="Hintergrund" width="31" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftXvA7Ka3vcj2Dya7FUnQL0WCWqVB7m962j1S89hItpsTiLnoiLmh9gIAHK8LCg==
+   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftRtstwod7FRGsxtkrzqd/a0GtR9ktw6d7dbGYbciCWZIkaBWiQi76e1vQzrbbcCAmt4GIp0Phvw9Eu3mBGIuOmJuqL0ADvQM9w==
   </data>
  </layer>
  <objectgroup name="Tore">
@@ -15,10 +16,6 @@
   <object id="11" gid="17" x="448" y="768"/>
   <object id="12" gid="16" x="960" y="256"/>
   <object id="13" gid="17" x="448" y="256"/>
-  <object id="14" gid="18" x="1728" y="320"/>
-  <object id="15" gid="18" x="1728" y="704"/>
-  <object id="16" gid="19" x="192" y="320"/>
-  <object id="17" gid="19" x="192" y="704"/>
   <object id="18" x="44" y="316" width="42" height="323">
    <properties>
     <property name="Entitytype" value="goal"/>
@@ -34,5 +31,9 @@
   <object id="24" gid="26" x="960" y="512"/>
   <object id="25" gid="33" x="256" y="512"/>
   <object id="26" gid="34" x="1664" y="512"/>
+  <object id="27" gid="35" x="1728" y="320"/>
+  <object id="28" gid="35" x="1728" y="704"/>
+  <object id="29" gid="36" x="128" y="320"/>
+  <object id="30" gid="36" x="128" y="704"/>
  </objectgroup>
 </map>

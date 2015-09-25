@@ -4,7 +4,7 @@
  <tileset firstgid="8" source="playgroundTileset.tsx"/>
  <tileset firstgid="20" source="Bande_Tileset.tsx"/>
  <tileset firstgid="29" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
-  <image source="../../../../../../../Magnetball/Karten/Dummy Gate.png" trans="ffffff" width="512" height="384"/>
+  <image source="Dummy Gate.png" trans="ffffff" width="512" height="384"/>
  </tileset>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">

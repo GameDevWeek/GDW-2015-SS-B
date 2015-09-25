@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.SmoothCamera;
@@ -14,12 +15,15 @@ import de.hochschuletrier.gdw.ss15.Main;
  * @author meiert
  *
  */
+
 public class HudRender {
     
     private SmoothCamera camera;
     private BitmapFont font;
     
     public HudRender(SmoothCamera camera) {
+    	
+       
         this.camera = camera;
     }
     
@@ -31,10 +35,16 @@ public class HudRender {
          * have not found a way to clear a bitmapFont so every frame a new one is needed
          */
         font = new BitmapFont(true);
+       
+        
         
         // EXAMPLE how to display text for the hud // 
-        font.draw(DrawUtil.batch, "Team I", 100, 50);
-        font.draw(DrawUtil.batch, "Team II", 500, 50);
+        String tmp = "team"+"var";
+        font.setColor(Color.RED);
+        font.draw(DrawUtil.batch, tmp, 100, 50);
+        font.setColor(Color.BLUE);
+        font.draw(DrawUtil.batch, tmp, 500, 50);
+//        font.draw(DrawUtil.batch,"" )
         
     }
 }

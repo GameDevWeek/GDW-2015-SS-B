@@ -103,11 +103,7 @@
         "components": {
             "Position": {},
             "Team": {},
-            "BallSpawn": {},
-            "Texture": {
-                "texture": "p_spawn_dummy",
-                "scale": 0.9
-            }
+            "BallSpawn": {}
         }
     },
     "magnet_plus": {

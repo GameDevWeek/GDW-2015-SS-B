@@ -39,6 +39,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.HudRender;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
@@ -50,6 +51,8 @@ public class TestGame extends AbstractGame {
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(
             engine);
     private final TeamManager teamManager = new TeamManager();
+
+    private HudRender hudRender;
 
     private BallManager ballManager;
 
@@ -63,6 +66,8 @@ public class TestGame extends AbstractGame {
         if (netClient != null)
             factoryParam.allowPhysics = false;
     }
+    
+
     private void initLoadMap(String mapName) {
         map = loadMap(mapName);
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
@@ -92,12 +97,12 @@ public class TestGame extends AbstractGame {
             netClient
                     .setListener(engine.getSystem(NetClientUpdateSystem.class));
         }
-        
+
         if(netClient == null) {
             /* TEST SPIELER ERSTELLEN */
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
- 
+
             ChangeGameStateEvent.emit(GameState.GAME);
         }
     }
@@ -108,6 +113,13 @@ public class TestGame extends AbstractGame {
     }
 
     @Override
+    protected void addSystems() {
+        super.addSystems();
+        engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
+        engine.addSystem(new MovementSystem(1));
+        engine.addSystem(new PullSystem(3));
+        engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
+        engine.addSystem(new MagneticForceSystem(2));
     protected void addSystems(AssetManagerX assetManager) {
         super.addSystems(assetManager);
         engine.addSystem(new PlayerAnimationSystem(
@@ -132,6 +144,14 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS, assetManager));
         
         /* Camera System muss schon existieren */
+        engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
+        hudRender = new HudRender(engine.getSystem(LimitedSmoothCameraSystem.class).getCamera());
+    }
+
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+        hudRender.update();
         engine.addSystem(new InputBallSystem(0, engine.getSystem(
                 LimitedSmoothCameraSystem.class).getCamera()));
     }

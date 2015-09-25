@@ -23,6 +23,7 @@ public class ChangeGameStateEvent {
     public static void register(Listener listener) {
         listeners.add(listener);
     }
+  
 
     public static void unregister(Listener listener) {
         listeners.removeValue(listener, true);
@@ -32,3 +33,4 @@ public class ChangeGameStateEvent {
         listeners.clear();
     }
 }
+

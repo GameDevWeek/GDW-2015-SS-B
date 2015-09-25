@@ -25,9 +25,10 @@ public class HudRender {
     private BitmapFont font;
     private int goalred = 0;
     private int goalblue = 0;
+
     private int playTime ;
     private int oldTime;
-
+    
     private TeamManager teamManager = new TeamManager();
     
     public HudRender(SmoothCamera camera) {

@@ -92,25 +92,17 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addPlayer(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent playerBody = engine.createComponent(PhysixBodyComponent.class);
-        PhysixBodyDef playerDef = new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem).position(param.x, param.y).fixedRotation(true);
+        PhysixBodyDef playerDef = new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem)
+                .position(param.x, param.y).fixedRotation(true).linearDamping(1).angularDamping(1);
 
         playerBody.init(playerDef, physixSystem, entity);
 
         float scale = properties.getFloat("scale", 1);
-        PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f).shapeCircle(40.0f * scale);
-        playerBody.createFixture(fixtureDef);
-
-        fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f).shapeCircle(40.0f * scale, new Vector2(-5, 45).scl(scale));
-        playerBody.createFixture(fixtureDef);
-
-        fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f).shapeCircle(20.0f * scale, new Vector2(50, 55).scl(scale));
-        playerBody.createFixture(fixtureDef);
-
-        fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f).shapeCircle(20.0f * scale, new Vector2(-50, 45).scl(scale));
-        playerBody.createFixture(fixtureDef);
-
-        fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f).shapeCircle(30.0f * scale, new Vector2(0, -50).scl(scale));
-        playerBody.createFixture(fixtureDef);
+        PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(100).friction(0.0f).restitution(0.0f);
+        playerBody.createFixture(fixtureDef.shapeCircle(26.0f * scale));
+        playerBody.createFixture(fixtureDef.shapeCircle(13.0f * scale, new Vector2(30, 8).scl(scale)));
+        playerBody.createFixture(fixtureDef.shapeCircle(13.0f * scale, new Vector2(-30, 8).scl(scale)));
+        playerBody.createFixture(fixtureDef.shapeCircle(20.0f * scale, new Vector2(0, -40).scl(scale)));
 
         entity.add(playerBody);
     }

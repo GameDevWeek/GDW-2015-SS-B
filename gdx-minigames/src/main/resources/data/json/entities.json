@@ -81,7 +81,7 @@
             "Movable": {},
             "PhysixBody": {
                 "type": "player",
-                "scale": 0.66
+                "scale": 1
             },
             "Team": {}
         }

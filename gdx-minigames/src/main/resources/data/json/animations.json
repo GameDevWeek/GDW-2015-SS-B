@@ -50,7 +50,7 @@
     
     "player_idle_minus": {
         "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
-        "frames" : 2,
+        "frames" : 1,
         "frameDuration": [0.5],
         "playType" : "LOOP",
         "columns": 16,
@@ -68,7 +68,7 @@
 
     "player_idle_plus": {
         "filename": "data/animations/character_animation_Spreadsheet_red.png",
-        "frames" : 2,
+        "frames" : 1,
         "frameDuration": [0.5],
         "playType" : "LOOP",
         "columns": 16,

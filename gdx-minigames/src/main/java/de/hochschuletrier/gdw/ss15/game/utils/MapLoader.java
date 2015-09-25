@@ -93,7 +93,10 @@ public class MapLoader {
                 // / wich needs to be already existing when loading other
                 // Objects
                 for (LayerObject obj : layer.getObjects()) {
-                    String entitytype = obj.getProperty("Entitytype", null).toLowerCase();
+                    String entitytype = obj.getProperty("Entitytype", null);
+                    if(entitytype == null)
+                        continue;
+                    entitytype = entitytype.toLowerCase();
                     if (entitytype != null) {
                         
                         int tmp = obj.getIntProperty("Team", -1);
@@ -121,7 +124,6 @@ public class MapLoader {
                             	}
                             case "playerspawn":
                             case "ballspawn":
-                            
                             	createEntity(engine, entitytype, obj.getX() + obj.getWidth() / 2.0f,
                             			obj.getY() + obj.getHeight() / 2.0f, team
                             			); 

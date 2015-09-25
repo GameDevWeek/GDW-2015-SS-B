@@ -10,10 +10,7 @@ import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import de.hochschuletrier.gdw.ss15.game.components.TextureComponent;
 
-/**
- *
- * @author goertzm <goertzm at hs-trier.de>
- */
+
 public class TextureComponentFactory extends ComponentFactory<EntityFactoryParam> {
 
     @Override

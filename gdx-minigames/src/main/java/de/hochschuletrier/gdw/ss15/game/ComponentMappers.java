@@ -1,18 +1,17 @@
-﻿package de.hochschuletrier.gdw.ss15.game;
+package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.ComponentMapper;
-
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
-import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;

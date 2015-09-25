@@ -59,7 +59,7 @@ public class HudRender {
         font.setColor(Color.BLUE);
         font.draw(DrawUtil.batch, tmp1,Gdx.graphics.getWidth()-200, 50);
         font.setColor(Color.GREEN);
-        font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2, 50);
+        font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2-100, 50);
 //        font.draw(DrawUtil.batch,"" )
         
     }

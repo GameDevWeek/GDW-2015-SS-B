@@ -1,4 +1,4 @@
-{
+﻿{
     "textStyles" : {
         "title": { "color": "FF8C00", "font": "verdana_32", "align": "left" },
         "text": { "color": "FFFFFF", "font": "verdana_32", "align": "right" }
@@ -92,7 +92,7 @@
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Gamelogic", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Thierbach", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Oetzkan", "delay": "1100" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Özkan", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Bennet Pieper", "delay": "1100" },
  
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Input", "delay": "2000" },
@@ -138,26 +138,26 @@
         	"layer": 0,
         	
     		"items": [
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "0" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "1500" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "2000" },
-    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "2000" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "2500" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "2500" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "2500" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "3000" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "3000" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "2500" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "3000" },
-    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "3000" },
-    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "3500" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "3000" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "3500" },
-    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "4000" },
-    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "4000" },
-    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "4000" },
-    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_red", "scale": "1", "oriented": "false", "delay": "4500" },
-    			{ "type": "animation", "path": "animation_4", "resource": "player_walk_blue", "scale": "1", "oriented": "false", "delay": "7000" }
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "0" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "1500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3500" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4500" },
+    			{ "type": "animation", "path": "animation_4", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "7000" }
     			
     			]
     		}

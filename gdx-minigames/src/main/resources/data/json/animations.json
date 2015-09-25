@@ -1,12 +1,4 @@
 {
-    "walking": {
-        "filename": "data/animations/walking.png",
-        "frames" : 7,
-        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-        "playType" : "LOOP",
-        "columns": 7,
-        "rows" : 1
-    },
     "ball": {
         "filename": "data/animations/ball.png",
         "frames" : 2,
@@ -56,6 +48,7 @@
         "rows" : 1
     },
     
+<<<<<<< HEAD
     "player_walk_blue": {
         "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
         "frames" : 17,
@@ -71,6 +64,41 @@
         "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
         "playType" : "LOOP",
         "columns": 9,
+=======
+    "player_idle_minus": {
+        "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
+        "frames" : 2,
+        "frameDuration": [0.5],
+        "playType" : "LOOP",
+        "columns": 16,
+        "rows" : 1
+    },
+    
+    "player_walk_minus": {
+        "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
+        "frames" : 16,
+        "frameDuration": [0.05],
+        "playType" : "LOOP",
+        "columns": 16,
+        "rows" : 1
+    },
+
+    "player_idle_plus": {
+        "filename": "data/animations/character_animation_Spreadsheet_red.png",
+        "frames" : 2,
+        "frameDuration": [0.5],
+        "playType" : "LOOP",
+        "columns": 16,
+        "rows" : 1
+    },
+
+    "player_walk_plus": {
+        "filename": "data/animations/character_animation_Spreadsheet_red.png",
+        "frames" : 16,
+        "frameDuration": [0.05],
+        "playType" : "LOOP",
+        "columns": 16,
+>>>>>>> b80ac7f23c6a693834519c495c6066f942ab95fd
         "rows" : 1
     }
     

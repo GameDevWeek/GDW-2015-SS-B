@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 
 public class TriggerListener extends PhysixContactAdapter {
 
+    @Override
     public void beginContact(PhysixContact contact) {
         PhysixBodyComponent otherComponent = contact.getOtherComponent();
         if (otherComponent != null) {

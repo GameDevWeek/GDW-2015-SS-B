@@ -61,13 +61,13 @@ public class RenderBallAtPlayerSystem extends IteratingSystem  {
         TeamComponent team = ComponentMappers.team.get(entity);
         this.rotation += deltaTime * speed;
         
-        drawTexture(ball_base, pos.x,pos.y,0.6f);
+        drawTexture(ball_base, pos.x,pos.y,0.6f, Team.BLUE);
         
   
         if(team.team == Team.BLUE){
-             drawTexture(ball_blue, pos.x,pos.y,0.6f);
+             drawTexture(ball_blue, pos.x,pos.y,0.6f, Team.BLUE);
         }else{
-            drawTexture(ball_red, pos.x,pos.y,0.6f);
+            drawTexture(ball_red, pos.x,pos.y,0.6f, Team.BLUE);
         }
         
          

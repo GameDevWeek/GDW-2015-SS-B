@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 
 public class BallListener extends PhysixContactAdapter {
@@ -30,7 +31,8 @@ public class BallListener extends PhysixContactAdapter {
                 ComponentMappers.magneticInfluence.get(myEntity).magneticFields.add(otherEntity);
             } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
                 PlayerComponent player = ComponentMappers.player.get(otherEntity);
-                if (player != null) {
+                NotReceptiveComponent notReceptive=ComponentMappers.notReceptive.get(otherEntity);
+                if (player != null&&notReceptive==null) {
                     SoundEvent.emit("ball_pickup", otherEntity);
                     player.hasBall = true;
                     engine.removeEntity(myEntity);

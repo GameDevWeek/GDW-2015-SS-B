@@ -68,6 +68,8 @@ public class InputBallSystem extends IteratingSystem {
             if (physBody != null)
                 physBody.setAngle(input.view.angleRad()
                         + ((float) Math.PI / 2.0f));
+        }else{
+            System.out.println("sollte noch gstunnt sein und keine bewegung");
         }
     }
 }

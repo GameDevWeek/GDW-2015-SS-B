@@ -60,11 +60,11 @@ public class PlayerSpawnManager {
             if (spawn.playerId == entityId) {
                 teamCounts[team.team.ordinal()]--;
                 spawn.playerId = 0;
-                engine.removeEntity(entity);
                 
                 PlayerComponent player = ComponentMappers.player.get(entity);
                 if(player.hasBall)
                     BallOwnershipChangedEvent.emit(null);
+                engine.removeEntity(entity);
                 return;
             }
         }

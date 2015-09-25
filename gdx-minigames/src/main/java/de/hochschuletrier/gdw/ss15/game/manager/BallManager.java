@@ -1,4 +1,4 @@
-﻿ackage de.hochschuletrier.gdw.ss15.game.manager;
+package de.hochschuletrier.gdw.ss15.game.manager;
 
 import java.awt.font.ImageGraphicAttribute;
 import java.util.ArrayList;

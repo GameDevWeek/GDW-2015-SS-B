@@ -25,21 +25,13 @@ public class HudRender {
     private BitmapFont font;
     private int goalred = 0;
     private int goalblue = 0;
-<<<<<<< HEAD
 
-    private TeamManager teamManager = new TeamManager();
-
-
-=======
     private double playTime ;
     private double oldTime;
 
     
     private TeamManager teamManager = new TeamManager();
     
-    
-    
->>>>>>> c694c801e570532021dba09dd20f2ceb26aca0d3
     public HudRender(SmoothCamera camera) {
 
 

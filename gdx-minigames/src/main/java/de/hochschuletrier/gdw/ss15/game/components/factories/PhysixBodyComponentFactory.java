@@ -55,7 +55,6 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addMagnet(EntityFactoryParam param, Entity entity,
 			SafeProperties properties) {
-    	System.out.println("erstelle MagnetBody als Sensor");
     	
 //       	PhysixBodyComponent magnetBody = getBodyComponent(param, entity);
 //        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyType.StaticBody, physixSystem).position(param.x, param.y).fixedRotation(true);

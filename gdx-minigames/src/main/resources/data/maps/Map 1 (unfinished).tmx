@@ -2,13 +2,75 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="26">
  <tileset firstgid="1" source="balls_and_magnets.tsx"/>
  <tileset firstgid="8" source="playgroundTileset.tsx"/>
- <tileset firstgid="20" source="Bande_Tileset.tsx"/>
- <tileset firstgid="29" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
+ <tileset firstgid="20" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
   <image source="Dummy Gate.png" trans="ffffff" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="32" name="Bande_Tileset_korrektur" tilewidth="128" tileheight="128" tilecount="15">
+  <image source="Bande_Tileset_korrektur.png" trans="ffffff" width="640" height="384"/>
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1rEOwjAMhGHvVjegAgq0QEvf/wm5SKmIKsYMvuiGb/cvS4ndzBwOcGzAKfeUeugacFYbJbVxUhsntXEq27Z7xAPMVYPb7z5J+3rAGGCuGm5wz/tLbS94B5irhgmeaqOzb/vAGmCuGmZYctsFrtbWO5l6Bmv7f1MbD7VxUhsntXH617bdJ+zKe+QLnCVTJA==
+   eJzt1rsOwjAQRNHtIzoIz4CDhHgF/v/zmAhHWBHlFjvWFKefKxfexswaSNBX4Jx7ShdYVOCqNkpq46Q2TmrjVLYl+/7n7wC7PLzsd5+M79XCOsAuD0tY5fcb23awD7DLwwa2aqMzbzvCKcAuDwfoctsDnnAPsMvDLfcMVvf/pjYeauOkNk5q4/SvbbpP2JX3yAdavVt4
   </data>
  </layer>
  <objectgroup name="Spawn">

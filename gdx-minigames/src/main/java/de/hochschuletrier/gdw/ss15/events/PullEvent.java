@@ -21,7 +21,7 @@ public class PullEvent {
 	}
 	
 	public static void emitOff(Entity entity) {
-		Object[] items = listeners.begin();
+		Object[] items = listeners.begin();		
 	    for (int i = 0, n = listeners.size; i < n; i++) {
 	    	((Listener)items[i]).onPullEventOff(entity);
 	    }

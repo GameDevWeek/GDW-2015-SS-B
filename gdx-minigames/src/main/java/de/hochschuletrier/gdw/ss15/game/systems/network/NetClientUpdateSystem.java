@@ -12,10 +12,13 @@ import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import java.util.HashMap;
@@ -82,11 +85,15 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     public void handle(MoveDatagram datagram) {
         Entity entity = netEntityMap.get(datagram.getNetId());
         if (entity != null) {
-            PositionComponent position = ComponentMappers.position.get(entity);
-            Vector2 pos = datagram.getPosition();
-            position.x = pos.x;
-            position.y = pos.y;
-            position.rotation = datagram.getRotation();
+            MovableComponent movable = ComponentMappers.movable.get(entity);
+            if(datagram.getPacketId() > movable.packetId) {
+                movable.packetId = datagram.getPacketId();
+                PositionComponent position = ComponentMappers.position.get(entity);
+                Vector2 pos = datagram.getPosition();
+                position.x = pos.x;
+                position.y = pos.y;
+                position.rotation = datagram.getRotation();
+            }
         }
     }
 
@@ -97,4 +104,10 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         }
     }
 
+    public void handle (SoundDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            SoundEvent.emit(datagram.getName(), entity);
+        }
+    }
 }

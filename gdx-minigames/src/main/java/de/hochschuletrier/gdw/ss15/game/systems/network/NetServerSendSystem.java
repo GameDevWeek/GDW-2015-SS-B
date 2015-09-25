@@ -12,13 +12,16 @@ import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 
-public class NetServerSendSystem extends EntitySystem implements EntityListener, ChangeAnimationStateEvent.Listener {
+public class NetServerSendSystem extends EntitySystem implements EntityListener,
+        ChangeAnimationStateEvent.Listener, SoundEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> movables;
@@ -35,6 +38,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         engine.addEntityListener(Family.all(SetupComponent.class).get(), this);
         movables = engine.getEntitiesFor(Family.all(MovableComponent.class, PositionComponent.class, PhysixBodyComponent.class).get());
         ChangeAnimationStateEvent.register(this);
+        SoundEvent.register(this);
     }
 
     @Override
@@ -43,6 +47,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         engine.removeEntityListener(this);
         movables = null;
         ChangeAnimationStateEvent.unregister(this);
+        SoundEvent.unregister(this);
     }
 
     @Override
@@ -65,5 +70,10 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
     @Override
     public void onAnimationStateChangedEvent(EntityAnimationState newState, Entity entity) {
         netServer.broadcastReliable(AnimationStateChangeDatagram.create(entity, newState));
+    }
+
+    @Override
+    public void onSoundEvent(String sound, Entity entity) {
+        netServer.broadcastReliable(SoundDatagram.create(sound, entity));
     }
 }

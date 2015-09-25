@@ -10,8 +10,10 @@ import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
-import de.hochschuletrier.gdw.ss15.game.components.WeaponInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
@@ -39,7 +41,10 @@ public class ComponentMappers {
     public static final ComponentMapper<InputBallComponent> input = ComponentMapper.getFor(InputBallComponent.class);
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<MagneticInfluenceComponent> magneticInfluence = ComponentMapper.getFor(MagneticInfluenceComponent.class);
-    public static final ComponentMapper<WeaponInfluenceComponent> weaponInfluence = ComponentMapper.getFor(WeaponInfluenceComponent.class);
+    public static final ComponentMapper<MagneticFieldComponent> magneticField = ComponentMapper.getFor(MagneticFieldComponent.class);
+    public static final ComponentMapper<BallParticlesComponent> ballParticles = ComponentMapper.getFor(BallParticlesComponent.class);
+    
+    public static final ComponentMapper<MovableComponent> movable = ComponentMapper.getFor(MovableComponent.class);
 
     /* Spawnpunkte für die Spieler */
     public static final ComponentMapper<PlayerSpawnComponent> playerSpawn = ComponentMapper.getFor(PlayerSpawnComponent.class);

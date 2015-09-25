@@ -1,4 +1,6 @@
-﻿
+﻿package de.hochschuletrier.gdw.ss15.game;
+
+
 import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -152,3 +154,4 @@ public class TestGame extends AbstractGame {
         else if(netServer != null)
             netServer.disconnect();
     }
+}

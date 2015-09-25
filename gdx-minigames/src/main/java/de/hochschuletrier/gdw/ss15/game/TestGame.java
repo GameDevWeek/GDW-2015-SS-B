@@ -22,6 +22,7 @@ import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
+import de.hochschuletrier.gdw.ss15.game.systems.BallDropSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
@@ -113,6 +114,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new PullSystem(30));
         engine.addSystem(new GoalShotEventSystem(
                 GameConstants.PRIORITY_ENTITIES));
+        engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(20));
         engine.addSystem(new ReceptiveSystem(5));
 

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="26">
- <tileset firstgid="1" source="balls_and_magnets.tsx"/>
- <tileset firstgid="8" source="playgroundTileset.tsx"/>
- <tileset firstgid="20" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="48">
+ <tileset firstgid="1" source="playgroundTileset.tsx"/>
+ <tileset firstgid="13" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
   <image source="Dummy Gate.png" trans="ffffff" width="512" height="384"/>
  </tileset>
- <tileset firstgid="32" name="Bande_Tileset_korrektur" tilewidth="128" tileheight="128" tilecount="15">
+ <tileset firstgid="25" name="Bande_Tileset_korrektur" tilewidth="128" tileheight="128" tilecount="15">
   <image source="Bande_Tileset_korrektur.png" trans="ffffff" width="640" height="384"/>
   <tile id="0">
    <properties>
@@ -68,69 +67,25 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="40" name="balls_and_magnets" tilewidth="128" tileheight="128" tilecount="10">
+  <image source="balls_and_magnets.png" trans="ffffff" width="640" height="256"/>
+ </tileset>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1rsOwjAQRNHtIzoIz4CDhHgF/v/zmAhHWBHlFjvWFKefKxfexswaSNBX4Jx7ShdYVOCqNkpq46Q2TmrjVLYl+/7n7wC7PLzsd5+M79XCOsAuD0tY5fcb23awD7DLwwa2aqMzbzvCKcAuDwfoctsDnnAPsMvDLfcMVvf/pjYeauOkNk5q4/SvbbpP2JX3yAdavVt4
+   eJzt1j0PgkAQhOEtiJ0giiiYGL/5//+QITnixVhusXOZ4unnzRW3lZlVMMBYgEvqyV1hU4Cb2iipjZPaOKmNU9623iNTgF0ePva9T5b3amAXYJeHLdTp/Za2A3QBdnloYa82Or9tJzgH2OXhCH1qe8ILHgF2ebinnreV/b+pjYfaOKmNk9o4/Wtb7xN2+T0yA9ehMt0=
   </data>
  </layer>
  <objectgroup name="Spawn">
-  <object id="11" gid="7" x="6401.09" y="1792" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="PlayerSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="12" gid="6" x="512" y="1790.91" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="PlayerSpawn"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="13" gid="2" x="3456" y="1792" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Ballspawn"/>
-    <property name="Team" value=""/>
-   </properties>
-  </object>
-  <object id="14" gid="1" x="1536" y="1790.91" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Ballspawn"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="15" gid="3" x="5376" y="1792" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Ballspawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="21" gid="4" x="769.091" y="1280.24" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="23" gid="4" x="3457.09" y="636.97" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="24" gid="4" x="4862.91" y="2689.94" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
+  <object id="47" gid="48" x="3712.67" y="1664" width="128" height="128"/>
  </objectgroup>
  <objectgroup name="Gate">
-  <object id="9" type="Gate" x="96" y="1416" width="260" height="616">
+  <object id="9" type="Gate" x="96" y="1372.73" width="252.485" height="703.03">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="10" type="Gate" x="6688" y="1416" width="248" height="616">
+  <object id="10" type="Gate" x="6688" y="1375.76" width="248" height="703.03">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="1"/>
@@ -141,23 +96,5 @@
   <properties>
    <property name="Entitytype" value=""/>
   </properties>
-  <object id="16" gid="5" x="6144" y="2307.03" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="18" gid="5" x="2046.06" y="896" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="20" gid="5" x="3457.09" y="2944" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

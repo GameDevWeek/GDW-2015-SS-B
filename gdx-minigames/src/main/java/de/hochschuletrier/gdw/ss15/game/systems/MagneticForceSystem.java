@@ -16,7 +16,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class MagneticForceSystem extends IteratingSystem {
 	/*
-	 * Size of Magnets can be changed in jason/entities (line 123(range) & 128(sensor))
+	 * Size of Magnets can be changed in jason/entities (line 123(range) & 128(sensor)) you have to change both values.
 	 */
     private final float force = 75;
     

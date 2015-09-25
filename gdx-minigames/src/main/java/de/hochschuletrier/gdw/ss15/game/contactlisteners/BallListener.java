@@ -2,9 +2,11 @@ package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 
@@ -28,6 +30,7 @@ public class BallListener extends PhysixContactAdapter {
             } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
                 PlayerComponent player = ComponentMappers.player.get(otherEntity);
                 if (player != null) {
+                    SoundEvent.emit("ball_pickup", otherEntity);
                     player.hasBall = true;
                     engine.removeEntity(myEntity);
                 }

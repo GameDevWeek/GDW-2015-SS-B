@@ -8,10 +8,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
+
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
-
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
@@ -21,6 +21,7 @@ import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
@@ -128,6 +129,15 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
         if(player != null && player.hasBall) {
             SoundEvent.emit("ball_shot", entityFrom);
             player.hasBall = false;
+            //füge "stunning" hinzu/kann den Ball nicht mehr aufnehmen 
+            final float stunningTime= 0.4f;
+            NotReceptiveComponent notReceptive = engine
+                    .createComponent(NotReceptiveComponent.class);
+            notReceptive.remainingTime = stunningTime;
+            notReceptive.time = stunningTime;
+            notReceptive.isStunned = false;
+            entityFrom.add(notReceptive);
+            
             PositionComponent pos = ComponentMappers.position.get(entityFrom);
             TeamComponent team = ComponentMappers.team.get(entityFrom);
             InputBallComponent input = ComponentMappers.input.get(entityFrom);

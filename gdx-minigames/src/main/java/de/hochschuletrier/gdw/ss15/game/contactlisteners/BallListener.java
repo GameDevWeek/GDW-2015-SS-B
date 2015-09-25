@@ -36,6 +36,8 @@ public class BallListener extends PhysixContactAdapter {
                     SoundEvent.emit("ball_pickup", otherEntity);
                     player.hasBall = true;
                     engine.removeEntity(myEntity);
+                }else if (player != null&&notReceptive!=null) {
+                    System.out.println("§würde mal sage test");
                 }
             }
         }

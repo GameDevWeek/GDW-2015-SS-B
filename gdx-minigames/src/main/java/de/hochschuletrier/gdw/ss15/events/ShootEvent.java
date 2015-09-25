@@ -12,7 +12,6 @@ public class ShootEvent {
 	private static final SnapshotArray<Listener> listeners = new SnapshotArray<Listener>();
 
 	public static void emit(Entity entity, Vector2 direction) {
-		System.out.println("event schuss");
 		Object[] items = listeners.begin();
 	    for (int i = 0, n = listeners.size; i < n; i++) {
 	    	((Listener)items[i]).onShootEvent(entity, direction);

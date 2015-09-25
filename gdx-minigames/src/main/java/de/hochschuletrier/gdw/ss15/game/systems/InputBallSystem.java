@@ -59,6 +59,7 @@ public class InputBallSystem extends IteratingSystem {
             }
 
             if (InputPuffer.push) {
+                
                 ShootEvent.emit(entity, input.view);
                 InputPuffer.push = false;
             }

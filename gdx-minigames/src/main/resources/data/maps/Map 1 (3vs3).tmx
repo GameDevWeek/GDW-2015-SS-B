@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="66">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
- <tileset firstgid="13" name="Dummy Gate" tilewidth="128" tileheight="128" tilecount="12">
-  <image source="Dummy Gate.png" trans="ffffff" width="512" height="384"/>
- </tileset>
+ <tileset firstgid="13" source="Dummy Gate.tsx"/>
  <tileset firstgid="25" source="Bande_Tileset.tsx"/>
  <tileset firstgid="40" name="balls_and_magnets" tilewidth="128" tileheight="128" tilecount="10">
   <image source="balls_and_magnets.png" trans="ffffff" width="640" height="256"/>

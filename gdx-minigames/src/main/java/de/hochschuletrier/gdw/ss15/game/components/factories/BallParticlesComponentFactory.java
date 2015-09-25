@@ -7,28 +7,30 @@
 package de.hochschuletrier.gdw.ss15.game.components.factories;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
-import de.hochschuletrier.gdw.ss15.game.components.ParticleEmitterComponent;
+import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
+import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 
 /**
  *
  * @author rftpool11
  */
-public class ParticleEmitterComponentFactory extends ComponentFactory<EntityFactoryParam>{
+public class BallParticlesComponentFactory extends ComponentFactory<EntityFactoryParam>{
 
     @Override
     public String getType() {
-        return("ParticleEmitter");
+        return("ballParticles");
     }
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
-        ParticleEmitterComponent component = engine.createComponent(ParticleEmitterComponent.class);
-        component.effect = assetManager.getParticleEffect(properties.getString("effect"));
-        component.effect.start();
-        
+        BallParticlesComponent component = engine.createComponent(BallParticlesComponent.class);
+        component.currentState = EntityAnimationState.BALL_NEUTRAL;
+        component.effect = new ParticleEffect(assetManager.getParticleEffect(properties.getString("effect")));
         entity.add(component);
         
     }

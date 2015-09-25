@@ -22,7 +22,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.ParticleRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.BallParticlesRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
@@ -79,7 +79,7 @@ public abstract class AbstractGame {
         engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
         engine.addSystem(new LimitedSmoothCameraSystem(GameConstants.PRIORITY_CAMERA));
         engine.addSystem(new SoundSystem(GameConstants.PRIORITY_CAMERA));
-        engine.addSystem(new ParticleRenderSystem(GameConstants.PRIORITY_ANIMATIONS + 2));
+        engine.addSystem(new BallParticlesRenderSystem(GameConstants.PRIORITY_ANIMATIONS - 1));
        
     }
 

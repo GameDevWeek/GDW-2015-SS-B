@@ -1,4 +1,4 @@
-﻿{
+{
     "textStyles" : {
         "title": { "color": "FF8C00", "font": "verdana_32", "align": "left" },
         "text": { "color": "FFFFFF", "font": "verdana_32", "align": "right" }

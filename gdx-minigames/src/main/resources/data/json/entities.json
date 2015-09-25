@@ -21,6 +21,10 @@
                 "animation_ball_neutral_shadow": "ball_base",
                 "scale": 0.6
             },
+            "ballParticles":{
+                "effect": "statedBall",
+                "startState": "neutral"
+            },
             "Movable": {},
             "PhysixBody": {
                 "type": "circle",

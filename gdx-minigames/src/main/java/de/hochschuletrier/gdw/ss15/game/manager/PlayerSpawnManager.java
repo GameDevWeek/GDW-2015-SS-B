@@ -53,7 +53,8 @@ public class PlayerSpawnManager {
         return null;
     }
 
-    public void freePlayer(long entityId) {
+    public void freePlayer(Entity playerEntity) {
+        long entityId = playerEntity.getId();
         for (Entity entity : spawnPoints) {
             PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
             TeamComponent team = ComponentMappers.team.get(entity);
@@ -61,10 +62,10 @@ public class PlayerSpawnManager {
                 teamCounts[team.team.ordinal()]--;
                 spawn.playerId = 0;
                 
-                PlayerComponent player = ComponentMappers.player.get(entity);
+                PlayerComponent player = ComponentMappers.player.get(playerEntity);
                 if(player.hasBall)
                     ChangeBallOwnershipEvent.emit(null);
-                engine.removeEntity(entity);
+                engine.removeEntity(playerEntity);
                 return;
             }
         }

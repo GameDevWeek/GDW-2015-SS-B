@@ -91,7 +91,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void onDisconnect(NetConnection connection) {
         Entity playerEntity = (Entity) connection.getAttachment();
         if (playerEntity != null) {
-            playerSpawns.freePlayer(playerEntity.getId());
+            playerSpawns.freePlayer(playerEntity);
         }
     }
 

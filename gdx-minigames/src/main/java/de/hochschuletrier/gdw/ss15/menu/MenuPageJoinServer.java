@@ -1,27 +1,22 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
-
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 /**
  *
  * @author schillen
  */
 public class MenuPageJoinServer extends MenuPage {
+    private final TextField username;
     
     
     public MenuPageJoinServer(Skin skin, MenuManager menuManager) {
@@ -35,34 +30,52 @@ public class MenuPageJoinServer extends MenuPage {
         int width = 300;
         int height = 50;
         
-
+        createLabel(50, 50, 300, 50, "hallo welt");
+        username = createTextField(50, 100, 300, 50, "default");
         
-        //if (type == Type.JOINSERVER) {
-        //TextButton addButton1 = addButton(x, y, width, height, "text", this::enterIP, "style");
-        //addButton(x, y, width, height, "text", this::enterIP, "style");
-            addCenteredButton(x, y - yStep * (i++), 300, 50, "Enter Server IP", this::enterIP);
-            //textfeld nachfolgend öffnen und werte uebergabe
-        //} else {
-            addCenteredButton(x, y - yStep * (i++), 300, 50, "Back To Menu", () -> menuManager.popPage());
-        //}
-        addCenteredButton(x, y - yStep * (i++), 300, 50, "Exit Client", () -> System.exit(-1));
-    }
-                
-                
-    
-    
-    
-    private void enterNickname() {
-        //enterNickname.emit();   
-    }
-    
+        //createTextField()
+        //ip
+        //port
+        //username
+        //mapname
+        //connet -> join server
+        
+        
+        
+        addCenteredButton(x, y - yStep * (i++), 400, 50, "Enter Server IP and Nickname", this::enterIP);
+        //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
+        //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
+        
+        addCenteredButton(x, y - yStep * (i++), 400, 50, "Back To Menu", () -> menuManager.popPage());
+        
+        addCenteredButton(x, y - yStep * (i++), 400, 50, "Exit Client", () -> System.exit(-1));
+    }  
     private void enterIP() {
-        //enterIP.emit();      
+        
+        
     }
+    
+    
     
     private void startServer() {
         String userName = "Server";
         int port = 9090;
         CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, userName);
     }
+
+    private void joinServer() {
+        String server = "localhost";
+        String userName = "Client";
+        int port = 9090;
+        JoinServerEvent.emit(server, port, userName);
+    }
+    
+    private void enterNickname() {
+        MyTextInputListener listener = new MyTextInputListener();
+        Gdx.input.getTextInput(listener, "Enter Server IP", "111.111.111.111", "");
+        
+        //*.emit();      
+    }
+    
+    
 }

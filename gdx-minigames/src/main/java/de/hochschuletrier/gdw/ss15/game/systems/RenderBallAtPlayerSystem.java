@@ -34,7 +34,7 @@ public class RenderBallAtPlayerSystem extends IteratingSystem  {
         ball_blue = assetManager.getTexture("ball_minus");
     }
     
-    private void drawTexture(Texture texture, float x, float y, float scale,Team team) {
+    private void drawTexture(Texture texture, float x, float y, float scale) {
         int w = texture.getWidth();
         int h = texture.getHeight();
         x -= (w / 2.0f)* scale;
@@ -55,13 +55,13 @@ public class RenderBallAtPlayerSystem extends IteratingSystem  {
         TeamComponent team = ComponentMappers.team.get(entity);
         this.rotation += deltaTime * speed;
         
-        drawTexture(ball_base, pos.x,pos.y,0.6f, Team.BLUE);
+        drawTexture(ball_base, pos.x,pos.y,0.4f);
         
   
         if(team.team == Team.BLUE){
-             drawTexture(ball_blue, pos.x,pos.y,0.6f, Team.BLUE);
+             drawTexture(ball_blue, pos.x,pos.y,0.4f);
         }else{
-            drawTexture(ball_red, pos.x,pos.y,0.6f, Team.BLUE);
+            drawTexture(ball_red, pos.x,pos.y,0.4f);
         }
     }
     

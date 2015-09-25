@@ -21,14 +21,13 @@ public class ReceptiveSystem extends IteratingSystem{
     protected void processEntity(Entity entity, float deltaTime) {
         // TODO Auto-generated method stub
         if(entity.getComponent(NotReceptiveComponent.class).remainingTime>0){
-            System.out.println("Keine BallAufnahme/ stunn"+ entity.getComponent(NotReceptiveComponent.class).remainingTime);
             entity.getComponent(NotReceptiveComponent.class).remainingTime-= deltaTime;
         }else{
             //
-            entity.getComponent(InputBallComponent.class).isStunned=false;
-            System.out.println("sallte nocht mehr gstunnd sein");
-            
+            InputBallComponent input= entity.getComponent(InputBallComponent.class);
+            input.isStunned=false;
             entity.remove(NotReceptiveComponent.class);
+            entity.add(input);
         }
     }
 

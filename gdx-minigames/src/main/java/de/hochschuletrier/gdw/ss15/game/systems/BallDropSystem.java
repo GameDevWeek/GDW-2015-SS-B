@@ -53,7 +53,9 @@ public class BallDropSystem extends IteratingSystem {
         notReceptive.isStunned = true;
         // myEntity.remove(InputBallComponent.class);//nicht erwünscht besser
         // mit:
-        player.getComponent(InputBallComponent.class).isStunned = true;
+        InputBallComponent input =player.getComponent(InputBallComponent.class);
+        input.isStunned = true;
+        player.add(input);
         player.add(notReceptive);
         
         player.remove(BallDropComponent.class);

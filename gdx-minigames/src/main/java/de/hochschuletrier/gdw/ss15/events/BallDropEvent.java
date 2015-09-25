@@ -14,7 +14,6 @@ public class BallDropEvent {
     private static final SnapshotArray<Listener> listeners = new SnapshotArray<Listener>();
 
     public static void emit(Entity entity, Vector2 direction) {
-        System.out.println("event drop");
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
             ((Listener) items[i]).onDropEvent(entity, direction);
@@ -24,7 +23,6 @@ public class BallDropEvent {
 
     public static void register(Listener listener) {
         listeners.add(listener);
-        System.out.println("listener wurde hinzugefügt");
     }
 
     public static void unregister(Listener listener) {

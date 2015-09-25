@@ -37,11 +37,9 @@ public class PlayerContactListener extends PhysixContactAdapter {
         if (otherEntity != null) {
             if (ComponentMappers.player.has(myEntity)
                     && ComponentMappers.player.has(otherEntity)) {
-                System.out.println("sieler berührt sich");
                 Team myteam = myEntity.getComponent(TeamComponent.class).team;
                 Team otherTeam = otherEntity.getComponent(TeamComponent.class).team;
                 if (myteam != otherTeam) {
-                    System.out.println("gefault");
                     // (NotReceptiveComponent.class);
                     if (myEntity.getComponent(PlayerComponent.class).hasBall) {
                         stunnPlayer(myEntity);
@@ -56,7 +54,6 @@ public class PlayerContactListener extends PhysixContactAdapter {
     }
 
     private void stunnPlayer(Entity player) {
-        System.out.println("stunned");
             BallDropComponent balldrop =engine.createComponent(BallDropComponent.class);
             player.add(balldrop);
             

@@ -21,7 +21,6 @@ public class ShootEvent {
 
 	public static void register(Listener listener) {
 		listeners.add(listener);
-		System.out.println("listener wurde hinzugefügt");
 	}
 
 	public static void unregister(Listener listener) {

@@ -16,14 +16,13 @@ import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
  */
 public class MovementSystem extends IteratingSystem {
 
-
-
     public MovementSystem() {
         this(0);
     }
 
     public MovementSystem(int priority) {
-        super(Family.all(InputBallComponent.class, PhysixBodyComponent.class).get(), priority);
+        super(Family.all(InputBallComponent.class, PhysixBodyComponent.class)
+                .get(), priority);
     }
 
     @Override
@@ -33,12 +32,14 @@ public class MovementSystem extends IteratingSystem {
         InputBallComponent input = ComponentMappers.input.get(entity);
 
         float speed = 500;
-        if(ComponentMappers.player.has(entity)){
-            if(entity.getComponent(PlayerComponent.class).hasBall){
-                speed/=2;
+        if (ComponentMappers.player.has(entity)) {
+            if (entity.getComponent(PlayerComponent.class).hasBall) {
+                speed /= 2;
             }
-            
+
         }
-        physBody.setLinearVelocity(input.move.x * speed, input.move.y * speed);
+        if (entity.getComponent(InputBallComponent.class).isStunned != true) {
+            physBody.setLinearVelocity(input.move.x * speed, input.move.y* speed);
+        }
     }
 }

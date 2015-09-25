@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="balls_and_magnets" tilewidth="64" tileheight="64">
- <image source="balls_and_magnets.png" width="448" height="64"/>
+<tileset name="balls_and_magnets" tilewidth="64" tileheight="64" tilecount="10">
+ <properties>
+  <property name="Enitytype" value="Magnet"/>
+  <property name="Team" value="1"/>
+ </properties>
+ <image source="balls_and_magnets.png" width="320" height="128"/>
  <tile id="0">
   <properties>
-   <property name="Entitytype" value="ballspawn"/>
+   <property name="Entitytype" value="BallSpawn"/>
    <property name="Team" value="1"/>
-  </properties>
- </tile>
- <tile id="1">
-  <properties>
-   <property name="Entitytype" value="ballspawn"/>
   </properties>
  </tile>
  <tile id="2">
   <properties>
-   <property name="Entitytype" value="ballspawn"/>
+   <property name="Entitytype" value="BallSpawn"/>
    <property name="Team" value="0"/>
   </properties>
  </tile>
@@ -30,15 +29,15 @@
    <property name="Team" value="0"/>
   </properties>
  </tile>
- <tile id="5">
+ <tile id="8">
   <properties>
-   <property name="Entitytype" value="playerspawn"/>
+   <property name="Entitytype" value="Magnet"/>
    <property name="Team" value="1"/>
   </properties>
  </tile>
- <tile id="6">
+ <tile id="9">
   <properties>
-   <property name="Entitytype" value="playerspawn"/>
+   <property name="Entitytype" value="Magnet"/>
    <property name="Team" value="0"/>
   </properties>
  </tile>

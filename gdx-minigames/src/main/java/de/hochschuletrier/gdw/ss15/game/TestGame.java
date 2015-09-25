@@ -12,8 +12,10 @@ import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
@@ -24,6 +26,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PullSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.ReceptiveSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
@@ -39,22 +42,23 @@ public class TestGame extends AbstractGame {
     private final NetClientSimple netClient;
 
     private TiledMap map;
-    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
+    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(
+            engine);
     private final TeamManager teamManager = new TeamManager();
-    
+
     private BallManager ballManager;
 
     public TestGame() {
         this(null, null);
     }
-    
+
     public TestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
         this.netClient = netClient;
-        if(netClient != null)
+        if (netClient != null)
             factoryParam.allowPhysics = false;
     }
-    
+
     private void initLoadMap() {
         map = loadMap("data/maps/NiceMap.tmx");
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
@@ -71,26 +75,29 @@ public class TestGame extends AbstractGame {
 
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map);
 
-        if(netClient == null) {
+        if (netClient == null) {
             /* TEST SPIELER ERSTELLEN */
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
- 
-            //Nur zum testen der Ballphysik
-            Entity ball= MapLoader.createEntity(engine, "ball", 3200, 500, Team.BLUE);
-           // ball.add(component)
+
+            // Nur zum testen der Ballphysik
+            Entity ball = MapLoader.createEntity(engine, "ball", 3200, 500,
+                    Team.BLUE);
+            // ball.add(component)
         }
-        
+
         setupPhysixWorld();
-        if(netClient == null)
+        if (netClient == null)
             ballManager = new BallManager(engine);
-        
-        if(netServer != null) {
+
+        if (netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
-            netServer.setListener(engine.getSystem(NetServerUpdateSystem.class));
-        } else if(netClient != null) {
+            netServer
+                    .setListener(engine.getSystem(NetServerUpdateSystem.class));
+        } else if (netClient != null) {
             netClient.setHandler(engine.getSystem(NetClientUpdateSystem.class));
-            netClient.setListener(engine.getSystem(NetClientUpdateSystem.class));
+            netClient
+                    .setListener(engine.getSystem(NetClientUpdateSystem.class));
         }
     }
 
@@ -102,29 +109,40 @@ public class TestGame extends AbstractGame {
     @Override
     protected void addSystems() {
         super.addSystems();
-        engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new MovementSystem(1));
-        engine.addSystem(new PullSystem(3));
-        engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new MagneticForceSystem(2));
-        
-        if(netServer != null) {
+        engine.addSystem(new PlayerAnimationSystem(
+                GameConstants.PRIORITY_ENTITIES));
+        engine.addSystem(new MovementSystem(10));
+        engine.addSystem(new PullSystem(30));
+        engine.addSystem(new GoalShotEventSystem(
+                GameConstants.PRIORITY_ENTITIES));
+        engine.addSystem(new MagneticForceSystem(20));
+        engine.addSystem(new ReceptiveSystem(5));
+
+        if (netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
-            engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer, GameType.MAGNET_BALL, getMapName()));
-        } else if(netClient != null) {
+            engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer,
+                    GameType.MAGNET_BALL, getMapName()));
+        } else if (netClient != null) {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
-        
+
         /* Camera System muss schon existieren */
-        engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
+        engine.addSystem(new InputBallSystem(0, engine.getSystem(
+                LimitedSmoothCameraSystem.class).getCamera()));
     }
 
     @Override
-    protected void addContactListeners(PhysixComponentAwareContactListener contactListener) {
-        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
-        contactListener.addListener(TriggerComponent.class, new TriggerListener());
-        contactListener.addListener(BallComponent.class, new BallListener(engine));
+    protected void addContactListeners(
+            PhysixComponentAwareContactListener contactListener) {
+        contactListener.addListener(ImpactSoundComponent.class,
+                new ImpactSoundListener());
+        contactListener.addListener(TriggerComponent.class,
+                new TriggerListener());
+        contactListener.addListener(BallComponent.class, new BallListener(
+                engine));
+        contactListener.addListener(PlayerComponent.class,
+                new PlayerContactListener(engine));
     }
 
     private void setupPhysixWorld() {
@@ -141,16 +159,16 @@ public class TestGame extends AbstractGame {
 
         }
     }
-    
+
     @Override
     public void dispose() {
         super.dispose();
         teamManager.dispose();
-        if(ballManager != null)
+        if (ballManager != null)
             ballManager.dispose();
-        if(netClient != null)
+        if (netClient != null)
             netClient.disconnect();
-        else if(netServer != null)
+        else if (netServer != null)
             netServer.disconnect();
     }
 }

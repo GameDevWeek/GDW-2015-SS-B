@@ -15,6 +15,7 @@ public class BallListener extends PhysixContactAdapter {
     public BallListener(PooledEngine engine) {
         this.engine = engine;
     }
+
     @Override
     public void beginContact(PhysixContact contact) {
         Entity myEntity = contact.getMyComponent().getEntity();
@@ -25,10 +26,13 @@ public class BallListener extends PhysixContactAdapter {
         }
         if (otherEntity != null) {
             if (ComponentMappers.magneticField.has(otherEntity)) {
-                ComponentMappers.magneticInfluence.get(myEntity).magneticFields.add(otherEntity);
-            } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
-                PlayerComponent player = ComponentMappers.player.get(otherEntity);
-                if (player != null) {
+                ComponentMappers.magneticInfluence.get(myEntity).magneticFields
+                        .add(otherEntity);
+            } else if (!myEntity.isScheduledForRemoval()
+                    && !ComponentMappers.goalShot.has(myEntity)) {
+                PlayerComponent player = ComponentMappers.player
+                        .get(otherEntity);
+                if (player != null&& !ComponentMappers.notReceptive.has(otherEntity)) {
                     player.hasBall = true;
                     engine.removeEntity(myEntity);
                 }
@@ -44,8 +48,10 @@ public class BallListener extends PhysixContactAdapter {
         if (comp != null) {
             otherEntity = comp.getEntity();
         }
-        if (otherEntity != null && ComponentMappers.magneticField.has(otherEntity)) {
-            ComponentMappers.magneticInfluence.get(myEntity).magneticFields.remove(otherEntity);
+        if (otherEntity != null
+                && ComponentMappers.magneticField.has(otherEntity)) {
+            ComponentMappers.magneticInfluence.get(myEntity).magneticFields
+                    .remove(otherEntity);
         }
     }
 }

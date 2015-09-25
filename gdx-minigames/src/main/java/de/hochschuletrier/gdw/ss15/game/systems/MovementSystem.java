@@ -33,6 +33,12 @@ public class MovementSystem extends IteratingSystem {
         InputBallComponent input = ComponentMappers.input.get(entity);
 
         float speed = 500;
+        if(ComponentMappers.player.has(entity)){
+            if(entity.getComponent(PlayerComponent.class).hasBall){
+                speed/=2;
+            }
+            
+        }
         physBody.setLinearVelocity(input.move.x * speed, input.move.y * speed);
     }
 }

@@ -4,7 +4,6 @@
  <tile id="3">
   <properties>
    <property name="Entitytype" value="BallSpawn"/>
-   <property name="Team" value=""/>
   </properties>
  </tile>
  <tile id="10">

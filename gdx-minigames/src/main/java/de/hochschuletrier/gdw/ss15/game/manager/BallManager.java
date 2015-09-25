@@ -30,6 +30,7 @@ import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
+import java.util.Random;
 
 
 public final class BallManager implements ChangeGameStateEvent.Listener,
@@ -42,6 +43,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     private final PooledEngine engine;
     private final ImmutableArray<Entity> balls;
     private GameState gameState;
+    private final Random random = new Random();
 
     public BallManager(PooledEngine engine) {
         this.engine = engine;
@@ -89,9 +91,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     }
     
     private PositionComponent getRandomSpawn(ArrayList<Entity> spawns) {
-        int random = Math.round((float) Math.random() * (spawns.size() - 1));
-
-        Entity spawn = spawns.get(random);
+        Entity spawn = spawns.get(random.nextInt(spawns.size()));
         return spawn.getComponent(PositionComponent.class);
     }
     

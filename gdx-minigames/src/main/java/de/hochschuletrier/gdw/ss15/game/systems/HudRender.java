@@ -21,6 +21,8 @@ public class HudRender {
     
     private SmoothCamera camera;
     private BitmapFont font;
+    private int goalred = 0;
+    private int goalblue = 0;
     
     public HudRender(SmoothCamera camera) {
     	
@@ -43,11 +45,12 @@ public class HudRender {
         
         
         // EXAMPLE how to display text for the hud // 
-        String tmp = "team"+"var";
+        String tmp = "team"+goalred;
+        String tmp1 = "team"+goalblue;
         font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp, 100, 50);
         font.setColor(Color.BLUE);
-        font.draw(DrawUtil.batch, tmp, 500, 50);
+        font.draw(DrawUtil.batch, tmp1, 500, 50);
 //        font.draw(DrawUtil.batch,"" )
         
     }

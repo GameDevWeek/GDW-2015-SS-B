@@ -25,17 +25,35 @@ public class HudRender {
     private BitmapFont font;
     private int goalred = 0;
     private int goalblue = 0;
+<<<<<<< HEAD
 
     private TeamManager teamManager = new TeamManager();
 
 
+=======
+    private double playTime ;
+    private double oldTime;
+
+    
+    private TeamManager teamManager = new TeamManager();
+    
+    
+    
+>>>>>>> c694c801e570532021dba09dd20f2ceb26aca0d3
     public HudRender(SmoothCamera camera) {
 
 
         this.camera = camera;
+        this.playTime=0;
+        this.oldTime=(int)((System.currentTimeMillis()/1000)%10);
     }
 
     public void update() {
+    	double newTime=(int)((System.currentTimeMillis()/1000)%10);
+    	double delta=newTime-oldTime;
+    	playTime+=delta;
+    	oldTime=newTime;
+    	
         Main.getInstance().screenCamera.bind();
         
         /* 
@@ -53,7 +71,7 @@ public class HudRender {
 
         String tmp = "BLUE "+ teamManager.getScore(Team.BLUE);
         String tmp1 = "RED "+teamManager.getScore(Team.RED);
-        String time = "time:";
+        String time = "time:"+playTime;
         font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);

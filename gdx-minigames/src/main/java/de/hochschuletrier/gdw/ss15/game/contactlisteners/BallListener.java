@@ -74,11 +74,11 @@ public class BallListener implements PhysixContactListener {
 		// TODO Auto-generated method stub
 		
 	}
-	public void playerPulling(Entity entity){
+	/*public void playerPulling(Entity entity){
 		WeaponInfluenceComponent weapons = ComponentMappers.weaponInfluence.get(entity);
 		if(){
 			
 		}
-	}
+	}*/
 	
 }

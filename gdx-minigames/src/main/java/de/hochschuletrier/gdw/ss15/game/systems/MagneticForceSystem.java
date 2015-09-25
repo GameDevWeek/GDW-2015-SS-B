@@ -15,7 +15,9 @@ import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class MagneticForceSystem extends IteratingSystem {
-
+	/*
+	 * Size of Magnets can be changed in jason/entities (line 123(range) & 128(sensor))
+	 */
     private final float force = 75;
     
     public MagneticForceSystem() {

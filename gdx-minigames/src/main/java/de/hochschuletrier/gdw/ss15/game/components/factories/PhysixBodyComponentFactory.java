@@ -87,7 +87,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         // bodyComponent.applyImpulse(0, 50000);
         entity.add(bodyComponent);
 
-        System.out.println("test");
+
     }
 
     private void addPlayer(EntityFactoryParam param, Entity entity, SafeProperties properties) {

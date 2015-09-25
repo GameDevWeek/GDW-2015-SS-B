@@ -2,13 +2,16 @@ package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
+import java.util.HashMap;
 
 public class MenuPageRoot extends MenuPage {
+    private HashMap<String, String> maps;
 
     public enum Type {
 
@@ -18,6 +21,16 @@ public class MenuPageRoot extends MenuPage {
 
     public MenuPageRoot(Skin skin, MenuManager menuManager, Type type) {
         super(skin, "menu_bg");
+
+        try {
+            maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            for(String name: maps.keySet()) {
+                System.out.println(name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
         int x = 100;

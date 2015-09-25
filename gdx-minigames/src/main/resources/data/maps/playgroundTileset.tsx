@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="playgroundTileset" tilewidth="128" tileheight="128">
- <image source="playgroundTileset.png" width="512" height="384"/>
+<tileset name="playgroundTileset" tilewidth="64" tileheight="64">
+ <image source="playgroundTileset.png" width="256" height="192"/>
  <tile id="0">
   <properties>
    <property name="solid" value="true"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="balls_and_magnets" tilewidth="128" tileheight="128">
- <image source="balls_and_magnets.png" width="896" height="128"/>
+<tileset name="balls_and_magnets" tilewidth="64" tileheight="64">
+ <image source="balls_and_magnets.png" width="448" height="64"/>
  <tile id="0">
   <properties>
    <property name="Entitytype" value="ballspawn"/>

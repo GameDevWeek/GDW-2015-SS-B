@@ -26,4 +26,6 @@ public class GameConstants {
     public static float MUSIC_FADE_TIME = 2;
     public static int MAX_PLAYERS = 8;
     public static int SCORE_TO_WIN = 10;
+    public static int GAME_TIME = 60 * 5;
+    public static int GAME_OVER_TIME = 30;
 }

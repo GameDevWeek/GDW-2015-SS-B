@@ -71,19 +71,17 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
                 countdown = 0;
                 break;
             case THREE:
-                countdown = 3;
-                break;
             case TWO:
-                countdown = 2;
-                break;
             case ONE:
+                SoundEvent.emit("countdown_" + gameState.name().toLowerCase(), null);
                 countdown = 1;
                 break;
             case GAME:
-                countdown = 60*5;
+                SoundEvent.emit("countdown_go", null);
+                countdown = GameConstants.GAME_TIME;
                 break;
             case GAME_OVER:
-                countdown = 30;
+                countdown = GameConstants.GAME_OVER_TIME;
                 break;
         }
     }
@@ -117,12 +115,14 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
     }
     
     private void addToScore(Team team, int value) {
-        scores[team.ordinal()] += value;
-        
-        if(scores[team.ordinal()] >= GameConstants.SCORE_TO_WIN)
-            ChangeGameStateEvent.emit(GameState.GAME_OVER);
-        
-        ScoreChangedEvent.emit(scores[0], scores[1]);
+        if(gameState == GameState.GAME) {
+            scores[team.ordinal()] += value;
+
+            if(scores[team.ordinal()] >= GameConstants.SCORE_TO_WIN)
+                ChangeGameStateEvent.emit(GameState.GAME_OVER);
+
+            ScoreChangedEvent.emit(scores[0], scores[1]);
+        }
     }
     
     private void resetScores() {

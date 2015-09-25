@@ -45,18 +45,16 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        
-        this.engine = (PooledEngine)engine;
+
+        this.engine = (PooledEngine) engine;
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
-        
+
         this.engine = null;
     }
-    
-    
 
     @Override
     public void onDisconnect() {
@@ -89,7 +87,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         Entity entity = netEntityMap.get(datagram.getNetId());
         if (entity != null) {
             MovableComponent movable = ComponentMappers.movable.get(entity);
-            if(datagram.getPacketId() > movable.packetId) {
+            if (datagram.getPacketId() > movable.packetId) {
                 movable.packetId = datagram.getPacketId();
                 PositionComponent position = ComponentMappers.position.get(entity);
                 Vector2 pos = datagram.getPosition();
@@ -107,18 +105,23 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         }
     }
 
-    public void handle (SoundDatagram datagram) {
-        Entity entity = netEntityMap.get(datagram.getNetId());
-        if (entity != null) {
-            SoundEvent.emit(datagram.getName(), entity);
+    public void handle(SoundDatagram datagram) {
+        long netId = datagram.getNetId();
+        if (netId == 0) {
+            SoundEvent.emit(datagram.getName(), null);
+        } else {
+            Entity entity = netEntityMap.get(datagram.getNetId());
+            if (entity != null) {
+                SoundEvent.emit(datagram.getName(), entity);
+            }
         }
     }
-    
+
     public void handle(BallOwnershipChangedDatagram datagram) {
         long netId = datagram.getOwnerId();
-        if(netId == 0)
+        if (netId == 0) {
             BallOwnershipChangedEvent.emit(null);
-        else {
+        } else {
             Entity entity = netEntityMap.get(netId);
             if (entity != null) {
                 PlayerComponent player = ComponentMappers.player.get(entity);

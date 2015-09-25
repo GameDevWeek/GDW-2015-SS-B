@@ -42,6 +42,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     private final PooledEngine engine;
     private final ImmutableArray<Entity> balls;
     private final ImmutableArray<Entity> players;
+    private GameState gameState;
 
     public BallManager(PooledEngine engine) {
         this.engine = engine;
@@ -122,6 +123,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
     @Override
     public void onChangeGameStateEvent(GameState newState) {
+        this.gameState = newState;
         switch(newState) {
             case WARMUP:
             case GAME:
@@ -136,7 +138,8 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
     @Override
     public void onGoalEvent(Team team) {
-        resetBall(team == Team.BLUE ? Team.RED : Team.BLUE);
+        if(gameState != GameState.GAME_OVER)
+            resetBall(team == Team.BLUE ? Team.RED : Team.BLUE);
     }
 
     @Override

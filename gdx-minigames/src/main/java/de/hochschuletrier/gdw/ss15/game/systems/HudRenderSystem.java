@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,6 +9,10 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 
 /**
  * This class is rendering the HUD with the update method
@@ -15,39 +20,75 @@ import de.hochschuletrier.gdw.ss15.Main;
  * @author meiert
  *
  */
-public class HudRenderSystem extends EntitySystem {
+public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.Listener,
+        ChangeGameStateEvent.Listener {
 
     private final BitmapFont font;
-    private int scoreRed;
-    private int scoreBlue;
+    private String scoreRed = "0";
+    private String scoreBlue = "0";
+    private float countdown;
 
-    private float playTime;
-    
     public HudRenderSystem(AssetManagerX assetManager, int priority) {
         super(priority);
         font = assetManager.getFont("quartz_50");
     }
 
     @Override
-    public void update(float deltaTime) {
-    	playTime+=deltaTime;
-    	
-        Main.getInstance().screenCamera.bind();
-        
-        /* 
-         * new fliped bitmapFont to display the hud
-         * have not found a way to clear a bitmapFont so every frame a new one is needed
-         */
-        //font = new BitmapFont(true);
+    public void addedToEngine(Engine engine) {
+        ScoreChangedEvent.register(this);
+        ChangeGameStateEvent.register(this);
+    }
 
-        String tmp = "BLUE " + scoreBlue;
-        String tmp1 = "RED " + scoreRed;
-        String time = "time:" + (int)playTime;
+    @Override
+    public void removedFromEngine(Engine engine) {
+        ScoreChangedEvent.unregister(this);
+        ChangeGameStateEvent.unregister(this);
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        countdown -= deltaTime;
+        if(countdown <= 0)
+            countdown = 0;
+
+        Main.getInstance().screenCamera.bind();
+
+        String time = "time:" + (int)Math.ceil(countdown);
         font.setColor(Color.BLUE);
-        font.draw(DrawUtil.batch, tmp, 50, 50);
+        font.draw(DrawUtil.batch, scoreBlue, 50, 50);
         font.setColor(Color.RED);
-        font.draw(DrawUtil.batch, tmp1,Gdx.graphics.getWidth()-200, 50);
+        font.draw(DrawUtil.batch, scoreRed, Gdx.graphics.getWidth() - 200, 50);
         font.setColor(Color.GREEN);
-        font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2-100, 50);
+        font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth() / 2 - 100, 50);
+    }
+
+    @Override
+    public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
+        this.scoreBlue = "BLUE " + scoreBlue;
+        this.scoreRed = "RED " + scoreRed;
+    }
+
+    @Override
+    public void onChangeGameStateEvent(GameState newState) {
+        switch (newState) {
+            case WARMUP:
+                countdown = 0;
+                break;
+            case THREE:
+                countdown = 3;
+                break;
+            case TWO:
+                countdown = 2;
+                break;
+            case ONE:
+                countdown = 1;
+                break;
+            case GAME:
+                countdown = GameConstants.GAME_TIME;
+                break;
+            case GAME_OVER:
+                countdown = GameConstants.GAME_OVER_TIME;
+                break;
+        }
     }
 }

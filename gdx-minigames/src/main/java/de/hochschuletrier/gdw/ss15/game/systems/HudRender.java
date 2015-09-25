@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
@@ -34,8 +35,11 @@ public class HudRender {
          * new fliped bitmapFont to display the hud
          * have not found a way to clear a bitmapFont so every frame a new one is needed
          */
-        font = new BitmapFont(true);
-       
+        //font = new BitmapFont(true);
+        font = new BitmapFont(Gdx.files.internal("data/fonts/quartz_50.fnt"),true);
+        font.setUseIntegerPositions(false);
+        font.setScale(1f);
+        
         
         
         // EXAMPLE how to display text for the hud // 

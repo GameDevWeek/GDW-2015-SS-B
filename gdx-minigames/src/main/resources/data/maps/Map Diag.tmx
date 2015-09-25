@@ -47,6 +47,11 @@
  <tileset firstgid="26" source="tileset_ground_SpawnsAndArea.tsx"/>
  <tileset firstgid="38" source="playgroundTileset.tsx"/>
  <tileset firstgid="50" source="Dummy Gate.tsx"/>
+ <tileset firstgid="106" name="Krater" tilewidth="64" tileheight="64" tilecount="16">
+  <image source="Krater.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="122" source="Brücke.tsx"/>
+ <tileset firstgid="146" source="Sanboden.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
    eJztmMEKgzAMhnPfBNl0zkcoO+4y74rv/0ZLsIMeQleQlv6aw3dqIPkgIaGOiC7MVaFhXOS9Zhpf98jMzBKwMk8f0zIvMG4JdafE1MjZ3aQvxwpqzeGGirlhYm6YlHC7Mw+F7gBuksMplMibO4fsR+3ey70zbd72YfOG6WbzZm7mZm7IoLrJzvy3H1Hdzv7Pg+zW09aXH2YKeNPWs4OP0e69mpG6XaT23/sXLqblRg==

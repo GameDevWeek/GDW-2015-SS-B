@@ -21,7 +21,6 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
-import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.systems.BallDropSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
@@ -37,9 +36,9 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
-import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
+import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.HudRender;
+import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
@@ -48,11 +47,7 @@ public class TestGame extends AbstractGame {
     private final NetClientSimple netClient;
 
     private TiledMap map;
-    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(
-            engine);
-    private final TeamManager teamManager = new TeamManager();
-
-    private HudRender hudRender;
+    private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
 
     private BallManager ballManager;
 
@@ -103,7 +98,7 @@ public class TestGame extends AbstractGame {
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
 
-            ChangeGameStateEvent.emit(GameState.GAME);
+            ChangeGameStateEvent.emit(GameState.WARMUP);
         }
     }
 
@@ -113,13 +108,6 @@ public class TestGame extends AbstractGame {
     }
 
     @Override
-    protected void addSystems() {
-        super.addSystems();
-        engine.addSystem(new PlayerAnimationSystem(GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new MovementSystem(1));
-        engine.addSystem(new PullSystem(3));
-        engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new MagneticForceSystem(2));
     protected void addSystems(AssetManagerX assetManager) {
         super.addSystems(assetManager);
         engine.addSystem(new PlayerAnimationSystem(
@@ -131,6 +119,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(20));
         engine.addSystem(new ReceptiveSystem(5));
+        engine.addSystem(new GameStateSystem(GameConstants.PRIORITY_ENTITIES));
 
         if (netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
@@ -145,13 +134,12 @@ public class TestGame extends AbstractGame {
         
         /* Camera System muss schon existieren */
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
-        hudRender = new HudRender(engine.getSystem(LimitedSmoothCameraSystem.class).getCamera());
+        engine.addSystem(new HudRenderSystem(assetManager, GameConstants.PRIORITY_HUD));
     }
 
     @Override
     public void update(float delta) {
         super.update(delta);
-        hudRender.update();
         engine.addSystem(new InputBallSystem(0, engine.getSystem(
                 LimitedSmoothCameraSystem.class).getCamera()));
     }
@@ -187,7 +175,6 @@ public class TestGame extends AbstractGame {
     @Override
     public void dispose() {
         super.dispose();
-        teamManager.dispose();
         if (ballManager != null)
             ballManager.dispose();
         if (netClient != null)

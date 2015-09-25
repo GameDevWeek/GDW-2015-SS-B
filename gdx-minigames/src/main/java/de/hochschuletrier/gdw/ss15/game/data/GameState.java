@@ -5,5 +5,6 @@ public enum GameState {
     THREE,
     TWO,
     ONE,
-    GAME
+    GAME,
+    GAME_OVER
 }

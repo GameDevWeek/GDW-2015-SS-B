@@ -16,6 +16,7 @@ import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.events.BallOwnershipChangedEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
@@ -40,12 +41,14 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
     private final PooledEngine engine;
     private final ImmutableArray<Entity> balls;
+    private final ImmutableArray<Entity> players;
 
     public BallManager(PooledEngine engine) {
         this.engine = engine;
 
         distributeSpawns();
         balls = engine.getEntitiesFor(Family.all(BallComponent.class).get());
+        players = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
 
         ChangeGameStateEvent.register(this);
         GoalEvent.register(this);
@@ -82,6 +85,11 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     private void removeBalls() {
         for(Entity ball: balls) 
             engine.removeEntity(ball);
+        
+        for(Entity player: players) {
+            ComponentMappers.player.get(player).hasBall = false;
+            BallOwnershipChangedEvent.emit(null);
+        }
     }
     
     private PositionComponent getRandomSpawn(ArrayList<Entity> spawns) {
@@ -114,8 +122,16 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
     @Override
     public void onChangeGameStateEvent(GameState newState) {
-        if (newState == GameState.GAME)
-            resetBall(null);
+        switch(newState) {
+            case WARMUP:
+            case GAME:
+                resetBall(null);
+                break;
+            case THREE:
+            case GAME_OVER:
+                removeBalls();
+                break;
+        }
     }
 
     @Override

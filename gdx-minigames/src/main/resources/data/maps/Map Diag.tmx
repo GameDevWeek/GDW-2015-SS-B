@@ -52,9 +52,15 @@
  </tileset>
  <tileset firstgid="122" source="Brücke.tsx"/>
  <tileset firstgid="146" source="Sanboden.tsx"/>
+ <tileset firstgid="164" source="Krater groß.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
    eJztmMEKgzAMhnPfBNl0zkcoO+4y74rv/0ZLsIMeQleQlv6aw3dqIPkgIaGOiC7MVaFhXOS9Zhpf98jMzBKwMk8f0zIvMG4JdafE1MjZ3aQvxwpqzeGGirlhYm6YlHC7Mw+F7gBuksMplMibO4fsR+3ey70zbd72YfOG6WbzZm7mZm7IoLrJzvy3H1Hdzv7Pg+zW09aXH2YKeNPWs4OP0e69mpG6XaT23/sXLqblRg==
+  </data>
+ </layer>
+ <layer name="Krater" width="55" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztzsUJA1AUBdH0X0fc3d3d3aWRTBEfXiB34OzH41FKKaWUUkoppX4jL3zwI4AgQggjYvjloihiiCOBJFJII2P45aIscsijgCJKKKNi+OWiKmqoo4EmWmijY7flpC566GOAIUYYY2L45aIpZphjgSVWWGNj+OWiLXbY44AjTjjjYvjloituuOOBJ15442O3pf6wL+shMOE=
   </data>
  </layer>
  <objectgroup name="Magnets">

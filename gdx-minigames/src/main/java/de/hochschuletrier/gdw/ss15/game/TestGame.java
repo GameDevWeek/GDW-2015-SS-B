@@ -1,6 +1,8 @@
-﻿package de.hochschuletrier.gdw.ss15.game;
+package de.hochschuletrier.gdw.ss15.game;
+
 
 import com.badlogic.ashley.core.Entity;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
@@ -43,22 +45,22 @@ public class TestGame extends AbstractGame {
     private TiledMap map;
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
     private final TeamManager teamManager = new TeamManager();
-    
+
     private HudRender hudRender;
-    
+
     private BallManager ballManager;
 
     public TestGame() {
         this(null, null);
     }
-    
+
     public TestGame(NetServerSimple netServer, NetClientSimple netClient) {
         this.netServer = netServer;
         this.netClient = netClient;
         if(netClient != null)
             factoryParam.allowPhysics = false;
     }
-    
+
     private void initLoadMap(String mapName) {
         map = loadMap(mapName);
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
@@ -78,7 +80,7 @@ public class TestGame extends AbstractGame {
         setupPhysixWorld();
         if(netClient == null)
             ballManager = new BallManager(engine);
-        
+
         if(netServer != null) {
             netServer.setHandler(engine.getSystem(NetServerUpdateSystem.class));
             netServer.setListener(engine.getSystem(NetServerUpdateSystem.class));
@@ -86,12 +88,12 @@ public class TestGame extends AbstractGame {
             netClient.setHandler(engine.getSystem(NetClientUpdateSystem.class));
             netClient.setListener(engine.getSystem(NetClientUpdateSystem.class));
         }
-        
+
         if(netClient == null) {
             /* TEST SPIELER ERSTELLEN */
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
- 
+
             ChangeGameStateEvent.emit(GameState.GAME);
         }
     }
@@ -109,7 +111,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new PullSystem(3));
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(2));
-        
+
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
             engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer, GameType.MAGNET_BALL, getMapName()));
@@ -122,7 +124,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
         hudRender = new HudRender(engine.getSystem(LimitedSmoothCameraSystem.class).getCamera());
     }
-    
+
     @Override
     public void update(float delta) {
         super.update(delta);
@@ -150,7 +152,7 @@ public class TestGame extends AbstractGame {
 
         }
     }
-    
+
     @Override
     public void dispose() {
         super.dispose();

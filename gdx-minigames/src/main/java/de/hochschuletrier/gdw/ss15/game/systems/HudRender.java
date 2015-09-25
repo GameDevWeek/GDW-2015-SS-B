@@ -12,15 +12,15 @@ import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 
 /**
  * Not a system but must be called every frame, so it is close to a System ;)
- * 
+ *
  * This class is rendering the HUD with the update method
- * 
+ *
  * @author meiert
  *
  */
 
 public class HudRender {
-    
+
     private SmoothCamera camera;
     private BitmapFont font;
     private int goalred = 0;
@@ -28,19 +28,16 @@ public class HudRender {
     private int playTime ;
     private int oldTime;
 
-    
     private TeamManager teamManager = new TeamManager();
     
-    
-    
     public HudRender(SmoothCamera camera) {
-    	
-       
+
+
         this.camera = camera;
         this.playTime=0;
         this.oldTime=(int)(System.currentTimeMillis()/1000);
     }
-    
+
     public void update() {
     	int newTime=(int)(System.currentTimeMillis()/1000);
     	double delta=newTime-oldTime;
@@ -57,11 +54,11 @@ public class HudRender {
         font = new BitmapFont(Gdx.files.internal("data/fonts/quartz_50.fnt"),true);
         font.setUseIntegerPositions(false);
         font.setScale(1f);
-        
-        
-        
+
+
+
         // EXAMPLE how to display text for the hud //
-        
+
         String tmp = "BLUE "+ teamManager.getScore(Team.BLUE);
         String tmp1 = "RED "+teamManager.getScore(Team.RED);
         String time = "time:"+playTime;
@@ -72,6 +69,6 @@ public class HudRender {
         font.setColor(Color.GREEN);
         font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2-100, 50);
 //        font.draw(DrawUtil.batch,"" )
-        
+
     }
 }

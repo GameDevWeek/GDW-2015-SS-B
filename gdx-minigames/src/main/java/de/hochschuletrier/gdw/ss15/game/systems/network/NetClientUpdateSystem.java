@@ -10,12 +10,14 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.BallOwnershipChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
@@ -23,6 +25,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import java.util.HashMap;
 
@@ -128,5 +131,9 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
                 ChangeBallOwnershipEvent.emit(entity);
             }
         }
+    }
+    
+    public void handle(GameStateDatagram datagram) {
+        ChangeGameStateEvent.emit(datagram.getGameState(), datagram.getGameTime());
     }
 }

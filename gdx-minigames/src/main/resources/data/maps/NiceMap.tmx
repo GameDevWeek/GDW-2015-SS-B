@@ -22,13 +22,13 @@
   <object id="18" x="44" y="316" width="42" height="323">
    <properties>
     <property name="Entitytype" value="goal"/>
-    <property name="Team" value="0"/>
+    <property name="Team" value="1"/>
    </properties>
   </object>
   <object id="20" x="1894.67" y="318" width="52.6667" height="320.667">
    <properties>
     <property name="Entitytype" value="goal"/>
-    <property name="Team" value="1"/>
+    <property name="Team" value="0"/>
    </properties>
   </object>
   <object id="24" gid="26" x="960" y="512"/>

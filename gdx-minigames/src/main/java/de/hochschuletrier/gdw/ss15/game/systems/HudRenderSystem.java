@@ -69,26 +69,7 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
     }
 
     @Override
-    public void onChangeGameStateEvent(GameState newState) {
-        switch (newState) {
-            case WARMUP:
-                countdown = 0;
-                break;
-            case THREE:
-                countdown = 3;
-                break;
-            case TWO:
-                countdown = 2;
-                break;
-            case ONE:
-                countdown = 1;
-                break;
-            case GAME:
-                countdown = GameConstants.GAME_TIME;
-                break;
-            case GAME_OVER:
-                countdown = GameConstants.GAME_OVER_TIME;
-                break;
-        }
+    public void onChangeGameStateEvent(GameState newState, float gameTime) {
+        countdown = gameTime;
     }
 }

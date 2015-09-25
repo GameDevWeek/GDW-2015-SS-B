@@ -11,6 +11,7 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.BallOwnershipChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.BallPlayerInputDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
@@ -30,6 +31,7 @@ import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsCompone
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
+import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler,
         NetServerSimple.Listener, ChangeGameStateEvent.Listener {
@@ -96,10 +98,13 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void sendWorldSetup(NetConnection connection, ConnectDatagram datagram) {
         String playerName = datagram.getPlayerName();
         final Entity playerEntity = (Entity) connection.getAttachment();
-        connection.sendReliable(WorldSetupDatagram.create(gameType, gameState, mapName, playerName));
+        connection.sendReliable(WorldSetupDatagram.create(gameType, mapName, playerName));
 
         for (Entity entity : entities) {
             connection.sendReliable(CreateEntityDatagram.create(entity));
+            PlayerComponent player = ComponentMappers.player.get(entity);
+            if(player != null && player.hasBall)
+                connection.sendReliable(BallOwnershipChangedDatagram.create(playerEntity));
         }
 
         for (Entity entity : animationEntities) {
@@ -107,6 +112,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
             connection.sendReliable(AnimationStateChangeDatagram.create(entity, anim.currentState));
         }
 
+        connection.sendReliable(GameStateDatagram.create(gameState, GameStateSystem.getCountdown()));
         connection.sendReliable(PlayerIdDatagram.create(playerEntity.getId()));
     }
 
@@ -156,8 +162,8 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     }
 
     @Override
-    public void onChangeGameStateEvent(GameState newState) {
+    public void onChangeGameStateEvent(GameState newState, float gameTime) {
         this.gameState = newState;
-        netServer.broadcastReliable(GameStateDatagram.create(newState, 0));
+        netServer.broadcastReliable(GameStateDatagram.create(newState, gameTime));
     }
 }

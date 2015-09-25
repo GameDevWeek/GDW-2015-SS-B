@@ -7,15 +7,15 @@ public class ChangeGameStateEvent {
 
     public static interface Listener {
 
-        void onChangeGameStateEvent(GameState newState);
+        void onChangeGameStateEvent(GameState newState, float gameTime);
     }
 
     private static final SnapshotArray<Listener> listeners = new SnapshotArray();
 
-    public static void emit(GameState newState) {
+    public static void emit(GameState newState, float gameTime) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener) items[i]).onChangeGameStateEvent(newState);
+            ((Listener) items[i]).onChangeGameStateEvent(newState, gameTime);
         }
         listeners.end();
     }

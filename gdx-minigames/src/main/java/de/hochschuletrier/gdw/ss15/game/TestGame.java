@@ -105,7 +105,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
             Entity player = playerSpawns.spawnPlayer();
             player.add(engine.createComponent(LocalPlayerComponent.class));
 
-            ChangeGameStateEvent.emit(GameState.WARMUP);
+            ChangeGameStateEvent.emit(GameState.WARMUP, 0);
         }
     }
 
@@ -126,7 +126,8 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(20));
         engine.addSystem(new ReceptiveSystem(5));
-        engine.addSystem(new GameStateSystem(GameConstants.PRIORITY_ENTITIES));
+        if(netClient == null)
+            engine.addSystem(new GameStateSystem(GameConstants.PRIORITY_ENTITIES));
 
         if (netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));

@@ -106,7 +106,7 @@ public class MapLoader {
                             team = null;
                         }
                         else {
-                            team  = (tmp == 0) ? Team.RED : Team.BLUE;
+                            team  = (tmp == 0) ? Team. BLUE : Team.RED;
                         }
                          
                         switch (entitytype) {

@@ -12,9 +12,9 @@ import de.hochschuletrier.gdw.ss15.game.data.GameState;
 public final class GameStateDatagram extends NetDatagram {
 
     private GameState gameState;
-    private long gameTime;
+    private float gameTime;
 
-    public static GameStateDatagram create(GameState gameState, long gameTime) {
+    public static GameStateDatagram create(GameState gameState, float gameTime) {
         GameStateDatagram datagram = DatagramFactory.create(GameStateDatagram.class);
         datagram.gameState = gameState;
         datagram.gameTime = gameTime;
@@ -25,7 +25,7 @@ public final class GameStateDatagram extends NetDatagram {
         return gameState;
     }
 
-    public long getGameTime() {
+    public float getGameTime() {
         return gameTime;
     }
     
@@ -37,12 +37,12 @@ public final class GameStateDatagram extends NetDatagram {
     @Override
     public void writeToMessage(NetMessageOut message) {
         message.putEnum(gameState);
-        message.putLong(gameTime);
+        message.putFloat(gameTime);
     }
 
     public @Override
     void readFromMessage(NetMessageIn message) {
         gameState = message.getEnum(GameState.class);
-        gameTime = message.getLong();
+        gameTime = message.getFloat();
     }
 }

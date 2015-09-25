@@ -20,7 +20,11 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
 
     private final int scores[] = new int[2];
     private GameState gameState = GameState.WARMUP;
-    private float countdown = 0;
+    private static float countdown = 0;
+    
+    public static float getCountdown() {
+        return countdown;
+    }
 
     public GameStateSystem(int priority) {
         super(priority);
@@ -28,6 +32,7 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
 
     @Override
     public void addedToEngine(Engine engine) {
+        countdown = 0;
         resetScores();
         GoalEvent.register(this);
         ChangeGameStateEvent.register(this);
@@ -62,52 +67,59 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
     }
 
     @Override
-    public void onChangeGameStateEvent(GameState newState) {
+    public void onChangeGameStateEvent(GameState newState, float gameTime) {
         this.gameState = newState;
         logger.info("Changed Gamestate to {}", gameState.toString());
 
         switch (gameState) {
-            case WARMUP:
-                countdown = 0;
-                break;
             case THREE:
             case TWO:
             case ONE:
                 SoundEvent.emit("countdown_" + gameState.name().toLowerCase(), null);
-                countdown = 1;
                 break;
             case GAME:
                 SoundEvent.emit("countdown_go", null);
-                countdown = GameConstants.GAME_TIME;
-                break;
-            case GAME_OVER:
-                countdown = GameConstants.GAME_OVER_TIME;
                 break;
         }
+        countdown = gameTime;
     }
 
     private void updateWarmup(float deltaTime) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            ChangeGameStateEvent.emit(GameState.THREE);
+            ChangeGameStateEvent.emit(GameState.THREE, 3);
         }
     }
 
     private void updateCountdown(float deltaTime) {
-        countdown -= deltaTime;
-        if(countdown <= 0)
-            ChangeGameStateEvent.emit(GameState.values()[gameState.ordinal()+1]);
+        switch (gameState) {
+            case THREE:
+                countdown -= deltaTime;
+                if(countdown <= 2)
+                    ChangeGameStateEvent.emit(GameState.TWO, countdown);
+                break;
+            case TWO:
+                countdown -= deltaTime;
+                if(countdown <= 1)
+                    ChangeGameStateEvent.emit(GameState.ONE, countdown);
+                break;
+            case ONE:
+                countdown -= deltaTime;
+                if(countdown <= 0)
+                    ChangeGameStateEvent.emit(GameState.GAME, GameConstants.GAME_TIME);
+                break;
+        }
     }
 
     private void updateGame(float deltaTime) {
         countdown -= deltaTime;
         if(countdown <= 0)
-            ChangeGameStateEvent.emit(GameState.GAME_OVER);
+            ChangeGameStateEvent.emit(GameState.GAME_OVER, GameConstants.GAME_OVER_TIME);
     }
 
     private void updateGameOver(float deltaTime) {
         countdown -= deltaTime;
         if(countdown <= 0)
-            ChangeGameStateEvent.emit(GameState.WARMUP);
+            ChangeGameStateEvent.emit(GameState.WARMUP, 0);
     }
 
     public int getScore(Team team) {
@@ -119,7 +131,7 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
             scores[team.ordinal()] += value;
 
             if(scores[team.ordinal()] >= GameConstants.SCORE_TO_WIN)
-                ChangeGameStateEvent.emit(GameState.GAME_OVER);
+                ChangeGameStateEvent.emit(GameState.GAME_OVER, GameConstants.GAME_OVER_TIME);
 
             ScoreChangedEvent.emit(scores[0], scores[1]);
         }

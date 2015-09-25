@@ -12,8 +12,10 @@ import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
@@ -102,4 +104,10 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         }
     }
 
+    public void handle (SoundDatagram datagram) {
+        Entity entity = netEntityMap.get(datagram.getNetId());
+        if (entity != null) {
+            SoundEvent.emit(datagram.getName(), entity);
+        }
+    }
 }

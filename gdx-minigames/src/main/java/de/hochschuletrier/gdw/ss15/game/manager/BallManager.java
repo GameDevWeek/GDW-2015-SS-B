@@ -8,17 +8,20 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
+
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
-
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
+import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
@@ -27,8 +30,9 @@ import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
+
 public final class BallManager implements ChangeGameStateEvent.Listener,
-        GoalEvent.Listener, ShootEvent.Listener{
+        GoalEvent.Listener, ShootEvent.Listener,BallDropEvent.Listener{
 
     ArrayList<Entity> start_spawns = new ArrayList<Entity>();
     ArrayList<Entity> team_0_spawns = new ArrayList<Entity>();
@@ -46,6 +50,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
         ChangeGameStateEvent.register(this);
         GoalEvent.register(this);
         ShootEvent.register(this);
+        BallDropEvent.register(this);
 
     }
 
@@ -53,6 +58,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
         ChangeGameStateEvent.unregister(this);
         GoalEvent.unregister(this);
         ShootEvent.unregister(this);
+        BallDropEvent.unregister(this);
     }
 
     public void distributeSpawns() {
@@ -121,7 +127,17 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     public void onShootEvent(Entity entityFrom, Vector2 direction) {
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
+            SoundEvent.emit("ball_shot", entityFrom);
             player.hasBall = false;
+            //füge "stunning" hinzu/kann den Ball nicht mehr aufnehmen 
+            final float stunningTime= 0.4f;
+            NotReceptiveComponent notReceptive = engine
+                    .createComponent(NotReceptiveComponent.class);
+            notReceptive.remainingTime = stunningTime;
+            notReceptive.time = stunningTime;
+            notReceptive.isStunned = false;
+            entityFrom.add(notReceptive);
+            
             PositionComponent pos = ComponentMappers.position.get(entityFrom);
             TeamComponent team = ComponentMappers.team.get(entityFrom);
             InputBallComponent input = ComponentMappers.input.get(entityFrom);
@@ -136,5 +152,27 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
             ball.add(modify);
             setBallTeam(team.team, ball);
         }
+    }
+
+    @Override
+    public void onDropEvent(Entity entityFrom, Vector2 direcion) {
+        PlayerComponent player = ComponentMappers.player.get(entityFrom);
+        if(player != null && player.hasBall) {
+            player.hasBall = false;
+            PositionComponent pos = ComponentMappers.position.get(entityFrom);
+            TeamComponent team = ComponentMappers.team.get(entityFrom);
+            InputBallComponent input = ComponentMappers.input.get(entityFrom);
+            Vector2 dir = input.view.cpy().scl(120);
+            Entity ball = MapLoader.createEntity(engine, "ball", pos.x + dir.x, pos.y + dir.y, team.team);
+            PhysixModifierComponent modify = ComponentMappers.physixModifier.get(ball);
+            modify.schedule(() -> {
+                PhysixBodyComponent body = ComponentMappers.physixBody.get(ball);
+                body.setLinearVelocity(dir.nor().scl(100));
+                body.setAwake(true);
+            });
+            ball.add(modify);
+            setBallTeam(team.team, ball);
+        }
+
     }
 }

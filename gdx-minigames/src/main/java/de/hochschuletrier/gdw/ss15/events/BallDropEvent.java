@@ -1,19 +1,22 @@
 package de.hochschuletrier.gdw.ss15.events;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.SnapshotArray;
 
-public class CreateServerEvent {
+import de.hochschuletrier.gdw.ss15.events.ShootEvent.Listener;
 
+public class BallDropEvent {
     public static interface Listener {
-        void onCreateServerEvent(int port, int maxPlayers, String mapName, String userName);
+        void onDropEvent(Entity entity,Vector2 direcion);
     }
 
-    private static final SnapshotArray<Listener> listeners = new SnapshotArray();
+    private static final SnapshotArray<Listener> listeners = new SnapshotArray<Listener>();
 
-    public static void emit(int port, int maxPlayers, String mapName, String userName) {
+    public static void emit(Entity entity, Vector2 direction) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener)items[i]).onCreateServerEvent(port, maxPlayers, mapName, userName);
+            ((Listener) items[i]).onDropEvent(entity, direction);
         }
         listeners.end();
     }
@@ -29,4 +32,5 @@ public class CreateServerEvent {
     public static void unregisterAll() {
         listeners.clear();
     }
+
 }

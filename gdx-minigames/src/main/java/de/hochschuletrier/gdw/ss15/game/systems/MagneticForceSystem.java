@@ -15,7 +15,9 @@ import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class MagneticForceSystem extends IteratingSystem {
-
+	/*
+	 * Size of Magnets can be changed in jason/entities (line 123(range) & 128(sensor)) you have to change both values.
+	 */
     private final float force = 75;
     
     public MagneticForceSystem() {
@@ -36,7 +38,6 @@ public class MagneticForceSystem extends IteratingSystem {
         final Team ballTeam = entity.getComponent(TeamComponent.class).team;
         int i =0;
         for (Entity magneticField : magnets.magneticFields) {
-            System.out.println("MagnetEffekt #" + i++);
             Vector2 otherPos = new Vector2();
             otherPos.x = magneticField.getComponent(PositionComponent.class).x;
             otherPos.y = magneticField.getComponent(PositionComponent.class).y;
@@ -47,7 +48,6 @@ public class MagneticForceSystem extends IteratingSystem {
             magneticForce.nor();
             //vom Magnet weg, falls gleiche Polarität
 
-            System.out.println("im Magnetsystem test");
             final Team fieldTeam = magneticField.getComponent(TeamComponent.class).team;
             if (fieldTeam == ballTeam) {
                 magneticForce.scl(-1f);

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="128" tileheight="128" nextobjectid="21">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="64" tileheight="64" nextobjectid="27">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
  <tileset firstgid="13" source="balls_and_magnets.tsx"/>
+ <tileset firstgid="23" source="tileset_ground_SpawnsAndArea.tsx"/>
  <layer name="Hintergrund" width="31" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftXvA7Ka3vcj2j9o9suweqXlsJNvNCcRcdMTcUHsBC8AKvw==
+   eJxjYWBgYARiJjpiZiBmgWJWIGajI2YftXvA7Ka3vcj2Dya7FUnQL0WCWqVB7m962j1S89hItpsTiLnoiLmh9gIAHK8LCg==
   </data>
  </layer>
  <objectgroup name="Tore">
-  <object id="4" gid="14" x="1920" y="1024"/>
-  <object id="5" gid="13" x="640" y="1024"/>
-  <object id="7" gid="15" x="3200" y="1024"/>
-  <object id="8" gid="16" x="2688" y="512"/>
-  <object id="9" gid="16" x="2688" y="1536"/>
-  <object id="10" gid="17" x="1920" y="1536"/>
-  <object id="11" gid="17" x="1152" y="1536"/>
-  <object id="12" gid="16" x="1920" y="512"/>
-  <object id="13" gid="17" x="1152" y="512"/>
-  <object id="14" gid="18" x="3584" y="640"/>
-  <object id="15" gid="18" x="3584" y="1408"/>
-  <object id="16" gid="19" x="256" y="640"/>
-  <object id="17" gid="19" x="256" y="1408"/>
-  <object id="18" x="96" y="640" width="96" height="648">
+  <object id="8" gid="16" x="1472" y="256"/>
+  <object id="9" gid="16" x="1472" y="768"/>
+  <object id="10" gid="17" x="960" y="768"/>
+  <object id="11" gid="17" x="448" y="768"/>
+  <object id="12" gid="16" x="960" y="256"/>
+  <object id="13" gid="17" x="448" y="256"/>
+  <object id="14" gid="18" x="1728" y="320"/>
+  <object id="15" gid="18" x="1728" y="704"/>
+  <object id="16" gid="19" x="192" y="320"/>
+  <object id="17" gid="19" x="192" y="704"/>
+  <object id="18" x="44" y="316" width="42" height="323">
    <properties>
     <property name="Entitytype" value="goal"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="20" x="3774" y="634" width="96" height="648">
+  <object id="20" x="1894.67" y="318" width="52.6667" height="320.667">
    <properties>
     <property name="Entitytype" value="goal"/>
     <property name="Team" value="1"/>
    </properties>
   </object>
+  <object id="24" gid="26" x="960" y="512"/>
+  <object id="25" gid="33" x="256" y="512"/>
+  <object id="26" gid="34" x="1664" y="512"/>
  </objectgroup>
 </map>

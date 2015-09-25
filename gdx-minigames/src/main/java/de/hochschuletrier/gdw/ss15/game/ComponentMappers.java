@@ -1,4 +1,4 @@
-﻿package de.hochschuletrier.gdw.ss15.game;
+package de.hochschuletrier.gdw.ss15.game;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
@@ -14,6 +14,7 @@ import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
@@ -45,6 +46,7 @@ public class ComponentMappers {
     public static final ComponentMapper<BallParticlesComponent> ballParticles = ComponentMapper.getFor(BallParticlesComponent.class);
     
     public static final ComponentMapper<MovableComponent> movable = ComponentMapper.getFor(MovableComponent.class);
+    public static final ComponentMapper<NotReceptiveComponent>notReceptive=ComponentMapper.getFor(NotReceptiveComponent.class);
 
     /* Spawnpunkte für die Spieler */
     public static final ComponentMapper<PlayerSpawnComponent> playerSpawn = ComponentMapper.getFor(PlayerSpawnComponent.class);

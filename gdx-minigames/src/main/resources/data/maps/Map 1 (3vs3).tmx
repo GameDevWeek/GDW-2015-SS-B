@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="66">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="83">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
  <tileset firstgid="13" source="Dummy Gate.tsx"/>
- <tileset firstgid="25" source="Bande_Tileset.tsx"/>
- <tileset firstgid="40" name="balls_and_magnets" tilewidth="128" tileheight="128" tilecount="10">
-  <image source="balls_and_magnets.png" trans="ffffff" width="640" height="256"/>
- </tileset>
+ <tileset firstgid="69" source="Bande_Tileset.tsx"/>
+ <tileset firstgid="84" source="balls_and_magnets.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1j0PgkAQhOEtiJ0giiiYGL/5//+QITnixVhusXOZ4unnzRW3lZlVMMBYgEvqyV1hU4Cb2iipjZPaOKmNU9623iNTgF0ePva9T5b3amAXYJeHLdTp/Za2A3QBdnloYa82Or9tJzgH2OXhCH1qe8ILHgF2ebinnreV/b+pjYfaOKmNk9o4/Wtb7xN2+T0yA9ehMt0=
+   eJzt1jsOgzAURNFXILoADYENARKChM/+98IgGeGC0oXHTHH6uXLhl5lZBh30CRhcj2+EPAGT2iipjZPaOKmNk9923SN7BLtC2Oy+T873KqGKYFcIHyjc+51tDbQR7Aqhhq/a6Lyl7Q8L/CLYFcLselZL+39TGw+1cVIbJ7Vxemq77hN2/j1yAFm/To0=
   </data>
  </layer>
  <objectgroup name="Spawn">
-  <object id="51" gid="41" x="3457.09" y="1790.91" width="128" height="128">
+  <object id="66" gid="85" x="1728" y="896" width="64" height="64">
    <properties>
     <property name="Entitytype" value="BallSpawn"/>
     <property name="Team" value=""/>
    </properties>
   </object>
-  <object id="52" gid="42" x="5377.09" y="1790.91" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="BallSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="53" gid="40" x="1536" y="1792" width="128" height="128">
+  <object id="67" gid="84" x="768" y="896" width="64" height="64">
    <properties>
     <property name="Entitytype" value="BallSpawn"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="54" gid="46" x="6142.06" y="2429.21" width="128" height="128">
+  <object id="68" gid="86" x="2688" y="896" width="64" height="64">
+   <properties>
+    <property name="Entitytype" value="BallSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="69" gid="90" x="2944" y="896" width="64" height="64">
    <properties>
     <property name="Entitytype" value="PlayerSpawn"/>
     <property name="Team" value="1"/>
    </properties>
   </object>
-  <object id="55" gid="45" x="766.061" y="2430.3" width="128" height="128">
+  <object id="70" gid="90" x="3073.33" y="577.333" width="64" height="64">
+   <properties>
+    <property name="Entitytype" value="PlayerSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="71" gid="90" x="3072" y="1218.67" width="64" height="64">
+   <properties>
+    <property name="Entitytype" value="PlayerSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="72" gid="89" x="512" y="897.333" width="64" height="64">
    <properties>
     <property name="Entitytype" value="PlayerSpawn"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="58" gid="46" x="5887.52" y="1789.82" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="PlayerSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="59" gid="46" x="6145.09" y="1153.45" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="PlayerSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </object>
-  <object id="60" gid="45" x="1023.64" y="1790.91" width="128" height="128">
+  <object id="73" gid="89" x="384" y="576" width="64" height="64">
    <properties>
     <property name="Entitytype" value="PlayerSpawn"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="61" gid="45" x="766.061" y="1151.52" width="128" height="128">
+  <object id="74" gid="89" x="384" y="1216" width="64" height="64">
    <properties>
     <property name="Entitytype" value="PlayerSpawn"/>
     <property name="Team" value="0"/>
@@ -68,13 +66,13 @@
   </object>
  </objectgroup>
  <objectgroup name="Gate">
-  <object id="9" type="Gate" x="96" y="1372.73" width="252.485" height="703.03">
+  <object id="75" type="Gate" x="48" y="686" width="116" height="360">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="10" type="Gate" x="6688" y="1375.76" width="248" height="703.03">
+  <object id="76" type="Gate" x="3353.15" y="686.97" width="116" height="360">
    <properties>
     <property name="Entitytype" value="Gate"/>
     <property name="Team" value="1"/>
@@ -82,44 +80,40 @@
   </object>
  </objectgroup>
  <objectgroup name="Magnet">
-  <properties>
-   <property name="Entitytype" value="Magnet"/>
-   <property name="Team" value="1"/>
-  </properties>
-  <object id="56" gid="48" x="3454.06" y="2880" width="128" height="128">
+  <object id="77" gid="92" x="1728.24" y="349.818" width="64" height="64">
    <properties>
     <property name="Entitytype" value="Magnet"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="57" gid="49" x="3456" y="699.879" width="128" height="128">
+  <object id="78" gid="93" x="1728.24" y="1440.36" width="64" height="64">
+   <properties>
+    <property name="Entitytype" value="Magnet"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="79" gid="92" x="576.727" y="580.121" width="64" height="64">
    <properties>
     <property name="Entitytype" value="Magnet"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="62" gid="48" x="5887.39" y="2434.55" width="128" height="128">
+  <object id="80" gid="93" x="2879.76" y="1219.15" width="64" height="64">
+   <properties>
+    <property name="Entitytype" value="Magnet"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="81" gid="92" x="2367.64" y="1343.76" width="64" height="64">
    <properties>
     <property name="Entitytype" value="Magnet"/>
     <property name="Team" value="0"/>
    </properties>
   </object>
-  <object id="63" gid="49" x="1024" y="1163.88" width="128" height="128">
+  <object id="82" gid="93" x="1088.85" y="382.788" width="64" height="64">
    <properties>
     <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="64" gid="49" x="4736" y="2827.88" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </object>
-  <object id="65" gid="48" x="2182.06" y="776" width="128" height="128">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
+    <property name="Team" value="1"/>
    </properties>
   </object>
  </objectgroup>

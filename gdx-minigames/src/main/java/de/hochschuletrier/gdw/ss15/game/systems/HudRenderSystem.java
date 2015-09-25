@@ -13,6 +13,7 @@ import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
  * This class is rendering the HUD with the update method
@@ -54,9 +55,9 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
         Main.getInstance().screenCamera.bind();
 
         String time = "time:" + (int)Math.ceil(countdown);
-        font.setColor(Color.RED);
+        font.setColor(Team.RED.color);
         font.draw(DrawUtil.batch, scoreRed, 50, 50);
-        font.setColor(Color.BLUE);
+        font.setColor(Team.BLUE.color);
         font.draw(DrawUtil.batch, scoreBlue, Gdx.graphics.getWidth() - 200, 50);
         font.setColor(Color.GREEN);
         font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth() / 2 - 100, 50);

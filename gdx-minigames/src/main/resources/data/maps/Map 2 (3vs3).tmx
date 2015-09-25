@@ -1,12 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="128" tileheight="128" nextobjectid="1">
- <tileset firstgid="1" source="balls_and_magnets.tsx"/>
- <tileset firstgid="11" source="Bande_Tileset.tsx"/>
- <tileset firstgid="26" source="Dummy Gate.tsx"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="95">
+ <tileset firstgid="1" name="balls_and_magnets" tilewidth="64" tileheight="64" tilecount="10">
+  <properties>
+   <property name="Enitytype" value="Magnet"/>
+   <property name="Team" value="1"/>
+  </properties>
+  <image source="balls_and_magnets.png" width="320" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="Entitytype" value="BallSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Entitytype" value="BallSpawn"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Entitytype" value="magnet"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Entitytype" value="magnet"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="Entitytype" value="Magnet"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="Entitytype" value="Magnet"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="11" name="Bande_Tileset" tilewidth="64" tileheight="64" tilecount="15">
+  <image source="bande_tileset" trans="ffffff" width="320" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="26" name="Dummy Gate" tilewidth="64" tileheight="64" tilecount="56">
+  <image source="Dummy Gate.png" trans="ffffff" width="512" height="448"/>
+ </tileset>
  <tileset firstgid="82" source="playgroundTileset.tsx"/>
+ <tileset firstgid="94" name="tileset_ground_SpawnsAndArea" tilewidth="64" tileheight="64" tilecount="12">
+  <image source="tileset_ground_SpawnsAndArea.png" trans="ffffff" width="768" height="64"/>
+  <tile id="3">
+   <properties>
+    <property name="Entitytype" value="Spawn"/>
+    <property name="Team" value=""/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="Enitytype" value="BallSpawn"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="Enitytype" value="BallSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="106" source="Krater.tsx"/>
+ <tileset firstgid="122" source="Sanboden.tsx"/>
+ <tileset firstgid="140" source="Krater groß.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJztmLsOwjAMRb0XJASUwMJjobDw+Br+/0+4CCx1SKIqacE3dDhTl3tU27VbicikQKZgBh4FMi/crQYrsDSQpw8WHx8HKnnX58ZArj5Yy9hvzPjctF4ZejCW1efGVK+v/KF54XPbgl3gmTU04x4cOrgdQUPmdgJnY27tfknBGXbT3s7dGS26/bImdR9LZehvSI6bztdUht7jLM+Sb7tdwJXM7QbuHdzaNwKDW+hGi+1cDHdPLCtD3eW805Ldxn8KPDDdaKn8S7+VhgNPv3ueTQ==
+   eJy1WMtuE0EQ3DtBikIg5ALkEuDC42Ms33b3OxyDN4QEG36aGWlLVErVM2ObHEqWd2a7u/o1Pbvoum4x41nCyX/Gc5L/lHoiXcBpwrKAvrLu8Fp0Zl6XB8hp0X3WwO1bwneDzbw+kLxR5A+yzvwiXsOs81cjNsIVNkTcWO9dwk+De5GpPij5+KzzeQEZ20CnwxTEzeXIifhzl/Db4I/YpPZsAp2O2xDIyFgl3CSs6X9kh+OH2jsN/Ox8u+liXhkPsq8Wtx+FuNzO66uZC9sAezX3h4o+B+TovfyP8GD4sS7YBm4aJ+Y2BTYoRuHouL1IeDXj/EBuvBe+LMWNucA3uWdsyU+oE85HZ2spbpqvSyN3H24sV3uk49KSB/2MbL/rF45bjuubhLdmjWuyhRtqL6o/9tm6Qd5k3oeN7xKuGuJ2nfBe1sZGm1aBnVGNsLybCrQ35ny8mG38kPBx9r+rATxz3KKeuese92nmzdy5f3Iv43rZF5kX5g1wK8Wtb+CmfYVrUXuz5q6rwWNnR+YWnQGD4faye9x/+s73q1Ku6ZmrZ+WhwAyicRuDuGlOLmZ+h+aN9mUX9xLGyjrsr+Uk8km5HXMfuez+zcCotVLcdT6txVa59WaN/cTcdG7XGWdZWePZbKrExc1x2rv0vda4AZ8SPgdrjgffTTbyDLZiJlTefG9hXpjB8julHIaNXxK+FrghnujLFyam2Md2sU2YHzDjroVXlo0ajOZk9YPmsOYd+sG5WYtmLjfHAJFd4Lel36nz5ymfjdFdYuy8/hZbS3mncvm/zhF8fuuzqaBvZ/bX7p9afxF/x83Vrrvf8T6d52/lWV/Qp7nnZhm24Y7kRr0UdxzOV36Xa9f5hvfpPI861NppuS9qvjNHnh3WpN/Ncblf4NsCZhCuXccJfuF9rnZcb1RuLkeiOVz7ZHSfY076ncvlH/zCc3atBqO5nec4jr2ej25eK9UXfNfyfdKdxaWzuwT1p8uRQ+Tuw+2Y2bHlPvLUulTPX/5M7YQ=
   </data>
  </layer>
+ <layer name="Ambient" width="55" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztmAsOwyAIhnvWzrmk9z/AsqwkhgBaeahbv2RZ11V+BMTGbYvhFaTzFP47HHV3R9sUD+X4dH4ssLJTm1OpQz2bO+22akr3gF2pN4LSXy6GEeC49awpa/891zXMl/OZ047uNS1Y9QAgM9eRQH48+yS+55XbkT1ptX64Cv8c14S+b9bhztmXGffxK0j+R+7ZI+uJmqdlXmvviFb2vfYSS7u/0jc+MZl17Wv80tQojI18p8FarfWVzrEW9dgSs9oztZhBTq/EVlMHnE5W2pXgzrMs+iblM3dmkglNPL78LZ1XWtK7rmbtUyVRMYQz7DffQyJV
+  </data>
+ </layer>
+ <objectgroup name="Spawn">
+  <object id="74" gid="104" x="2688.33" y="1348.33" width="64" height="64"/>
+  <object id="75" gid="105" x="768" y="444" width="64" height="64"/>
+  <object id="78" gid="97" x="1728" y="895.333" width="64" height="64"/>
+  <object id="88" gid="6" x="640" y="388" width="64" height="64"/>
+  <object id="89" gid="6" x="700" y="764" width="64" height="64"/>
+  <object id="90" gid="6" x="700" y="1412" width="64" height="64"/>
+  <object id="91" gid="7" x="2812" y="1408" width="64" height="64"/>
+  <object id="92" gid="7" x="2752" y="1028" width="64" height="64"/>
+  <object id="93" gid="7" x="2752" y="380" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Gate">
+  <properties>
+   <property name="Entitytype" value="Gate"/>
+   <property name="Team" value="0"/>
+  </properties>
+  <object id="12" type="Gate" x="281.818" y="554.545" width="124.242" height="618.182">
+   <properties>
+    <property name="Entitytype" value="Gate"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="13" type="Gate" x="3112.12" y="551.515" width="124.242" height="618.182">
+   <properties>
+    <property name="Entitytype" value="Gate"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Magnet">
+  <object id="28" gid="9" x="1920.48" y="768.364" width="64" height="64"/>
+  <object id="29" gid="10" x="1536.61" y="1024.85" width="64" height="64"/>
+  <object id="30" gid="10" x="1536.61" y="962.182" width="64" height="64"/>
+  <object id="31" gid="9" x="1920.48" y="833.697" width="64" height="64"/>
+  <object id="32" gid="9" x="1728.48" y="1152.36" width="64" height="64"/>
+  <object id="33" gid="10" x="1728.61" y="642.182" width="64" height="64"/>
+  <object id="42" gid="10" x="63.2727" y="640.848" width="64" height="64"/>
+  <object id="43" gid="10" x="63.2727" y="706.182" width="64" height="64"/>
+  <object id="44" gid="10" x="63.2727" y="770.182" width="64" height="64"/>
+  <object id="45" gid="10" x="63.2727" y="576.848" width="64" height="64"/>
+  <object id="46" gid="10" x="63.2727" y="512.848" width="64" height="64"/>
+  <object id="47" gid="10" x="63.2727" y="832.848" width="64" height="64"/>
+  <object id="48" gid="10" x="63.2727" y="896.848" width="64" height="64"/>
+  <object id="49" gid="10" x="61.9394" y="960.848" width="64" height="64"/>
+  <object id="50" gid="10" x="63.2727" y="1090.18" width="64" height="64"/>
+  <object id="51" gid="10" x="61.9394" y="1024.85" width="64" height="64"/>
+  <object id="52" gid="10" x="63.2727" y="1152.85" width="64" height="64"/>
+  <object id="53" gid="10" x="63.2727" y="1216.85" width="64" height="64"/>
+  <object id="54" gid="10" x="63.2727" y="1282.18" width="64" height="64"/>
+  <object id="55" gid="9" x="3395.15" y="769.697" width="64" height="64"/>
+  <object id="56" gid="9" x="3395.15" y="704.364" width="64" height="64"/>
+  <object id="57" gid="9" x="3393.82" y="641.697" width="64" height="64"/>
+  <object id="58" gid="9" x="3393.82" y="576.364" width="64" height="64"/>
+  <object id="59" gid="9" x="3393.82" y="511.03" width="64" height="64"/>
+  <object id="60" gid="9" x="3393.82" y="833.697" width="64" height="64"/>
+  <object id="61" gid="9" x="3392.48" y="895.03" width="64" height="64"/>
+  <object id="62" gid="9" x="3395.15" y="957.697" width="64" height="64"/>
+  <object id="63" gid="9" x="3393.82" y="1025.7" width="64" height="64"/>
+  <object id="64" gid="9" x="3393.82" y="1088.36" width="64" height="64"/>
+  <object id="65" gid="9" x="3392.48" y="1152.36" width="64" height="64"/>
+  <object id="66" gid="9" x="3392.48" y="1217.7" width="64" height="64"/>
+  <object id="67" gid="9" x="3392.48" y="1283.03" width="64" height="64"/>
+  <object id="79" gid="9" x="1920.82" y="1599.03" width="64" height="64"/>
+  <object id="80" gid="9" x="1857.82" y="191.03" width="64" height="64"/>
+  <object id="81" gid="10" x="1535.27" y="191.848" width="64" height="64"/>
+  <object id="82" gid="10" x="1600.27" y="1600.85" width="64" height="64"/>
+  <object id="83" gid="9" x="3263.82" y="1472.03" width="64" height="64"/>
+  <object id="84" gid="9" x="3264.82" y="319.03" width="64" height="64"/>
+  <object id="86" gid="10" x="193.273" y="1472.85" width="64" height="64"/>
+  <object id="87" gid="10" x="191.273" y="320.848" width="64" height="64"/>
+ </objectgroup>
 </map>

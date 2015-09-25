@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="balls_and_magnets" tilewidth="64" tileheight="64" tilecount="10">
+<tileset name="balls_and_magnets" tilewidth="64" tileheight="64">
  <properties>
   <property name="Enitytype" value="Magnet"/>
   <property name="Team" value="1"/>
@@ -26,6 +26,18 @@
  <tile id="4">
   <properties>
    <property name="Entitytype" value="magnet"/>
+   <property name="Team" value="0"/>
+  </properties>
+ </tile>
+ <tile id="5">
+  <properties>
+   <property name="Entitytype" value="PlayerSpawn"/>
+   <property name="Team" value="1"/>
+  </properties>
+ </tile>
+ <tile id="6">
+  <properties>
+   <property name="Entitytype" value="PlayerSpawn"/>
    <property name="Team" value="0"/>
   </properties>
  </tile>

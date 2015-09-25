@@ -1,8 +1,6 @@
 ﻿package de.hochschuletrier.gdw.ss15.game;
 
-
 import com.badlogic.ashley.core.Entity;
-
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;

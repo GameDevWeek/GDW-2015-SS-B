@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
-import de.hochschuletrier.gdw.ss15.events.BallOwnershipChangedEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
@@ -23,7 +23,7 @@ import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 
 public class NetServerSendSystem extends EntitySystem implements EntityListener,
-        ChangeAnimationStateEvent.Listener, SoundEvent.Listener, BallOwnershipChangedEvent.Listener {
+        ChangeAnimationStateEvent.Listener, SoundEvent.Listener, ChangeBallOwnershipEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> movables;
@@ -41,7 +41,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         movables = engine.getEntitiesFor(Family.all(MovableComponent.class, PositionComponent.class, PhysixBodyComponent.class).get());
         ChangeAnimationStateEvent.register(this);
         SoundEvent.register(this);
-        BallOwnershipChangedEvent.register(this);
+        ChangeBallOwnershipEvent.register(this);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         movables = null;
         ChangeAnimationStateEvent.unregister(this);
         SoundEvent.unregister(this);
-        BallOwnershipChangedEvent.unregister(this);
+        ChangeBallOwnershipEvent.unregister(this);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
     }
 
     @Override
-    public void onBallOwnershipChangedEvent(Entity owner) {
+    public void onChangeBallOwnershipEvent(Entity owner) {
         netServer.broadcastReliable(BallOwnershipChangedDatagram.create(owner));
     }
 }

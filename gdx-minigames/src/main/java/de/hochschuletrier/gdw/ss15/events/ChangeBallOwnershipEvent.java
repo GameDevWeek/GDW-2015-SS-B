@@ -3,10 +3,10 @@ package de.hochschuletrier.gdw.ss15.events;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.SnapshotArray;
 
-public class BallOwnershipChangedEvent {
+public class ChangeBallOwnershipEvent {
 
     public static interface Listener {
-        void onBallOwnershipChangedEvent(Entity owner);
+        void onChangeBallOwnershipEvent(Entity owner);
     }
 
     private static final SnapshotArray<Listener> listeners = new SnapshotArray();
@@ -14,7 +14,7 @@ public class BallOwnershipChangedEvent {
     public static void emit(Entity owner) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener)items[i]).onBallOwnershipChangedEvent(owner);
+            ((Listener)items[i]).onChangeBallOwnershipEvent(owner);
         }
         listeners.end();
     }

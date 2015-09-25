@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss15.events.BallOwnershipChangedEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
@@ -35,8 +35,7 @@ public class BallListener extends PhysixContactAdapter {
                 NotReceptiveComponent notReceptive=ComponentMappers.notReceptive.get(otherEntity);
                 if (player != null&&notReceptive==null) {
                     SoundEvent.emit("ball_pickup", otherEntity);
-                    player.hasBall = true;
-                    BallOwnershipChangedEvent.emit(otherEntity);
+                    ChangeBallOwnershipEvent.emit(otherEntity);
                     engine.removeEntity(myEntity);
                 }else if (player != null&&notReceptive!=null) {
                     //för sth like sound etc

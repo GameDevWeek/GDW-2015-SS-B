@@ -2,6 +2,8 @@ package de.hochschuletrier.gdw.ss15.game;
 
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -9,6 +11,7 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
@@ -42,7 +45,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
-public class TestGame extends AbstractGame {
+public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.Listener{
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
 
@@ -50,6 +53,7 @@ public class TestGame extends AbstractGame {
     private final PlayerSpawnManager playerSpawns = new PlayerSpawnManager(engine);
 
     private BallManager ballManager;
+    private ImmutableArray<Entity> players;
 
     public TestGame() {
         this(null, null);
@@ -72,6 +76,9 @@ public class TestGame extends AbstractGame {
     @Override
     public void init(AssetManagerX assetManager, String mapName) {
         super.init(assetManager, mapName);
+        
+        players = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
+        ChangeBallOwnershipEvent.register(this);
 
         MapLoader.entityFactory.init(engine, assetManager);
 
@@ -181,5 +188,14 @@ public class TestGame extends AbstractGame {
             netClient.disconnect();
         else if (netServer != null)
             netServer.disconnect();
+        ChangeBallOwnershipEvent.unregister(this);
+    }
+
+    @Override
+    public void onChangeBallOwnershipEvent(Entity owner) {
+        for(Entity player: players)
+            ComponentMappers.player.get(player).hasBall = false;
+        if(owner != null)
+            ComponentMappers.player.get(owner).hasBall = true;
     }
 }

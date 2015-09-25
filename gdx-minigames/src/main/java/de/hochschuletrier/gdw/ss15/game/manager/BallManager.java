@@ -16,7 +16,7 @@ import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
-import de.hochschuletrier.gdw.ss15.events.BallOwnershipChangedEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
@@ -33,7 +33,7 @@ import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
 
 public final class BallManager implements ChangeGameStateEvent.Listener,
-        GoalEvent.Listener, ShootEvent.Listener,BallDropEvent.Listener{
+        GoalEvent.Listener, ShootEvent.Listener,BallDropEvent.Listener {
 
     ArrayList<Entity> start_spawns = new ArrayList<Entity>();
     ArrayList<Entity> team_0_spawns = new ArrayList<Entity>();
@@ -41,7 +41,6 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
     private final PooledEngine engine;
     private final ImmutableArray<Entity> balls;
-    private final ImmutableArray<Entity> players;
     private GameState gameState;
 
     public BallManager(PooledEngine engine) {
@@ -49,7 +48,6 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
 
         distributeSpawns();
         balls = engine.getEntitiesFor(Family.all(BallComponent.class).get());
-        players = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
 
         ChangeGameStateEvent.register(this);
         GoalEvent.register(this);
@@ -87,10 +85,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
         for(Entity ball: balls) 
             engine.removeEntity(ball);
         
-        for(Entity player: players) {
-            ComponentMappers.player.get(player).hasBall = false;
-            BallOwnershipChangedEvent.emit(null);
-        }
+        ChangeBallOwnershipEvent.emit(null);
     }
     
     private PositionComponent getRandomSpawn(ArrayList<Entity> spawns) {
@@ -147,7 +142,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
             SoundEvent.emit("ball_shot", entityFrom);
-            player.hasBall = false;
+            ChangeBallOwnershipEvent.emit(null);
             //füge "stunning" hinzu/kann den Ball nicht mehr aufnehmen 
             final float stunningTime= 0.4f;
             NotReceptiveComponent notReceptive = engine

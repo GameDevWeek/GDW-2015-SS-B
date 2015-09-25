@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
-import de.hochschuletrier.gdw.ss15.events.BallOwnershipChangedEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
@@ -120,13 +120,12 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     public void handle(BallOwnershipChangedDatagram datagram) {
         long netId = datagram.getOwnerId();
         if (netId == 0) {
-            BallOwnershipChangedEvent.emit(null);
+            ChangeBallOwnershipEvent.emit(null);
         } else {
             Entity entity = netEntityMap.get(netId);
             if (entity != null) {
                 PlayerComponent player = ComponentMappers.player.get(entity);
-                player.hasBall = true;
-                BallOwnershipChangedEvent.emit(entity);
+                ChangeBallOwnershipEvent.emit(entity);
             }
         }
     }

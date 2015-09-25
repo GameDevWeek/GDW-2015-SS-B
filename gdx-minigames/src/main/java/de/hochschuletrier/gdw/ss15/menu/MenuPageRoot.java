@@ -25,16 +25,16 @@ public class MenuPageRoot extends MenuPage {
         int y = 370;
         int yStep = 55;
         if (type == Type.MAINMENU) {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel Starten", this::startGame);
-            addPageEntry(menuManager, x, y - yStep * (i++), "Join Server", new MenuPageJoinServer(skin, menuManager));
-            addPageEntry(menuManager, x, y - yStep * (i++), "Host Server", new MenuPageHostServer(skin, menuManager));
+            createLabel(400, 500, 600, 80, "Main Menu");
+            addPageEntry(menuManager, 50, 300, "Join Server", new MenuPageJoinServer(skin, menuManager));
+            addPageEntry(menuManager, 50, 200, "Host Server", new MenuPageHostServer(skin, menuManager));
             
         } else {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Fortsetzen", () -> menuManager.popPage());
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel verlassen", this::stopGame);
+            addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
+            addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);
         }
-        addPageEntry(menuManager, x, y - yStep * (i++), "Credits", new MenuPageCredits(skin, menuManager));
-        addCenteredButton(menuManager.getWidth() - 80, 54, 100, 40, "Exit", () -> System.exit(-1));
+        addPageEntry(menuManager, 50, 300, "Credits", new MenuPageCredits(skin, menuManager));
+        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
     }
 
     private void startServer() {

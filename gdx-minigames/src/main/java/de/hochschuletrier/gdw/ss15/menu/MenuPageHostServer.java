@@ -6,6 +6,7 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -24,7 +25,7 @@ public class MenuPageHostServer extends MenuPage {
     //private final TextField serverIP;
     private final TextField serverPort;
     private final TextField username;
-    private final TextField mapname;
+    private final SelectBox mapname;
     
     public MenuPageHostServer(Skin skin, MenuManager menuManager) {
         super(skin, "menu_bg");
@@ -46,7 +47,8 @@ public class MenuPageHostServer extends MenuPage {
         createLabel(50, 300, 300, 50, "Enter Username");
         username = createTextField(400, 300, 300, 50, "Host");
         createLabel(50, 250, 300, 50, "Select Map");
-        mapname = createTextField(400, 250, 300, 50, "Map");
+        mapname = selectBox(400, 250, 300, 50, "Select Map");
+        //mapname = createTextField(400, 250, 300, 50, "Map");
         addLeftAlignedButton(400, 200, 300, 50, "Server Starten", this::startServer);
         //addCenteredButton(..., this::joinServer); 
         

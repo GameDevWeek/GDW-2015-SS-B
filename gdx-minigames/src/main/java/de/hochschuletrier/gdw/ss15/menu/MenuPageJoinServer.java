@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -18,8 +19,8 @@ import de.hochschuletrier.gdw.ss15.game.GameConstants;
 public class MenuPageJoinServer extends MenuPage {
     private final TextField username;
     private final TextField serverIP;
-    private final TextField mapname;
     private final TextField serverPort;
+    private final SelectBox mapname;
     
     
     public MenuPageJoinServer(Skin skin, MenuManager menuManager) {
@@ -37,11 +38,12 @@ public class MenuPageJoinServer extends MenuPage {
         createLabel(50, 400, 300, 50, "Enter Server IP");
         serverIP = createTextField(400, 400, 300, 50, "localhost");
         createLabel(50, 350, 300, 50, "Enter Server Port");
-        serverPort = createTextField(400, 350, 300, 50, "9090t");
+        serverPort = createTextField(400, 350, 300, 50, "9090");
         createLabel(50, 300, 300, 50, "Enter Username");
         username = createTextField(400, 300, 300, 50, "Client");
         createLabel(50, 250, 300, 50, "Select Map");
-        mapname = createTextField(400, 250, 300, 50, "Map");
+        mapname = selectBox(400, 250, 300, 50, "Select Map");
+        //mapname = createTextField(400, 250, 300, 50, "Map");
         addLeftAlignedButton(400, 200, 300, 50, "Join Server", this::joinServer);
         
         addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
@@ -60,12 +62,11 @@ public class MenuPageJoinServer extends MenuPage {
     }
     
     private void joinServer() {
-        String server = "loclahost";
+        
         try {
-            int server = this.serverIP.getText();
+            String server = this.serverIP.getText();
             int port = Integer.parseInt(this.serverPort.getText());
             String userName = this.username.getText();
-            String mapName = "data/maps/NiceMap.tmx";
             JoinServerEvent.emit(server, port, userName);
         }   catch(NumberFormatException e){}
         

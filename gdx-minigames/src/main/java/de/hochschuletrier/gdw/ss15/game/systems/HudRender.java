@@ -49,13 +49,17 @@ public class HudRender {
         
         
         
-        // EXAMPLE how to display text for the hud // 
-        String tmp = "team"+ teamManager.getScore(Team.BLUE);
-        String tmp1 = "team"+teamManager.getScore(Team.RED);
+        // EXAMPLE how to display text for the hud //
+        
+        String tmp = "BLUE "+ teamManager.getScore(Team.BLUE);
+        String tmp1 = "RED "+teamManager.getScore(Team.RED);
+        String time = "time:"+System.currentTimeMillis();
         font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);
         font.draw(DrawUtil.batch, tmp1,Gdx.graphics.getWidth()-200, 50);
+        font.setColor(Color.GREEN);
+        font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2, 50);
 //        font.draw(DrawUtil.batch,"" )
         
     }

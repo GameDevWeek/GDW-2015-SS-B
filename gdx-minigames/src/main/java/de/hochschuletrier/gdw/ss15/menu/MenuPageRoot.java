@@ -26,6 +26,7 @@ public class MenuPageRoot extends MenuPage {
             maps = JacksonReader.readMap("data/json/maps.json", String.class);
             for(String name: maps.keySet()) {
                 System.out.println(name);
+                //get.
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,9 +34,9 @@ public class MenuPageRoot extends MenuPage {
         }
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
-        int x = 100;
+        int x = 500;
         int i = 0;
-        int y = 370;
+        int y = 500;
         int yStep = 55;
         if (type == Type.MAINMENU) {
             createLabel(400, 500, 600, 80, "Main Menu");
@@ -46,7 +47,7 @@ public class MenuPageRoot extends MenuPage {
             addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
             addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);
         }
-        addPageEntry(menuManager, 50, 300, "Credits", new MenuPageCredits(skin, menuManager));
+        addPageEntry(menuManager, 50, 100, "Credits", new MenuPageCredits(skin, menuManager));
         addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
     }
 
@@ -74,6 +75,6 @@ public class MenuPageRoot extends MenuPage {
 
     protected final void addPageEntry(MenuManager menuManager, int x, int y, String text, MenuPage page) {
         menuManager.addLayer(page);
-        addLeftAlignedButton(x, y, 300, 40, text, () -> menuManager.pushPage(page));
+        addLeftAlignedButton(x, y, 300, 50, text, () -> menuManager.pushPage(page));
     }
 }

@@ -33,16 +33,21 @@ public class MenuPageJoinServer extends MenuPage {
         int width = 300;
         int height = 50;
         
+        createLabel(400, 500, 600, 80, "Join Server Menu");
+        createLabel(50, 400, 300, 50, "Enter Server IP");
+        serverIP = createTextField(400, 400, 300, 50, "localhost");
+        createLabel(50, 350, 300, 50, "Enter Server Port");
+        serverPort = createTextField(400, 350, 300, 50, "9090t");
+        createLabel(50, 300, 300, 50, "Enter Username");
+        username = createTextField(400, 300, 300, 50, "Client");
+        createLabel(50, 250, 300, 50, "Select Map");
+        mapname = createTextField(400, 250, 300, 50, "Map");
+        addLeftAlignedButton(400, 200, 300, 50, "Join Server", this::joinServer);
         
-        createLabel(50, 50, 300, 50, "Enter Server IP");
-        serverIP = createTextField(50, 100, 300, 50, "111.111.111.111");
-        createLabel(50, 50, 300, 50, "Enter Server Port");
-        serverPort = createTextField(50, 100, 300, 50, "");
-        createLabel(50, 50, 300, 50, "Enter Username");
-        username = createTextField(50, 100, 300, 50, "default");
-        createLabel(50, 50, 300, 50, "Select Map");
-        mapname = createTextField(50, 100, 300, 50, "default");
-        //addCenteredButton(..., this::joinServer);
+        addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
+        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
+
+        //addButton(50, 50,300, 50, "text" this::joinServer, "style");
         
         //addCenteredButton(x, y - yStep * (i++), 400, 50, "Enter Server IP and Nickname", this::enterIP);
         /*
@@ -50,34 +55,19 @@ public class MenuPageJoinServer extends MenuPage {
         //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
         
         
-        addCenteredButton(x, y - yStep * (i++), 400, 50, "Back To Menu", () -> menuManager.popPage());
         
-        addCenteredButton(x, y - yStep * (i++), 400, 50, "Exit Client", () -> System.exit(-1));
                 */
     }
-
-    private void enterIP() {
-        
-        
-    }
-
-    private void startServer() {
-        String userName = "Server";
-        int port = 9090;
-        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, userName);
-    }
-
+    
     private void joinServer() {
-        String server = "localhost";
-        String userName = "Client";
-        int port = 9090;
-        JoinServerEvent.emit(server, port, userName);
-    }
-    
-    private void enterNickname() {
+        String server = "loclahost";
+        try {
+            int server = this.serverIP.getText();
+            int port = Integer.parseInt(this.serverPort.getText());
+            String userName = this.username.getText();
+            String mapName = "data/maps/NiceMap.tmx";
+            JoinServerEvent.emit(server, port, userName);
+        }   catch(NumberFormatException e){}
         
-        //*.emit();      
     }
-    
-    
 }

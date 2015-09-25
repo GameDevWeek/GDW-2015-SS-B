@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -81,5 +82,9 @@ public class MenuPage extends Group {
         return createLabel;
     }
     
-    //protected final select //dropdown menu
+    protected final void selectBox(int x, int y, int width, int height, String text) {
+        Label selectBox = new Label(text, skin);
+        selectBox.setBounds(x, y, width, height);
+        addActor(selectBox);
+    }
 }

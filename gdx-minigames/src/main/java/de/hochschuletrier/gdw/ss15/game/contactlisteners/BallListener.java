@@ -1,6 +1,5 @@
 ﻿package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 

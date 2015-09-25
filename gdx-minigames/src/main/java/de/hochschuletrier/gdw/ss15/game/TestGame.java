@@ -55,8 +55,8 @@ public class TestGame extends AbstractGame {
             factoryParam.allowPhysics = false;
     }
     
-    private void initLoadMap() {
-        map = loadMap("data/maps/NiceMap.tmx");
+    private void initLoadMap(String mapName) {
+        map = loadMap(mapName);
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
     }
@@ -67,7 +67,7 @@ public class TestGame extends AbstractGame {
 
         MapLoader.entityFactory.init(engine, assetManager);
 
-        this.initLoadMap();
+        this.initLoadMap(mapName);
 
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map);
 

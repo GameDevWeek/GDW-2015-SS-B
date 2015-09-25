@@ -1,0 +1,5 @@
+{
+    "test": "data/particleEffects/test.pe",
+    "test2": "data/particleEffects/ball_red_mid.pe",
+    "statedBall": "data/particleEffects/ball_stated.pe"
+}

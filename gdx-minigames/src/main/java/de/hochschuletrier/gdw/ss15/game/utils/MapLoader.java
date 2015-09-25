@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game.utils;
 
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.GoalTrigger;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -8,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
@@ -17,8 +20,10 @@ import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
+import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
+import java.util.function.Consumer;
 
 /**
  *
@@ -51,6 +56,25 @@ public class MapLoader {
         engine.addEntity(entity);
         return entity;
     }
+
+    public static void createTrigger(PooledEngine engine, PhysixSystem physixSystem, float x, float y, float width, float height, Consumer<Entity> consumer) {
+        Entity entity = engine.createEntity();
+        PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
+        entity.add(modifyComponent);
+        TriggerComponent triggerComponent = engine.createComponent(TriggerComponent.class);
+        triggerComponent.consumer = consumer;
+        entity.add(triggerComponent);
+        modifyComponent.schedule(() -> {
+            PhysixBodyComponent bodyComponent = engine.createComponent(PhysixBodyComponent.class);
+            PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(x + width/2, y + height/2);
+            bodyComponent.init(bodyDef, physixSystem, entity);
+            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).sensor(true).shapeBox(width, height);
+            bodyComponent.createFixture(fixtureDef);
+            entity.add(bodyComponent);
+        });
+        engine.addEntity(entity);
+    }
+    
     public static void generateWorldFromTileMapX(PooledEngine engine,
             PhysixSystem physixSystem, TiledMap map) {
         
@@ -83,6 +107,11 @@ public class MapLoader {
                         }
                          
                         switch (entitytype) {
+                            case "goal":
+                                createTrigger(engine, physixSystem,
+                                        obj.getX(), obj.getY(), obj.getWidth(), obj.getHeight(),
+                                        new GoalTrigger(engine, team));
+                                break;
                             case "magnet":
                             	if(team == Team.BLUE) {
                             		entitytype = "magnet_minus";

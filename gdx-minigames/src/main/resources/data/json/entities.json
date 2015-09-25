@@ -21,13 +21,17 @@
                 "animation_ball_neutral_shadow": "ball_base",
                 "scale": 0.6
             },
+            "ballParticles":{
+                "effect": "statedBall",
+                "startState": "neutral"
+            },
             "Movable": {},
             "PhysixBody": {
                 "type": "circle",
                 "size": 30,
                 "density": 5,
                 "friction": 0.2,
-                "restitution": 0.4
+                "restitution": 0.6
             },
             "Team": {},
             "Ball":{},
@@ -67,19 +71,16 @@
             "Player": {},
             "Input": {},
             "StateRelatedAnimations": {
-                "animation_idle": "box",
-                "animation_shoot": "ball",
-                "animation_idle_shadow": "ball",
-                "animation_shoot_shadow": "ball",
-                "initial_state": "idle"
+                "animation_idle_plus": "player_idle_plus",
+                "animation_walk_plus": "player_walk_plus",
+                "animation_idle_minus": "player_idle_minus",
+                "animation_walk_minus": "player_walk_minus",
+                "initial_state": "idle_plus",
+                "scale": 1.5
             },
             "Movable": {},
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0
+                "type": "player"
             },
             "Team": {}
         }
@@ -117,10 +118,13 @@
                 "texture": "magnet_plus",
                 "scale": 0.9
             },
-            "Magnet": {},
+            "MagneticField": {
+            "range":250
+            },
             "PhysixBody": {
                 "type": "magnet",
-                "size":60
+                "size":50, 
+                "sensor": 250
             }
     	}
     },
@@ -133,10 +137,13 @@
                 "texture": "magnet_minus",
                 "scale": 0.9
             },
-            "Magnet": {},
+            "MagneticField": {
+                "range" :250
+            },
             "PhysixBody": {
                 "type": "magnet",
-                "size":60
+                "size":50,
+                "sensor": 250
             }
     	}
     }

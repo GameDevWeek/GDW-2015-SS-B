@@ -23,6 +23,10 @@ public class PullChangeDatagram extends NetDatagram {
         return datagram;
     }
 
+    public boolean getOn() {
+        return on;
+    }
+
     public Vector2 getDirection() {
         return direction;
     }
@@ -34,6 +38,7 @@ public class PullChangeDatagram extends NetDatagram {
 
     @Override
     public void writeToMessage(NetMessageOut message) {
+        message.putBool(on);
         if(on) {
             message.putFloat(direction.x);
             message.putFloat(direction.y);
@@ -47,9 +52,5 @@ public class PullChangeDatagram extends NetDatagram {
             direction.x = message.getFloat();
             direction.y = message.getFloat();
         }
-    }
-
-    public boolean getOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

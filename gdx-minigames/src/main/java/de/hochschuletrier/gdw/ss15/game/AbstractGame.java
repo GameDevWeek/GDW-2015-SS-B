@@ -22,6 +22,7 @@ import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.BallParticlesRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
@@ -70,6 +71,7 @@ public abstract class AbstractGame {
         if(factoryParam.allowPhysics) {
             engine.addSystem(physixSystem);
             engine.addSystem(physixDebugRenderSystem);
+            
         }
         engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
         engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
@@ -77,6 +79,7 @@ public abstract class AbstractGame {
         engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS+2));
         engine.addSystem(new LimitedSmoothCameraSystem(GameConstants.PRIORITY_CAMERA));
         engine.addSystem(new SoundSystem(GameConstants.PRIORITY_CAMERA));
+        engine.addSystem(new BallParticlesRenderSystem(GameConstants.PRIORITY_ANIMATIONS - 1));
        
     }
 
@@ -91,23 +94,5 @@ public abstract class AbstractGame {
 
     public void update(float delta) {
         engine.update(delta);
-    }
-
-    public void createTrigger(float x, float y, float width, float height, Consumer<Entity> consumer) {
-        Entity entity = engine.createEntity();
-        PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
-        entity.add(modifyComponent);
-        TriggerComponent triggerComponent = engine.createComponent(TriggerComponent.class);
-        triggerComponent.consumer = consumer;
-        entity.add(triggerComponent);
-        modifyComponent.schedule(() -> {
-            PhysixBodyComponent bodyComponent = engine.createComponent(PhysixBodyComponent.class);
-            PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(x, y);
-            bodyComponent.init(bodyDef, physixSystem, entity);
-            PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).sensor(true).shapeBox(width, height);
-            bodyComponent.createFixture(fixtureDef);
-            entity.add(bodyComponent);
-        });
-        engine.addEntity(entity);
     }
 }

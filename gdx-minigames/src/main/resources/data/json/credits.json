@@ -29,17 +29,58 @@
             ]
         },
         
+        "animation_1": {
+            "type": "linear",
+            "destinations": [
+                {"x": 200, "y": 800, "speed": 80 },
+                {"x": 200, "y": -50, "speed": 80 }
+            ]
+        },
+        
+        "animation_2": {
+            "type": "linear",
+            "destinations": [
+                {"x": 470, "y": 800, "speed": 90 },
+                {"x": 470, "y": -50, "speed": 90 }
+            ]
+        },
+        
+        "animation_3": {
+            "type": "linear",
+            "destinations": [
+                {"x": 700, "y": 800, "speed": 60 },
+                {"x": 700, "y": -50, "speed": 60 }
+            ]
+        },
+        
+        "animation_4": {
+            "type": "linear",
+            "destinations": [
+                {"x": 470, "y": 800, "speed": 25 },
+                {"x": 470, "y": -50, "speed": 25 }
+            ]
+        },
+        
         "GDW": {
             "type": "linear",
             "destinations": [
                 {"x": 300, "y": 120, "speed": 25 },
                 {"x": 300, "y": 700, "speed": 25 }
             ]
+        },
+        
+        "Ende": {
+            "type": "linear",
+            "destinations": [
+                {"x": 500, "y": 120, "speed": 15 },
+                {"x": 500, "y": 700, "speed": 15 }
+            ]
         }
     },
     
     "queues": {
         "test-text": {
+        	"layer": 1,
             "time": 0,
             "items" : [
                 { "type": "text", "path" : "GDW", "style" : "title", "text": "Game Development Week", "delay": "0" },
@@ -51,7 +92,7 @@
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Gamelogic", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Thierbach", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Oetzkan", "delay": "1100" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Özkan", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Bennet Pieper", "delay": "1100" },
  
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Input", "delay": "2000" },
@@ -81,12 +122,44 @@
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Anja Regnery", "delay": "1100" },
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Credits", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schütze", "delay": "1100" }
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schütze", "delay": "1100" },
+                
+                { "type": "text", "path" : "Ende", "style" : "text", "text": "Ende", "delay": "20000" }
             ],
             
             "animations": [
     			{ "time": 0, "animation": "fade_in", "animationTime": 1000, "group": "*" }
-    		] 
-        }
+    		]
+    		
+    		 
+        },
+        
+        "animations": {
+        	"layer": 0,
+        	
+    		"items": [
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "0" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "1500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "2500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3500" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "3500" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_3", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_1", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4000" },
+    			{ "type": "animation", "path": "animation_2", "resource": "player_walk_plus", "scale": "1", "oriented": "false", "delay": "4500" },
+    			{ "type": "animation", "path": "animation_4", "resource": "player_walk_minus", "scale": "1", "oriented": "false", "delay": "7000" }
+    			
+    			]
+    		}
     }
 }

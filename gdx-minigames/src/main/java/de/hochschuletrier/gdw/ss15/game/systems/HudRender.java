@@ -25,8 +25,8 @@ public class HudRender {
     private BitmapFont font;
     private int goalred = 0;
     private int goalblue = 0;
-    private double playTime ;
-    private double oldTime;
+    private int playTime ;
+    private int oldTime;
 
     
     private TeamManager teamManager = new TeamManager();
@@ -38,11 +38,11 @@ public class HudRender {
        
         this.camera = camera;
         this.playTime=0;
-        this.oldTime=(int)((System.currentTimeMillis()/1000)%10);
+        this.oldTime=(int)(System.currentTimeMillis()/1000);
     }
     
     public void update() {
-    	double newTime=(int)((System.currentTimeMillis()/1000)%10);
+    	int newTime=(int)(System.currentTimeMillis()/1000);
     	double delta=newTime-oldTime;
     	playTime+=delta;
     	oldTime=newTime;

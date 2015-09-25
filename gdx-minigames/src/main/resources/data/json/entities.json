@@ -117,14 +117,14 @@
             "Team": {},
             "Texture": {
                 "texture": "magnet_plus",
-                "scale": 0.9
+                "scale": 0.7
             },
             "MagneticField": {
             "range":250
             },
             "PhysixBody": {
                 "type": "magnet",
-                "size":50, 
+                "size":35, 
                 "sensor": 250
             }
     	}
@@ -136,14 +136,14 @@
             "Team": {},
             "Texture": {
                 "texture": "magnet_minus",
-                "scale": 0.9
+                "scale": 0.7
             },
             "MagneticField": {
                 "range" :250
             },
             "PhysixBody": {
                 "type": "magnet",
-                "size":50,
+                "size":35,
                 "sensor": 250
             }
     	}

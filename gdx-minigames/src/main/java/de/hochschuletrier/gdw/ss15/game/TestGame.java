@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
@@ -15,6 +16,7 @@ import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
@@ -71,16 +73,6 @@ public class TestGame extends AbstractGame {
 
         MapLoader.generateWorldFromTileMapX(engine, physixSystem, map);
 
-        if(netClient == null) {
-            /* TEST SPIELER ERSTELLEN */
-            Entity player = playerSpawns.spawnPlayer();
-            player.add(engine.createComponent(LocalPlayerComponent.class));
- 
-            //Nur zum testen der Ballphysik
-            Entity ball= MapLoader.createEntity(engine, "ball", 3200, 500, Team.BLUE);
-           // ball.add(component)
-        }
-        
         setupPhysixWorld();
         if(netClient == null)
             ballManager = new BallManager(engine);
@@ -91,6 +83,14 @@ public class TestGame extends AbstractGame {
         } else if(netClient != null) {
             netClient.setHandler(engine.getSystem(NetClientUpdateSystem.class));
             netClient.setListener(engine.getSystem(NetClientUpdateSystem.class));
+        }
+        
+        if(netClient == null) {
+            /* TEST SPIELER ERSTELLEN */
+            Entity player = playerSpawns.spawnPlayer();
+            player.add(engine.createComponent(LocalPlayerComponent.class));
+ 
+            ChangeGameStateEvent.emit(GameState.GAME);
         }
     }
 

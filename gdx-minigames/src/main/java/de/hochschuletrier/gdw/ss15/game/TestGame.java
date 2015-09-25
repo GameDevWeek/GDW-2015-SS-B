@@ -109,6 +109,7 @@ public class TestGame extends AbstractGame {
         engine.addSystem(new GoalShotEventSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(2));
         
+        
         if(netServer != null) {
             engine.addSystem(new NetServerSendSystem(netServer));
             engine.addSystem(new NetServerUpdateSystem(playerSpawns, netServer, GameType.MAGNET_BALL, getMapName()));

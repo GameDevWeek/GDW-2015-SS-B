@@ -22,20 +22,16 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 
 public class RenderBallAtPlayerSystem extends IteratingSystem  {
-    private final AssetManagerX assetManager;
     private Texture ball_red, ball_base, ball_blue;
-    private ParticleEffect ball_effect;
     private final float speed = 200.0f;
     private float rotation = 0;
+    String effectName;
     
     public RenderBallAtPlayerSystem(int priority, AssetManagerX assetManager) {
         super(Family.all(PositionComponent.class, PlayerComponent.class, TeamComponent.class).get(), priority);
-        this.assetManager = assetManager;
         ball_red = assetManager.getTexture("ball_plus");
         ball_base = assetManager.getTexture("ball_base");
         ball_blue = assetManager.getTexture("ball_minus");
-        
-        
     }
     
     private void drawTexture(Texture texture, float x, float y, float scale,Team team) {
@@ -47,9 +43,7 @@ public class RenderBallAtPlayerSystem extends IteratingSystem  {
         offsetx = -50;
         offsety= -200;
         
-       DrawUtil.batch.draw(texture, x + offsetx, y +offsety, (w / 2.0f) * scale  - offsetx ,(h / 2.0f) * scale - offsety, w, h, scale, scale, rotation,0, 0, w, h, false, true);
-       
-     
+       DrawUtil.batch.draw(texture, x + offsetx, y + offsety, (w / 2.0f) * scale  - offsetx ,(h / 2.0f) * scale - offsety, w, h, scale, scale, rotation,0, 0, w, h, false, true);
     }
 
     @Override
@@ -69,8 +63,6 @@ public class RenderBallAtPlayerSystem extends IteratingSystem  {
         }else{
             drawTexture(ball_red, pos.x,pos.y,0.6f, Team.BLUE);
         }
-        
-         
     }
     
 }

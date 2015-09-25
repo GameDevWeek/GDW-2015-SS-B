@@ -39,6 +39,7 @@ import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.manager.TeamManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
 public class TestGame extends AbstractGame {
     private final NetServerSimple netServer;
@@ -106,8 +107,8 @@ public class TestGame extends AbstractGame {
     }
 
     @Override
-    protected void addSystems() {
-        super.addSystems();
+    protected void addSystems(AssetManagerX assetManager) {
+        super.addSystems(assetManager);
         engine.addSystem(new PlayerAnimationSystem(
                 GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MovementSystem(10));
@@ -126,7 +127,9 @@ public class TestGame extends AbstractGame {
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
-
+        
+        engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS, assetManager));
+        
         /* Camera System muss schon existieren */
         engine.addSystem(new InputBallSystem(0, engine.getSystem(
                 LimitedSmoothCameraSystem.class).getCamera()));

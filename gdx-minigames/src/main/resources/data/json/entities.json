@@ -6,7 +6,7 @@
             "Position": {},
             "SoundEmitter": {},
             "ImpactSound": {
-                "sound": "click",
+                "sound": "ball_impact",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
                 "minDelay": 100

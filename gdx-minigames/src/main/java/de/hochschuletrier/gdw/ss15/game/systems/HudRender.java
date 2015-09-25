@@ -53,7 +53,7 @@ public class HudRender {
         
         String tmp = "BLUE "+ teamManager.getScore(Team.BLUE);
         String tmp1 = "RED "+teamManager.getScore(Team.RED);
-        String time = "time:"+System.currentTimeMillis();
+        String time = "time:";
         font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);

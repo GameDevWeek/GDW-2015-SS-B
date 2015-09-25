@@ -60,12 +60,12 @@ public class HudRender {
 
         // EXAMPLE how to display text for the hud //
 
-        String tmp = "BLUE "+ teamManager.getScore(Team.BLUE);
-        String tmp1 = "RED "+teamManager.getScore(Team.RED);
+        String tmp = "BLUE "+ teamManager.getScore(Team.RED);
+        String tmp1 = "RED "+teamManager.getScore(Team.BLUE);
         String time = "time:"+playTime;
-        font.setColor(Color.RED);
-        font.draw(DrawUtil.batch, tmp, 50, 50);
         font.setColor(Color.BLUE);
+        font.draw(DrawUtil.batch, tmp, 50, 50);
+        font.setColor(Color.RED);
         font.draw(DrawUtil.batch, tmp1,Gdx.graphics.getWidth()-200, 50);
         font.setColor(Color.GREEN);
         font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth()/2-100, 50);

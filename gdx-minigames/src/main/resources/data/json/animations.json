@@ -48,23 +48,6 @@
         "rows" : 1
     },
     
-<<<<<<< HEAD
-    "player_walk_blue": {
-        "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
-        "frames" : 17,
-        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-        "playType" : "LOOP",
-        "columns": 17,
-        "rows" : 1
-    },
-
-    "player_walk_red": {
-        "filename": "data/animations/charakter_animation_Spreadsheet_orange.png",
-        "frames" : 9,
-        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-        "playType" : "LOOP",
-        "columns": 9,
-=======
     "player_idle_minus": {
         "filename": "data/animations/charakter_animation_Spreadsheet_blue.png",
         "frames" : 2,
@@ -98,7 +81,6 @@
         "frameDuration": [0.05],
         "playType" : "LOOP",
         "columns": 16,
->>>>>>> b80ac7f23c6a693834519c495c6066f942ab95fd
         "rows" : 1
     }
     

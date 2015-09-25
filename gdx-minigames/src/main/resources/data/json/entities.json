@@ -1,4 +1,4 @@
-﻿{
+{
     "ball": {
         "meta": {},
         "components": {
@@ -20,9 +20,6 @@
                 "animation_ball_neutral": "ball_neutral",
                 "animation_ball_neutral_shadow": "ball_base",
                 "scale": 0.6
-            },
-            "ParticleEmitter": {
-                "effect": "test2"
             },
             "Movable": {},
             "PhysixBody": {
@@ -139,6 +136,8 @@
                 "type": "magnet",
                 "size":50,
                 "sensor": 250
+            }
     	}
     }
+    
 }

@@ -1,9 +1,13 @@
 package de.hochschuletrier.gdw.ss15.game.components.factories;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
@@ -12,9 +16,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
-import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryParam> {
 

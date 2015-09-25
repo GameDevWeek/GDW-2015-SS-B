@@ -125,7 +125,7 @@ public class MapLoader {
                             case "playerspawn":
                             case "ballspawn":
                             	createEntity(engine, entitytype, obj.getX() + obj.getWidth() / 2.0f,
-                            			obj.getY() + obj.getHeight() / 2.0f, team
+                            			obj.getY() - obj.getHeight() / 2.0f, team
                             			); 
                             	break;
                             default:

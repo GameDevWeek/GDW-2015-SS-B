@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.commons.netcode.core.NetMessageIn;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageOut;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 
 /**
@@ -16,6 +17,7 @@ import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 public class MoveDatagram extends NetDatagram {
 
     private long netId;
+    private long packetId;
     private final Vector2 position = new Vector2();
     private final Vector2 velocity = new Vector2();
     private float rotation;
@@ -23,6 +25,8 @@ public class MoveDatagram extends NetDatagram {
     public static MoveDatagram create(Entity entity) {
         MoveDatagram datagram = DatagramFactory.create(MoveDatagram.class);
         datagram.netId = entity.getId();
+        MovableComponent movable = ComponentMappers.movable.get(entity);
+        datagram.packetId = movable.packetId++;
         PositionComponent position = ComponentMappers.position.get(entity);
         datagram.position.set(position.x, position.y);
         final PhysixBodyComponent physixBody = ComponentMappers.physixBody.get(entity);
@@ -34,6 +38,10 @@ public class MoveDatagram extends NetDatagram {
 
     public long getNetId() {
         return netId;
+    }
+
+    public long getPacketId() {
+        return packetId;
     }
 
     public Vector2 getPosition() {
@@ -56,6 +64,7 @@ public class MoveDatagram extends NetDatagram {
     @Override
     public void writeToMessage(NetMessageOut message) {
         message.putLong(netId);
+        message.putLong(packetId);
         message.putFloat(position.x);
         message.putFloat(position.y);
         message.putFloat(velocity.x);
@@ -66,6 +75,7 @@ public class MoveDatagram extends NetDatagram {
     public @Override
     void readFromMessage(NetMessageIn message) {
         netId = message.getLong();
+        packetId = message.getLong();
         position.x = message.getFloat();
         position.y = message.getFloat();
         velocity.x = message.getFloat();

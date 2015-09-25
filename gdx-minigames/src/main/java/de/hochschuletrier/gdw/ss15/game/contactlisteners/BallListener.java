@@ -1,68 +1,53 @@
 package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
-import com.badlogic.ashley.core.Component;
-
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.ashley.core.PooledEngine;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactListener;
+import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
-import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
+import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 
-public class BallListener implements PhysixContactListener {
+public class BallListener extends PhysixContactAdapter {
+    private final PooledEngine engine;
 
-	@Override
-	public void beginContact(PhysixContact contact) {
-		PhysixBodyComponent comp = contact.getOtherComponent();
-		Entity entity = null;
-		if(comp != null)
-			entity = comp.getEntity();
-		if(entity != null && entity.getComponent(MagneticFieldComponent.class) != null)
-		{
-			System.out.println("MAGNETFELD REIN");
-			contact.getMyComponent().getEntity().getComponent(MagneticInfluenceComponent.class).magneticFields.add(entity);
-		}
-	}
+    public BallListener(PooledEngine engine) {
+        this.engine = engine;
+    }
+    @Override
+    public void beginContact(PhysixContact contact) {
+        Entity myEntity = contact.getMyComponent().getEntity();
+        PhysixBodyComponent comp = contact.getOtherComponent();
+        Entity otherEntity = null;
+        if (comp != null) {
+            otherEntity = comp.getEntity();
+        }
+        if (otherEntity != null) {
+            if (ComponentMappers.magneticField.has(otherEntity)) {
+                ComponentMappers.magneticInfluence.get(myEntity).magneticFields.add(otherEntity);
+            } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
+                PlayerComponent player = ComponentMappers.player.get(otherEntity);
+                if (player != null) {
+                    SoundEvent.emit("ball_pickup", otherEntity);
+                    player.hasBall = true;
+                    engine.removeEntity(myEntity);
+                }
+            }
+        }
+    }
 
-	@Override
-	public void endContact(PhysixContact contact) {
-		PhysixBodyComponent comp = contact.getOtherComponent();
-		Entity entity = null;
-		if(comp != null)
-			entity = comp.getEntity();
-		if(entity != null && entity.getComponent(MagneticFieldComponent.class) != null)
-		{
-			contact.getMyComponent().getEntity().getComponent(MagneticInfluenceComponent.class).magneticFields.remove(entity);
-		}
-		System.out.println("MAGNETFELD RAUS");
-	}
-
-	@Override
-	public void preSolve(PhysixContact contact, Manifold oldManifold) {
-//		// TODO Auto-generated method stub
-//		MagneticFieldComponent field = contact.getOtherComponent().getEntity().getComponent(MagneticFieldComponent.class);
-//		if(field != null)
-//		{
-//			contact.setEnabled(false);
-//			Vector2 myPos = contact.getMyComponent().getPosition();
-//			Vector2 otherPos = contact.getOtherComponent().getPosition();
-//			//vom Magnet weg, falls gleiche Polarität
-//			Vector2 magneticForce = new Vector2(myPos.x - otherPos.x, myPos.y - otherPos.y);
-//			if(contact.getOtherComponent().getEntity().getComponent(MagnetComponent.class).positiv == contact.getMyComponent().getEntity().getComponent(MagnetComponent.class).positiv)
-//				magneticForce.scl(-1f);
-//			magneticForce.nor();
-//			contact.getMyComponent().getBody().applyForceToCenter(magneticForce, true);
-//		}
-	}
-
-	@Override
-	public void postSolve(PhysixContact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
+    @Override
+    public void endContact(PhysixContact contact) {
+        Entity myEntity = contact.getMyComponent().getEntity();
+        PhysixBodyComponent comp = contact.getOtherComponent();
+        Entity otherEntity = null;
+        if (comp != null) {
+            otherEntity = comp.getEntity();
+        }
+        if (otherEntity != null && ComponentMappers.magneticField.has(otherEntity)) {
+            ComponentMappers.magneticInfluence.get(myEntity).magneticFields.remove(otherEntity);
+        }
+    }
 }

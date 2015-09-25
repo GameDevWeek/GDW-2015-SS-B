@@ -21,7 +21,6 @@ public class Tools extends JFrame {
         setResizable(false);
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
-
         addButton("Font Creator", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {

@@ -1,4 +1,10 @@
 {
-	"click": "data/sounds/click.wav",
-	"helicopter": "data/sounds/helicopter.wav"
+    "ball_attract": "data/sounds/ball_attract_1.ogg",
+    "ball_drop": "data/sounds/ball_drop.wav",
+    "ball_goal": "data/sounds/ball_goal.wav",
+    "ball_impact": "data/sounds/ball_impact.wav",
+    "ball_pickup": "data/sounds/ball_pickup.wav",
+    "ball_shot": "data/sounds/ball_shot.wav",
+    "click": "data/sounds/click.wav",
+    "helicopter": "data/sounds/helicopter.wav"
 }

@@ -8,13 +8,18 @@ import com.badlogic.gdx.math.Vector2;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
+import de.hochschuletrier.gdw.ss15.game.components.MagneticFieldComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MagneticInfluenceComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class MagneticForceSystem extends IteratingSystem {
-
+	/*
+	 * Size of Magnets can be changed in jason/entities (line 123(range) & 128(sensor)) you have to change both values.
+	 */
+    private final float force = 75;
+    
     public MagneticForceSystem() {
         this(0);
     }
@@ -37,16 +42,21 @@ public class MagneticForceSystem extends IteratingSystem {
             Vector2 otherPos = new Vector2();
             otherPos.x = magneticField.getComponent(PositionComponent.class).x;
             otherPos.y = magneticField.getComponent(PositionComponent.class).y;
-            //vom Magnet weg, falls gleiche Polarität
+  
             Vector2 magneticForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
+            float distance=magneticForce.len();
+            float fieldLength= magneticField.getComponent(MagneticFieldComponent.class).range;
+            magneticForce.nor();
+            //vom Magnet weg, falls gleiche Polarität
+
             System.out.println("im Magnetsystem test");
             final Team fieldTeam = magneticField.getComponent(TeamComponent.class).team;
             if (fieldTeam == ballTeam) {
                 magneticForce.scl(-1f);
             }
 
-            magneticForce.nor();
-            magneticForce.scl(50.f);
+ 
+            magneticForce.scl(force*(fieldLength/distance));
             physix.simpleForceApply(magneticForce);
         }
 

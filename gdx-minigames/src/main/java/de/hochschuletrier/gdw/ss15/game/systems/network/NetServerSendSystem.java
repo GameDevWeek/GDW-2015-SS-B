@@ -45,6 +45,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         ChangeAnimationStateEvent.register(this);
         SoundEvent.register(this);
         ChangeBallOwnershipEvent.register(this);
+        ScoreChangedEvent.register(this);
     }
 
     @Override
@@ -55,6 +56,7 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
         ChangeAnimationStateEvent.unregister(this);
         SoundEvent.unregister(this);
         ChangeBallOwnershipEvent.unregister(this);
+        ScoreChangedEvent.unregister(this);
     }
 
     @Override

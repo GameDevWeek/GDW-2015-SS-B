@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="35" tilewidth="64" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" source="balls_and_magnets.tsx"/>
+ <tileset firstgid="11" source="Bande_Tileset.tsx"/>
+ <tileset firstgid="26" source="Goal_Spawn.tsx"/>
+ <tileset firstgid="41" source="Krater groß.tsx"/>
+ <tileset firstgid="105" source="Krater.tsx"/>
+ <tileset firstgid="121" source="playgroundTileset.tsx"/>
+ <tileset firstgid="133" source="Sanboden.tsx"/>
+ <tileset firstgid="151" source="tileset_ground_SpawnsAndArea.tsx"/>
+ <layer name="Kachelebene 1" width="45" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztlDEKACAMxPoA/+6XXV0KWmghkCGblCDhdkTsR9bH2wod93Wec+6m809Ebog9U3dD5xlnWs8iGcSeqbuh84wzrWeRDGLP1N3QecaZ1rNIBrFn6m7oXLt/AFCZ+jY=
+  </data>
+ </layer>
+</map>

@@ -38,18 +38,16 @@ public class MagneticForceSystem extends IteratingSystem {
         final Team ballTeam = entity.getComponent(TeamComponent.class).team;
         int i =0;
         for (Entity magneticField : magnets.magneticFields) {
-            System.out.println("MagnetEffekt #" + i++);
             Vector2 otherPos = new Vector2();
             otherPos.x = magneticField.getComponent(PositionComponent.class).x;
             otherPos.y = magneticField.getComponent(PositionComponent.class).y;
-  
+   
             Vector2 magneticForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
             float distance=magneticForce.len();
             float fieldLength= magneticField.getComponent(MagneticFieldComponent.class).range;
             magneticForce.nor();
             //vom Magnet weg, falls gleiche Polarität
 
-            System.out.println("im Magnetsystem test");
             final Team fieldTeam = magneticField.getComponent(TeamComponent.class).team;
             if (fieldTeam == ballTeam) {
                 magneticForce.scl(-1f);

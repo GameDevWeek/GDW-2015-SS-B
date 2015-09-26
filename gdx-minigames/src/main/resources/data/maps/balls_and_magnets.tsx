@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="balls_and_magnets" tilewidth="64" tileheight="64">
  <properties>
-  <property name="Enitytype" value="Magnet"/>
+  <property name="Entitytype" value="Magnet"/>
   <property name="Team" value="1"/>
  </properties>
  <image source="balls_and_magnets.png" width="320" height="128"/>

@@ -13,14 +13,12 @@ import de.hochschuletrier.gdw.ss15.game.data.GameType;
 public final class WorldSetupDatagram extends NetDatagram {
 
     private GameType gameType;
-    private GameState gameState;
     private String mapName;
     private String playerName;
 
-    public static WorldSetupDatagram create(GameType gameType, GameState gameState, String mapName, String playerName) {
+    public static WorldSetupDatagram create(GameType gameType, String mapName, String playerName) {
         WorldSetupDatagram datagram = DatagramFactory.create(WorldSetupDatagram.class);
         datagram.gameType = gameType;
-        datagram.gameState = gameState;
         datagram.mapName = mapName;
         datagram.playerName = playerName;
         return datagram;
@@ -28,10 +26,6 @@ public final class WorldSetupDatagram extends NetDatagram {
 
     public GameType getGameType() {
         return gameType;
-    }
-
-    public GameState getGameState() {
-        return gameState;
     }
 
     public String getMapName() {
@@ -51,7 +45,6 @@ public final class WorldSetupDatagram extends NetDatagram {
     public void writeToMessage(NetMessageOut message) {
         message.putString(mapName);
         message.putEnum(gameType);
-        message.putEnum(gameState);
         message.putString(playerName);
     }
 
@@ -59,7 +52,6 @@ public final class WorldSetupDatagram extends NetDatagram {
     void readFromMessage(NetMessageIn message) {
         mapName = message.getString();
         gameType = message.getEnum(GameType.class);
-        gameState = message.getEnum(GameState.class);
         playerName = message.getString();
     }
 }

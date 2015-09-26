@@ -48,7 +48,7 @@ public class PullSystem extends IteratingSystem {
         Entity ball = balls.size() > 0 ? balls.first() : null;
         if (ball != null) {
             InputBallComponent input = entity.getComponent(InputBallComponent.class);
-            if (input.pull) {
+            if (input.pull&&!input.isStunned) {
                 Vector2 direction = input.view;
                 PositionComponent ballPos = ball.getComponent(PositionComponent.class);
                 PositionComponent entPos = entity.getComponent(PositionComponent.class);

@@ -6,8 +6,10 @@ import com.badlogic.ashley.core.PooledEngine;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 
 public class BallListener extends PhysixContactAdapter {
@@ -16,6 +18,7 @@ public class BallListener extends PhysixContactAdapter {
     public BallListener(PooledEngine engine) {
         this.engine = engine;
     }
+
     @Override
     public void beginContact(PhysixContact contact) {
         Entity myEntity = contact.getMyComponent().getEntity();
@@ -29,10 +32,13 @@ public class BallListener extends PhysixContactAdapter {
                 ComponentMappers.magneticInfluence.get(myEntity).magneticFields.add(otherEntity);
             } else if (!myEntity.isScheduledForRemoval() && !ComponentMappers.goalShot.has(myEntity)) {
                 PlayerComponent player = ComponentMappers.player.get(otherEntity);
-                if (player != null) {
+                NotReceptiveComponent notReceptive=ComponentMappers.notReceptive.get(otherEntity);
+                if (player != null&&notReceptive==null) {
                     SoundEvent.emit("ball_pickup", otherEntity);
-                    player.hasBall = true;
+                    ChangeBallOwnershipEvent.emit(otherEntity);
                     engine.removeEntity(myEntity);
+                }else if (player != null&&notReceptive!=null) {
+                    //för sth like sound etc
                 }
             }
         }
@@ -46,8 +52,10 @@ public class BallListener extends PhysixContactAdapter {
         if (comp != null) {
             otherEntity = comp.getEntity();
         }
-        if (otherEntity != null && ComponentMappers.magneticField.has(otherEntity)) {
-            ComponentMappers.magneticInfluence.get(myEntity).magneticFields.remove(otherEntity);
+        if (otherEntity != null
+                && ComponentMappers.magneticField.has(otherEntity)) {
+            ComponentMappers.magneticInfluence.get(myEntity).magneticFields
+                    .remove(otherEntity);
         }
     }
 }

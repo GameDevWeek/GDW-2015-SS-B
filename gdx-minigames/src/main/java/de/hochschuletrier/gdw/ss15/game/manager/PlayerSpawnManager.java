@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
@@ -51,14 +53,19 @@ public class PlayerSpawnManager {
         return null;
     }
 
-    public void freePlayer(long entityId) {
+    public void freePlayer(Entity playerEntity) {
+        long entityId = playerEntity.getId();
         for (Entity entity : spawnPoints) {
             PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(entity);
             TeamComponent team = ComponentMappers.team.get(entity);
             if (spawn.playerId == entityId) {
                 teamCounts[team.team.ordinal()]--;
                 spawn.playerId = 0;
-                engine.removeEntity(entity);
+                
+                PlayerComponent player = ComponentMappers.player.get(playerEntity);
+                if(player.hasBall)
+                    ChangeBallOwnershipEvent.emit(null);
+                engine.removeEntity(playerEntity);
                 return;
             }
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="113">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="117">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
  <tileset firstgid="13" source="Bande_Tileset.tsx"/>
  <tileset firstgid="28" source="balls_and_magnets.tsx"/>
@@ -17,30 +17,6 @@
   <tile id="1">
    <properties>
     <property name="Entitytype" value="PlayerSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="Entitytype" value="goal_particles_bl"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="Entitytype" value="goal_particles_br"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="Entitytype" value="goal_particles_tl"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="Entitytype" value="goal_particles_tr"/>
     <property name="Team" value="1"/>
    </properties>
   </tile>
@@ -88,10 +64,33 @@
   <object id="82" name="blueM" gid="37" x="1088" y="448" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="GoalParticle">
-  <object id="112" gid="88" x="128" y="768" width="64" height="64">
+  <object id="113" x="174" y="676" width="13" height="21">
    <properties>
-    <property name="Entitytype" value="goal_particle_spawner_45"/>
+    <property name="Entitytype" value="goal_particles_br"/>
+    <property name="Team" value="1"/>
    </properties>
+   <ellipse/>
+  </object>
+  <object id="114" x="172" y="1033" width="13" height="20">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tr"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="115" x="3338" y="670" width="8" height="23">
+   <properties>
+    <property name="Entitytype" value="goal_particles_bl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="116" x="3336" y="1037" width="13" height="17">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

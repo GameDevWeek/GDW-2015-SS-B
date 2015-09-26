@@ -88,5 +88,5 @@ public class MenuPage extends Group {
         selectBox.setMaxListCount(10);
         addActor(selectBox);
         return selectBox;
-    }
+    }     
 }

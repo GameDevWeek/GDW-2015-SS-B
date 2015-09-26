@@ -24,7 +24,7 @@ public class MenuPageRoot extends MenuPage {
             createLabel(400, 500, 600, 80, "Main Menu");
             addPageEntry(menuManager, 50, 300, "Join Server", new MenuPageJoinServer(skin, menuManager));
             addPageEntry(menuManager, 50, 200, "Host Server", new MenuPageHostServer(skin, menuManager));
-            
+
         } else {
             addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
             addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);

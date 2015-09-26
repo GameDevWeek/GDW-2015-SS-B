@@ -18,6 +18,7 @@ public final class DatagramFactory {
             GoalShotDatagram.class,
             PullChangeDatagram.class,
             SoundDatagram.class,
+            ScoreChangedDatagram.class,
             BallOwnershipChangedDatagram.class,
             AnimationStateChangeDatagram.class
     );

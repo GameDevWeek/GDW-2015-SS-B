@@ -19,11 +19,13 @@ import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GoalShotDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PullChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.ScoreChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ShootDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalShotEvent;
 import de.hochschuletrier.gdw.ss15.events.PullEvent;
+import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
@@ -104,6 +106,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         String playerName = datagram.getPlayerName();
         final Entity playerEntity = (Entity) connection.getAttachment();
         connection.sendReliable(WorldSetupDatagram.create(gameType, mapName, playerName));
+        netServer.broadcastReliable(ScoreChangedDatagram.create(GameStateSystem.getScoreBlue(), GameStateSystem.getScoreRed()));
 
         for (Entity entity : entities) {
             connection.sendReliable(CreateEntityDatagram.create(entity));

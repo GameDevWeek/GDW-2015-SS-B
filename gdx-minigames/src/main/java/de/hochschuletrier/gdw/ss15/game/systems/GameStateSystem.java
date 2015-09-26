@@ -18,12 +18,18 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
         GoalEvent.Listener {
     private static final Logger logger = LoggerFactory.getLogger(GameStateSystem.class);
 
-    private final int scores[] = new int[2];
+    private static final int scores[] = new int[2];
     private GameState gameState = GameState.WARMUP;
     private static float countdown = 0;
     
     public static float getCountdown() {
         return countdown;
+    }
+    public static int getScoreBlue() {
+        return scores[0];
+    }
+    public static int getScoreRed() {
+        return scores[1];
     }
 
     public GameStateSystem(int priority) {
@@ -33,6 +39,8 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
     @Override
     public void addedToEngine(Engine engine) {
         countdown = 0;
+        scores[0] = 0;
+        scores[1] = 0;
         resetScores();
         GoalEvent.register(this);
         ChangeGameStateEvent.register(this);

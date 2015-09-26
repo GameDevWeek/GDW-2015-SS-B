@@ -13,9 +13,11 @@ import de.hochschuletrier.gdw.ss15.datagrams.BallOwnershipChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.ScoreChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
@@ -23,7 +25,8 @@ import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 
 public class NetServerSendSystem extends EntitySystem implements EntityListener,
-        ChangeAnimationStateEvent.Listener, SoundEvent.Listener, ChangeBallOwnershipEvent.Listener {
+        ChangeAnimationStateEvent.Listener, SoundEvent.Listener, ChangeBallOwnershipEvent.Listener,
+        ScoreChangedEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> movables;
@@ -84,5 +87,10 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
     @Override
     public void onChangeBallOwnershipEvent(Entity owner) {
         netServer.broadcastReliable(BallOwnershipChangedDatagram.create(owner));
+    }
+
+    @Override
+    public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
+        netServer.broadcastReliable(ScoreChangedDatagram.create(scoreBlue, scoreRed));
     }
 }

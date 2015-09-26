@@ -23,7 +23,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
  */
 public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.Listener,
         ChangeGameStateEvent.Listener {
-
+    private String winner;
     private final BitmapFont font;
     private String scoreRed = "0";
     private String scoreBlue = "0";
@@ -45,7 +45,9 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
         ScoreChangedEvent.unregister(this);
         ChangeGameStateEvent.unregister(this);
     }
-
+    public void winner(){
+    
+    }
     @Override
     public void update(float deltaTime) {
         countdown -= deltaTime;
@@ -53,7 +55,8 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
             countdown = 0;
 
         Main.getInstance().screenCamera.bind();
-
+        String warmup = "WARMUP";
+        String gameover = winner+" Victory";
         String time = "time:" + (int)Math.ceil(countdown);
         font.setColor(Team.RED.color);
         font.draw(DrawUtil.batch,scoreBlue , 50, 50);
@@ -67,7 +70,11 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
     public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
         this.scoreBlue = "RED " + scoreBlue;
         this.scoreRed = "BLUE " + scoreRed;
-    }
+        if(scoreBlue>scoreRed)
+        	winner="TEAM RED";
+        else
+        	winner="TEAM BLUE";
+ }
 
     @Override
     public void onChangeGameStateEvent(GameState newState, float gameTime) {

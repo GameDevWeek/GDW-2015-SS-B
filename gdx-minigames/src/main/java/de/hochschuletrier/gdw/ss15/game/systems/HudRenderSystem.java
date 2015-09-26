@@ -26,8 +26,10 @@ public class HudRenderSystem extends EntitySystem implements
 		ScoreChangedEvent.Listener, ChangeGameStateEvent.Listener {
 	private String winner;
 	private final BitmapFont font;
-	private String scoreRed = "0";
+	private int scoreRedInt = 0;
+	private int scoreBlueInt = 0;
 	private String scoreBlue = "0";
+	private String scoreRed = "0";
 	private float countdown;
 	private GameState gamestate;
 
@@ -66,23 +68,17 @@ public class HudRenderSystem extends EntitySystem implements
 
 		Main.getInstance().screenCamera.bind();
 		String warmup = "WARMUP";
-		String gameover = winner + " Victory";
+		String gameover = winner + "!";
+
 		String time = "time:" + (int) Math.ceil(countdown);
-		// font.setColor(Team.RED.color);
-		// font.draw(DrawUtil.batch,scoreBlue , 50, 50);
-		// font.setColor(Team.BLUE.color);
-		// font.draw(DrawUtil.batch,scoreRed , Gdx.graphics.getWidth() - 200,
-		// 50);
-		// font.setColor(Color.GREEN);
-		// font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth() / 2 - 100,
-		// 50);
+
 		if (gamestate != null) {
 			switch (gamestate) {
 			case WARMUP:
 				font.setColor(Team.RED.color);
-				font.draw(DrawUtil.batch, scoreBlue, 50, 50);
+				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
-				font.draw(DrawUtil.batch, scoreRed,
+				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
 				font.setColor(Color.GREEN);
 				font.draw(DrawUtil.batch, warmup,
@@ -94,9 +90,9 @@ public class HudRenderSystem extends EntitySystem implements
 				// fallthrough
 			case ONE:
 				font.setColor(Team.RED.color);
-				font.draw(DrawUtil.batch, scoreBlue, 50, 50);
+				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
-				font.draw(DrawUtil.batch, scoreRed,
+				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
 				font.setColor(Color.GREEN);
 				font.draw(DrawUtil.batch, time,
@@ -104,21 +100,29 @@ public class HudRenderSystem extends EntitySystem implements
 				break;
 			case GAME:
 				font.setColor(Team.RED.color);
-				font.draw(DrawUtil.batch, scoreBlue, 50, 50);
+				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
-				font.draw(DrawUtil.batch, scoreRed,
+				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
 				font.setColor(Color.GREEN);
 				font.draw(DrawUtil.batch, time,
 						Gdx.graphics.getWidth() / 2 - 100, 50);
 				break;
 			case GAME_OVER:
+				if (scoreBlueInt > scoreRedInt) {
+					winner = "Team Blue Victory";
+				} else if (scoreBlueInt < scoreRedInt) {
+					winner = "Team Red Victory";
+				} else if (scoreBlue == scoreRed) {
+					winner = "Tied";
+				}
+
 				font.setColor(Team.RED.color);
-				font.draw(DrawUtil.batch, scoreBlue, 50, 50);
+				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
-				font.draw(DrawUtil.batch, scoreRed,
+				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
-				font.setColor(Color.GREEN);
+				font.setColor(Color.YELLOW);
 				font.draw(DrawUtil.batch, gameover,
 						Gdx.graphics.getWidth() / 2 - 100, 50);
 				break;
@@ -132,12 +136,11 @@ public class HudRenderSystem extends EntitySystem implements
 
 	@Override
 	public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
-		this.scoreBlue = "RED " + scoreBlue;
-		this.scoreRed = "BLUE " + scoreRed;
-		if (scoreBlue > scoreRed)
-			winner = "TEAM RED";
-		else
-			winner = "TEAM BLUE";
+		this.scoreBlueInt = scoreRed;
+		this.scoreRedInt = scoreBlue;
+		this.scoreBlue = "BLUE " + scoreRed;
+		this.scoreRed = "RED " + scoreBlue;
+
 	}
 
 	@Override

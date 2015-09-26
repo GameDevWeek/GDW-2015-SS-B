@@ -1,4 +1,4 @@
-{
+﻿{
     "menu_fg": "data/ui/menu/fg_border.png",
     "menu_bg": "data/ui/menu/bg_root.png",
     "ball_base": "data/images/ball_base.png",
@@ -14,5 +14,8 @@
     "data/maps/RedBull.tmx": "data/maps/RedBull.png"
     
     
+    "data/maps/Map Diag.tmx": "data/maps/Map Diag.png",
+    "data/maps/Map_one.tmx": "data/maps/Map_one.png",
+    "data/maps/Map_two.tmx": "data/maps/Map_two.png"
     
 }

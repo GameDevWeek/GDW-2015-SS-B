@@ -12,7 +12,6 @@ import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ss15.game.components.ResetComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;

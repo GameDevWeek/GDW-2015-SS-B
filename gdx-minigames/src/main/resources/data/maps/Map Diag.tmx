@@ -40,13 +40,13 @@
  <objectgroup name="Gate">
   <object id="22" name="Red Gate" x="117.333" y="52.6667" width="342" height="66.6667">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="1"/>
    </properties>
   </object>
   <object id="23" name="Blue Gate" x="3061.79" y="1607.05" width="342" height="66.6667">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="0"/>
    </properties>
   </object>

@@ -31,14 +31,14 @@
  <objectgroup name="Gate">
   <object id="75" type="Gate" x="48" y="686" width="116" height="360">
    <properties>
-    <property name="Entitytype" value="Gate"/>
-    <property name="Team" value="0"/>
+    <property name="Entitytype" value="Goal"/>
+    <property name="Team" value="1"/>
    </properties>
   </object>
   <object id="76" type="Gate" x="3353.15" y="686.97" width="116" height="360">
    <properties>
-    <property name="Entitytype" value="Gate"/>
-    <property name="Team" value="1"/>
+    <property name="Entitytype" value="Goal"/>
+    <property name="Team" value="0"/>
    </properties>
   </object>
  </objectgroup>

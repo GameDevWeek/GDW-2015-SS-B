@@ -36,13 +36,13 @@
   </properties>
   <object id="12" type="Gate" x="281.818" y="554.545" width="124.242" height="618.182">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="1"/>
    </properties>
   </object>
   <object id="13" type="Gate" x="3112.12" y="551.515" width="124.242" height="618.182">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="0"/>
    </properties>
   </object>

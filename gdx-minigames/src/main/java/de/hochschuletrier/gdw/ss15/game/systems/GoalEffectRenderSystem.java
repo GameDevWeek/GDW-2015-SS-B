@@ -66,7 +66,7 @@ public class GoalEffectRenderSystem extends IteratingSystem implements GoalShotE
         
         
         for(ParticleEmitter emitter : component.effect.getEmitters()){
-            if(emitter.getName().toLowerCase().equals(this.teamScored.name().toLowerCase())){
+            if(!emitter.getName().toLowerCase().equals(this.teamScored.name().toLowerCase())){
                 //gool scored but emitter not started
                 if(!component.started){
                     emitter.setPosition(pos.x,pos.y);

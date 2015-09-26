@@ -11,6 +11,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -62,7 +63,7 @@ import org.apache.commons.cli.PosixParser;
  * @author Santo Pfingsten
  */
 public class Main extends StateBasedGame
-    implements DisconnectEvent.Listener, TestGameEvent.Listener,
+        implements DisconnectEvent.Listener, TestGameEvent.Listener,
         CreateServerEvent.Listener, JoinServerEvent.Listener {
 
     public static CommandLine cmdLine;
@@ -81,7 +82,7 @@ public class Main extends StateBasedGame
     public static final InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
-    private final Hotkey toggleFullscreen = new Hotkey(()->ScreenUtil.toggleFullscreen(), Input.Keys.ENTER, HotkeyModifier.ALT);
+    private final Hotkey toggleFullscreen = new Hotkey(() -> ScreenUtil.toggleFullscreen(), Input.Keys.ENTER, HotkeyModifier.ALT);
 
     public Main() {
         super(new BaseGameState());
@@ -150,13 +151,15 @@ public class Main extends StateBasedGame
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
-        
+
         TestGameEvent.register(this);
         DisconnectEvent.register(this);
         CreateServerEvent.register(this);
         JoinServerEvent.register(this);
-        
+
         toggleFullscreen.register();
+        Pixmap pm = new Pixmap(Gdx.files.internal("data/ui/cursor.png"));
+        Gdx.input.setCursorImage(pm, 0, 0);
     }
 
     private void onLoadComplete() {
@@ -233,7 +236,7 @@ public class Main extends StateBasedGame
             changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
         }
     }
-    
+
     @Override
     public void onDisconnectEvent() {
         if (!isTransitioning()) {
@@ -258,18 +261,17 @@ public class Main extends StateBasedGame
         if (!isTransitioning()) {
             try {
                 ConnectingState connectingState = new ConnectingState(assetManager, server, port, userName);
-                if(connectingState.isSuccess())
+                if (connectingState.isSuccess()) {
                     changeState(connectingState);
-                else {
+                } else {
                     connectingState.dispose();
                     DisconnectEvent.emit();
                 }
-            } catch(IOException e) {
+            } catch (IOException e) {
                 DisconnectEvent.emit();
             }
         }
     }
-
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();

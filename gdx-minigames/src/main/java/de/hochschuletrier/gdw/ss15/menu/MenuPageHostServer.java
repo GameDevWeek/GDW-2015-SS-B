@@ -33,7 +33,6 @@ public class MenuPageHostServer extends MenuPage {
     private final TextField username;
     private final SelectBox mapname;
     //private final SelectBox mapname;
-    private final SelectBox mapname;
     private final DecoImage previewImage;
     private HashMap<String, String> maps;
     private final SelectBox mapSelect;
@@ -71,12 +70,6 @@ public class MenuPageHostServer extends MenuPage {
         addActor(mapSelect);
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
-        int x = 100;
-        int i = 0;
-        int y = 370;
-        int yStep = 55;
-        int width = 300;
-        int height = 50;
         
         
         createLabel(x2, 500, 600, 80, "Host Server Menu");

@@ -27,7 +27,7 @@ public class GoalEffectComponentFactory extends ComponentFactory<EntityFactoryPa
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         GoalEffectComponent component = engine.createComponent(GoalEffectComponent.class);
         component.effect = new ParticleEffect(assetManager.getParticleEffect(properties.getString("effect")));
-        entity.add(component);
-        
+        component.effect.flipY();
+        entity.add(component);    
     }
 }

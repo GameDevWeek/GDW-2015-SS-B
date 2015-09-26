@@ -6,5 +6,6 @@
     "goal_topLeft": "data/particleEffects/goal_topLeft.pe",
     "goal_topRight": "data/particleEffects/goal_topRight.pe",
     "goal_bottomLeft": "data/particleEffects/goal_bottomLeft.pe",
-    "goal_bottomRight": "data/particleEffects/goal_bottomRight.pe"
+    "goal_bottomRight": "data/particleEffects/goal_bottomRight.pe",
+    "player_has_ball": "data/particleEffects/player_has_ball.pe"
 }

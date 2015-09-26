@@ -52,6 +52,7 @@ public class MapLoader {
         Entity entity = entityFactory.createEntity(name, factoryParam);
         SetupComponent setup = engine.createComponent(SetupComponent.class);
         setup.name = name;
+        setup.team = team;
         entity.add(setup);
         engine.addEntity(entity);
         return entity;

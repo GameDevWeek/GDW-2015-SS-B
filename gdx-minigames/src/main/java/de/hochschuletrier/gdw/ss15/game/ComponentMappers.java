@@ -7,6 +7,7 @@ import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
+import de.hochschuletrier.gdw.ss15.game.components.GoalEffectComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
@@ -43,6 +44,7 @@ public class ComponentMappers {
     public static final ComponentMapper<MagneticInfluenceComponent> magneticInfluence = ComponentMapper.getFor(MagneticInfluenceComponent.class);
     public static final ComponentMapper<MagneticFieldComponent> magneticField = ComponentMapper.getFor(MagneticFieldComponent.class);
     public static final ComponentMapper<BallParticlesComponent> ballParticles = ComponentMapper.getFor(BallParticlesComponent.class);
+     public static final ComponentMapper<GoalEffectComponent> goalEffect = ComponentMapper.getFor(GoalEffectComponent.class);
     
     public static final ComponentMapper<MovableComponent> movable = ComponentMapper.getFor(MovableComponent.class);
     public static final ComponentMapper<NotReceptiveComponent>notReceptive=ComponentMapper.getFor(NotReceptiveComponent.class);

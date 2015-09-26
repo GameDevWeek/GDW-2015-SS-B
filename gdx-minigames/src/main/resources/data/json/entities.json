@@ -139,6 +139,43 @@
                 "sensor": 250
             }
     	}
+    },
+    
+    "goal_particle_spawner_45": {
+        "meta": {},
+        "components":{
+            "Position":{},
+            "GoalEffect":{
+                "effect": "goal_45"
+            }
+        }
+    },
+    "goal_particle_spawner_135": {
+        "meta": {},
+        "components":{
+            "Position":{},
+            "GoalEffect":{
+                "effect": "goal_135"
+            }
+        }
+    },
+    "goal_particle_spawner_225": {
+        "meta": {},
+        "components":{
+            "Position":{},
+            "GoalEffect":{
+                "effect": "goal_225"
+            }
+        }
+    },
+    "goal_particle_spawner_315": {
+        "meta": {},
+        "components":{
+            "Position":{},
+            "GoalEffect":{
+                "effect": "goal_315"
+            }
+        }
     }
     
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="95">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="101">
  <tileset firstgid="1" source="balls_and_magnets.tsx"/>
  <tileset firstgid="11" source="Bande_Tileset.tsx"/>
  <tileset firstgid="26" source="Dummy Gate.tsx"/>
@@ -8,9 +8,10 @@
  <tileset firstgid="106" source="Krater.tsx"/>
  <tileset firstgid="122" source="Sanboden.tsx"/>
  <tileset firstgid="140" source="Krater groß.tsx"/>
+ <tileset firstgid="204" source="Goal_Spawn.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="Ambient" width="55" height="27">
@@ -88,5 +89,35 @@
   <object id="84" gid="9" x="3264.82" y="319.03" width="64" height="64"/>
   <object id="86" gid="10" x="193.273" y="1472.85" width="64" height="64"/>
   <object id="87" gid="10" x="191.273" y="320.848" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="goal particles">
+  <object id="97" x="288" y="564" width="12" height="12">
+   <properties>
+    <property name="Entitytype" value="goal_particles_bl"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="98" x="284" y="1154" width="11" height="10">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tl"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="99" x="3224" y="1156" width="12" height="13">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tr"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="100" x="3224" y="561" width="11" height="12">
+   <properties>
+    <property name="Entitytype" value="goal_particles_br"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

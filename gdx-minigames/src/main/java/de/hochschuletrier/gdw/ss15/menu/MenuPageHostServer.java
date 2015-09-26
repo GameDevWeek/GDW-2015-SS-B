@@ -58,16 +58,13 @@ public class MenuPageHostServer extends MenuPage {
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         
-        
-        createLabel(x2, 500, 600, 80, "Host Server Menu", "big");
-        //createLabel(50, x2, 300, 50, "Enter Server IP");
-        //serverIP = createTextField(x2, 400, 300, 50, "");
-        createLabel(50, 400, 300, 50, "Enter Server Port");
-        serverPort = createTextField(x2, 400, 300, 50, "9090");
-        createLabel(50, 350, 300, 50, "Enter Username");
-        username = createTextField(x2, 350, 300, 50, "Host");
-        createLabel(50, 300, 300, 50, "Select Map");
-        mapname = selectBox(x2, 300, 300, 50, "Select Map");
+        createLabel(50, 390, 600, 80, "Host Server Menu", "big");
+        createLabel(50, 300, 300, 50, "Enter Server Port");
+        serverPort = createTextField(400, 300, 300, 50, "9090");
+        createLabel(50, 250, 300, 50, "Enter Username");
+        username = createTextField(400, 250, 300, 50, "Host");
+        createLabel(50, 200, 300, 50, "Select Map");
+        mapname = selectBox(400, 200, 300, 50, "Select Map");
         mapname.setItems(maps.keySet().toArray());
         previewImage = new DecoImage(getPreviewTexture());
         addActor(previewImage);
@@ -80,11 +77,11 @@ public class MenuPageHostServer extends MenuPage {
         });
         updatePreview();
         //mapname = createTextField(x2, 250, 300, 50, "Map");
-        addLeftAlignedButton(x2, 200, 300, 50, "Server Starten", this::startServer);
+        addLeftAlignedButton(400, 150, 300, 50, "START SERVER", this::startServer);
         //addCenteredButton(..., this::joinServer); 
         
-        addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
-        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
+        addLeftAlignedButton(50, 50, 400, 50, "BACK TO MAIN MENU", () -> menuManager.popPage());
+        
 
     }
     
@@ -97,8 +94,8 @@ public class MenuPageHostServer extends MenuPage {
     }
     
     private void updatePreview() {
-        float x = 800;
-        float y = 300;
+        float x = 850;
+        float y = 275;
         float maxWidth = 256;
         float maxHeight = 256;
         Texture texture = getPreviewTexture();

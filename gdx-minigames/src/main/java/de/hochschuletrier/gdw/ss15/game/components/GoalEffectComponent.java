@@ -18,12 +18,14 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 public class GoalEffectComponent extends Component implements Pool.Poolable{
     public ParticleEffect effect;
     public boolean started = false;
+    public Team team;
     
     @Override
     public void reset() {
        effect.dispose();
        effect = null;
        started = false;
+       team = Team.RED;
     }
      
 }

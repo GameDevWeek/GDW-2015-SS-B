@@ -202,7 +202,6 @@ public class Main extends StateBasedGame
         console.executeCmdQueue();
         SoundEmitter.updateGlobal();
         MusicManager.update(delta);
-        MusicManager.setMuted(true);//fixme: setting in menu
 
         preRender();
     }

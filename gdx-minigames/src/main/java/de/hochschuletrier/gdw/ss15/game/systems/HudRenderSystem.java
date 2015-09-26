@@ -111,7 +111,7 @@ public class HudRenderSystem extends EntitySystem implements
 				font.setColor(Team.BLUE.color);
 				font.draw(DrawUtil.batch, scoreRed,
 						Gdx.graphics.getWidth() - 200, 50);
-				font.setColor(Color.GREEN);
+				font.setColor(Color.YELLOW);
 				font.draw(DrawUtil.batch, gameover,
 						Gdx.graphics.getWidth() / 2 - 100, 50);
 				break;
@@ -127,12 +127,14 @@ public class HudRenderSystem extends EntitySystem implements
 	public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
 		this.scoreBlue = "RED " + scoreBlue;
 		this.scoreRed = "BLUE " + scoreRed;
-		if (scoreBlue > scoreRed)
-			winner = "TEAM RED";
-		else
-			winner = "TEAM BLUE";
+		 if (scoreBlue>scoreRed) {
+	            winner="Team Blue";
+	        } else if (scoreRed>scoreBlue) {
+	            winner="Team Red";
+	        } else {
+	            winner="Tied";
+	        }
 	}
-
 	@Override
 	public void onChangeGameStateEvent(GameState newState, float gameTime) {
 		countdown = gameTime;

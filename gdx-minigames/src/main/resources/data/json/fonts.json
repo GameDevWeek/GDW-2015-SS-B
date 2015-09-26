@@ -4,5 +4,11 @@
     "verdana_24": "data/fonts/verdana_24.fnt",
     "verdana_32": "data/fonts/verdana_32.fnt",
     "verdana_46": "data/fonts/verdana_46.fnt",
-    "verdana_90": "data/fonts/verdana_90.fnt"
+    "verdana_90": "data/fonts/verdana_90.fnt",
+    "railway_12": "data/fonts/railway_12.fnt",
+    "railway_16": "data/fonts/railway_16.fnt",
+    "railway_18": "data/fonts/railway_18.fnt",
+    "railway_24": "data/fonts/railway_24.fnt",
+    "railway_32": "data/fonts/railway_32.fnt",
+    "hud_font": "data/fonts/hud_font.fnt"
 }

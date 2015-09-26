@@ -78,53 +78,45 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
         return null;
     }
 
-    public void freePlayer(Entity playerEntity) {
-        long entityId = playerEntity.getId();
+    
+    public Entity getPlayerSpawn(long playerId) {
         for (Entity entity : spawnPoints) {
             PlayerSpawnComponent spawn = ComponentMappers.playerSpawn
                     .get(entity);
-            TeamComponent team = ComponentMappers.team.get(entity);
-            if (spawn.playerId == entityId) {
-                teamCounts[team.team.ordinal()]--;
-                spawn.playerId = 0;
-
-                PlayerComponent player = ComponentMappers.player
-                        .get(playerEntity);
-                if (player.hasBall)
-                    ChangeBallOwnershipEvent.emit(null);
-
-                engine.removeEntity(playerEntity);
-                return;
+            if (spawn.playerId == playerId) {
+                return entity;
             }
         }
+        return null;
+    }
+    
+    public void freePlayer(Entity playerEntity) {
+        Entity spawnEntity = getPlayerSpawn(playerEntity.getId());
+        if(spawnEntity != null) {
+            PlayerSpawnComponent spawn = ComponentMappers.playerSpawn.get(spawnEntity);
+            TeamComponent team = ComponentMappers.team.get(spawnEntity);
+            teamCounts[team.team.ordinal()]--;
+            spawn.playerId = 0;
+
+            PlayerComponent player = ComponentMappers.player
+                    .get(playerEntity);
+            if (player.hasBall)
+                ChangeBallOwnershipEvent.emit(null);
+
+        }
+        engine.removeEntity(playerEntity);
     }
 
     public void resetPlayers(boolean isStunning) {
         System.out.println("reset");
         for (Entity player : players) {
-            long playerId = player.getId();
-            System.out.println("playerId"+playerId);
-            for (Entity spawnEntity : spawnPoints) {
-                PlayerSpawnComponent spawn = ComponentMappers.playerSpawn
-                        .get(spawnEntity);
-                System.out.println("SpawnId:"+spawn.playerId);
-                TeamComponent team = ComponentMappers.team.get(spawnEntity);
-                if (spawn.playerId == playerId) {
-//                    ResetComponent reset= engine.createComponent(ResetComponent.class);
-//                    reset.toStun=isStunning;
-//                    reset.x=spawnEntity.getComponent(PositionComponent.class).x;
-//                    reset.y=spawnEntity.getComponent(PositionComponent.class).y;
-//                    player.add(reset);
-                    PhysixBodyComponent physixBody=player.getComponent(PhysixBodyComponent.class);
-                    physixBody.setX(spawnEntity.getComponent(PositionComponent.class).x);
-                    physixBody.setY(spawnEntity.getComponent(PositionComponent.class).y);
-                    physixBody.setLinearVelocity(0,0);
-                    //___
-                    player.getComponent(InputBallComponent.class).isStunned=isStunning;
-                    return;
-
-                }
-
+            Entity spawnEntity = getPlayerSpawn(player.getId());
+            if(spawnEntity != null) {
+                PhysixBodyComponent physixBody=player.getComponent(PhysixBodyComponent.class);
+                physixBody.setX(spawnEntity.getComponent(PositionComponent.class).x);
+                physixBody.setY(spawnEntity.getComponent(PositionComponent.class).y);
+                physixBody.setLinearVelocity(0,0);
+                player.getComponent(InputBallComponent.class).isStunned=isStunning;
             }
         }
     }

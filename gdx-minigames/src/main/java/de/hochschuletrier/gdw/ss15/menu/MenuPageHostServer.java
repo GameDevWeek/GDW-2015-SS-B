@@ -59,7 +59,7 @@ public class MenuPageHostServer extends MenuPage {
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         
         
-        createLabel(x2, 500, 600, 80, "Host Server Menu");
+        createLabel(x2, 500, 600, 80, "Host Server Menu", "big");
         //createLabel(50, x2, 300, 50, "Enter Server IP");
         //serverIP = createTextField(x2, 400, 300, 50, "");
         createLabel(50, 400, 300, 50, "Enter Server Port");

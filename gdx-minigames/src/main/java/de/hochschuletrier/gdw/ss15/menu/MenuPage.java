@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -76,7 +77,11 @@ public class MenuPage extends Group {
     }
     
     protected final Label createLabel(int x, int y, int width, int height, String text) {
-        Label createLabel = new Label(text, skin);
+        return createLabel(x, y, width, height, text, "default");
+    }
+    
+    protected final Label createLabel(int x, int y, int width, int height, String text, String style) {
+        Label createLabel = new Label(text, skin, style);
         createLabel.setBounds(x, y, width, height);
         addActor(createLabel);
         return createLabel;

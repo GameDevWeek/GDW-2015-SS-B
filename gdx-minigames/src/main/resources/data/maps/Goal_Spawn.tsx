@@ -13,28 +13,4 @@
    <property name="Team" value="1"/>
   </properties>
  </tile>
- <tile id="3">
-  <properties>
-   <property name="Entitytype" value="goal_particles_bl"/>
-   <property name="Team" value="0"/>
-  </properties>
- </tile>
- <tile id="4">
-  <properties>
-   <property name="Entitytype" value="goal_particles_br"/>
-   <property name="Team" value="1"/>
-  </properties>
- </tile>
- <tile id="13">
-  <properties>
-   <property name="Entitytype" value="goal_particles_tl"/>
-   <property name="Team" value="0"/>
-  </properties>
- </tile>
- <tile id="14">
-  <properties>
-   <property name="Entitytype" value="goal_particles_tr"/>
-   <property name="Team" value="1"/>
-  </properties>
- </tile>
 </tileset>

@@ -1,7 +1,12 @@
 {
     "com.badlogic.gdx.graphics.g2d.BitmapFont": {
         "default-font": {"file": "data/fonts/verdana_32.fnt"},
-        "verdana_32": {"file": "data/fonts/verdana_32.fnt"}
+        "verdana_32": {"file": "data/fonts/verdana_32.fnt"},
+        "railway_12": {"file": "data/fonts/railway_12.fnt"},
+        "railway_16": {"file": "data/fonts/railway_16.fnt"},
+        "railway_18": {"file": "data/fonts/railway_18.fnt"},
+        "railway_24": {"file": "data/fonts/railway_24.fnt"},
+        "railway_32": {"file": "data/fonts/railway_32.fnt"}
     },
     "com.badlogic.gdx.graphics.Color": {
         "green": {"a": 1, "b": 0, "g": 1, "r": 0},
@@ -11,7 +16,9 @@
         "black": {"a": 1, "b": 0, "g": 0, "r": 0},
         "gray": {"a": 1, "b": 0.5, "g": 0.5, "r": 0.5},
         "cyan": {"a": 1, "b": 1, "g": 1, "r": 0},
-        "softOrange": {"a": 1, "b": 0.03, "g": 0.73, "r": 0.97}
+        "softOrange": {"a": 1, "b": 0.03, "g": 0.73, "r": 0.97},
+        "buttonColor": {"a": 1, "b": 0, "g": 0, "r": 0},
+        "buttonOverColor": {"a": 1, "b": 0.2, "g": 0.2, "r": 0.2}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
         "dialogDim": {"name": "white", "color": {"r": 0, "g": 0, "b": 0, "a": 0.45}}
@@ -21,7 +28,7 @@
         "toggle": {"down": "default-round-down", "checked": "default-round-down", "up": "default-round"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-        "default": {"down": "default-round-down", "up": "default-round", "font": "default-font", "fontColor": "white"},
+        "default": {"font": "railway_24", "fontColor": "buttonColor", "overFontColor": "buttonOverColor"},
         "toggle": {"down": "default-round-down", "up": "default-round", "checked": "default-round-down", "font": "default-font", "fontColor": "white", "downFontColor": "cyan", "overFontColor": "softOrange"},
         "error": {"down": "default-round-down", "up": "default-round", "font": "default-font", "fontColor": "red"}
     },
@@ -48,7 +55,8 @@
         "default-horizontal": {"background": "default-slider", "knob": "default-slider-knob"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-        "default": {"font": "default-font", "fontColor": "white"}
+        "default": {"font": "railway_16", "fontColor": "black"},
+        "big": {"font": "railway_32", "fontColor": "black"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
         "default": {"selection": "selection", "background": "textfield", "font": "default-font", "fontColor": "white", "cursor": "cursor"}

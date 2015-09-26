@@ -31,7 +31,7 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
 
     public HudRenderSystem(AssetManagerX assetManager, int priority) {
         super(priority);
-        font = assetManager.getFont("quartz_50");
+        font = assetManager.getFont("hud_font");
     }
 
     @Override

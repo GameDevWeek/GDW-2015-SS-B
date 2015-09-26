@@ -6,17 +6,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
+import java.util.HashMap;
 
 /**
  *
  * @author schillen
  */
 public class MenuPageJoinServer extends MenuPage {
+    private HashMap<String, String> maps;
     private final TextField username;
     private final TextField serverIP;
     private final TextField serverPort;
@@ -25,6 +28,17 @@ public class MenuPageJoinServer extends MenuPage {
     
     public MenuPageJoinServer(Skin skin, MenuManager menuManager) {
         super(skin, "menu_bg");
+        
+            try {
+            maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            for(String name: maps.keySet()) {
+                System.out.println(name);
+                //get.
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         int x = 100;

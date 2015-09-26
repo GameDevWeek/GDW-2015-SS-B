@@ -76,7 +76,7 @@ public class MapLoader {
     }
     
     public static void generateWorldFromTileMapX(PooledEngine engine,
-            PhysixSystem physixSystem, TiledMap map) {
+            PhysixSystem physixSystem, TiledMap map, boolean isClient) {
         
         // Generate static world
         int tileWidth = map.getTileWidth();
@@ -86,6 +86,8 @@ public class MapLoader {
                 (Layer layer, TileInfo info) -> info.getBooleanProperty("solid", false),
                 (Rectangle rect) -> addShape(physixSystem, rect, tileWidth, tileHeight));
         
+        if(isClient)
+            return;
         
         for (Layer layer : map.getLayers()) {
             if (layer.isObjectLayer()) {

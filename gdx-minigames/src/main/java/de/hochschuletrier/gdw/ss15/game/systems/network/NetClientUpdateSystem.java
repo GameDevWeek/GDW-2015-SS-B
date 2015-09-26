@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
@@ -92,11 +94,10 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             MovableComponent movable = ComponentMappers.movable.get(entity);
             if (datagram.getPacketId() > movable.packetId) {
                 movable.packetId = datagram.getPacketId();
-                PositionComponent position = ComponentMappers.position.get(entity);
-                Vector2 pos = datagram.getPosition();
-                position.x = pos.x;
-                position.y = pos.y;
-                position.rotation = datagram.getRotation();
+                PhysixBodyComponent physixBody = ComponentMappers.physixBody.get(entity);
+                physixBody.setPosition(datagram.getPosition());
+                physixBody.setLinearVelocity(datagram.getVelocity());
+                physixBody.setAngle(datagram.getRotation() * MathUtils.degreesToRadians);
             }
         }
     }

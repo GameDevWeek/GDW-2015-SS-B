@@ -68,14 +68,7 @@ public class HudRenderSystem extends EntitySystem implements
 		String warmup = "WARMUP";
 		String gameover = winner + " Victory";
 		String time = "time:" + (int) Math.ceil(countdown);
-		// font.setColor(Team.RED.color);
-		// font.draw(DrawUtil.batch,scoreBlue , 50, 50);
-		// font.setColor(Team.BLUE.color);
-		// font.draw(DrawUtil.batch,scoreRed , Gdx.graphics.getWidth() - 200,
-		// 50);
-		// font.setColor(Color.GREEN);
-		// font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth() / 2 - 100,
-		// 50);
+
 		if (gamestate != null) {
 			switch (gamestate) {
 			case WARMUP:

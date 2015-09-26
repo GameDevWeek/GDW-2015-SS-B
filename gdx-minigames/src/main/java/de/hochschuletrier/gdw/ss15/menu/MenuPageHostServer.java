@@ -6,16 +6,22 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
+import java.util.HashMap;
 
 /**
  *
@@ -26,9 +32,29 @@ public class MenuPageHostServer extends MenuPage {
     private final TextField serverPort;
     private final TextField username;
     private final SelectBox mapname;
+    //private final SelectBox mapname;
+    private final DecoImage previewImage;
+    private HashMap<String, String> maps;
+    private final SelectBox mapSelect;
+
     
     public MenuPageHostServer(Skin skin, MenuManager menuManager) {
         super(skin, "menu_bg");
+        
+        //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
+        final int x2 = 300;
+        
+        try {
+            maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            
+            for(String name: maps.keySet()) {
+                System.out.println(name);
+                //get.
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         int x = 100;
@@ -37,19 +63,37 @@ public class MenuPageHostServer extends MenuPage {
         int yStep = 55;
         int width = 300;
         int height = 50;
+        mapSelect = new SelectBox(skin);
+        mapSelect.setItems(maps.keySet().toArray());
+        mapSelect.setBounds(400, 250, 300, 50);
+        mapSelect.setMaxListCount(10);
+        addActor(mapSelect);
+        
+        //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         
         
-        createLabel(400, 500, 600, 80, "Host Server Menu");
-        //createLabel(50, 400, 300, 50, "Enter Server IP");
-        //serverIP = createTextField(400, 400, 300, 50, "");
+        createLabel(x2, 500, 600, 80, "Host Server Menu");
+        //createLabel(50, x2, 300, 50, "Enter Server IP");
+        //serverIP = createTextField(x2, 400, 300, 50, "");
         createLabel(50, 350, 300, 50, "Enter Server Port");
-        serverPort = createTextField(400, 350, 300, 50, "9090");
+        serverPort = createTextField(x2, 350, 300, 50, "9090");
         createLabel(50, 300, 300, 50, "Enter Username");
-        username = createTextField(400, 300, 300, 50, "Host");
+        username = createTextField(x2, 300, 300, 50, "Host");
         createLabel(50, 250, 300, 50, "Select Map");
-        mapname = selectBox(400, 250, 300, 50, "Select Map");
-        //mapname = createTextField(400, 250, 300, 50, "Map");
-        addLeftAlignedButton(400, 200, 300, 50, "Server Starten", this::startServer);
+        mapname = selectBox(x2, 250, 300, 50, "Select Map");
+        mapname.setItems(maps.keySet().toArray());
+        previewImage = new DecoImage(getPreviewTexture());
+        addActor(previewImage);
+        
+        mapname.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                updatePreview();
+            }
+        });
+        updatePreview();
+        //mapname = createTextField(x2, 250, 300, 50, "Map");
+        addLeftAlignedButton(x2, 200, 300, 50, "Server Starten", this::startServer);
         //addCenteredButton(..., this::joinServer); 
         
         addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
@@ -57,11 +101,39 @@ public class MenuPageHostServer extends MenuPage {
 
     }
     
+    private Texture getPreviewTexture() {
+        String mapName = maps.get((String)mapname.getSelected());
+        Texture texture = assetManager.getTexture(mapName);
+        if(texture != null)
+            return texture;
+        return assetManager.getTexture("magnet_plus");
+    }
+    
+    private void updatePreview() {
+        float x = 800;
+        float y = 300;
+        float maxWidth = 256;
+        float maxHeight = 256;
+        Texture texture = getPreviewTexture();
+        previewImage.setTexture(texture);
+        float width = texture.getWidth();
+        float height = texture.getHeight();
+        if(width > height) {
+            height = maxHeight * height / width;
+            width = maxWidth;
+        } else {
+            width = maxWidth * width / height;
+            height = maxHeight;
+        }
+        previewImage.setBounds(x - width/2, y - height/2, width, height);
+    }
+
+    
     private void startServer() {
         try {
             String userName = this.username.getText();
             int port = Integer.parseInt(this.serverPort.getText());
-            String mapName = "data/maps/NiceMap.tmx";
+            String mapName = maps.get((String)this.mapname.getSelected());
             CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
         
         }   catch(NumberFormatException e){}

@@ -2,5 +2,9 @@
     "test": "data/particleEffects/test.pe",
     "test2": "data/particleEffects/ball_red_mid.pe",
     "statedBall": "data/particleEffects/ball_stated.pe",
-    "mfieldPulse": "data/particleEffects/MagneticFiledPulse.pe"
+    "mfieldPulse": "data/particleEffects/MagneticFiledPulse.pe",
+    "goal_45": "data/particleEffects/goal_45.pe",
+    "goal_135": "data/particleEffects/goal_135.pe",
+    "goal_225": "data/particleEffects/goal_225.pe",
+    "goal_315": "data/particleEffects/goal_315.pe"
 }

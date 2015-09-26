@@ -144,6 +144,7 @@
     "goal_particles_tl": {
         "meta": {},
         "components":{
+            "Team": {},
             "Position":{},
             "goalEffect":{
                 "effect": "goal_topLeft"
@@ -153,6 +154,7 @@
     "goal_particles_tr": {
         "meta": {},
         "components":{
+            "Team": {},
             "Position":{},
             "goalEffect":{
                 "effect": "goal_topRight"
@@ -162,6 +164,7 @@
     "goal_particles_br": {
         "meta": {},
         "components":{
+            "Team": {},
             "Position":{},
             "goalEffect":{
                 "effect": "goal_bottomRight"
@@ -171,6 +174,7 @@
     "goal_particles_bl": {
         "meta": {},
         "components":{
+            "Team": {},
             "Position":{},
             "goalEffect":{
                 "effect": "goal_bottomLeft"

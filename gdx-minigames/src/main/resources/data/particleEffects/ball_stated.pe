@@ -115,7 +115,7 @@ highMin: 1.0
 highMax: 1.0
 relative: false
 scalingCount: 1
-scaling0: 1.0
+scaling0: 0.2
 timelineCount: 1
 timeline0: 0.0
 - Options - 
@@ -246,7 +246,7 @@ highMin: 1.0
 highMax: 1.0
 relative: false
 scalingCount: 1
-scaling0: 1.0
+scaling0: 0.2
 timelineCount: 1
 timeline0: 0.0
 - Options - 
@@ -377,7 +377,7 @@ highMin: 1.0
 highMax: 1.0
 relative: false
 scalingCount: 1
-scaling0: 0.1754386
+scaling0: 0.2
 timelineCount: 1
 timeline0: 0.0
 - Options - 

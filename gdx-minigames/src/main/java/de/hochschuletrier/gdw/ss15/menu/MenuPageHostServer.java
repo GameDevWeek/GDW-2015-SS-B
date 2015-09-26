@@ -32,10 +32,9 @@ public class MenuPageHostServer extends MenuPage {
     private final TextField serverPort;
     private final TextField username;
     private final SelectBox mapname;
-    //private final SelectBox mapname;
     private final DecoImage previewImage;
     private HashMap<String, String> maps;
-    private final SelectBox mapSelect;
+    
 
     
     public MenuPageHostServer(Skin skin, MenuManager menuManager) {
@@ -55,19 +54,7 @@ public class MenuPageHostServer extends MenuPage {
             e.printStackTrace();
             System.exit(-1);
         }
-        
-        //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
-        int x = 100;
-        int i = 0;
-        int y = 370;
-        int yStep = 55;
-        int width = 300;
-        int height = 50;
-        mapSelect = new SelectBox(skin);
-        mapSelect.setItems(maps.keySet().toArray());
-        mapSelect.setBounds(400, 250, 300, 50);
-        mapSelect.setMaxListCount(10);
-        addActor(mapSelect);
+  
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         
@@ -75,12 +62,12 @@ public class MenuPageHostServer extends MenuPage {
         createLabel(x2, 500, 600, 80, "Host Server Menu");
         //createLabel(50, x2, 300, 50, "Enter Server IP");
         //serverIP = createTextField(x2, 400, 300, 50, "");
-        createLabel(50, 350, 300, 50, "Enter Server Port");
-        serverPort = createTextField(x2, 350, 300, 50, "9090");
-        createLabel(50, 300, 300, 50, "Enter Username");
-        username = createTextField(x2, 300, 300, 50, "Host");
-        createLabel(50, 250, 300, 50, "Select Map");
-        mapname = selectBox(x2, 250, 300, 50, "Select Map");
+        createLabel(50, 400, 300, 50, "Enter Server Port");
+        serverPort = createTextField(x2, 400, 300, 50, "9090");
+        createLabel(50, 350, 300, 50, "Enter Username");
+        username = createTextField(x2, 350, 300, 50, "Host");
+        createLabel(50, 300, 300, 50, "Select Map");
+        mapname = selectBox(x2, 300, 300, 50, "Select Map");
         mapname.setItems(maps.keySet().toArray());
         previewImage = new DecoImage(getPreviewTexture());
         addActor(previewImage);

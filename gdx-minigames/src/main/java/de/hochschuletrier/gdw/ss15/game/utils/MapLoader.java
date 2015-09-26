@@ -128,6 +128,22 @@ public class MapLoader {
                             			obj.getY() - obj.getHeight() / 2.0f, team
                             			); 
                             	break;
+                            case "goal_particle_spawner_45":
+                                createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
+                                        obj.getY() - obj.getHeight() / 2.0f, team);
+                                break;
+                            case "goal_particle_spawner_135":
+                                createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
+                                        obj.getY() - obj.getHeight() / 2.0f, team);
+                                break;
+                            case "goal_particle_spawner_225":
+                                createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
+                                        obj.getY() - obj.getHeight() / 2.0f, team);
+                                break;
+                            case "goal_particle_spawner_315":
+                                createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
+                                        obj.getY() - obj.getHeight() / 2.0f, team);
+                                break;
                             default:
                                 System.out.println(entitytype + "Nicht bekannt");
                         }

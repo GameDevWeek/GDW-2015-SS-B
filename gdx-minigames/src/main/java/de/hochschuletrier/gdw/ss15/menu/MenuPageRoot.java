@@ -1,19 +1,10 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
-import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
-import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
-import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
-import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
-import de.hochschuletrier.gdw.ss15.game.GameConstants;
-import java.util.HashMap;
 
 public class MenuPageRoot extends MenuPage {
-    private HashMap<String, String> maps;
-    private final SelectBox mapSelect;
 
     public enum Type {
 
@@ -23,24 +14,6 @@ public class MenuPageRoot extends MenuPage {
 
     public MenuPageRoot(Skin skin, MenuManager menuManager, Type type) {
         super(skin, "menu_bg");
-
-        try {
-            maps = JacksonReader.readMap("data/json/maps.json", String.class);
-            
-            for(String name: maps.keySet()) {
-                System.out.println(name);
-                //get.
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        
-        mapSelect = new SelectBox(skin);
-        mapSelect.setItems(maps.keySet().toArray());
-        mapSelect.setBounds(50, 500, 200, 30);
-        mapSelect.setMaxListCount(10);
-        addActor(mapSelect);
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
         int x = 500;
@@ -58,25 +31,6 @@ public class MenuPageRoot extends MenuPage {
         }
         addPageEntry(menuManager, 50, 100, "Credits", new MenuPageCredits(skin, menuManager));
         addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
-    }
-
-    private void startServer() {
-        String userName = "Server";
-        String mapName = maps.get((String)mapSelect.getSelected());
-        int port = 9090;
-        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
-    }
-
-    private void joinServer() {
-        String server = "localhost";
-        String userName = "Client";
-        int port = 9090;
-        JoinServerEvent.emit(server, port, userName);
-    }
-
-    private void startGame() {
-        String mapName = maps.get((String)mapSelect.getSelected());
-        TestGameEvent.emit(mapName);
     }
 
     private void stopGame() {

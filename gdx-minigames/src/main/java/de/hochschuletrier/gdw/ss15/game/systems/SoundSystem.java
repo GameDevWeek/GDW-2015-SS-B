@@ -67,7 +67,7 @@ public class SoundSystem extends IteratingSystem implements SoundEvent.Listener 
             SoundEmitterComponent soundEmitter = ComponentMappers.soundEmitter.get(entity);
             soundEmitter.emitter.play(assetManager.getSound(sound), false);
         } else {
-            assetManager.getSound(sound).play();
+            SoundEmitter.playGlobal(assetManager.getSound(sound), false);
         }
     }
 }

@@ -212,12 +212,6 @@ public class Main extends StateBasedGame
         postRender();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        SoundEmitter.setListenerPosition(width / 2, height / 2, 10, emitterMode.get());
-    }
-
     public void onEmitterModeChanged(CVar cvar) {
         int x = Gdx.graphics.getWidth() / 2;
         int y = Gdx.graphics.getHeight() / 2;

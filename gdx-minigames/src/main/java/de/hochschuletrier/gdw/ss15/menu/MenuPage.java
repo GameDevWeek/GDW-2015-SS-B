@@ -1,6 +1,8 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.ss15.Main;
+import java.awt.Cursor;
 
 public class MenuPage extends Group {
 
@@ -70,7 +73,7 @@ public class MenuPage extends Group {
     }
     
     protected final TextField createTextField(int x, int y, int width, int height, String text) {
-        TextField textField = new TextField(text, skin);
+        TextField textField = new TextField(text, skin, "default");
         textField.setBounds(x, y, width, height);
         addActor(textField);
         return textField;

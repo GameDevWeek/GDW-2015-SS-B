@@ -120,6 +120,7 @@
  
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Graphic Design", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Anja Regnery", "delay": "1100" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Natalie Carl", "delay": "1100" },
                 
                 { "type": "text", "path" : "title-text", "style" : "title", "text": "Credits", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schütze", "delay": "1100" },

@@ -25,7 +25,7 @@ public class PointLightComponent extends Component implements Pool.Poolable
 
     @Override
     public void reset()
-    {
+    {   
         pointLight.remove();
         pointLight = null;
     }

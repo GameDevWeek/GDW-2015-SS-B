@@ -63,7 +63,7 @@
  </layer>
  <layer name="Style/Spawns" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJztl1tuwjAQRb2OQP/ar/71/X5so7SQQAOlbK3dY8eqrzKMJo5tEggSR7oCHMee64nHwZgDnw3ahDfSyn3/IH0FzCdlxxiR3kU8hRsTTFxbEekN42OOGF9Dp1mCL6vcxTsV3rBWYM78xXiz42cuxmmELzvPIMGbvf/b/K+jjXlhqpxrc41Y30mit0Ggt5L5ylzbksXb5GvF7pH9JTY2vubWH/IZ4g1rtzDrz4GGzFkhrvvyx30BrAkk4XmVdFlLNLg3PHsQrztjp4kyhg9Ze7bpjecBXgbuE3VuxvqXrF0+Axo56cdUtSfGW2aqvWc5deLzZ4FxWGSOfs36nub7ISSHvme0Ce4L2L3MPeG3BGfSmEnWcV9c84R4Yxh6rvH6oXmTZ9K+EbM3uoDXktB+8lz0gdwhTynzhZApbbmpaokP2++Y9Str+h0pbah3eG86CZxP1pJYQmsJ76edqz6sN7xXpMzXZ+r2WxdnZpv4aiXoey3R0M43Sd351sQmcYHchNUSH7JGDU11duP8TolrW7WkC85I56QL0qW4ti+1pI4r0jXphnS741ja5o50T3ogPUbch73YZ55Iz6QX0mvgPfz/rkbK3u4LudnOO6r2Dtc2S/EbOdvVmXmgHf4AM8iPOg==
+   eJztl1tuwjAQRb2OQP/ar/71/X5so7SQQIFSttbusTOqrzKMHMc2SQgSR7oCHMee64nHwZgDnzXahjfS2n7/IH0FzKfFY4xI7yqewo4JJratiPSG8TFHjK+h1SzBFyu38U6VN6wVWAh/Md54/MzGOI3wxfMMErzx/d/mfx055qUpc+6aayT6ThK9DQK9zYWvzLatRLx1vtbiHt1fw7HJNWd/yGeIN6zd0mw+By50zgp13Zc/6QtgTSCNzKumzVriQnrDswfJujO2mjjG8KFrT5feZB7gZWA/Uedmov9ctOtnwEVO+jFl7Ynxlply7zGnVnL+LDAORufo12zuabkfQnLoe0brkL4A72XpCb81OJPGQrqO++JaJMQbw9BzTdYPlzd9Ju0bMXujDWQtCe2nz0UfyB3ylDJfCJmjLTdlLfHB/Y5Fv3lFvyNHG+od3ptOAufTtSSW0Foi+7nOVR/sDe8VKfP1mar91saZ2SS+Wgn6XktcuM43TdX5Vsc2cYHchNUSH7pGDU15duP8Tomrq1rSBmekc9IF6VJd25daUsUV6Zp0Q7rdcSxNc0e6Jz2QHiPuw17sM0+kZ9IL6TXwHvl/10XK3t4Vuk7mppt3VNc7XNOs1G/kbFdn5oFm+AMsh4+W
   </data>
  </layer>
  <layer name="krater" width="55" height="27">
@@ -73,7 +73,7 @@
  </layer>
  <layer name="Dekorations" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJztl0sOxCAIQD1Jh9r733EyiybGEfkJ1ca3tMoftCltNm2OxlpWnCm5GrJ6Z05CnoWPo+woOD7UezKyjuGZg5kB4vtKcaltpfr4zXjnjdNXEhsuekuTzLQFg5rlEiLrzZpfIL5j+bD6iMkdmQcp2trjoKlNT3tK7phH6bPiNdO830jSnom8cyFQ1wjdd2xmedeWc+uXZ04vgY8pf2AxymnsXSWZ3dzaXmUmUazwfp6llzSUto+q6bfUHkavX62+W88/+c9W9wG3d5+wmaNTk4uez6CQJyVCx4bmC+YzCRU=
+   eJztlkkOwCAIRT1Ja+3979i4MCGNA6Jf0fiWjTLIB2rM4RDninxzgjuUt8KW52GckXIDbWvinyfn3SnIGmjGzg4ASK0GdmI1Pb/lI1F8jbXMuJF6Q9c3VY/WHFN2SzsViVR7HCTaRMZDCW8+yl8rKM2j54fmPWQX8x00oGXm07nl68zpJYsJhY0zfTVZM7u5PbzKTCqxwn+Yll6SQGPvpeldtJci16+tubfe17Qrub07I2aUz1zOFuRztI9DmQ+6lQd3
   </data>
  </layer>
  <objectgroup name="Goals">

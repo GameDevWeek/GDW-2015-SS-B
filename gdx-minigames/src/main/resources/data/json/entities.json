@@ -7,8 +7,8 @@
             "SoundEmitter": {},
             "ImpactSound": {
                 "sound": "ball_impact",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
+                "minImpulseStrength": 40,
+                "minSpeed": 40,
                 "minDelay": 100
             },
             "StateRelatedAnimations": {

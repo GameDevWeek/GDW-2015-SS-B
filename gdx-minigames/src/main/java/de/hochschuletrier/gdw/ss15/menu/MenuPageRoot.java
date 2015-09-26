@@ -29,6 +29,7 @@ public class MenuPageRoot extends MenuPage {
             
             for(String name: maps.keySet()) {
                 System.out.println(name);
+                //get.
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,20 +43,21 @@ public class MenuPageRoot extends MenuPage {
         addActor(mapSelect);
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
-        int x = 100;
+        int x = 500;
         int i = 0;
-        int y = 370;
+        int y = 500;
         int yStep = 55;
         if (type == Type.MAINMENU) {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel Starten", this::startGame);
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
+            createLabel(400, 500, 600, 80, "Main Menu");
+            addPageEntry(menuManager, 50, 300, "Join Server", new MenuPageJoinServer(skin, menuManager));
+            addPageEntry(menuManager, 50, 200, "Host Server", new MenuPageHostServer(skin, menuManager));
+            
         } else {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Fortsetzen", () -> menuManager.popPage());
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel verlassen", this::stopGame);
+            addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
+            addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);
         }
-        addPageEntry(menuManager, x, y - yStep * (i++), "Credits", new MenuPageCredits(skin, menuManager));
-        addCenteredButton(menuManager.getWidth() - 80, 54, 100, 40, "Exit", () -> System.exit(-1));
+        addPageEntry(menuManager, 50, 100, "Credits", new MenuPageCredits(skin, menuManager));
+        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
     }
 
     private void startServer() {
@@ -83,6 +85,6 @@ public class MenuPageRoot extends MenuPage {
 
     protected final void addPageEntry(MenuManager menuManager, int x, int y, String text, MenuPage page) {
         menuManager.addLayer(page);
-        addLeftAlignedButton(x, y, 300, 40, text, () -> menuManager.pushPage(page));
+        addLeftAlignedButton(x, y, 300, 50, text, () -> menuManager.pushPage(page));
     }
 }

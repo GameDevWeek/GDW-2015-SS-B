@@ -56,17 +56,17 @@ public class HudRenderSystem extends EntitySystem implements ScoreChangedEvent.L
 
         String time = "time:" + (int)Math.ceil(countdown);
         font.setColor(Team.RED.color);
-        font.draw(DrawUtil.batch, scoreRed, 50, 50);
+        font.draw(DrawUtil.batch,scoreBlue , 50, 50);
         font.setColor(Team.BLUE.color);
-        font.draw(DrawUtil.batch, scoreBlue, Gdx.graphics.getWidth() - 200, 50);
+        font.draw(DrawUtil.batch,scoreRed , Gdx.graphics.getWidth() - 200, 50);
         font.setColor(Color.GREEN);
         font.draw(DrawUtil.batch, time, Gdx.graphics.getWidth() / 2 - 100, 50);
     }
 
     @Override
     public void onScoreChangedEvent(int scoreBlue, int scoreRed) {
-        this.scoreBlue = "BLUE " + scoreBlue;
-        this.scoreRed = "RED " + scoreRed;
+        this.scoreBlue = "RED " + scoreBlue;
+        this.scoreRed = "BLUE " + scoreRed;
     }
 
     @Override

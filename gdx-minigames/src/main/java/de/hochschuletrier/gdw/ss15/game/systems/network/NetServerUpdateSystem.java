@@ -16,11 +16,13 @@ import de.hochschuletrier.gdw.ss15.datagrams.BallPlayerInputDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.GoalShotDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PullChangeDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.ShootDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalShotEvent;
 import de.hochschuletrier.gdw.ss15.events.PullEvent;
 import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
@@ -30,11 +32,12 @@ import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
 
 public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHandler,
-        NetServerSimple.Listener, ChangeGameStateEvent.Listener {
+        NetServerSimple.Listener, ChangeGameStateEvent.Listener, GoalShotEvent.Listener {
 
     private final NetServerSimple netServer;
     private ImmutableArray<Entity> entities;
@@ -61,6 +64,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         entities = engine.getEntitiesFor(Family.all(SetupComponent.class).get());
         animationEntities = engine.getEntitiesFor(Family.all(StateRelatedAnimationsComponent.class).get());
         ChangeGameStateEvent.register(this);
+        GoalShotEvent.register(this);
     }
 
     @Override
@@ -68,6 +72,7 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
         super.removedFromEngine(engine);
         entities = null;
         ChangeGameStateEvent.unregister(this);
+        GoalShotEvent.unregister(this);
     }
 
     @Override
@@ -165,5 +170,10 @@ public class NetServerUpdateSystem extends EntitySystem implements NetDatagramHa
     public void onChangeGameStateEvent(GameState newState, float gameTime) {
         this.gameState = newState;
         netServer.broadcastReliable(GameStateDatagram.create(newState, gameTime));
+    }
+
+    @Override
+    public void onGoalShotEvent(Team team) {
+        netServer.broadcastReliable(GoalShotDatagram.create(team));
     }
 }

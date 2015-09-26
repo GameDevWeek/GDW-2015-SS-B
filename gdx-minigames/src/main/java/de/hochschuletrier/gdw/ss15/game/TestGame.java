@@ -125,10 +125,10 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         if(netClient == null) {
             engine.addSystem(new MovementSystem(10));
             engine.addSystem(new PullSystem(30));
-            engine.addSystem(new GoalShotEventSystem(
-                    GameConstants.PRIORITY_ENTITIES));
             engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
         }
+        engine.addSystem(new GoalShotEventSystem(
+                GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(20));
         engine.addSystem(new ReceptiveSystem(5));
         if(netClient == null)

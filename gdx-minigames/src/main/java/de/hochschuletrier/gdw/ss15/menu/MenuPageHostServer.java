@@ -11,11 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
 import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
+import java.util.HashMap;
 
 /**
  *
@@ -25,10 +27,31 @@ public class MenuPageHostServer extends MenuPage {
     //private final TextField serverIP;
     private final TextField serverPort;
     private final TextField username;
-    private final SelectBox mapname;
+    //private final SelectBox mapname;
+    private HashMap<String, String> maps;
+    private final SelectBox mapSelect;
+
     
     public MenuPageHostServer(Skin skin, MenuManager menuManager) {
         super(skin, "menu_bg");
+        
+        try {
+            maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            
+            for(String name: maps.keySet()) {
+                System.out.println(name);
+                //get.
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        
+        mapSelect = new SelectBox(skin);
+        mapSelect.setItems(maps.keySet().toArray());
+        mapSelect.setBounds(400, 250, 300, 50);
+        mapSelect.setMaxListCount(10);
+        addActor(mapSelect);
         
         //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         int x = 100;
@@ -47,9 +70,9 @@ public class MenuPageHostServer extends MenuPage {
         createLabel(50, 300, 300, 50, "Enter Username");
         username = createTextField(400, 300, 300, 50, "Host");
         createLabel(50, 250, 300, 50, "Select Map");
-        mapname = selectBox(400, 250, 300, 50, "Select Map");
+        //mapname = selectBox(400, 250, 300, 50, "Select Map");
         //mapname = createTextField(400, 250, 300, 50, "Map");
-        addLeftAlignedButton(400, 200, 300, 50, "Server Starten", this::startServer);
+        addLeftAlignedButton(400, 200, 300, 50, "Start Server", this::startServer);
         //addCenteredButton(..., this::joinServer); 
         
         addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());

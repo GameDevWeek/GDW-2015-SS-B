@@ -141,39 +141,39 @@
     	}
     },
     
-    "goal_particle_spawner_45": {
+    "goal_particles_tl": {
         "meta": {},
         "components":{
             "Position":{},
-            "GoalEffect":{
-                "effect": "goal_45"
+            "goalEffect":{
+                "effect": "goal_topLeft"
             }
         }
     },
-    "goal_particle_spawner_135": {
+    "goal_particles_tr": {
         "meta": {},
         "components":{
             "Position":{},
-            "GoalEffect":{
-                "effect": "goal_135"
+            "goalEffect":{
+                "effect": "goal_topRight"
             }
         }
     },
-    "goal_particle_spawner_225": {
+    "goal_particles_br": {
         "meta": {},
         "components":{
             "Position":{},
-            "GoalEffect":{
-                "effect": "goal_225"
+            "goalEffect":{
+                "effect": "goal_bottomRight"
             }
         }
     },
-    "goal_particle_spawner_315": {
+    "goal_particles_bl": {
         "meta": {},
         "components":{
             "Position":{},
-            "GoalEffect":{
-                "effect": "goal_315"
+            "goalEffect":{
+                "effect": "goal_bottomLeft"
             }
         }
     }

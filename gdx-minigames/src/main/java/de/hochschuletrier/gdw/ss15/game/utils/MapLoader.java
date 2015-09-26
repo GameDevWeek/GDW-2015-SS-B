@@ -108,7 +108,7 @@ public class MapLoader {
                         else {
                             team  = (tmp == 0) ? Team. BLUE : Team.RED;
                         }
-                         
+                        
                         switch (entitytype) {
                             case "goal":
                                 createTrigger(engine, physixSystem,

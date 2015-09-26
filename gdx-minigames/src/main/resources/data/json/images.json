@@ -10,5 +10,9 @@
     "texture_dummy_64": "data/images/texture_dummy_64x64px.png",
     "p_spawn_dummy": "data/images/player_spawn_dummy.png",
     
-    "data/maps/NiceMap.tmx": "data/maps/NiceMap.png"
+    "data/maps/NiceMap.tmx": "data/maps/NiceMap.png",
+    "data/maps/RedBull.tmx": "data/maps/RedBull.png"
+    
+    
+    
 }

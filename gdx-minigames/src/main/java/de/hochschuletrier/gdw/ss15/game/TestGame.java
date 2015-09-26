@@ -64,9 +64,9 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
     }
 
     public TestGame(NetServerSimple netServer, NetClientSimple netClient) {
+        super(netClient != null);
         this.netServer = netServer;
         this.netClient = netClient;
-        factoryParam.clientPhysix = (netClient != null);
     }
     
 
@@ -173,7 +173,10 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
     }
 
     private void setupPhysixWorld() {
-        physixSystem.setGravity(0, 0);
+        if(netClient == null)
+            physixSystem.setGravity(0, 0);
+        else if(!GameConstants.LIGHTS)
+            physixSystem.setProcessing(false);
     }
 
     public static TiledMap loadMap(String filename) {
@@ -205,7 +208,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
             final boolean hasBall = owner == player;
             ComponentMappers.player.get(player).hasBall = hasBall;
             PointLightComponent light = ComponentMappers.pointLight.get(player);
-            if(hasBall != light.pointLight.isActive()) {
+            if(light != null && hasBall != light.pointLight.isActive()) {
                 light.pointLight.setActive(hasBall);
                 if(hasBall) {
                     TeamComponent team = ComponentMappers.team.get(player);

@@ -19,6 +19,7 @@ import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.commons.tiled.utils.RectangleGenerator;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
 import de.hochschuletrier.gdw.ss15.Main;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
@@ -78,7 +79,11 @@ public class MapLoader {
     
     public static void generateWorldFromTileMapX(PooledEngine engine,
             PhysixSystem physixSystem, TiledMap map, boolean isClient) {
+        factoryParam.isClient = isClient;
         
+        if(!GameConstants.LIGHTS && isClient)
+            return;
+            
         // Generate static world
         int tileWidth = map.getTileWidth();
         int tileHeight = map.getTileHeight();

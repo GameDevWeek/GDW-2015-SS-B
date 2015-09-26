@@ -25,6 +25,7 @@ import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalShotEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
@@ -96,10 +97,17 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
             MovableComponent movable = ComponentMappers.movable.get(entity);
             if (datagram.getPacketId() > movable.packetId) {
                 movable.packetId = datagram.getPacketId();
-                PhysixBodyComponent physixBody = ComponentMappers.physixBody.get(entity);
-                physixBody.setPosition(datagram.getPosition());
-                physixBody.setLinearVelocity(datagram.getVelocity());
-                physixBody.setAngle(datagram.getRotation() * MathUtils.degreesToRadians);
+                if(GameConstants.LIGHTS) {
+                    PhysixBodyComponent physixBody = ComponentMappers.physixBody.get(entity);
+                    physixBody.setPosition(datagram.getPosition());
+                    physixBody.setLinearVelocity(datagram.getVelocity());
+                    physixBody.setAngle(datagram.getRotation() * MathUtils.degreesToRadians);
+                } else {
+                    PositionComponent pos = ComponentMappers.position.get(entity);
+                    pos.x = datagram.getPosition().x;
+                    pos.y = datagram.getPosition().y;
+                    pos.rotation = datagram.getRotation();
+                }
             }
         }
     }

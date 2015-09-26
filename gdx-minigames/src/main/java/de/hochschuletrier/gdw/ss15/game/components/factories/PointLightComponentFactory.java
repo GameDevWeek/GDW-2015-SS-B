@@ -19,6 +19,8 @@ public class PointLightComponentFactory extends ComponentFactory<EntityFactoryPa
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
+        if(!GameConstants.LIGHTS)
+            return;
         PointLightComponent plc = engine.createComponent(PointLightComponent.class);
         Color color = Color.valueOf(properties.getString("color", "FFFFFF"));
         float distance = properties.getFloat("distance", 250) / GameConstants.BOX2D_SCALE;

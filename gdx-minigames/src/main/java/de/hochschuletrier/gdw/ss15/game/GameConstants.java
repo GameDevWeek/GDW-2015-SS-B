@@ -40,4 +40,6 @@ public class GameConstants {
     public static short MASK_EVERYTHING = 0xFFF;
     public static short MASK_WORLDOBJECT = 0x002;
     public static short MASK_WORLDSENSOR = 0x004;
+    
+    public static final boolean LIGHTS = true;
 }

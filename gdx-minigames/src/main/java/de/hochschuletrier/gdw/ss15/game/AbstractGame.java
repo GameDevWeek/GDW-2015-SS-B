@@ -26,15 +26,16 @@ import de.hochschuletrier.gdw.ss15.game.systems.UpdatePositionSystem;
 public abstract class AbstractGame {
 
     protected final PooledEngine engine = new PooledEngine(GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE, GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE);
-    protected final EntityFactoryParam factoryParam = new EntityFactoryParam();
     protected final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", TestGame.class);
     protected final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
     protected final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
     protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
     private String mapName;
+    private final boolean isClient;
 
-    public AbstractGame() {
+    public AbstractGame(boolean isClient) {
+        this.isClient = isClient;
         // If this is a build jar file, disable hotkeys
         if (!Main.IS_RELEASE) {
             togglePhysixDebug.register();
@@ -65,7 +66,8 @@ public abstract class AbstractGame {
         engine.addSystem(physixSystem);
         engine.addSystem(physixDebugRenderSystem);
 
-        engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
+        if(!isClient || GameConstants.LIGHTS)
+            engine.addSystem(new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1));
         engine.addSystem(new TextureRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
         engine.addSystem(new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS + 1));
         engine.addSystem(new StateRelatedAnimationsRenderSystem(GameConstants.PRIORITY_ANIMATIONS + 2));
@@ -73,12 +75,14 @@ public abstract class AbstractGame {
         engine.addSystem(camSys);
         engine.addSystem(new SoundSystem(GameConstants.PRIORITY_CAMERA));
         engine.addSystem(new BallParticlesRenderSystem(GameConstants.PRIORITY_ANIMATIONS - 1));
-        engine.addSystem(new LightRenderSystem(camSys.getCamera(), physixSystem, GameConstants.PRIORITY_MAP + 1));
+        if(GameConstants.LIGHTS)
+            engine.addSystem(new LightRenderSystem(camSys.getCamera(), physixSystem, GameConstants.PRIORITY_MAP + 1));
     }
 
     private void addContactListeners() {
-        if(factoryParam.clientPhysix) {
-            physixSystem.getWorld().setContactListener(new ClientContactListener());
+        if(isClient) {
+            if(GameConstants.LIGHTS)
+                physixSystem.getWorld().setContactListener(new ClientContactListener());
         } else {
             PhysixComponentAwareContactListener contactListener = new PhysixComponentAwareContactListener();
             physixSystem.getWorld().setContactListener(contactListener);

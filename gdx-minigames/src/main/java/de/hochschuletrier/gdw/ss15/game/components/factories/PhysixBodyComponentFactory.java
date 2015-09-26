@@ -39,7 +39,9 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
-        dynamicBodyType = param.clientPhysix ? BodyType.KinematicBody : BodyType.DynamicBody;
+        if(param.isClient && !GameConstants.LIGHTS)
+            return;
+        dynamicBodyType = param.isClient ? BodyType.KinematicBody : BodyType.DynamicBody;
         final PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");

@@ -41,7 +41,7 @@ public class MagneticForceSystem extends IteratingSystem {
             Vector2 otherPos = new Vector2();
             otherPos.x = magneticField.getComponent(PositionComponent.class).x;
             otherPos.y = magneticField.getComponent(PositionComponent.class).y;
-  
+   
             Vector2 magneticForce = new Vector2(otherPos.x - position.x, otherPos.y - position.y);
             float distance=magneticForce.len();
             float fieldLength= magneticField.getComponent(MagneticFieldComponent.class).range;

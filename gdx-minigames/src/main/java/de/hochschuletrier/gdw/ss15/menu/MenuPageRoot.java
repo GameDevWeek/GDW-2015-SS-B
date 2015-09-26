@@ -1,19 +1,10 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
-import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
-import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
-import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
-import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
-import de.hochschuletrier.gdw.ss15.game.GameConstants;
-import java.util.HashMap;
 
 public class MenuPageRoot extends MenuPage {
-    private HashMap<String, String> maps;
-    private final SelectBox mapSelect;
 
     public enum Type {
 
@@ -24,57 +15,22 @@ public class MenuPageRoot extends MenuPage {
     public MenuPageRoot(Skin skin, MenuManager menuManager, Type type) {
         super(skin, "menu_bg");
 
-        try {
-            maps = JacksonReader.readMap("data/json/maps.json", String.class);
-            
-            for(String name: maps.keySet()) {
-                System.out.println(name);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        
-        mapSelect = new SelectBox(skin);
-        mapSelect.setItems(maps.keySet().toArray());
-        mapSelect.setBounds(50, 500, 200, 30);
-        mapSelect.setMaxListCount(10);
-        addActor(mapSelect);
-
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
-        int x = 100;
+        int x = 500;
         int i = 0;
-        int y = 370;
+        int y = 500;
         int yStep = 55;
         if (type == Type.MAINMENU) {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel Starten", this::startGame);
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
+            createLabel(400, 500, 600, 80, "Main Menu");
+            addPageEntry(menuManager, 50, 300, "Join Server", new MenuPageJoinServer(skin, menuManager));
+            addPageEntry(menuManager, 50, 200, "Host Server", new MenuPageHostServer(skin, menuManager));
+            
         } else {
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Fortsetzen", () -> menuManager.popPage());
-            addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Spiel verlassen", this::stopGame);
+            addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
+            addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);
         }
-        addPageEntry(menuManager, x, y - yStep * (i++), "Credits", new MenuPageCredits(skin, menuManager));
-        addCenteredButton(menuManager.getWidth() - 80, 54, 100, 40, "Exit", () -> System.exit(-1));
-    }
-
-    private void startServer() {
-        String userName = "Server";
-        String mapName = maps.get((String)mapSelect.getSelected());
-        int port = 9090;
-        CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
-    }
-
-    private void joinServer() {
-        String server = "localhost";
-        String userName = "Client";
-        int port = 9090;
-        JoinServerEvent.emit(server, port, userName);
-    }
-
-    private void startGame() {
-        String mapName = maps.get((String)mapSelect.getSelected());
-        TestGameEvent.emit(mapName);
+        addPageEntry(menuManager, 50, 100, "Credits", new MenuPageCredits(skin, menuManager));
+        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
     }
 
     private void stopGame() {
@@ -83,6 +39,6 @@ public class MenuPageRoot extends MenuPage {
 
     protected final void addPageEntry(MenuManager menuManager, int x, int y, String text, MenuPage page) {
         menuManager.addLayer(page);
-        addLeftAlignedButton(x, y, 300, 40, text, () -> menuManager.pushPage(page));
+        addLeftAlignedButton(x, y, 300, 50, text, () -> menuManager.pushPage(page));
     }
 }

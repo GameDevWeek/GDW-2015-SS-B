@@ -5,12 +5,14 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerSpawnComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.components.ResetComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
@@ -109,14 +111,15 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
                 System.out.println("SpawnId:"+spawn.playerId);
                 TeamComponent team = ComponentMappers.team.get(spawnEntity);
                 if (spawn.playerId == playerId) {
-                    PositionComponent positionPlayer = player
-                            .getComponent(PositionComponent.class);
-                    PositionComponent posSpawn = ComponentMappers.position
-                            .get(spawnEntity);
-
-                    positionPlayer.x = posSpawn.x;
-                    positionPlayer.y = posSpawn.y;
-                    
+//                    ResetComponent reset= engine.createComponent(ResetComponent.class);
+//                    reset.toStun=isStunning;
+//                    reset.x=spawnEntity.getComponent(PositionComponent.class).x;
+//                    reset.y=spawnEntity.getComponent(PositionComponent.class).y;
+//                    player.add(reset);
+                    PhysixBodyComponent physixBody=player.getComponent(PhysixBodyComponent.class);
+                    physixBody.setX(spawnEntity.getComponent(PositionComponent.class).x);
+                    physixBody.setY(spawnEntity.getComponent(PositionComponent.class).y);
+                    physixBody.setLinearVelocity(0,0);
                     //___
                     player.getComponent(InputBallComponent.class).isStunned=isStunning;
                     return;

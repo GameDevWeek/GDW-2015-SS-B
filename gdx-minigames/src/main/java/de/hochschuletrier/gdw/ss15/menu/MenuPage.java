@@ -85,8 +85,7 @@ public class MenuPage extends Group {
     protected final SelectBox selectBox(int x, int y, int width, int height, String text) {
         SelectBox selectBox = new SelectBox(skin);
         selectBox.setBounds(x, y, width, height);
-        selectBox.setItems("data/maps/NiceMap.tmx","TestForDropDown");
-        selectBox.setSelected("data/maps/NiceMap.tmx");
+        selectBox.setMaxListCount(10);
         addActor(selectBox);
         return selectBox;
     }

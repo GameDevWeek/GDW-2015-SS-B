@@ -11,7 +11,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
  *
- * @author rftpool11
+ * emitted when a goal is scored
  */
 public class GoalShotEvent {
     

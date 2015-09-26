@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalShotEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
@@ -35,6 +36,7 @@ public class GoalTrigger implements Consumer<Entity> {
             goalShot.countdown = 1; // seconds until reset
             goalShot.team = team;
             entity.add(goalShot);
+            GoalShotEvent.emit(team);
             ChangeAnimationStateEvent.emit(EntityAnimationState.BALL_NEUTRAL, entity);
         }
     }

@@ -11,7 +11,7 @@
     "p_spawn_dummy": "data/images/player_spawn_dummy.png",
     
     "data/maps/NiceMap.tmx": "data/maps/NiceMap.png",
-    "data/maps/RedBull.tmx": "data/maps/RedBull.png"
+    "data/maps/RedBull.tmx": "data/maps/RedBull.png",
     
     "data/maps/Map Diag.tmx": "data/maps/Map Diag.png",
     "data/maps/Map_one.tmx": "data/maps/Map_one.png",

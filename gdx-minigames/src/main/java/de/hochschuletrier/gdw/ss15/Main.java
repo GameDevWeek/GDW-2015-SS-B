@@ -280,6 +280,10 @@ public class Main extends StateBasedGame
         cfg.vSyncEnabled = true;
         cfg.foregroundFPS = 60;
         cfg.backgroundFPS = 60;
+        cfg.addIcon("data/icon128.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon64.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon32.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon16.png", Files.FileType.Internal);
 
         parseOptions(args);
         new LwjglApplication(getInstance(), cfg);

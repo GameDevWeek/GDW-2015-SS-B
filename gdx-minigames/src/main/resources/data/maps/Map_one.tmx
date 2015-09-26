@@ -64,28 +64,28 @@
   <object id="82" name="blueM" gid="37" x="1088" y="448" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="GoalParticle">
-  <object id="113" x="174" y="676" width="13" height="21">
+  <object id="113" x="178" y="688" width="13" height="15">
    <properties>
     <property name="Entitytype" value="goal_particles_br"/>
     <property name="Team" value="1"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="114" x="172" y="1033" width="13" height="20">
+  <object id="114" x="179" y="1026" width="13" height="11">
    <properties>
     <property name="Entitytype" value="goal_particles_tr"/>
     <property name="Team" value="1"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="115" x="3338" y="670" width="8" height="23">
+  <object id="115" x="3331" y="687" width="8" height="13">
    <properties>
     <property name="Entitytype" value="goal_particles_bl"/>
     <property name="Team" value="0"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="116" x="3336" y="1037" width="13" height="17">
+  <object id="116" x="3329" y="1025" width="13" height="17">
    <properties>
     <property name="Entitytype" value="goal_particles_tl"/>
     <property name="Team" value="0"/>

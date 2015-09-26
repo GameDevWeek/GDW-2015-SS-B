@@ -32,8 +32,11 @@ public class MenuPageHostServer extends MenuPage {
     private final TextField serverPort;
     private final TextField username;
     private final SelectBox mapname;
+    //private final SelectBox mapname;
     private final DecoImage previewImage;
     private HashMap<String, String> maps;
+    private final SelectBox mapSelect;
+
     
     public MenuPageHostServer(Skin skin, MenuManager menuManager) {
         super(skin, "menu_bg");
@@ -43,11 +46,30 @@ public class MenuPageHostServer extends MenuPage {
         
         try {
             maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            
+            for(String name: maps.keySet()) {
+                System.out.println(name);
+                //get.
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
         }
         
+        //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
+        int x = 100;
+        int i = 0;
+        int y = 370;
+        int yStep = 55;
+        int width = 300;
+        int height = 50;
+        mapSelect = new SelectBox(skin);
+        mapSelect.setItems(maps.keySet().toArray());
+        mapSelect.setBounds(400, 250, 300, 50);
+        mapSelect.setMaxListCount(10);
+        addActor(mapSelect);
+        
+        //addActor(new DecoImage(assetManger.getTexture("menu_bg_root_bottom")));
         
         
         createLabel(x2, 500, 600, 80, "Host Server Menu");

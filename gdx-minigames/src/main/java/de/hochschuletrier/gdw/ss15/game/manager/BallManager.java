@@ -177,7 +177,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     }
 
     @Override
-    public void onDropEvent(Entity entityFrom, Vector2 direcion) {
+    public void onDropEvent(Entity entityFrom, Vector2 direction) {
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
             ChangeBallOwnershipEvent.emit(null);

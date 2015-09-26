@@ -82,12 +82,11 @@ public class RenderBallAtPlayerSystem extends IteratingSystem implements ChangeB
     public void onShootEvent(Entity entity, Vector2 direction) {
         for(ParticleEmitter emitter: effect.getEmitters()){
            emitter.reset();
-          
        } 
     }
 
     @Override
-    public void onDropEvent(Entity entity, Vector2 direcion) {
+    public void onDropEvent(Entity entity, Vector2 direction) {
         for(ParticleEmitter emitter: effect.getEmitters()){
            emitter.reset();
        } 

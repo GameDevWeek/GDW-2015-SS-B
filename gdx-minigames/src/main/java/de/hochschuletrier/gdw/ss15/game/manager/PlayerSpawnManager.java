@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
@@ -101,7 +102,7 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
             PlayerComponent player = ComponentMappers.player
                     .get(playerEntity);
             if (player.hasBall)
-                ChangeBallOwnershipEvent.emit(null);
+                BallDropEvent.emit(playerEntity, Vector2.Zero);
 
         }
         engine.removeEntity(playerEntity);

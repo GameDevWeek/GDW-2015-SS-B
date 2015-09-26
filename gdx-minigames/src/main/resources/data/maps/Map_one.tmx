@@ -8,6 +8,9 @@
  <tileset firstgid="66" source="Sanboden.tsx"/>
  <tileset firstgid="84" source="Goal_Spawn.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
+  <properties>
+   <property name="Enitytype" value="goal_particle_spawner_45"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzdV81OmzEQ9AH1BkiIQmnvX9Jb+wokaRpCwm/UHuihvP9DYEteZTOZXe9HQAIOIwEfXnu8s+PdvZTSXsZ+xsEHwGHlo3GU8ekdYJLxi2Bavx8HuLEY0+D+r4l5xiXBsp6vxa3wus44zxhljNX6l+CI9ybxho11ncOtYNHgNlTrf2fMMi5IDO8MrTPi+eTOW7EGGTcZtxXj1I+b3rvseVVzGOEm+bDOKd8xHos5qHny7uhG8SsauwtwK2u0FjUkhndmi/tcxcD4C4hlYQq5lDzKmVrcig5XaVOL5xDDygPjjtyY1hfwPxaWEPMefo94CWoRczFJXFtW7XRprSGm9Si3Vr1HNIm1KvE64OXpS9cOqxGmhzl8GwXiW9ykH/lG/k97ktaZ3p/pS94KrBMW1/MHiW3pF3204Gta9ydHde1f5y6suvG8lGnV4mrFl9gY33sz/lQ+x4rbv2dyi8LqA5DrwIiv13t+9dCD20r9/HMHbkVf39N2H8Dyymq5rP9R1xdNoj/24dY5eUM/iCCqXbwPqTW9Hr1En5Vxe3S4IJhuxO8sjBL3PE/DRXf41qAeMQf/FbfTjC8ZJ+q71Q9KHPa2tXpMlnfL4y3/bflIwefK5yw9b35j9aa5DYIxLI9vadjbKzK/7cLN4jdMm32a5fGev1oaEa1FuK3SZt+Kby/2FpYnY+/bx0uYNnGvvv0ky4+eS2dpu2eZ9cjxLv7aquvWbCr5Zedq9VMeN6avvmCzkN4/mrfoO2Z5l57hPe/T3Fv7sXlB79/HS7T22Bzfqu9I76lngQv4G4LNC3r/CLeOnJNxZXOCdzfe2mHanqPRd61zROfuKJD/WwDjJv3Je4fuR54Al4fuRw==
   </data>
@@ -48,12 +51,5 @@
   <object id="80" name="blueM" gid="37" x="2880" y="1152" width="64" height="64"/>
   <object id="81" name="redM" gid="36" x="2368" y="1344" width="64" height="64"/>
   <object id="82" name="blueM" gid="37" x="1088" y="448" width="64" height="64"/>
- </objectgroup>
- <objectgroup name="goal particle">
-  <object id="111" gid="8" x="116.485" y="765.333" width="64" height="64">
-   <properties>
-    <property name="Entitytype" value="goal_particle_spawner_45"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

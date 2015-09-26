@@ -134,7 +134,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     @Override
     public void onGoalEvent(Team team) {
         if(gameState != GameState.GAME_OVER)
-            resetBall(team == Team.BLUE ? Team.RED : Team.BLUE);
+            resetBall(team == Team.BLUE ? Team.BLUE : Team.RED);
     }
 
     @Override

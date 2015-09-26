@@ -37,12 +37,18 @@ public class HudRenderSystem extends EntitySystem implements
 		font = assetManager.getFont("quartz_50");
 	}
 
+    public HudRenderSystem(AssetManagerX assetManager, int priority) {
+        super(priority);
+        font = assetManager.getFont("quartz_50");
 	@Override
 	public void addedToEngine(Engine engine) {
 //		this.engine=(PooledEngine) engine;
 		ScoreChangedEvent.register(this);
 		ChangeGameStateEvent.register(this);
 	}
+    public HudRenderSystem(AssetManagerX assetManager, int priority) {
+        super(priority);
+        font = assetManager.getFont("hud_font");
 
 	@Override
 	public void removedFromEngine(Engine engine) {

@@ -18,11 +18,9 @@ import java.util.HashMap;
  * @author schillen
  */
 public class MenuPageJoinServer extends MenuPage {
-    //private HashMap<String, String> maps;
     private final TextField username;
     private final TextField serverIP;
     private final TextField serverPort;
-    //private final SelectBox mapname;
     
     
     public MenuPageJoinServer(Skin skin, MenuManager menuManager) {
@@ -43,24 +41,11 @@ public class MenuPageJoinServer extends MenuPage {
         serverPort = createTextField(400, 350, 300, 50, "9090");
         createLabel(50, 300, 300, 50, "Enter Username");
         username = createTextField(400, 300, 300, 50, "Client");
-        //createLabel(50, 250, 300, 50, "Select Map");
-        //mapname = selectBox(400, 250, 300, 50, "Select Map");
-        //mapname = createTextField(400, 250, 300, 50, "Map");
         addLeftAlignedButton(400, 250, 300, 50, "Join Server", this::joinServer);
         
         addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
         addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
 
-        //addButton(50, 50,300, 50, "text" this::joinServer, "style");
-        
-        //addCenteredButton(x, y - yStep * (i++), 400, 50, "Enter Server IP and Nickname", this::enterIP);
-        /*
-        addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Starten", this::startServer);
-        //addLeftAlignedButton(x, y - yStep * (i++), 400, 50, "Server Beitreten", this::joinServer);
-        
-        
-        
-                */
     }
     
     private void joinServer() {

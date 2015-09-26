@@ -29,7 +29,7 @@ public abstract class AbstractGame {
     protected final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", TestGame.class);
     protected final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
     protected final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
-    protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
+    protected final CVarBool physixDebug = new CVarBool("physix_debug", !Main.IS_RELEASE, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
     private String mapName;
     private final boolean isClient;
@@ -54,6 +54,7 @@ public abstract class AbstractGame {
         this.mapName = mapName;
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
+        physixDebugRenderSystem.setProcessing(physixDebug.get());
         addSystems(assetManager);
         addContactListeners();
         entityFactory.init(engine, assetManager);

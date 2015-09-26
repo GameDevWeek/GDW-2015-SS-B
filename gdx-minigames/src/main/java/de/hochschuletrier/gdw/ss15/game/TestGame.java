@@ -40,6 +40,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.GoalEffectRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
@@ -143,6 +144,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         /* Camera System muss schon existieren */
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
         engine.addSystem(new HudRenderSystem(assetManager, GameConstants.PRIORITY_HUD));
+        engine.addSystem(new GoalEffectRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
     }
 
     @Override

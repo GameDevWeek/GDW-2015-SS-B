@@ -58,12 +58,12 @@
  <tileset firstgid="172" source="Goal_Spawn.tsx"/>
  <layer name="Background" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJzdmNtOwzAMQPMOk1AZlwI/UO2PuI3uxsa+DpCAz8PWYmFZTpo2XtfxcMSm2a7PkswRlXPuBDhVGAFV5PMhM/J9l8A78MH4BK59zBmw6IHasFbh+34CnhWmLOZY3eYJMf/RDfdlOWC3UE6KW5/UjNx4ctsY9HUOXBowTnTjTrUCueHrx0w3rFV50LPN7/WY5VI/sTVKWVvutgn4uQ5uWHPCuAHu/N/bhFzNQ7o09VWIWiG/XDecMdMWuRZnV7rl+GluNDfXwMr9zcxDuSFdfjdxVtD5Kb3XWolbKX4yd2huElnjHnhwuz2h+Vmjucnv2yXWknHS7cXHzCLrl/O8JrfQPuqCPLfo8irqL3tat1wvPrtxXk0UPwm5FSLX2m1mUEubASE/PH/bQO6xuCF09tDnzbON5Pbl5gzcNopPLDfleU19pdy5uqwbzqs29+Nyj+tG94UcPz5/c7Ce3fh6ydaPZqzFMw4FudFZkPfKoTrivGmaFaE7l8XdeSHq7GNNUmLovNEM5++7+MW+KwtPvt9CaOdtLt638Wvq39Ltwu325Rfwzfhxuz175WMs/s/RJ9h3FemdPv8FYB/ZhQ==
+   eJzNmOtOGzEQhf2/RaoovewmLxDljaDALiVbLk9HK5U+Xj3CRz2dzviyu0T9cZSg2OP57LnY7EIIb6LeGjqJ2mV+/591kvzuop6ivpN+RH1OY95F3S7QFPWNdOeMGxeuwzpNfl9GXRm6pjFrrZnTa7B9rRjzmkzbqE3SMdkkLrsjsPWN53ZeOGuLbbuiz7L+RdSXzBicVZ/WHhsY+8x4sN2vwPE+6uMKOqtkY6bRENjGwt7WxvcuSThb6vUZzYU/HstI51vyB7buHb4wg01sSqztkxBvfbDrhZ7LHJtgx13JL7BhHzy+OWz7ZFc+pcdcq/GbzNzWnLZ85nPD+nP5LDb0TenVU/jTMzFn68xtWXeIuimwSa080PfW/ZJegfzpEpd1/5iMM9RzW9gmZx2db48NbN5+QdoG9wOLb22BTdZBzur9DpX7pcdptiGNuaH5Fp+1npVTnl+aDbHoxZHe95p903mL+zLbP1TaGoIfI/BL+wa2xwIX7Hu1VOxz75Z+tXfGssB2quaWYsTya1T8nG+53OEYsvJxCHadzPGdpz29Nea25BW/n5i/hQ12rsK/ezg5bOhv2AvheUgCV7+QrZRvObbQYMs6N5wd80D9gnMr+VVz59Jx5MUX+yf9quV+3Cm2pXdbZqu9kwzO+Q7h7/67RJ2zxlw2vpMIn1frvXpl1fc5qrFT24v4/Sa5gDvztsBYK64da8QZYkT6jdUrvHzjNyyr9e6sayHbWYMRNblUczAG93M5r0v6G++nWj70LP2OZJtL3lFYA34/ZMT8/AZgH2vfdjxH7w/mHgxbfGey7k7WGuL3h/ASlz+jnkm/wkvMfkpj1vg/xzElfu8yvuP331fy0UY=
   </data>
  </layer>
  <layer name="Style/Spawns" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJztmNlugzAQRec7CH1rn/rWfV9+o2kTaJqkaX6t/ceOFV8xGRljUyBQ5UhXCuBlLmOPUYj2fFToL7yw1vb3G+szYD4tM8aY9ariye2YYGrv5ZHeMD7miPGFuWY1fBlldox35Q3vCiyEvxhvGB9zxPiq4830/6LNezQxL6nIuWuusWg7bdnbXLSHt5WIt2rOteij22sQG+Iy/pDPEG94d0vaXgcudM5y9dyXP7k/Ad4JpJF51bRZS1xIb1h7kKw7E6upYwwfuvZ06U3mQecIeZ6Je6717SNjfVNRe2K8JVYje31slTsUgs7RD23vabkfQnLoW6NVSF8gpY2XhPzecCZNhHQd98W1qBFvDKnnmYl9ROXe9Jk0NGLXZNPIWhLaTp+LPpA75KnOfHXJqKglVe0ORbt5SbsDxz3UO3w3HQXOp2tJLKG1RLZznas+jDd8V9SZr8+U7bc2zswm8dVK0PdaUkZS8RznXSxd1hIf2l9K1Wd3SFxd1ZI2OGGdss5Y5+rZUGpJGResS9YV63rHsTTNDeuWdce6j+iHvdhnHliPrCfWc2Af/d/LfyKj3X6jNslKXev/lfYMk18XWJIT
+   eJztl1tuwjAQRb2OQP/ar/71/X5so7SQQAOlbK3dY8eqrzKMJo5tEggSR7oCHMee64nHwZgDnw3ahDfSyn3/IH0FzCdlxxiR3kU8hRsTTFxbEekN42OOGF9Dp1mCL6vcxTsV3rBWYM78xXiz42cuxmmELzvPIMGbvf/b/K+jjXlhqpxrc41Y30mit0Ggt5L5ylzbksXb5GvF7pH9JTY2vubWH/IZ4g1rtzDrz4GGzFkhrvvyx30BrAkk4XmVdFlLNLg3PHsQrztjp4kyhg9Ze7bpjecBXgbuE3VuxvqXrF0+Axo56cdUtSfGW2aqvWc5deLzZ4FxWGSOfs36nub7ISSHvme0Ce4L2L3MPeG3BGfSmEnWcV9c84R4Yxh6rvH6oXmTZ9K+EbM3uoDXktB+8lz0gdwhTynzhZApbbmpaokP2++Y9Str+h0pbah3eG86CZxP1pJYQmsJ76edqz6sN7xXpMzXZ+r2WxdnZpv4aiXoey3R0M43Sd351sQmcYHchNUSH7JGDU11duP8TolrW7WkC85I56QL0qW4ti+1pI4r0jXphnS741ja5o50T3ogPUbch73YZ55Iz6QX0mvgPfz/rkbK3u4LudnOO6r2Dtc2S/EbOdvVmXmgHf4AM8iPOg==
   </data>
  </layer>
  <layer name="krater" width="55" height="27">
@@ -71,7 +71,12 @@
    eJztzsV1AwEQREHFZGZb+ZiZZGZmZoYkXZuDxnuZ/16duyuVrJ8BBhlimBFGGSvxVz0aZ4JJpphmhlnmAncbaKSJ5qCNeWossMgSy6ywGrRZ1EIrbbQHbayxzgabbLHNDrtBm0UddNJFd9DGHvsccMgRx5xwGrRZ1EMvfVSDNs4454JLrrjmhtugzf/qjnseeOSJZ154Le9WXXrjnQ8++eKbH35L/JVlWZZlWZZlWZZlWTn9ASysJnk=
   </data>
  </layer>
- <objectgroup name="Goals" visible="0">
+ <layer name="Dekorations" width="55" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztl0sOxCAIQD1Jh9r733EyiybGEfkJ1ca3tMoftCltNm2OxlpWnCm5GrJ6Z05CnoWPo+woOD7UezKyjuGZg5kB4vtKcaltpfr4zXjnjdNXEhsuekuTzLQFg5rlEiLrzZpfIL5j+bD6iMkdmQcp2trjoKlNT3tK7phH6bPiNdO830jSnom8cyFQ1wjdd2xmedeWc+uXZ04vgY8pf2AxymnsXSWZ3dzaXmUmUazwfp6llzSUto+q6bfUHkavX62+W88/+c9W9wG3d5+wmaNTk4uez6CQJyVCx4bmC+YzCRU=
+  </data>
+ </layer>
+ <objectgroup name="Goals">
   <object id="34" name="blueGoal" x="98.6667" y="50.67" width="384.667" height="42.6667">
    <properties>
     <property name="Entitytype" value="goal"/>
@@ -85,12 +90,12 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="BSpawns" visible="0">
+ <objectgroup name="BSpawns">
   <object id="36" name="neutralBSpawn" gid="29" x="1728" y="896" width="64" height="64"/>
   <object id="37" name="blueBSpawn" gid="36" x="1152" y="896" width="64" height="64"/>
   <object id="38" name="redBSpawn" gid="37" x="2304" y="896" width="64" height="64"/>
  </objectgroup>
- <objectgroup name="PSpawns" visible="0">
+ <objectgroup name="PSpawns">
   <object id="39" name="blue1" gid="172" x="512" y="896" width="64" height="64"/>
   <object id="40" name="blue2" gid="172" x="512" y="576" width="64" height="64"/>
   <object id="41" name="blue3" gid="172" x="512" y="1216" width="64" height="64"/>
@@ -98,7 +103,7 @@
   <object id="43" name="red2" gid="173" x="2944" y="1216" width="64" height="64"/>
   <object id="44" name="red3" gid="173" x="2944" y="576" width="64" height="64"/>
  </objectgroup>
- <objectgroup name="Magnets" visible="0">
+ <objectgroup name="Magnets">
   <object id="46" name="blueGoalM" gid="10" x="512" y="320" width="64" height="64"/>
   <object id="47" name="redGoalM" gid="9" x="2944" y="1472" width="64" height="64"/>
   <object id="48" name="redTop" gid="9" x="3400" y="118" width="64" height="64"/>

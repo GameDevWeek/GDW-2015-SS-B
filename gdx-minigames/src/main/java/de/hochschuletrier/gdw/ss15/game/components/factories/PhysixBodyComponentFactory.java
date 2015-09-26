@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -16,11 +17,13 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 
 public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryParam> {
 
     private static final Logger logger = LoggerFactory.getLogger(PhysixBodyComponentFactory.class);
     private PhysixSystem physixSystem;
+    private BodyType dynamicBodyType;
 
     @Override
     public String getType() {
@@ -36,10 +39,9 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
-        if (!param.allowPhysics) {
+        if(param.isClient && !GameConstants.LIGHTS)
             return;
-        }
-
+        dynamicBodyType = param.isClient ? BodyType.KinematicBody : BodyType.DynamicBody;
         final PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");
@@ -70,9 +72,11 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem)
                 .position(param.x, param.y).fixedRotation(false);
         magnetBody.init(bodyDef, physixSystem, entity);
-        PhysixFixtureDef fixtureDefMagnetRange = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(properties.getFloat("sensor", 5)).sensor(true);
+        PhysixFixtureDef fixtureDefMagnetRange = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).sensor(true)
+                .mask(GameConstants.MASK_EVERYTHING).category(GameConstants.MASK_WORLDSENSOR).shapeCircle(properties.getFloat("sensor", 5));
         magnetBody.createFixture(fixtureDefMagnetRange);
-        PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f).shapeCircle(properties.getFloat("size", 5));
+        PhysixFixtureDef fixtureDef = new PhysixFixtureDef(physixSystem).density(5).friction(0.2f).restitution(0.4f)
+                .shapeCircle(properties.getFloat("size", 5));
         magnetBody.createFixture(fixtureDef);
 
         entity.add(magnetBody);
@@ -92,7 +96,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addPlayer(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent playerBody = engine.createComponent(PhysixBodyComponent.class);
-        PhysixBodyDef playerDef = new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem)
+        PhysixBodyDef playerDef = new PhysixBodyDef(dynamicBodyType, physixSystem)
                 .position(param.x, param.y).fixedRotation(true).linearDamping(1).angularDamping(1);
 
         playerBody.init(playerDef, physixSystem, entity);
@@ -124,7 +128,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
     }
 
     private PhysixBodyDef getBodyDef(EntityFactoryParam param) {
-        return new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem)
+        return new PhysixBodyDef(dynamicBodyType, physixSystem)
                 .position(param.x, param.y).fixedRotation(false)
                 .linearDamping(0.25f).angularDamping(0.25f);
     }
@@ -133,6 +137,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         return new PhysixFixtureDef(physixSystem)
                 .density(properties.getFloat("density", 5))
                 .friction(properties.getFloat("friction", 5))
-                .restitution(properties.getFloat("restitution", 0));
+                .restitution(properties.getFloat("restitution", 0))
+                .groupIndex((short)properties.getInt("groupIndex", 0));
     }
 }

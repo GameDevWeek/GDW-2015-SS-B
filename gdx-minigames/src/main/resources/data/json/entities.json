@@ -4,6 +4,11 @@
         "components": {
             "Ball": {},
             "Position": {},
+            "PointLight": {
+                "distance": 250,
+                "static": false,
+                "color": "FFFFFF"
+            },
             "SoundEmitter": {},
             "ImpactSound": {
                 "sound": "ball_impact",
@@ -31,7 +36,8 @@
                 "size": 20,
                 "density": 5,
                 "friction": 0.2,
-                "restitution": 0.6
+                "restitution": 0.6,
+                "groupIndex": -1
             },
             "Team": {},
             "Ball":{},
@@ -67,6 +73,12 @@
         "meta": {},
         "components": {
             "Position": {},
+            "PointLight": {
+                "distance": 250,
+                "static": false,
+                "color": "FFFFFF",
+                "active": false
+            },
             "SoundEmitter": {},
             "Player": {},
             "Input": {},
@@ -106,6 +118,11 @@
         "meta": {},
         "components": {
             "Position": {},
+            "PointLight": {
+                "distance": 350,
+                "static": true,
+                "color": "F00303"
+            },
             "Team": {},
             "Texture": {
                 "texture": "magnet_plus",
@@ -125,6 +142,11 @@
         "meta": {},
         "components": {
             "Position": {},
+            "PointLight": {
+                "distance": 350,
+                "static": true,
+                "color": "0078E8"
+            },
             "Team": {},
             "Texture": {
                 "texture": "magnet_minus",

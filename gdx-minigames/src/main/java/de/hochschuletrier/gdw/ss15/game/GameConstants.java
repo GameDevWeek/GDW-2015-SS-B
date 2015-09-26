@@ -28,4 +28,18 @@ public class GameConstants {
     public static int SCORE_TO_WIN = 10;
     public static int GAME_TIME = 60 * 5;
     public static int GAME_OVER_TIME = 30;
+    
+    // Light parameters
+    public static final int LIGHT_RAYS = 90;
+    public static final float LIGHT_AMBIENT = 0.4f;
+    public static final boolean LIGHT_BLUR = true;
+    public static final int LIGHT_BLURNUM = 2;
+    public static final boolean LIGHT_SHADOW = true;
+    public static final boolean LIGHT_DIFFUSE = false;
+    
+    public static short MASK_EVERYTHING = 0xFFF;
+    public static short MASK_WORLDOBJECT = 0x002;
+    public static short MASK_WORLDSENSOR = 0x004;
+    
+    public static final boolean LIGHTS = true;
 }

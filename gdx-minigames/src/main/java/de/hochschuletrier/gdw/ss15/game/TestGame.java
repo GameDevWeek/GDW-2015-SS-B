@@ -18,6 +18,8 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PointLightComponent;
+import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
@@ -62,10 +64,9 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
     }
 
     public TestGame(NetServerSimple netServer, NetClientSimple netClient) {
+        super(netClient != null);
         this.netServer = netServer;
         this.netClient = netClient;
-        if (netClient != null)
-            factoryParam.allowPhysics = false;
     }
     
 
@@ -86,7 +87,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
 
         this.initLoadMap(mapName);
 
-        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map);
+        MapLoader.generateWorldFromTileMapX(engine, physixSystem, map, netClient != null);
 
         setupPhysixWorld();
         if (netClient == null)
@@ -121,11 +122,13 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         super.addSystems(assetManager);
         engine.addSystem(new PlayerAnimationSystem(
                 GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new MovementSystem(10));
-        engine.addSystem(new PullSystem(30));
+        if(netClient == null) {
+            engine.addSystem(new MovementSystem(10));
+            engine.addSystem(new PullSystem(30));
+            engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
+        }
         engine.addSystem(new GoalShotEventSystem(
                 GameConstants.PRIORITY_ENTITIES));
-        engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));
         engine.addSystem(new MagneticForceSystem(20));
         engine.addSystem(new ReceptiveSystem(5));
         if(netClient == null)
@@ -170,7 +173,10 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
     }
 
     private void setupPhysixWorld() {
-        physixSystem.setGravity(0, 0);
+        if(netClient == null)
+            physixSystem.setGravity(0, 0);
+        else if(!GameConstants.LIGHTS)
+            physixSystem.setProcessing(false);
     }
 
     public static TiledMap loadMap(String filename) {
@@ -198,9 +204,17 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
 
     @Override
     public void onChangeBallOwnershipEvent(Entity owner) {
-        for(Entity player: players)
-            ComponentMappers.player.get(player).hasBall = false;
-        if(owner != null)
-            ComponentMappers.player.get(owner).hasBall = true;
+        for(Entity player: players) {
+            final boolean hasBall = owner == player;
+            ComponentMappers.player.get(player).hasBall = hasBall;
+            PointLightComponent light = ComponentMappers.pointLight.get(player);
+            if(light != null && hasBall != light.pointLight.isActive()) {
+                light.pointLight.setActive(hasBall);
+                if(hasBall) {
+                    TeamComponent team = ComponentMappers.team.get(player);
+                    light.pointLight.setColor(team.team.color);
+                }
+            }
+        }
     }
 }

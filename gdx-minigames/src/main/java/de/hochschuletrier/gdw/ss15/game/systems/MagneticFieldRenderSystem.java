@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -17,6 +18,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class MagneticFieldRenderSystem extends IteratingSystem implements ChangeBallOwnershipEvent.Listener {
 
+    private static final Color TINT = new Color(1, 1, 1, 0.6f);
     private final AnimationExtended animMinus;
     private final AnimationExtended animMinusReverse;
     private final AnimationExtended animPlus;
@@ -47,8 +49,11 @@ public class MagneticFieldRenderSystem extends IteratingSystem implements Change
 
     @Override
     public void update(float deltaTime) {
-        if(ballTeam != null)
+        if(ballTeam != null) {
+            DrawUtil.batch.setColor(TINT);
             super.update(deltaTime);
+            DrawUtil.batch.setColor(Color.WHITE);
+        }
     }
 
     

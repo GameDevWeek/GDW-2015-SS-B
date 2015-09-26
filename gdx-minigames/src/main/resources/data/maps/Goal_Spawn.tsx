@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="Goal_Spawn" tilewidth="64" tileheight="64">
+<tileset name="Goal_Spawn" tilewidth="64" tileheight="64" tilecount="15">
  <image source="Goal_Spawn.png" width="320" height="192"/>
  <tile id="0">
   <properties>

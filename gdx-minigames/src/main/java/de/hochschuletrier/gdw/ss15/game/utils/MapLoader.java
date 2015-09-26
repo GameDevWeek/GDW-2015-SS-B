@@ -108,7 +108,7 @@ public class MapLoader {
                         else {
                             team  = (tmp == 0) ? Team. BLUE : Team.RED;
                         }
-                         
+                        
                         switch (entitytype) {
                             case "goal":
                                 createTrigger(engine, physixSystem,
@@ -128,19 +128,20 @@ public class MapLoader {
                             			obj.getY() - obj.getHeight() / 2.0f, team
                             			); 
                             	break;
-                            case "goal_particle_spawner_45":
+                            case "goal_particles_tl":
+                                //System.out.println("found dings");
                                 createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
                                         obj.getY() - obj.getHeight() / 2.0f, team);
                                 break;
-                            case "goal_particle_spawner_135":
+                            case "goal_particles_tr":
                                 createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
                                         obj.getY() - obj.getHeight() / 2.0f, team);
                                 break;
-                            case "goal_particle_spawner_225":
+                            case "goal_particles_bl":
                                 createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
                                         obj.getY() - obj.getHeight() / 2.0f, team);
                                 break;
-                            case "goal_particle_spawner_315":
+                            case "goal_particles_br":
                                 createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
                                         obj.getY() - obj.getHeight() / 2.0f, team);
                                 break;

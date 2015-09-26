@@ -43,6 +43,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalEffectRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MagneticFieldRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
@@ -145,6 +146,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));
         engine.addSystem(new HudRenderSystem(assetManager, GameConstants.PRIORITY_HUD));
         engine.addSystem(new GoalEffectRenderSystem(GameConstants.PRIORITY_ANIMATIONS));
+        engine.addSystem(new MagneticFieldRenderSystem(assetManager, GameConstants.PRIORITY_ANIMATIONS-1));
     }
 
     @Override

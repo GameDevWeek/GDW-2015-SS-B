@@ -82,6 +82,41 @@
         "playType" : "LOOP",
         "columns": 16,
         "rows" : 1
-    }
+    },
     
+    "magnetic_field_minus": {
+        "filename": "data/animations/impulse_minus.png",
+        "frames" : 5,
+        "frameDuration": [0.15],
+        "playType" : "LOOP",
+        "columns": 5,
+        "rows" : 1
+    },
+    
+    "magnetic_field_minus_reverse": {
+        "filename": "data/animations/impulse_minus.png",
+        "frames" : 5,
+        "frameDuration": [0.15],
+        "playType" : "LOOP_REVERSED",
+        "columns": 5,
+        "rows" : 1
+    },
+    
+    "magnetic_field_plus": {
+        "filename": "data/animations/impulse_plus.png",
+        "frames" : 5,
+        "frameDuration": [0.15],
+        "playType" : "LOOP",
+        "columns": 5,
+        "rows" : 1
+    },
+    
+    "magnetic_field_plus_reverse": {
+        "filename": "data/animations/impulse_plus.png",
+        "frames" : 5,
+        "frameDuration": [0.15],
+        "playType" : "LOOP_REVERSED",
+        "columns": 5,
+        "rows" : 1
+    }
 }

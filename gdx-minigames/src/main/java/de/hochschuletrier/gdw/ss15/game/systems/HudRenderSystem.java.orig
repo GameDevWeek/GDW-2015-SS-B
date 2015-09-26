@@ -28,10 +28,9 @@ public class HudRenderSystem extends EntitySystem implements
 	private final BitmapFont font;
 	private String scoreRed = "0";
 	private String scoreBlue = "0";
-	private float countdown;
+	private float countdown ;
 	private GameState gamestate;
-
-	// private PooledEngine engine;
+//	private PooledEngine engine;
 
 	public HudRenderSystem(AssetManagerX assetManager, int priority) {
 		super(priority);
@@ -40,7 +39,7 @@ public class HudRenderSystem extends EntitySystem implements
 
 	@Override
 	public void addedToEngine(Engine engine) {
-		// this.engine=(PooledEngine) engine;
+//		this.engine=(PooledEngine) engine;
 		ScoreChangedEvent.register(this);
 		ChangeGameStateEvent.register(this);
 	}
@@ -48,10 +47,17 @@ public class HudRenderSystem extends EntitySystem implements
 	@Override
 	public void removedFromEngine(Engine engine) {
 
+<<<<<<< HEAD
 		ScoreChangedEvent.unregister(this);
 		ChangeGameStateEvent.unregister(this);
-		// this.engine=null;
+//		this.engine=null;
 	}
+=======
+    public HudRenderSystem(AssetManagerX assetManager, int priority) {
+        super(priority);
+        font = assetManager.getFont("hud_font");
+    }
+>>>>>>> 750896e5dd89eb640bea48360c4488c09af8d424
 
 	public void winner() {
 
@@ -60,7 +66,7 @@ public class HudRenderSystem extends EntitySystem implements
 	@Override
 	public void update(float deltaTime) {
 		countdown -= deltaTime;
-
+		
 		if (countdown <= 0)
 			countdown = 0;
 
@@ -89,9 +95,9 @@ public class HudRenderSystem extends EntitySystem implements
 						Gdx.graphics.getWidth() / 2 - 100, 50);
 				break;
 			case THREE:
-				// fallthrough
+				//fallthrough
 			case TWO:
-				// fallthrough
+				//fallthrough
 			case ONE:
 				font.setColor(Team.RED.color);
 				font.draw(DrawUtil.batch, scoreBlue, 50, 50);
@@ -125,8 +131,8 @@ public class HudRenderSystem extends EntitySystem implements
 			default:
 
 			}
-		} else {
-			System.out.println("kein gamestate " + time);
+		}else{
+			System.out.println("kein gamestate "+ time);
 		}
 	}
 
@@ -143,7 +149,7 @@ public class HudRenderSystem extends EntitySystem implements
 	@Override
 	public void onChangeGameStateEvent(GameState newState, float gameTime) {
 		countdown = gameTime;
-		this.gamestate = newState;
-
+		this.gamestate=newState;
+	
 	}
 }

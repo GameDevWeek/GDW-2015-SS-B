@@ -9,12 +9,12 @@ public class MagneticFieldComponent extends Component implements Pool.Poolable {
 	 * Wichtig: MagneticFieldComponent nur an Magnete hängen, die (physikalische) Sensoren sind
 	 */
 	public float range;
+        public float stateTime;
     
 	@Override
 	public void reset() {
 	    range=0;
-		// TODO Auto-generated method stub
-		
+            stateTime = 0;
 	}
 
 }

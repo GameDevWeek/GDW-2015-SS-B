@@ -38,9 +38,9 @@
     },
     "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
         "default": {
-            "font": "default-font", "fontColor": "white", "background": "default-select",
+            "font": "railway_16", "fontColor": "white", "background": "default-select",
             "scrollStyle": "default",
-            "listStyle": {"font": "default-font", "selection": "default-select-selection"}
+            "listStyle": {"font": "railway_16", "selection": "default-select-selection"}
         }
     },
     "com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": {
@@ -59,10 +59,10 @@
         "big": {"font": "railway_32", "fontColor": "black"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
-        "default": {"selection": "selection", "background": "textfield", "font": "default-font", "fontColor": "white", "cursor": "cursor"}
+        "default": {"selection": "selection", "background": "textfield", "font": "railway_16", "fontColor": "white", "cursor": "cursor"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
-        "default": {"checkboxOn": "check-on", "checkboxOff": "check-off", "font": "default-font", "fontColor": "white"}
+        "default": {"checkboxOn": "check-on", "checkboxOff": "check-off", "font": "railway_16", "fontColor": "white"}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
         "default": {"fontColorUnselected": "white", "selection": "default-rect-pad", "fontColorSelected": "white", "font": "default-font"}

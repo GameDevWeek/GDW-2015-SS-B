@@ -22,24 +22,31 @@ public class MenuPageRoot extends MenuPage {
         int yStep = 50;
         if (type == Type.MAINMENU) {
             createLabel(50, 390, 600, 80, "Main Menu", "big");
-            addPageEntry(menuManager, 50, 300, "JOIN SERVER", new MenuPageJoinServer(skin, menuManager));
-            addPageEntry(menuManager, 50, 200, "HOST SERVER", new MenuPageHostServer(skin, menuManager));
-
+            addPageEntry1(menuManager, 50, 300, "JOIN SERVER", new MenuPageJoinServer(skin, menuManager));
+            addPageEntry2(menuManager, 50, 200, "HOST SERVER", new MenuPageHostServer(skin, menuManager));
+            addPageEntry3(menuManager, 50, 100, "CREDITS", new MenuPageCredits(skin, menuManager));
+            addLeftAlignedButton(50, 50, 400, 50, "EXIT CLIENT", () -> System.exit(-1));
         } else {
-            createLabel(50, 350, 600, 80, "ingame menu", "big");
-            addLeftAlignedButton(50, 300, 400, 50, "RESUME", () -> menuManager.popPage());
+            createLabel(50, 390, 600, 80, "ingame menu", "big");
+            addLeftAlignedButton(50, 300, 400, 50, "RESUME GAME !", () -> menuManager.popPage());
             addLeftAlignedButton(50, 200, 400, 50, "LEAVE GAME", this::stopGame);
-        }
-        addPageEntry(menuManager, 50, 100, "CREDITS", new MenuPageCredits(skin, menuManager));
-        addLeftAlignedButton(50, 50, 400, 50, "EXIT CLIENT", () -> System.exit(-1));
+        }       
     }
 
     private void stopGame() {
         DisconnectEvent.emit();
     }
 
-    protected final void addPageEntry(MenuManager menuManager, int x, int y, String text, MenuPage page) {
+    protected final void addPageEntry1(MenuManager menuManager, int x, int y, String text, MenuPage page) {
         menuManager.addLayer(page);
-        addLeftAlignedButton(x, y, 300, 50, text, () -> menuManager.pushPage(page));
+        addLeftAlignedButton(50, 300, 300, 50, text, () -> menuManager.pushPage(page));
+    }
+    protected final void addPageEntry2(MenuManager menuManager, int x, int y, String text, MenuPage page) {
+        menuManager.addLayer(page);
+        addLeftAlignedButton(50, 250, 300, 50, text, () -> menuManager.pushPage(page));
+    }
+    protected final void addPageEntry3(MenuManager menuManager, int x, int y, String text, MenuPage page) {
+        menuManager.addLayer(page);
+        addLeftAlignedButton(50, 200, 300, 50, text, () -> menuManager.pushPage(page));
     }
 }

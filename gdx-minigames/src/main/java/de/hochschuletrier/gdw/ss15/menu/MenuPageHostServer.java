@@ -60,11 +60,11 @@ public class MenuPageHostServer extends MenuPage {
         
         createLabel(50, 390, 600, 80, "Host Server Menu", "big");
         createLabel(50, 300, 300, 50, "Enter Server Port");
-        serverPort = createTextField(400, 300, 300, 50, "9090");
+        serverPort = createTextField(400, 300, 200, 50, "9090");
         createLabel(50, 250, 300, 50, "Enter Username");
-        username = createTextField(400, 250, 300, 50, "Host");
+        username = createTextField(400, 250, 200, 50, "Host");
         createLabel(50, 200, 300, 50, "Select Map");
-        mapname = selectBox(400, 200, 300, 50, "Select Map");
+        mapname = selectBox(400, 200, 200, 50, "Select Map");
         mapname.setItems(maps.keySet().toArray());
         previewImage = new DecoImage(getPreviewTexture());
         addActor(previewImage);

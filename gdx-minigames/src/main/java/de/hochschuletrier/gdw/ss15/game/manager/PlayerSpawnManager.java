@@ -30,7 +30,7 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
     private final ImmutableArray<Entity> players;
     private final PooledEngine engine;
     private final int teamCounts[] = new int[2];
-    private final Random random = new Random();
+    private final Random random = new Random(System.currentTimeMillis());
 
     public PlayerSpawnManager(PooledEngine engine) {
         this.engine = engine;

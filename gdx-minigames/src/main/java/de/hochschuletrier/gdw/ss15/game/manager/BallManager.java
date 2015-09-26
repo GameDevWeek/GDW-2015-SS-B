@@ -45,7 +45,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     private final PooledEngine engine;
     private final ImmutableArray<Entity> balls;
     private GameState gameState;
-    private final Random random = new Random();
+    private final Random random = new Random(System.currentTimeMillis());
 
     public BallManager(PooledEngine engine) {
         this.engine = engine;

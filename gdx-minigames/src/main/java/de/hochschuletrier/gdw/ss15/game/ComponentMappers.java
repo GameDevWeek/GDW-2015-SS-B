@@ -7,6 +7,7 @@ import de.hochschuletrier.gdw.ss15.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallParticlesComponent;
 import de.hochschuletrier.gdw.ss15.game.components.BallSpawnComponent;
+import de.hochschuletrier.gdw.ss15.game.components.ChainLightComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalEffectComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
@@ -56,4 +57,5 @@ public class ComponentMappers {
     /* Spawnpunkte für den Ball */
     public static final ComponentMapper<BallSpawnComponent> ballSpawn = ComponentMapper.getFor(BallSpawnComponent.class);
     public static final ComponentMapper<PointLightComponent> pointLight = ComponentMapper.getFor(PointLightComponent.class);
+    public static final ComponentMapper<ChainLightComponent> chainLight = ComponentMapper.getFor(ChainLightComponent.class);
 }

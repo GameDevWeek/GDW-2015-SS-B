@@ -32,6 +32,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.game.components.ChainLightComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
@@ -139,10 +140,15 @@ public class LightRenderSystem extends IteratingSystem implements ChangeAnimatio
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent position = ComponentMappers.position.get(entity);
         PointLightComponent pointLight = ComponentMappers.pointLight.get(entity);
+        ChainLightComponent chainLight = ComponentMappers.chainLight.get(entity);
 
         if (pointLight != null) {
             pointLight.pointLight.setPosition(position.x / GameConstants.BOX2D_SCALE,
                     position.y / GameConstants.BOX2D_SCALE);
+        }
+        
+        if(chainLight != null){
+            chainLight.chainLight.setPosition((position.x)/GameConstants.BOX2D_SCALE,(position.y)/GameConstants.BOX2D_SCALE);
         }
     }
 

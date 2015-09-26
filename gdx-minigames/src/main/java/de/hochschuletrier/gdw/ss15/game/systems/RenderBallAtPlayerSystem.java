@@ -10,24 +10,18 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
-import com.badlogic.gdx.math.Vector2;
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
-import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
-import de.hochschuletrier.gdw.ss15.events.ShootEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
-import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 
-public class RenderBallAtPlayerSystem extends IteratingSystem implements ChangeBallOwnershipEvent.Listener, ShootEvent.Listener, BallDropEvent.Listener{
+public class RenderBallAtPlayerSystem extends IteratingSystem implements ChangeBallOwnershipEvent.Listener {
     ParticleEffect effect;
     
     public RenderBallAtPlayerSystem(int priority, AssetManagerX assetManager) {
@@ -58,16 +52,12 @@ public class RenderBallAtPlayerSystem extends IteratingSystem implements ChangeB
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
         ChangeBallOwnershipEvent.unregister(this);
-        ShootEvent.unregister(this);
-        BallDropEvent.unregister(this);
     }
 
      @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         ChangeBallOwnershipEvent.register(this);
-        ShootEvent.register(this);
-        BallDropEvent.register(this);
     }
    
     
@@ -77,19 +67,4 @@ public class RenderBallAtPlayerSystem extends IteratingSystem implements ChangeB
            emitter.reset();
        }       
     }
-
-    @Override
-    public void onShootEvent(Entity entity, Vector2 direction) {
-        for(ParticleEmitter emitter: effect.getEmitters()){
-           emitter.reset();
-       } 
-    }
-
-    @Override
-    public void onDropEvent(Entity entity, Vector2 direction) {
-        for(ParticleEmitter emitter: effect.getEmitters()){
-           emitter.reset();
-       } 
-    }
-    
 }

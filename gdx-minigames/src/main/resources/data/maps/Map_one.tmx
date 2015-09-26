@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="112">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="117">
  <tileset firstgid="1" source="playgroundTileset.tsx"/>
  <tileset firstgid="13" source="Bande_Tileset.tsx"/>
  <tileset firstgid="28" source="balls_and_magnets.tsx"/>
  <tileset firstgid="38" source="tileset_ground_SpawnsAndArea.tsx"/>
  <tileset firstgid="50" source="Krater.tsx"/>
  <tileset firstgid="66" source="Sanboden.tsx"/>
- <tileset firstgid="84" source="Goal_Spawn.tsx"/>
+ <tileset firstgid="84" name="Goal_Spawn" tilewidth="64" tileheight="64" tilecount="15">
+  <image source="Goal_Spawn.png" width="320" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="Entitytype" value="PlayerSpawn"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Entitytype" value="PlayerSpawn"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Kachelebene 1" width="55" height="27">
-  <properties>
-   <property name="Enitytype" value="goal_particle_spawner_45"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJzdV81OmzEQ9AH1BkiIQmnvX9Jb+wokaRpCwm/UHuihvP9DYEteZTOZXe9HQAIOIwEfXnu8s+PdvZTSXsZ+xsEHwGHlo3GU8ekdYJLxi2Bavx8HuLEY0+D+r4l5xiXBsp6vxa3wus44zxhljNX6l+CI9ybxho11ncOtYNHgNlTrf2fMMi5IDO8MrTPi+eTOW7EGGTcZtxXj1I+b3rvseVVzGOEm+bDOKd8xHos5qHny7uhG8SsauwtwK2u0FjUkhndmi/tcxcD4C4hlYQq5lDzKmVrcig5XaVOL5xDDygPjjtyY1hfwPxaWEPMefo94CWoRczFJXFtW7XRprSGm9Si3Vr1HNIm1KvE64OXpS9cOqxGmhzl8GwXiW9ykH/lG/k97ktaZ3p/pS94KrBMW1/MHiW3pF3204Gta9ydHde1f5y6suvG8lGnV4mrFl9gY33sz/lQ+x4rbv2dyi8LqA5DrwIiv13t+9dCD20r9/HMHbkVf39N2H8Dyymq5rP9R1xdNoj/24dY5eUM/iCCqXbwPqTW9Hr1En5Vxe3S4IJhuxO8sjBL3PE/DRXf41qAeMQf/FbfTjC8ZJ+q71Q9KHPa2tXpMlnfL4y3/bflIwefK5yw9b35j9aa5DYIxLI9vadjbKzK/7cLN4jdMm32a5fGev1oaEa1FuK3SZt+Kby/2FpYnY+/bx0uYNnGvvv0ky4+eS2dpu2eZ9cjxLv7aquvWbCr5Zedq9VMeN6avvmCzkN4/mrfoO2Z5l57hPe/T3Fv7sXlB79/HS7T22Bzfqu9I76lngQv4G4LNC3r/CLeOnJNxZXOCdzfe2mHanqPRd61zROfuKJD/WwDjJv3Je4fuR54Al4fuRw==
   </data>
@@ -51,5 +62,35 @@
   <object id="80" name="blueM" gid="37" x="2880" y="1152" width="64" height="64"/>
   <object id="81" name="redM" gid="36" x="2368" y="1344" width="64" height="64"/>
   <object id="82" name="blueM" gid="37" x="1088" y="448" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="GoalParticle">
+  <object id="113" x="174" y="676" width="13" height="21">
+   <properties>
+    <property name="Entitytype" value="goal_particles_br"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="114" x="172" y="1033" width="13" height="20">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tr"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="115" x="3338" y="670" width="8" height="23">
+   <properties>
+    <property name="Entitytype" value="goal_particles_bl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="116" x="3336" y="1037" width="13" height="17">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

@@ -21,6 +21,7 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
+import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundInstance;
@@ -200,6 +201,8 @@ public class Main extends StateBasedGame
         }
         console.executeCmdQueue();
         SoundEmitter.updateGlobal();
+        MusicManager.update(delta);
+        MusicManager.setMuted(true);//fixme: setting in menu
 
         preRender();
     }

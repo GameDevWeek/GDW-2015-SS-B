@@ -8,6 +8,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
@@ -151,12 +153,18 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
             notReceptive.time = stunningTime;
             notReceptive.isStunned = false;
             entityFrom.add(notReceptive);
+            PhysixBodyComponent pBody = ComponentMappers.physixBody.get(entityFrom);
+            for (Fixture fixture : pBody.getFixtureList()) {
+                Filter filter = fixture.getFilterData();
+                filter.groupIndex = -1;
+                fixture.setFilterData(filter);
+            }
             
             PositionComponent pos = ComponentMappers.position.get(entityFrom);
             TeamComponent team = ComponentMappers.team.get(entityFrom);
             InputBallComponent input = ComponentMappers.input.get(entityFrom);
             Vector2 dir = input.view.cpy().scl(120);
-            Entity ball = MapLoader.createEntity(engine, "ball", pos.x + dir.x, pos.y + dir.y, team.team);
+            Entity ball = MapLoader.createEntity(engine, "ball", pos.x, pos.y, team.team);
             PhysixModifierComponent modify = ComponentMappers.physixModifier.get(ball);
             modify.schedule(() -> {
                 PhysixBodyComponent body = ComponentMappers.physixBody.get(ball);

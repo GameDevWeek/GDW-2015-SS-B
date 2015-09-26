@@ -36,7 +36,8 @@
                 "size": 20,
                 "density": 5,
                 "friction": 0.2,
-                "restitution": 0.6
+                "restitution": 0.6,
+                "groupIndex": -1
             },
             "Team": {},
             "Ball":{},

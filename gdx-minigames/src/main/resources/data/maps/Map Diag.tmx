@@ -58,7 +58,7 @@
  <tileset firstgid="172" source="Goal_Spawn.tsx"/>
  <layer name="Background" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJzdmNtOwzAMQP0Ok9AYlwI/UO2PuI1yGev2dWwS8HnYqiO8KEldmqUND0ebVDv1kZN4WgkAR8ixgwlSBp6PmQnXXSAfyFawQy455gR5TUAVca0p1/2APDpYiJhc3V4UMf/RjfZlMWI3X47GLSWVoG+8casj1HWKnEdgpnSTTpUD40bf73u60VolQ55d7uuZyDX1hHqk6a28J3y9gz+40ZpzwRVyw5/XilyXh+3SVlfMOzDkRjNm0SE3Vj2HdDNzc4Us4Xdm5uZGs8Kcn4K9Vo64pcPPzh2bm409V26RO2juLJdfbDRuoFzLjrPdnjjmOdC/Pu9L2bca9ucKubzD/j59G7hvWuTspnk1d/jZGLeplTs2N98M8PnR+dt4cnNxI8zZI581swnkpnKDCG61wyeUq3lfW12H6hvNqy6/j4uB+qZFzt8+5DC7hyZXN5o3bbMiVzdN3bm7rQPk7HYGzb78RL4E39Ds2QuOifE/R0qo7jJQu3n+A2+s2pI=
+   eJzdmNtOwzAMQPMOk1AZlwI/UO2PuI3uxsa+DpCAz8PWYmFZTpo2XtfxcMSm2a7PkswRlXPuBDhVGAFV5PMhM/J9l8A78MH4BK59zBmw6IHasFbh+34CnhWmLOZY3eYJMf/RDfdlOWC3UE6KW5/UjNx4ctsY9HUOXBowTnTjTrUCueHrx0w3rFV50LPN7/WY5VI/sTVKWVvutgn4uQ5uWHPCuAHu/N/bhFzNQ7o09VWIWiG/XDecMdMWuRZnV7rl+GluNDfXwMr9zcxDuSFdfjdxVtD5Kb3XWolbKX4yd2huElnjHnhwuz2h+Vmjucnv2yXWknHS7cXHzCLrl/O8JrfQPuqCPLfo8irqL3tat1wvPrtxXk0UPwm5FSLX2m1mUEubASE/PH/bQO6xuCF09tDnzbON5Pbl5gzcNopPLDfleU19pdy5uqwbzqs29+Nyj+tG94UcPz5/c7Ce3fh6ydaPZqzFMw4FudFZkPfKoTrivGmaFaE7l8XdeSHq7GNNUmLovNEM5++7+MW+KwtPvt9CaOdtLt638Wvq39Ltwu325Rfwzfhxuz175WMs/s/RJ9h3FemdPv8FYB/ZhQ==
   </data>
  </layer>
  <layer name="Style/Spawns" width="55" height="27">

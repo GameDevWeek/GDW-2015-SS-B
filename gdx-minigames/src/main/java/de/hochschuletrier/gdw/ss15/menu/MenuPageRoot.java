@@ -16,21 +16,22 @@ public class MenuPageRoot extends MenuPage {
         super(skin, "menu_bg");
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
-        int x = 500;
+        int x = 50;
         int i = 0;
-        int y = 500;
-        int yStep = 55;
+        int y = 50;
+        int yStep = 50;
         if (type == Type.MAINMENU) {
-            createLabel(400, 500, 600, 80, "Main Menu");
-            addPageEntry(menuManager, 50, 300, "Join Server", new MenuPageJoinServer(skin, menuManager));
-            addPageEntry(menuManager, 50, 200, "Host Server", new MenuPageHostServer(skin, menuManager));
+            createLabel(50, 390, 600, 80, "Main Menu", "big");
+            addPageEntry(menuManager, 50, 300, "JOIN SERVER", new MenuPageJoinServer(skin, menuManager));
+            addPageEntry(menuManager, 50, 200, "HOST SERVER", new MenuPageHostServer(skin, menuManager));
 
         } else {
-            addLeftAlignedButton(50, 300, 400, 50, "Fortsetzen", () -> menuManager.popPage());
-            addLeftAlignedButton(50, 200, 400, 50, "Spiel verlassen", this::stopGame);
+            createLabel(50, 350, 600, 80, "game paused", "big");
+            addLeftAlignedButton(50, 300, 400, 50, "RESUME", () -> menuManager.popPage());
+            addLeftAlignedButton(50, 200, 400, 50, "LEAVE GAME", this::stopGame);
         }
-        addPageEntry(menuManager, 50, 100, "Credits", new MenuPageCredits(skin, menuManager));
-        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
+        addPageEntry(menuManager, 50, 100, "CREDITS", new MenuPageCredits(skin, menuManager));
+        addLeftAlignedButton(50, 50, 400, 50, "EXIT CLIENT", () -> System.exit(-1));
     }
 
     private void stopGame() {

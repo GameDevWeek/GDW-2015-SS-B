@@ -34,17 +34,17 @@ public class MenuPageJoinServer extends MenuPage {
         int width = 300;
         int height = 50;
         
-        createLabel(400, 500, 600, 80, "Join Server Menu");
-        createLabel(50, 400, 300, 50, "Enter Server IP");
-        serverIP = createTextField(400, 400, 300, 50, "localhost");
-        createLabel(50, 350, 300, 50, "Enter Server Port");
-        serverPort = createTextField(400, 350, 300, 50, "9090");
-        createLabel(50, 300, 300, 50, "Enter Username");
-        username = createTextField(400, 300, 300, 50, "Client");
-        addLeftAlignedButton(400, 250, 300, 50, "Join Server", this::joinServer);
+        createLabel(50, 390, 600, 80, "Join Server Menu", "big");
+        createLabel(50, 300, 300, 50, "Enter Server IP");
+        serverIP = createTextField(400, 300, 300, 50, "localhost");
+        createLabel(50, 250, 300, 50, "Enter Server Port");
+        serverPort = createTextField(400, 250, 300, 50, "9090");
+        createLabel(50, 200, 300, 50, "Enter Username");
+        username = createTextField(400, 200, 300, 50, "Client");
+        addLeftAlignedButton(400, 150, 300, 50, "JOIN SERVER", this::joinServer);
         
-        addCenteredButton(50, 100, 400, 50, "Back To Menu", () -> menuManager.popPage());
-        addCenteredButton(50, 50, 400, 50, "Exit Client", () -> System.exit(-1));
+        addLeftAlignedButton(50, 50, 400, 50, "BACK TO MAIN MENU", () -> menuManager.popPage());
+        
 
     }
     

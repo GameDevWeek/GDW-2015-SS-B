@@ -172,7 +172,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     public void onDropEvent(Entity entityFrom, Vector2 direcion) {
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
-            player.hasBall = false;
+            ChangeBallOwnershipEvent.emit(null);
             PositionComponent pos = ComponentMappers.position.get(entityFrom);
             TeamComponent team = ComponentMappers.team.get(entityFrom);
             InputBallComponent input = ComponentMappers.input.get(entityFrom);

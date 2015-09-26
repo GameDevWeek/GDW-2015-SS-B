@@ -18,7 +18,7 @@
         "cyan": {"a": 1, "b": 1, "g": 1, "r": 0},
         "softOrange": {"a": 1, "b": 0.03, "g": 0.73, "r": 0.97},
         "buttonColor": {"a": 1, "b": 0, "g": 0, "r": 0},
-        "buttonOverColor": {"a": 1, "b": 0.2, "g": 0.2, "r": 0.2}
+        "buttonOverColor": {"a": 1, "b": 1, "g": 1, "r": 1}
     },
     "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
         "dialogDim": {"name": "white", "color": {"r": 0, "g": 0, "b": 0, "a": 0.45}}

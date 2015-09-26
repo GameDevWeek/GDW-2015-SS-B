@@ -8,18 +8,24 @@ import com.badlogic.gdx.math.Vector2;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.ss15.datagrams.AnimationStateChangeDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.BallOwnershipChangedDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.CreateEntityDatagram;
+import de.hochschuletrier.gdw.ss15.datagrams.GameStateDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.PlayerIdDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.MoveDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.RemoveEntityDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.SoundDatagram;
+import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 import java.util.HashMap;
 
@@ -42,18 +48,16 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        
-        this.engine = (PooledEngine)engine;
+
+        this.engine = (PooledEngine) engine;
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
-        
+
         this.engine = null;
     }
-    
-    
 
     @Override
     public void onDisconnect() {
@@ -86,7 +90,7 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         Entity entity = netEntityMap.get(datagram.getNetId());
         if (entity != null) {
             MovableComponent movable = ComponentMappers.movable.get(entity);
-            if(datagram.getPacketId() > movable.packetId) {
+            if (datagram.getPacketId() > movable.packetId) {
                 movable.packetId = datagram.getPacketId();
                 PositionComponent position = ComponentMappers.position.get(entity);
                 Vector2 pos = datagram.getPosition();
@@ -104,10 +108,32 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
         }
     }
 
-    public void handle (SoundDatagram datagram) {
-        Entity entity = netEntityMap.get(datagram.getNetId());
-        if (entity != null) {
-            SoundEvent.emit(datagram.getName(), entity);
+    public void handle(SoundDatagram datagram) {
+        long netId = datagram.getNetId();
+        if (netId == 0) {
+            SoundEvent.emit(datagram.getName(), null);
+        } else {
+            Entity entity = netEntityMap.get(datagram.getNetId());
+            if (entity != null) {
+                SoundEvent.emit(datagram.getName(), entity);
+            }
         }
+    }
+
+    public void handle(BallOwnershipChangedDatagram datagram) {
+        long netId = datagram.getOwnerId();
+        if (netId == 0) {
+            ChangeBallOwnershipEvent.emit(null);
+        } else {
+            Entity entity = netEntityMap.get(netId);
+            if (entity != null) {
+                PlayerComponent player = ComponentMappers.player.get(entity);
+                ChangeBallOwnershipEvent.emit(entity);
+            }
+        }
+    }
+    
+    public void handle(GameStateDatagram datagram) {
+        ChangeGameStateEvent.emit(datagram.getGameState(), datagram.getGameTime());
     }
 }

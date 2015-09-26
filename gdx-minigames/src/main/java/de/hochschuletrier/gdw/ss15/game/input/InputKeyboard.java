@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
@@ -20,7 +21,7 @@ public class InputKeyboard implements InputProcessor {
 			
 			/* Ausprobieren */
             case Input.Keys.I: GoalEvent.emit(Team.RED); break;
-			case Input.Keys.O: ChangeGameStateEvent.emit(GameState.GAME); break;
+			case Input.Keys.O: ChangeGameStateEvent.emit(GameState.GAME, GameConstants.GAME_TIME); break;
 			case Input.Keys.P: GoalEvent.emit(Team.BLUE); break;
 
 		}

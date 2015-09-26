@@ -1,136 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="95">
- <tileset firstgid="1" name="balls_and_magnets" tilewidth="64" tileheight="64" tilecount="10">
-  <properties>
-   <property name="Enitytype" value="Magnet"/>
-   <property name="Team" value="1"/>
-  </properties>
-  <image source="balls_and_magnets.png" width="320" height="128"/>
-  <tile id="0">
-   <properties>
-    <property name="Entitytype" value="BallSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="Entitytype" value="BallSpawn"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="Entitytype" value="magnet"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="Entitytype" value="magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="Entitytype" value="Magnet"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="11" name="Bande_Tileset" tilewidth="64" tileheight="64" tilecount="15">
-  <image source="bande_tileset" trans="ffffff" width="320" height="192"/>
-  <tile id="0">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="solid" value="true"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="26" name="Dummy Gate" tilewidth="64" tileheight="64" tilecount="56">
-  <image source="Dummy Gate.png" trans="ffffff" width="512" height="448"/>
- </tileset>
+ <tileset firstgid="1" source="balls_and_magnets.tsx"/>
+ <tileset firstgid="11" source="Bande_Tileset.tsx"/>
+ <tileset firstgid="26" source="Dummy Gate.tsx"/>
  <tileset firstgid="82" source="playgroundTileset.tsx"/>
- <tileset firstgid="94" name="tileset_ground_SpawnsAndArea" tilewidth="64" tileheight="64" tilecount="12">
-  <image source="tileset_ground_SpawnsAndArea.png" trans="ffffff" width="768" height="64"/>
-  <tile id="3">
-   <properties>
-    <property name="Entitytype" value="Spawn"/>
-    <property name="Team" value=""/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="Enitytype" value="BallSpawn"/>
-    <property name="Team" value="0"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="Enitytype" value="BallSpawn"/>
-    <property name="Team" value="1"/>
-   </properties>
-  </tile>
- </tileset>
+ <tileset firstgid="94" source="tileset_ground_SpawnsAndArea.tsx"/>
  <tileset firstgid="106" source="Krater.tsx"/>
  <tileset firstgid="122" source="Sanboden.tsx"/>
  <tileset firstgid="140" source="Krater groß.tsx"/>
@@ -162,13 +36,13 @@
   </properties>
   <object id="12" type="Gate" x="281.818" y="554.545" width="124.242" height="618.182">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="1"/>
    </properties>
   </object>
   <object id="13" type="Gate" x="3112.12" y="551.515" width="124.242" height="618.182">
    <properties>
-    <property name="Entitytype" value="Gate"/>
+    <property name="Entitytype" value="Goal"/>
     <property name="Team" value="0"/>
    </properties>
   </object>

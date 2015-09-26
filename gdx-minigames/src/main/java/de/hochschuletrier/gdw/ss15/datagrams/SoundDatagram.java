@@ -16,7 +16,7 @@ public final class SoundDatagram extends NetDatagram {
 
     public static SoundDatagram create(String name, Entity entity) {
         SoundDatagram datagram = DatagramFactory.create(SoundDatagram.class);
-        datagram.netId = entity.getId();
+        datagram.netId = entity == null ? 0 : entity.getId();
         datagram.name = name;
         return datagram;
     }

@@ -11,6 +11,7 @@ public class InputBallComponent extends Component implements Pool.Poolable {
 
     public boolean pull;
     public long packetId; // netcode
+    public boolean isStunned;
 
     @Override
     public void reset() {
@@ -18,5 +19,6 @@ public class InputBallComponent extends Component implements Pool.Poolable {
         view.setZero();
         pull = false;
         packetId = 0;
+        isStunned=false;
     }
 }

@@ -59,7 +59,7 @@ public abstract class AbstractGame {
     	this.mapName = mapName;
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
-        addSystems();
+        addSystems(assetManager);
         addContactListeners();
         entityFactory.init(engine, assetManager);
     }
@@ -67,7 +67,7 @@ public abstract class AbstractGame {
     public void start() {
     }
 
-    protected void addSystems() {
+    protected void addSystems(AssetManagerX assetManager) {
         if(factoryParam.allowPhysics) {
             engine.addSystem(physixSystem);
             engine.addSystem(physixDebugRenderSystem);

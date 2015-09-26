@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 
 public class MenuPageRoot extends MenuPage {
     private HashMap<String, String> maps;
+    private final SelectBox mapSelect;
 
     public enum Type {
 
@@ -24,6 +26,7 @@ public class MenuPageRoot extends MenuPage {
 
         try {
             maps = JacksonReader.readMap("data/json/maps.json", String.class);
+            
             for(String name: maps.keySet()) {
                 System.out.println(name);
             }
@@ -31,6 +34,12 @@ public class MenuPageRoot extends MenuPage {
             e.printStackTrace();
             System.exit(-1);
         }
+        
+        mapSelect = new SelectBox(skin);
+        mapSelect.setItems(maps.keySet().toArray());
+        mapSelect.setBounds(50, 500, 200, 30);
+        mapSelect.setMaxListCount(10);
+        addActor(mapSelect);
 
 //        addActor(new DecoImage(assetManager.getTexture("menu_bg_root_bottom")));
         int x = 100;
@@ -51,7 +60,7 @@ public class MenuPageRoot extends MenuPage {
 
     private void startServer() {
         String userName = "Server";
-        String mapName = "data/maps/NiceMap.tmx";
+        String mapName = maps.get((String)mapSelect.getSelected());
         int port = 9090;
         CreateServerEvent.emit(port, GameConstants.MAX_PLAYERS, mapName, userName);
     }
@@ -64,7 +73,8 @@ public class MenuPageRoot extends MenuPage {
     }
 
     private void startGame() {
-        TestGameEvent.emit("data/maps/NiceMap.tmx");
+        String mapName = maps.get((String)mapSelect.getSelected());
+        TestGameEvent.emit(mapName);
     }
 
     private void stopGame() {

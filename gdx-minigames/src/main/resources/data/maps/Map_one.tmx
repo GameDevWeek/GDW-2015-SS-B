@@ -94,7 +94,7 @@
   </object>
  </objectgroup>
  <objectgroup name="Lights">
-  <object id="117" x="95" y="705">
+  <object id="117" x="63" y="704">
    <properties>
     <property name="Entitytype" value="Chainlight"/>
     <property name="color" value="F00303"/>
@@ -102,7 +102,7 @@
    </properties>
    <polyline points="0,0 1,320"/>
   </object>
-  <object id="118" x="3422" y="704">
+  <object id="118" x="3455" y="705">
    <properties>
     <property name="Entitytype" value="Chainlight"/>
     <property name="color" value="0078E8"/>

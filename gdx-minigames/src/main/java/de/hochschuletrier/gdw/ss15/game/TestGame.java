@@ -134,9 +134,9 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
     @Override
     protected void addSystems(AssetManagerX assetManager) {
         super.addSystems(assetManager);
-        engine.addSystem(new PlayerAnimationSystem(
-                GameConstants.PRIORITY_ENTITIES));
         if(netClient == null) {
+            engine.addSystem(new PlayerAnimationSystem(
+                    GameConstants.PRIORITY_ENTITIES));
             engine.addSystem(new MovementSystem(10));
             engine.addSystem(new PullSystem(30));
             engine.addSystem(new BallDropSystem(GameConstants.PRIORITY_ENTITIES));

@@ -23,7 +23,9 @@ public class PlayerAnimationSystem extends IteratingSystem {
         PhysixBodyComponent physBody = ComponentMappers.physixBody.get(entity);
         InputBallComponent input = ComponentMappers.input.get(entity);
 
-        if(physBody.getLinearVelocity().len() >= 10f)
+        if(input.isStunned)
+            ChangeAnimationStateEvent.emit(getStunnedState(entity), entity);
+        else if(physBody.getLinearVelocity().len() >= 10f)
             ChangeAnimationStateEvent.emit(getWalkState(entity), entity);
         else
             ChangeAnimationStateEvent.emit(getIdleState(entity), entity);
@@ -37,5 +39,10 @@ public class PlayerAnimationSystem extends IteratingSystem {
     private EntityAnimationState getIdleState(Entity entity) {
         Team team = ComponentMappers.team.get(entity).team;
         return team == Team.BLUE ? EntityAnimationState.IDLE_MINUS : EntityAnimationState.IDLE_PLUS;
+    }
+    
+    private EntityAnimationState getStunnedState(Entity entity) {
+        Team team = ComponentMappers.team.get(entity).team;
+        return team == Team.BLUE ? EntityAnimationState.STUNNED_MINUS : EntityAnimationState.STUNNED_PLUS;
     }
 }

@@ -83,6 +83,23 @@
         "columns": 16,
         "rows" : 1
     },
+
+    "player_stunned_plus": {
+        "filename": "data/animations/character_animation_Spreadsheet_red_stunned.png",
+        "frames" : 1,
+        "frameDuration": [0.5],
+        "playType" : "LOOP",
+        "columns": 16,
+        "rows" : 1
+    },
+    "player_stunned_minus": {
+        "filename": "data/animations/charakter_animation_Spreadsheet_blue_stunned.png",
+        "frames" : 16,
+        "frameDuration": [0.05],
+        "playType" : "LOOP",
+        "columns": 16,
+        "rows" : 1
+    },
     
     "magnetic_field_minus": {
         "filename": "data/animations/impulse_minus.png",

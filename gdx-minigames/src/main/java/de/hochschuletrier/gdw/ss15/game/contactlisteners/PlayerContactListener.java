@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallDropComponent;
+import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
@@ -49,9 +50,10 @@ public class PlayerContactListener extends PhysixContactAdapter {
     }
 
     private void stunnPlayer(Entity player) {
-//            if(player.hasComponent)//ggf die NotrecepiveComponent mit der Notstunnable abfragen
-            BallDropComponent balldrop =engine.createComponent(BallDropComponent.class);
-            player.add(balldrop);
+            if(!((player.getComponent(NotReceptiveComponent.class)!=null)&&(player.getComponent(NotReceptiveComponent.class).cantBeStunned))){//ggf die NotrecepiveComponent mit der Notstunnable abfragen
+                BallDropComponent balldrop =engine.createComponent(BallDropComponent.class);
+                player.add(balldrop);
+            }
             
     }
 

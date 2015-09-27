@@ -26,6 +26,7 @@ public class ReceptiveSystem extends IteratingSystem{
         // TODO Auto-generated method stub
         if(entity.getComponent(NotReceptiveComponent.class).remainingTime>0){
             entity.getComponent(NotReceptiveComponent.class).remainingTime-= deltaTime;
+            System.out.println("Cant BeStunned:"+entity.getComponent(NotReceptiveComponent.class).cantBeStunned+ entity.getComponent(NotReceptiveComponent.class).remainingTime);
         }else{
             //
             InputBallComponent input= entity.getComponent(InputBallComponent.class);

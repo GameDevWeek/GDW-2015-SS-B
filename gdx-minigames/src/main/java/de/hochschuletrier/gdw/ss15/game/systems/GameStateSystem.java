@@ -14,6 +14,7 @@ import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class GameStateSystem extends EntitySystem implements ChangeGameStateEvent.Listener,
@@ -86,10 +87,10 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
                 resetScores();
             case TWO:
             case ONE:
-                SoundEvent.emit("countdown_" + gameState.name().toLowerCase(), null);
+                SoundEvent.emit("countdown_" + gameState.name().toLowerCase(), SoundChannel.NONE, null);
                 break;
             case GAME:
-                SoundEvent.emit("countdown_go", null);
+                SoundEvent.emit("countdown_go", SoundChannel.NONE, null);
                 break;
         }
         countdown = gameTime;

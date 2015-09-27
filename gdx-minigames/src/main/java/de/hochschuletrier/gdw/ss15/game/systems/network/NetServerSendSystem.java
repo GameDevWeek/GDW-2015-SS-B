@@ -24,6 +24,7 @@ import de.hochschuletrier.gdw.ss15.game.components.MovableComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 
 public class NetServerSendSystem extends EntitySystem implements EntityListener,
         ChangeAnimationStateEvent.Listener, SoundEvent.Listener, ChangeBallOwnershipEvent.Listener,
@@ -83,8 +84,8 @@ public class NetServerSendSystem extends EntitySystem implements EntityListener,
     }
 
     @Override
-    public void onSoundEvent(String sound, Entity entity) {
-        netServer.broadcastReliable(SoundDatagram.create(sound, entity));
+    public void onSoundEvent(String sound, SoundChannel channel, Entity entity) {
+        netServer.broadcastReliable(SoundDatagram.create(sound, channel, entity));
     }
 
     @Override

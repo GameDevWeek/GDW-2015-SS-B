@@ -30,6 +30,7 @@ import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
@@ -142,7 +143,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
     public void onShootEvent(Entity entityFrom, Vector2 direction) {
         PlayerComponent player = ComponentMappers.player.get(entityFrom);
         if(player != null && player.hasBall) {
-            SoundEvent.emit("ball_shot", entityFrom);
+            SoundEvent.emit("ball_shot", SoundChannel.NONE, entityFrom);
             ChangeBallOwnershipEvent.emit(null);
             //füge "stunning" hinzu/kann den Ball nicht mehr aufnehmen 
             final float stunningTime= 0.4f;

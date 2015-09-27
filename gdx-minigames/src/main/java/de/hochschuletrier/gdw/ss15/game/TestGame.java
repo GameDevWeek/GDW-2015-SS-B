@@ -7,6 +7,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleShader.Inputs;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -16,6 +17,8 @@ import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.PullEvent;
+import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
@@ -29,6 +32,7 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 import de.hochschuletrier.gdw.ss15.game.input.InputManager;
 import de.hochschuletrier.gdw.ss15.game.input.InputManager.InputStates;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
@@ -55,7 +59,8 @@ import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
 
-public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.Listener{
+public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.Listener,
+        PullEvent.Listener {
     private final NetServerSimple netServer;
     private final NetClientSimple netClient;
 
@@ -90,6 +95,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         
         players = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
         ChangeBallOwnershipEvent.register(this);
+        PullEvent.register(this);
 
         MapLoader.entityFactory.init(engine, assetManager);
 
@@ -209,6 +215,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         else if (netServer != null)
             netServer.disconnect();
         ChangeBallOwnershipEvent.unregister(this);
+        PullEvent.unregister(this);
     }
 
     @Override
@@ -225,5 +232,17 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
                 }
             }
         }
+    }
+
+    @Override
+    public void onPullEventOn(Entity entity, Vector2 direction) {
+        if(netClient == null)
+            SoundEvent.emit("ball_attract", SoundChannel.LOOP1, entity);
+    }
+
+    @Override
+    public void onPullEventOff(Entity entity) {
+        if(netClient == null)
+            SoundEvent.emit(null, SoundChannel.LOOP1, entity);
     }
 }

@@ -8,6 +8,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 
 public class ImpactSoundListener extends PhysixContactAdapter {
 
@@ -36,7 +37,7 @@ public class ImpactSoundListener extends PhysixContactAdapter {
             return null;
         
         isc.lastPlayed.reset();
-        SoundEvent.emit(isc.sound, component.getEntity());
+        SoundEvent.emit(isc.sound, SoundChannel.NONE, component.getEntity());
         return isc.sound;
     }
 }

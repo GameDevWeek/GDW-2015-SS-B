@@ -11,6 +11,7 @@ import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 
 public class BallListener extends PhysixContactAdapter {
     private final PooledEngine engine;
@@ -34,7 +35,7 @@ public class BallListener extends PhysixContactAdapter {
                 PlayerComponent player = ComponentMappers.player.get(otherEntity);
                 NotReceptiveComponent notReceptive=ComponentMappers.notReceptive.get(otherEntity);
                 if (player != null&&notReceptive==null) {
-                    SoundEvent.emit("ball_pickup", otherEntity);
+                    SoundEvent.emit("ball_pickup", SoundChannel.NONE, otherEntity);
                     ChangeBallOwnershipEvent.emit(otherEntity);
                     engine.removeEntity(myEntity);
                 }else if (player != null&&notReceptive!=null) {

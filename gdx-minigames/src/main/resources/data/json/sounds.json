@@ -5,6 +5,7 @@
     "ball_impact": "data/sounds/ball_impact.wav",
     "ball_pickup": "data/sounds/ball_pickup.wav",
     "ball_shot": "data/sounds/ball_shot.wav",
+    "ball_attract": "data/sounds/ball_attract_1.wav",
     "countdown_three": "data/sounds/countdown/three.wav",
     "countdown_two": "data/sounds/countdown/two.wav",
     "countdown_one": "data/sounds/countdown/one.wav",

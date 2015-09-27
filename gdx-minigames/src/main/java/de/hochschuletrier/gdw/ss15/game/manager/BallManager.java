@@ -185,7 +185,7 @@ public final class BallManager implements ChangeGameStateEvent.Listener,
             TeamComponent team = ComponentMappers.team.get(entityFrom);
             InputBallComponent input = ComponentMappers.input.get(entityFrom);
             Vector2 dir = input.view.cpy().scl(120);
-            Entity ball = MapLoader.createEntity(engine, "ball", pos.x + dir.x, pos.y + dir.y, team.team);
+            Entity ball = MapLoader.createEntity(engine, "ball", pos.x, pos.y, team.team);
             PhysixModifierComponent modify = ComponentMappers.physixModifier.get(ball);
             modify.schedule(() -> {
                 PhysixBodyComponent body = ComponentMappers.physixBody.get(ball);

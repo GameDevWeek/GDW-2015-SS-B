@@ -79,7 +79,7 @@ public class HudRenderSystem extends EntitySystem implements
 			countdown = 0;
 
 		Main.getInstance().screenCamera.bind();
-		String warmup = "WARMUP";
+		String warmup = "WARMUP (ENTER to start)";
 		String gameover = winner + "!";
 
         contdown321 = (int) Math.ceil(countdown);
@@ -93,10 +93,11 @@ public class HudRenderSystem extends EntitySystem implements
 				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
 				font.draw(DrawUtil.batch, scoreBlue,
-						Gdx.graphics.getWidth() - 200, 50);
+						Gdx.graphics.getWidth() - 100, 50);
 				font.setColor(Color.GREEN);
-				font.draw(DrawUtil.batch, warmup,
-						Gdx.graphics.getWidth() / 2 - 100, 50);
+				font.drawWrapped(DrawUtil.batch, warmup, Gdx.graphics.getWidth() / 2 - 300, 50, 800);
+//				font.draw(DrawUtil.batch, warmup,
+//						Gdx.graphics.getWidth() / 2 - 100, 50);
 				break;
 			case THREE:
 				// fallthrough
@@ -107,7 +108,7 @@ public class HudRenderSystem extends EntitySystem implements
 				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);
 				font.draw(DrawUtil.batch, scoreBlue,
-						Gdx.graphics.getWidth() - 200, 50);
+						Gdx.graphics.getWidth() - 100, 50);
 				font.setColor(Color.GREEN);
 				//font.draw(DrawUtil.batch, time,Gdx.graphics.getWidth() / 2 - 100, 50);
                 if(contdown321 > 0){

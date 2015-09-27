@@ -44,6 +44,6 @@ public class GameConstants {
     public static final boolean LIGHTS = true;
     
     //times
-    public static final float NOT_STAUNNABLE_TIME=5f;//0.75f;
-    public static final float STUNN_TIME=2f;
+    public static final float NOT_STAUNNABLE_TIME=0.5f;
+    public static final float STUNN_TIME= 2f;
 }

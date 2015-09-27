@@ -27,7 +27,7 @@ public class GameConstants {
     public static int MAX_PLAYERS = 24;
     public static int SCORE_TO_WIN = 10;
     public static int GAME_TIME = 60 * 5;
-    public static int GAME_OVER_TIME = 30;
+    public static int GAME_OVER_TIME = 15;
     
     // Light parameters
     public static final int LIGHT_RAYS = 90;

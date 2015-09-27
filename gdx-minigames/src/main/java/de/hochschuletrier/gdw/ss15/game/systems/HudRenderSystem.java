@@ -157,9 +157,13 @@ public class HudRenderSystem extends EntitySystem implements
 				font.setColor(Team.BLUE.color);
 				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
-				font.setColor(Color.YELLOW);
-				font.draw(DrawUtil.batch, gameover,
-						Gdx.graphics.getWidth() / 2 - 100, 50);
+				font.setColor(Color.GREEN);
+				font.draw(DrawUtil.batch, "next round in " + contdown321,Gdx.graphics.getWidth() / 2 - 150, 50);
+                goalFont.setScale(1);
+                if(winner == null){
+                    winner = "Tied";
+                }
+                goalFont.draw(DrawUtil.batch, winner + "!" ,Gdx.graphics.getWidth()/2 -24 * winner.length()  , Gdx.graphics.getHeight() / 2 -32);
 				break;
 			default:
 

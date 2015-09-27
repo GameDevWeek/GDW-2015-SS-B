@@ -83,6 +83,7 @@ public class GameStateSystem extends EntitySystem implements ChangeGameStateEven
 
         switch (gameState) {
             case THREE:
+                resetScores();
             case TWO:
             case ONE:
                 SoundEvent.emit("countdown_" + gameState.name().toLowerCase(), null);

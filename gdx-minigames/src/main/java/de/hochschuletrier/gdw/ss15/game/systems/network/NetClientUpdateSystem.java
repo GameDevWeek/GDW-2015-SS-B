@@ -124,11 +124,11 @@ public class NetClientUpdateSystem extends EntitySystem implements NetDatagramHa
     public void handle(SoundDatagram datagram) {
         long netId = datagram.getNetId();
         if (netId == 0) {
-            SoundEvent.emit(datagram.getName(), null);
+            SoundEvent.emit(datagram.getName(), datagram.getChannel(), null);
         } else {
             Entity entity = netEntityMap.get(datagram.getNetId());
             if (entity != null) {
-                SoundEvent.emit(datagram.getName(), entity);
+                SoundEvent.emit(datagram.getName(), datagram.getChannel(), entity);
             }
         }
     }

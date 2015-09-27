@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-up" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="67">
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="69">
  <tileset firstgid="1" source="balls_and_magnets.tsx"/>
  <tileset firstgid="11" source="Bande_Tileset.tsx"/>
  <tileset firstgid="26" source="tileset_ground_SpawnsAndArea.tsx"/>
@@ -138,6 +138,24 @@
     <property name="Team" value="0"/>
    </properties>
    <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Goal Lights">
+  <object id="67" x="124" y="60">
+   <properties>
+    <property name="Entitytype" value="Chainlight"/>
+    <property name="color" value="0078E8"/>
+    <property name="direction" value="1"/>
+   </properties>
+   <polyline points="0,0 328,1"/>
+  </object>
+  <object id="68" x="3068" y="1665">
+   <properties>
+    <property name="Entitytype" value="Chainlight"/>
+    <property name="color" value="F00303"/>
+    <property name="direction" value="-1"/>
+   </properties>
+   <polyline points="0,0 326,1"/>
   </object>
  </objectgroup>
 </map>

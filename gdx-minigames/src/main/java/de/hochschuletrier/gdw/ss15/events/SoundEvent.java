@@ -2,19 +2,20 @@ package de.hochschuletrier.gdw.ss15.events;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.SnapshotArray;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 
 public class SoundEvent {
 
     public static interface Listener {
-        void onSoundEvent(String sound, Entity entity);
+        void onSoundEvent(String sound, SoundChannel channel, Entity entity);
     }
 
     private static final SnapshotArray<Listener> listeners = new SnapshotArray();
 
-    public static void emit(String sound, Entity entity) {
+    public static void emit(String sound, SoundChannel channel, Entity entity) {
         Object[] items = listeners.begin();
         for (int i = 0, n = listeners.size; i < n; i++) {
-            ((Listener)items[i]).onSoundEvent(sound, entity);
+            ((Listener)items[i]).onSoundEvent(sound, channel, entity);
         }
         listeners.end();
     }

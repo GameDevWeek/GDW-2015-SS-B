@@ -14,6 +14,7 @@ import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SoundEmitterComponent;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 
 public class SoundSystem extends IteratingSystem implements SoundEvent.Listener {
 
@@ -62,10 +63,20 @@ public class SoundSystem extends IteratingSystem implements SoundEvent.Listener 
     }
 
     @Override
-    public void onSoundEvent(String sound, Entity entity) {
+    public void onSoundEvent(String sound, SoundChannel channel, Entity entity) {
         if(entity != null) {
             SoundEmitterComponent soundEmitter = ComponentMappers.soundEmitter.get(entity);
-            soundEmitter.emitter.play(assetManager.getSound(sound), false);
+            if(channel != SoundChannel.NONE) {
+                if(sound != null) {
+                    soundEmitter.channels[channel.ordinal()] = soundEmitter.emitter.play(assetManager.getSound(sound), true);
+                } else if(soundEmitter.channels[channel.ordinal()] != null) {
+                    soundEmitter.channels[channel.ordinal()].stop();
+                    soundEmitter.channels[channel.ordinal()] = null;
+                }
+            }
+            else if(sound != null) {
+                soundEmitter.emitter.play(assetManager.getSound(sound), false);
+            }
         } else {
             SoundEmitter.playGlobal(assetManager.getSound(sound), false);
         }

@@ -8,13 +8,14 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.components.BallDropComponent;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 
 public class BallDropSystem extends IteratingSystem {
 
-    private final float stunningTime = 5;
+    private final float stunningTime = GameConstants.STUNN_TIME;
     private PooledEngine engine;
 
     public BallDropSystem() {

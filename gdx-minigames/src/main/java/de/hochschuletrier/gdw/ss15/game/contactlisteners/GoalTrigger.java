@@ -12,6 +12,7 @@ import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.GoalShotComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
+import de.hochschuletrier.gdw.ss15.game.data.SoundChannel;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**
@@ -31,7 +32,7 @@ public class GoalTrigger implements Consumer<Entity> {
     public void accept(Entity entity) {
         BallComponent ball = ComponentMappers.ball.get(entity);
         if(ball != null && !ball.goal) {
-            SoundEvent.emit("ball_goal", entity);
+            SoundEvent.emit("ball_goal", SoundChannel.NONE, entity);
             ball.goal = true;
             GoalShotComponent goalShot = engine.createComponent(GoalShotComponent.class);
             goalShot.countdown = 1; // seconds until reset

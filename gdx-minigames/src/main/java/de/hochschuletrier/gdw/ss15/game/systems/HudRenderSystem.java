@@ -47,7 +47,7 @@ public class HudRenderSystem extends EntitySystem implements
 	public HudRenderSystem(AssetManagerX assetManager, int priority) {
 		super(priority);
 		font = assetManager.getFont("quartz_50");
-        goalFont = assetManager.getFont("railway_32");
+        goalFont = assetManager.getFont("railway_64");
 	}
 
 	@Override
@@ -112,9 +112,10 @@ public class HudRenderSystem extends EntitySystem implements
 				//font.draw(DrawUtil.batch, time,Gdx.graphics.getWidth() / 2 - 100, 50);
                 if(contdown321 > 0){
                     float f = ( countdown - contdown321);
-                    goalFont.setScale( 2 + f);
-                    goalFont.draw(DrawUtil.batch, contdown321.toString() ,Gdx.graphics.getWidth()/2 -20 - 10*f , Gdx.graphics.getHeight() / 2 -20 - 10*f);
+                    goalFont.setScale( 1.5f + f);
+                    goalFont.draw(DrawUtil.batch, contdown321.toString() ,Gdx.graphics.getWidth()/2 -32 - 10*f , Gdx.graphics.getHeight() / 2 -32 - 10*f);
                 }else{
+                    goalFont.setScale(1);
                     goTimer = 1.0f;
                 }
                 goalShot = false;
@@ -122,7 +123,7 @@ public class HudRenderSystem extends EntitySystem implements
 			case GAME:
                 goTimer -= deltaTime;
                 if(goTimer>0){
-                    goalFont.draw(DrawUtil.batch, "GO!",Gdx.graphics.getWidth()/2 -20 , Gdx.graphics.getHeight() / 2 -20);
+                    goalFont.draw(DrawUtil.batch, "GO!",Gdx.graphics.getWidth()/2 -32 , Gdx.graphics.getHeight() / 2 -20);
                 }
 				font.setColor(Team.RED.color);
 				font.draw(DrawUtil.batch, scoreRed, 50, 50);
@@ -135,9 +136,9 @@ public class HudRenderSystem extends EntitySystem implements
                 if(goalShot){
                     displayedGoalMessage += deltaTime;
                     if(displayedGoalMessage <displayGoalMessage){
-                        goalFont.setScale(0.5f + displayedGoalMessage);
+                        goalFont.setScale(0.2f + displayedGoalMessage);
                         
-                        goalFont.draw(DrawUtil.batch,"GOAL!",Gdx.graphics.getWidth() / 2 - 70 - 50 * displayedGoalMessage, Gdx.graphics.getHeight() / 2 - 20 - 30 * displayedGoalMessage);
+                        goalFont.draw(DrawUtil.batch,"GOAL!",Gdx.graphics.getWidth() / 2 - 50 - 100 * displayedGoalMessage, Gdx.graphics.getHeight() / 2 - 40 - 60 * displayedGoalMessage);
                     }else{
                         displayedGoalMessage = 0;
                         goalShot = false;

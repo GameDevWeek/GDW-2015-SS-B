@@ -111,7 +111,7 @@ public class HudRenderSystem extends EntitySystem implements
 					winner = "Team Blue Victory";
 				} else if (scoreBlueInt < scoreRedInt) {
 					winner = "Team Red Victory";
-				} else if (scoreBlue == scoreRed) {
+				} else if (scoreBlue.equals(scoreRed)) {
 					winner = "Tied";
 				}
 

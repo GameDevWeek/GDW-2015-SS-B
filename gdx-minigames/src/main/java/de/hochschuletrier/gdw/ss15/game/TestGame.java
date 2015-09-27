@@ -50,6 +50,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.ReceptiveSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.network.NetHudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
@@ -149,6 +150,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
+        engine.addSystem(new NetHudRenderSystem(assetManager, netClient, netServer, GameConstants.PRIORITY_HUD));
         
         engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS, assetManager));
         

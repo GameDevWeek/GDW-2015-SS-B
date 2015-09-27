@@ -202,6 +202,21 @@
                 "effect": "goal_bottomLeft"
             }
         }
+    },    
+    "ball_light_minus": {
+    	"meta": {},
+      	"components":{
+        	"Position": {},
+        	"PointLight": {
+        	    "distance": 350,
+        	    "static": true,
+        	    "color": "0078E8"
+        	    },
+        	 "Texture": {
+           		 "texture": "ball_minus",
+           		  "scale": 0.7
+          		}
+           }
     }
     
 }

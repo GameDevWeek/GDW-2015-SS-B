@@ -111,9 +111,8 @@ public class HudRenderSystem extends EntitySystem implements
 				font.setColor(Color.GREEN);
 				//font.draw(DrawUtil.batch, time,Gdx.graphics.getWidth() / 2 - 100, 50);
                 if(contdown321 > 0){
-                    float f = ( countdown - contdown321);
-                    goalFont.setScale( 1.5f + f);
-                    goalFont.draw(DrawUtil.batch, contdown321.toString() ,Gdx.graphics.getWidth()/2 -32 - 10*f , Gdx.graphics.getHeight() / 2 -32 - 10*f);
+                    goalFont.setScale(1);
+                    goalFont.draw(DrawUtil.batch, contdown321.toString() ,Gdx.graphics.getWidth()/2 -32  , Gdx.graphics.getHeight() / 2 -32);
                 }else{
                     goalFont.setScale(1);
                     goTimer = 1.0f;
@@ -123,7 +122,7 @@ public class HudRenderSystem extends EntitySystem implements
 			case GAME:
                 goTimer -= deltaTime;
                 if(goTimer>0){
-                    goalFont.draw(DrawUtil.batch, "GO!",Gdx.graphics.getWidth()/2 -32 , Gdx.graphics.getHeight() / 2 -20);
+                    goalFont.draw(DrawUtil.batch, "GO!",Gdx.graphics.getWidth()/2 -55 , Gdx.graphics.getHeight() / 2 -32);
                 }
 				font.setColor(Team.RED.color);
 				font.draw(DrawUtil.batch, scoreRed, 50, 50);
@@ -137,8 +136,7 @@ public class HudRenderSystem extends EntitySystem implements
                     displayedGoalMessage += deltaTime;
                     if(displayedGoalMessage <displayGoalMessage){
                         goalFont.setScale(0.2f + displayedGoalMessage);
-                        
-                        goalFont.draw(DrawUtil.batch,"GOAL!",Gdx.graphics.getWidth() / 2 - 50 - 100 * displayedGoalMessage, Gdx.graphics.getHeight() / 2 - 40 - 60 * displayedGoalMessage);
+                        goalFont.draw(DrawUtil.batch,"GOAL!",Gdx.graphics.getWidth() / 2 - 50 - 100 * displayedGoalMessage, Gdx.graphics.getHeight() / 2 - 38 * displayedGoalMessage);
                     }else{
                         displayedGoalMessage = 0;
                         goalShot = false;

@@ -3,5 +3,6 @@
     "Map 1": "data/maps/Map_one.tmx",
     "Map 2": "data/maps/Map_two.tmx",
     "Map Diag": "data/maps/Map Diag.tmx",
-    "RedBull": "data/maps/RedBull.tmx"
+    "RedBull": "data/maps/RedBull.tmx",
+    "PassageBattle": "data/maps/PassageBattle.tmx"
 }

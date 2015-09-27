@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="35" tilewidth="64" tileheight="64" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="47" height="43" tilewidth="64" tileheight="64" nextobjectid="29">
  <tileset firstgid="1" source="balls_and_magnets.tsx"/>
  <tileset firstgid="11" source="Bande_Tileset.tsx"/>
  <tileset firstgid="26" source="Goal_Spawn.tsx"/>
@@ -8,9 +8,45 @@
  <tileset firstgid="121" source="playgroundTileset.tsx"/>
  <tileset firstgid="133" source="Sanboden.tsx"/>
  <tileset firstgid="151" source="tileset_ground_SpawnsAndArea.tsx"/>
- <layer name="Kachelebene 1" width="45" height="35">
+ <layer name="Kachelebene 1" width="47" height="43">
   <data encoding="base64" compression="zlib">
-   eJztlDEKACAMxPoA/+6XXV0KWmghkCGblCDhdkTsR9bH2wod93Wec+6m809Ebog9U3dD5xlnWs8iGcSeqbuh84wzrWeRDGLP1N3QecaZ1rNIBrFn6m7oXLt/AFCZ+jY=
+   eJzt2MEKgzAQBNC9R6EU0tztB/feW/ulNVCpSEmyMetmcQ5zW8nThFF0RDQUZmTM1sQxLZc5j8JwZmtyZc6exe7n3AQTBO09BXYbdk6H1WQUtFvuGdh17Oj3dnsEe/929Hvaw5ldd0fuvrXt630PX8+98Fpt+7L+RL8zs9h95tlr9rvL2K2k1P7escZzx7WvBvYe888ez1TuzGn1u6f0ebfWM/FZln7Hadu37yLL71V8vx8f2G3Ypft9ELRb7hnYdezo93Z7BHv/dvyfSXvOYI+dxOm9wJitCdfyAc1jdjI=
   </data>
  </layer>
+ <layer name="Zusätze" width="47" height="43">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENACAQAzEqEOw/MCsgmojHXiCprjUAeEsP7Y7QLsAv9J1KZvrApZU+QEn6DlCTvgPAuQ2AGABI
+  </data>
+ </layer>
+ <objectgroup name="Magnets">
+  <object id="1" gid="9" x="0" y="1408.5" width="64" height="64"/>
+  <object id="2" gid="10" x="2944" y="1408" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Spawns">
+  <object id="11" gid="26" x="2432" y="2176.5" width="64" height="64"/>
+  <object id="12" gid="26" x="2431.5" y="1664.5" width="64" height="64"/>
+  <object id="13" gid="26" x="2432" y="1151.5" width="64" height="64"/>
+  <object id="14" gid="26" x="2432" y="639.5" width="64" height="64"/>
+  <object id="15" gid="27" x="513" y="639.5" width="64" height="64"/>
+  <object id="16" gid="27" x="513.5" y="1151.5" width="64" height="64"/>
+  <object id="17" gid="27" x="513" y="1662.5" width="64" height="64"/>
+  <object id="18" gid="27" x="514" y="2175.5" width="64" height="64"/>
+  <object id="19" gid="162" x="512.5" y="1408" width="64" height="64"/>
+  <object id="20" gid="161" x="2432.5" y="1409" width="64" height="64"/>
+  <object id="21" gid="154" x="1471.5" y="1408" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Goals">
+  <object id="23" x="61" y="1140" width="36" height="462">
+   <properties>
+    <property name="Entitytype" value="goal"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+  <object id="24" x="2908" y="1144" width="49" height="477">
+   <properties>
+    <property name="Entitytype" value="goal"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

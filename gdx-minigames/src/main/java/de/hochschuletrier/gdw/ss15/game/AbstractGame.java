@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss15.game;
 
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
 
@@ -48,6 +49,10 @@ public abstract class AbstractGame {
     }
 
     public void dispose() {
+        engine.removeAllEntities();
+        for (EntitySystem system : engine.getSystems()) {
+            engine.removeSystem(system);
+        }
         togglePhysixDebug.unregister();
     }
 

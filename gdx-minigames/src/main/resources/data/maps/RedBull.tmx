@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="41">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="64" tileheight="64" nextobjectid="52">
  <tileset firstgid="1" source="balls_and_magnets.tsx"/>
  <tileset firstgid="11" source="Bande_Tileset.tsx"/>
  <tileset firstgid="26" source="Goal_Spawn.tsx"/>
@@ -10,10 +10,13 @@
  <tileset firstgid="151" source="tileset_ground_SpawnsAndArea.tsx"/>
  <layer name="Kachelebene 1" width="55" height="27">
   <data encoding="base64" compression="zlib">
-   eJy9mE1PwzAMhnMfSBMfHWyXXfiXiBsa+wCGNnbgBr+URIo1y3Nsx017eDWtjVU/tZ3YnYQQrgRdK/dbatLYbhr1FrUm2kTt8v2XkVTyRdIm2+2IbvL1j6h51Gf+fY06ZXb87Gci6Tq3TlKXuQ7ZD6v2mWFJhNlgbYkL/OX+c/5Tdg/XbdSdkQ3sv3IsKZvE1YdN4pPi9RD1qLAlljWx3zNs2yDXlyUna9i8eWjJU8oG8eyUuFn81tYMxVVi0/hKcamtN+Cy1FNLNolPqjfrPonjZamn1myW/PRoyDysYaN8WGNxQb+R9u9VOPdJLdiAj/YBlNUiyjUXngmifQqcW3RdYv9GOhnZqH5DXU8E8uRh8vlIfF4x67Y5xvhdzoxsPw6/Wij5TPvE98I6rqesjdsfib9V3PvWlOqB5iQX/8R2Hy7nF42Ny2XPHHIkfAsD2zRc5iRXb9yeoNUb7i+xPPskx6cpxaLLvh/CuY40O22fxFw1/aLUo3j4PJLY6DzAMXlnAsw3ds/FzTkt2TDfmD2XZd7uk5N9668PW2l+ax23oflq5reh2DQ+Sz3CGYXta+a3IdkkPks9AgfYQ11hNjhLFwxfaRbzfPNqnZ/A9kQEbPjsxz3A2N8n4f3X9HIQI+77JO3DqGbK/ZaCPqTWruTjP/bkjzA=
+   eJy9mD1vAjEMhjN0o5VQP44Wli79l6hbRfloC4IydGt/aRMpFtaLEzshd8Mr4C4Wfs52Yt/IOXed0Y1yv6VGje3GXu9eS9DKaxPvvw6klC85raLdBnQbr396Tb2+4ueb1zGy4/9fMdG1OQivWbi6yLWPfli1jQzPIM5GazUu6bfk/zzxvYTrzuveyEb2uxhLZMtxST5a2XJ8uXg9ej0pbIFlCfZbgW3t8vUl5V4q/yxstXloyVNko3h2Stwsfmtr+uJKsWl8qbiU1htxWeqpJVuOLxWLkn2Sx8tST63ZLPlZoz7zsIQN+biG4qJ+I+zfC3fqk1qwER/2AchqEXJNM/9Jwj6Fzi1cF9i/mY5GNtSvK+uJSDV5GHw+gM8LYd06xpg/y4mR7afCrxYKPmOf+JFYJ/WUpXH7g/hbJT1vTaEeMCel+Ae2B3c+v2hsUi7XzCEH4JsZ2MbuPCelepP2BK3eeH/JVbNPSnyaQiy66PvenepIs9P2Sc5V0i/mepQavhrl2HAekJhq2JBv6J5LmnNasnG+IXuu1PzWKicvrb9L2FLzW+u49c1XMr/1xabxWeqRzihuXzK/9cmW47PUI3GQPdUVZ6OzdCbwpWYx7f1Cbr5rlZ/E9gIiNn728x5g6PeT9PxLejmKkfR+Evsw1ES531LUh5TapXz8B+PejGI=
   </data>
  </layer>
  <layer name="RedBull" width="55" height="27">
+  <properties>
+   <property name="Entitytype" value="ball_light_minus"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJztlNEKQBEUBMn//7NXnXZd3aelmVIaR9k4WoPX6WXsvKpLpp6zG1/dDfn+ZnM1SZy8ydXVvcm4Hnrl3r7mp+tp7Prt9n8SAADgJcYyVldrlHcuBZWJbN6lwJvU3rkUyKa9cymofnN+CK8cgGMCH9EA4Q==
   </data>

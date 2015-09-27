@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ss15.game.utils;
+﻿package de.hochschuletrier.gdw.ss15.game.utils;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;

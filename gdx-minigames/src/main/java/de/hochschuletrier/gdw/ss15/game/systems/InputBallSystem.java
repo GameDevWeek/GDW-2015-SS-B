@@ -64,6 +64,9 @@ public class InputBallSystem extends IteratingSystem {
                 ShootEvent.emit(entity, input.view);
                 input.notPullable = 0.5f;
                 InputPuffer.push = false;
+                
+                PullEvent.emitOff(entity);
+                input.pull = false;
             }
 
             if (input.pull != InputPuffer.pull && input.notPullable == 0) { // wechsel hat stattgefunden

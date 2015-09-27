@@ -21,7 +21,7 @@ public class InputManager {
 
 
     public static void init() {
-        if(controller == null && Controllers.getControllers().first() != null) {
+        if(controller == null && Controllers.getControllers() != null && Controllers.getControllers().size > 0) {
             InputManager.controller = Controllers.getControllers().first();
         }
         

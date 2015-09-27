@@ -1,8 +1,8 @@
 package de.hochschuletrier.gdw.ss15.game;
 
-import de.hochschuletrier.gdw.ss15.game.contactlisteners.ClientContactListener;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
+
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
@@ -14,10 +14,11 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.ClientContactListener;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.BallParticlesRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LightRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;

@@ -1,25 +1,17 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
-import box2dLight.ChainLight;
-import box2dLight.ConeLight;
-import box2dLight.PointLight;
-import com.badlogic.ashley.systems.IteratingSystem;
-import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
-import de.hochschuletrier.gdw.ss15.game.GameConstants;
-import de.hochschuletrier.gdw.ss15.game.components.PointLightComponent;
-import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
-
-import box2dLight.RayHandler;
-
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Filter;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
@@ -32,7 +24,11 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.events.ChangeAnimationStateEvent;
+import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.components.ChainLightComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PointLightComponent;
+import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 

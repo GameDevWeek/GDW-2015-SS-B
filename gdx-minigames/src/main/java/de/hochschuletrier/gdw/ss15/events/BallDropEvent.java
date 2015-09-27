@@ -4,8 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.SnapshotArray;
 
-import de.hochschuletrier.gdw.ss15.events.ShootEvent.Listener;
-
 public class BallDropEvent {
     public static interface Listener {
         void onDropEvent(Entity entity,Vector2 direction);

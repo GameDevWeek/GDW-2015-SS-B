@@ -1,6 +1,5 @@
 package de.hochschuletrier.gdw.ss14.game.contactlisteners;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;

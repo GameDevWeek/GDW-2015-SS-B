@@ -1,14 +1,15 @@
 package de.hochschuletrier.gdw.examples.netcode.game;
 
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
-import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
+import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.DatagramFactory;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.DestroyEntityDatagram;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.MoveIntentDatagram;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.PlayerDatagram;
-import java.awt.event.KeyEvent;
-import java.util.HashMap;
 
 /**
  *

@@ -1,9 +1,10 @@
 package de.hochschuletrier.gdw.commons.netcode.core;
 
-import de.hochschuletrier.gdw.commons.utils.chainprocessing.ChainJob;
-import de.hochschuletrier.gdw.commons.utils.chainprocessing.ChainWorker;
 import java.io.EOFException;
 import java.io.IOException;
+
+import de.hochschuletrier.gdw.commons.utils.chainprocessing.ChainJob;
+import de.hochschuletrier.gdw.commons.utils.chainprocessing.ChainWorker;
 
 /**
  * Read datagrams from a TCP connection

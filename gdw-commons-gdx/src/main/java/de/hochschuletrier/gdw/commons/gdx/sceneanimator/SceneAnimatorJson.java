@@ -1,10 +1,11 @@
 package de.hochschuletrier.gdw.commons.gdx.sceneanimator;
 
+import java.util.List;
+import java.util.Map;
+
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.text.TextAlign;
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  *

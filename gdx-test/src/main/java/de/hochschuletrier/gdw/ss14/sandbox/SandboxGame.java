@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ss14.sandbox;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Disposable;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 
 public abstract class SandboxGame implements InputProcessor, Disposable {

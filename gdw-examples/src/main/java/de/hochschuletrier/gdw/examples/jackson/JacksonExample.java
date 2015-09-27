@@ -1,10 +1,11 @@
 package de.hochschuletrier.gdw.examples.jackson;
 
-import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
-import de.hochschuletrier.gdw.commons.jackson.JacksonWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
+import de.hochschuletrier.gdw.commons.jackson.JacksonWriter;
 
 /**
  * An example use of the Jackson reader/writer

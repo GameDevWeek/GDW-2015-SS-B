@@ -1,11 +1,13 @@
 package de.hochschuletrier.gdw.commons.netcode.simple;
 
-import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 
 /**
  * Distribute datagrams to their respective handler methods.

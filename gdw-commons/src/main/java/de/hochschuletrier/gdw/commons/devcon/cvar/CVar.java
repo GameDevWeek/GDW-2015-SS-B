@@ -1,11 +1,13 @@
 package de.hochschuletrier.gdw.commons.devcon.cvar;
 
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.hochschuletrier.gdw.commons.devcon.CVarFlags;
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.completers.IConsoleCompleter;
-import java.util.ArrayList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Abstract console variable class

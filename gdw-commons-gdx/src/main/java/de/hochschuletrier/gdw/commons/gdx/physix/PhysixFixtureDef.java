@@ -1,13 +1,15 @@
 package de.hochschuletrier.gdw.commons.gdx.physix;
 
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
+import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+
+import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.Point;
-import java.util.List;
 
 /**
  *

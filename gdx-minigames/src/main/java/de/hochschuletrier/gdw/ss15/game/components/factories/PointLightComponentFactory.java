@@ -1,9 +1,10 @@
 package de.hochschuletrier.gdw.ss15.game.components.factories;
 
 
-import box2dLight.PointLight;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
+
+import box2dLight.PointLight;
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;

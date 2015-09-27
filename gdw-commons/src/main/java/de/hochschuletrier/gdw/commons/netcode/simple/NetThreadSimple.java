@@ -1,10 +1,12 @@
 package de.hochschuletrier.gdw.commons.netcode.simple;
 
-import de.hochschuletrier.gdw.commons.netcode.core.NetManager;
 import java.io.IOException;
 import java.nio.channels.ClosedSelectorException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hochschuletrier.gdw.commons.netcode.core.NetManager;
 
 /**
  * A thread class to run manager update and shut down the manager correctly when all is done.

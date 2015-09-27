@@ -1,9 +1,9 @@
 package de.hochschuletrier.gdw.ss15.game.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 
 import box2dLight.PointLight;
-import com.badlogic.gdx.utils.Pool;
 
 
 /**

@@ -1,6 +1,5 @@
 package de.hochschuletrier.gdw.commons.tiled;
 
-import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,7 @@ import de.hochschuletrier.gdw.commons.tiled.tmx.TmxLayer;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxLayerBase;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxObject;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxObjectGroup;
+import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 
 /**
  * A layer which can contain either tiles or objects

@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.commons.gdx.devcon;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+
 import de.hochschuletrier.gdw.commons.devcon.ConsoleEditor;
 
 /**

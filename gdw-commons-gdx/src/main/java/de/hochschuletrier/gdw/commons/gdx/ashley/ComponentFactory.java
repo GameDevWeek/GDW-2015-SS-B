@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.commons.gdx.ashley;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 

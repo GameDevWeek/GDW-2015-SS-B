@@ -1,12 +1,12 @@
 package de.hochschuletrier.gdw.commons.tiled;
 
-import de.hochschuletrier.gdw.commons.utils.SafeProperties;
-import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import java.util.HashMap;
 
+import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxTile;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxTileSet;
+import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 
 /**
  * A tile set

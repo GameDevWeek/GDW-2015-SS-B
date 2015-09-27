@@ -1,11 +1,11 @@
 package de.hochschuletrier.gdw.commons.gdx.ashley;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
-
-import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Imagine a SortedIteratingSystem that you can add SubSystems to.

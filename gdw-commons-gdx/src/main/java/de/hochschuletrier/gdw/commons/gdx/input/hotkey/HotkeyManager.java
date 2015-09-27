@@ -1,9 +1,10 @@
 package de.hochschuletrier.gdw.commons.gdx.input.hotkey;
 
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 
 /**
  *

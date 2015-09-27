@@ -15,8 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
-import de.hochschuletrier.gdw.commons.gdx.assets.AssetLoaderParametersX;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended.PlayMode;
+import de.hochschuletrier.gdw.commons.gdx.assets.AssetLoaderParametersX;
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 
 public class AnimationExtendedLoader extends

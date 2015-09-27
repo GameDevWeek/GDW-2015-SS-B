@@ -1,14 +1,16 @@
 package de.hochschuletrier.gdw.commons.gdx.audio;
 
+import static org.lwjgl.openal.AL10.AL_POSITION;
+import static org.lwjgl.openal.AL10.alListener3f;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.ReflectionPool;
-import java.util.ArrayList;
-import java.util.Iterator;
-import static org.lwjgl.openal.AL10.AL_POSITION;
-import static org.lwjgl.openal.AL10.alListener3f;
 
 /**
  * Like a speaker in the world, can be moved.

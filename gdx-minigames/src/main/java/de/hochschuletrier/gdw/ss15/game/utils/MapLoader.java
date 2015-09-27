@@ -1,14 +1,16 @@
 package de.hochschuletrier.gdw.ss15.game.utils;
 
-import box2dLight.ChainLight;
-import box2dLight.RayHandler;
-import de.hochschuletrier.gdw.ss15.game.contactlisteners.GoalTrigger;
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
+import box2dLight.ChainLight;
+import box2dLight.RayHandler;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
@@ -29,10 +31,9 @@ import de.hochschuletrier.gdw.ss15.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss15.game.components.SetupComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.GoalTrigger;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.systems.LightRenderSystem;
-import java.util.ArrayList;
-import java.util.function.Consumer;
 
 /**
  *

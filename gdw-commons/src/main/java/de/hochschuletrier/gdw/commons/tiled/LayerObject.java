@@ -1,12 +1,12 @@
 package de.hochschuletrier.gdw.commons.tiled;
 
-import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import java.util.ArrayList;
 
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxObject;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxPointList;
 import de.hochschuletrier.gdw.commons.utils.Point;
+import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 
 /**
  * An object read from an object group layer

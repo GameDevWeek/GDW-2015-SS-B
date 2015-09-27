@@ -1,5 +1,7 @@
 package de.hochschuletrier.gdw.ss15.game.manager;
 
+import java.util.Random;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
@@ -7,7 +9,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
+import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
@@ -17,10 +21,6 @@ import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
-import de.hochschuletrier.gdw.ss15.events.*;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayerSpawnManager implements GoalEvent.Listener,
         ChangeGameStateEvent.Listener {

@@ -1,9 +1,13 @@
 package de.hochschuletrier.gdw.ss15.game.systems;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
@@ -11,8 +15,6 @@ import de.hochschuletrier.gdw.ss15.events.SoundEvent;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GameStateSystem extends EntitySystem implements ChangeGameStateEvent.Listener,
         GoalEvent.Listener {

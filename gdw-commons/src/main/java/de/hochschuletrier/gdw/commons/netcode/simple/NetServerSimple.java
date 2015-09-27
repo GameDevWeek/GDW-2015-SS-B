@@ -1,16 +1,18 @@
 package de.hochschuletrier.gdw.commons.netcode.simple;
 
-import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
-import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
-import de.hochschuletrier.gdw.commons.netcode.core.NetManagerServer;
-import de.hochschuletrier.gdw.commons.netcode.core.NetDatagramPool;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
+import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
+import de.hochschuletrier.gdw.commons.netcode.core.NetDatagramPool;
+import de.hochschuletrier.gdw.commons.netcode.core.NetManagerServer;
 
 /**
  * A helper class to help avoid writing the same handler code for every game.

@@ -1,5 +1,9 @@
 package de.hochschuletrier.gdw.commons.gdx.physix;
 
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.function.Consumer;
+
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -7,10 +11,8 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.function.Consumer;
 
 /**
  *

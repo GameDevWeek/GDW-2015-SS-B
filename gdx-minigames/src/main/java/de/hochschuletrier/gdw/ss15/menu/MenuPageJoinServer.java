@@ -1,17 +1,10 @@
 package de.hochschuletrier.gdw.ss15.menu;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
-import de.hochschuletrier.gdw.ss15.events.CreateServerEvent;
-import de.hochschuletrier.gdw.ss15.events.DisconnectEvent;
 import de.hochschuletrier.gdw.ss15.events.JoinServerEvent;
-import de.hochschuletrier.gdw.ss15.events.TestGameEvent;
-import de.hochschuletrier.gdw.ss15.game.GameConstants;
-import java.util.HashMap;
 
 /**
  *

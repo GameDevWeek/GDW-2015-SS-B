@@ -1,13 +1,14 @@
 package de.hochschuletrier.gdw.commons.utils;
 
 import java.util.HashMap;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Alternative Properties storage to get some additional types without the need to manually check for parse exceptions

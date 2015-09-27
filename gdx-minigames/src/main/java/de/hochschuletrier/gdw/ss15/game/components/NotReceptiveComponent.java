@@ -8,12 +8,14 @@ public class NotReceptiveComponent extends Component implements Pool.Poolable {
     public float time;
     public float remainingTime;
     public boolean isStunned;
+    public boolean cantBeStunned;
     
     @Override
     public void reset() {
         time =-1;
         remainingTime =-1;
         isStunned=false;
+        cantBeStunned=false;
     }
 
 }

@@ -4,5 +4,6 @@
     "Map 2": "data/maps/Map_two.tmx",
     "Map Diag": "data/maps/Map Diag.tmx",
     "RedBull": "data/maps/RedBull.tmx",
-    "PassageBattle": "data/maps/PassageBattle.tmx"
+    "PassageBattle": "data/maps/PassageBattle.tmx",
+    "7v7":"data/maps/Kreis.tmx"
 }

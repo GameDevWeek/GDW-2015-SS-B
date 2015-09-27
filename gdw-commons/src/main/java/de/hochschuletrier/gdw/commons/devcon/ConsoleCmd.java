@@ -1,9 +1,11 @@
 package de.hochschuletrier.gdw.commons.devcon;
 
-import de.hochschuletrier.gdw.commons.devcon.completers.IConsoleCompleter;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hochschuletrier.gdw.commons.devcon.completers.IConsoleCompleter;
 
 /**
  * Abstract class for a console command

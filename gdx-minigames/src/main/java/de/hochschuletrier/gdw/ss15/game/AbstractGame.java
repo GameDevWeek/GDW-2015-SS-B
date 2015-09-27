@@ -1,8 +1,8 @@
 package de.hochschuletrier.gdw.ss15.game;
 
-import de.hochschuletrier.gdw.ss15.game.contactlisteners.ClientContactListener;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
+
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
 import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
@@ -14,10 +14,11 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.components.factories.EntityFactoryParam;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.ClientContactListener;
 import de.hochschuletrier.gdw.ss15.game.systems.AnimationRenderSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.BallParticlesRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LightRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.StateRelatedAnimationsRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.TextureRenderSystem;
@@ -29,7 +30,7 @@ public abstract class AbstractGame {
     protected final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", TestGame.class);
     protected final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
     protected final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
-    protected final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
+    protected final CVarBool physixDebug = new CVarBool("physix_debug", !Main.IS_RELEASE, 0, "Draw physix debug");
     protected final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
     private String mapName;
     private final boolean isClient;
@@ -54,6 +55,7 @@ public abstract class AbstractGame {
         this.mapName = mapName;
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
+        physixDebugRenderSystem.setProcessing(physixDebug.get());
         addSystems(assetManager);
         addContactListeners();
         entityFactory.init(engine, assetManager);

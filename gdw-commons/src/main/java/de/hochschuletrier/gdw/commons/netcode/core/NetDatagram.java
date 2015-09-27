@@ -1,7 +1,8 @@
 package de.hochschuletrier.gdw.commons.netcode.core;
 
-import de.hochschuletrier.gdw.commons.utils.pool.Poolable;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import de.hochschuletrier.gdw.commons.utils.pool.Poolable;
 
 /**
  * The most basic datagram

@@ -1,12 +1,17 @@
 package de.hochschuletrier.gdw.ss15.game.manager;
 
+import java.util.Random;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
+import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
+import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
@@ -16,10 +21,6 @@ import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
-import de.hochschuletrier.gdw.ss15.events.*;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayerSpawnManager implements GoalEvent.Listener,
         ChangeGameStateEvent.Listener {
@@ -29,7 +30,7 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
     private final ImmutableArray<Entity> players;
     private final PooledEngine engine;
     private final int teamCounts[] = new int[2];
-    private final Random random = new Random();
+    private final Random random = new Random(System.currentTimeMillis());
 
     public PlayerSpawnManager(PooledEngine engine) {
         this.engine = engine;
@@ -101,7 +102,7 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
             PlayerComponent player = ComponentMappers.player
                     .get(playerEntity);
             if (player.hasBall)
-                ChangeBallOwnershipEvent.emit(null);
+                BallDropEvent.emit(playerEntity, Vector2.Zero);
 
         }
         engine.removeEntity(playerEntity);
@@ -113,9 +114,11 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
             Entity spawnEntity = getPlayerSpawn(player.getId());
             if(spawnEntity != null) {
                 PhysixBodyComponent physixBody=player.getComponent(PhysixBodyComponent.class);
+                
                 physixBody.setX(spawnEntity.getComponent(PositionComponent.class).x);
                 physixBody.setY(spawnEntity.getComponent(PositionComponent.class).y);
                 physixBody.setLinearVelocity(0,0);
+                
                 player.getComponent(InputBallComponent.class).isStunned=isStunning;
             }
         }

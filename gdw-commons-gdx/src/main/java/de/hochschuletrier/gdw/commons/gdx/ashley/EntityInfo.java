@@ -1,8 +1,9 @@
 package de.hochschuletrier.gdw.commons.gdx.ashley;
 
+import java.util.Map;
+
 import de.hochschuletrier.gdw.commons.jackson.JacksonMap;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
-import java.util.Map;
 
 /**
  *

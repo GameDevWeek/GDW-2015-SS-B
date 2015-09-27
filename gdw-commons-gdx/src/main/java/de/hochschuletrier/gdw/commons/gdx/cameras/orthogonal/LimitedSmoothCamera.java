@@ -1,6 +1,6 @@
 package de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal;
 
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 /**
  * A smooth camera controller that stays within the set bounds.

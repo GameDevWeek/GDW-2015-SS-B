@@ -1,9 +1,14 @@
 package de.hochschuletrier.gdw.examples.netcode.game;
 
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import de.hochschuletrier.gdw.commons.utils.QuietUtils;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 /**
  * Ignore what's in here, it's just a quick hack to get the app running and drawing.

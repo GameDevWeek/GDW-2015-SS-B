@@ -6,13 +6,15 @@
 
 package de.hochschuletrier.gdw.ss15.game.components.factories;
 
+import java.util.HashMap;
+
 import com.badlogic.ashley.core.Entity;
+
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import de.hochschuletrier.gdw.ss15.game.components.StateRelatedAnimationsComponent;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
-import java.util.HashMap;
 
 /**
  *

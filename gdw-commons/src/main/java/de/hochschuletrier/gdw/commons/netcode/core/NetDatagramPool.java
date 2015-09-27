@@ -1,9 +1,9 @@
 package de.hochschuletrier.gdw.commons.netcode.core;
 
+import java.util.HashMap;
+
 import de.hochschuletrier.gdw.commons.utils.pool.Pool;
 import de.hochschuletrier.gdw.commons.utils.pool.ReflectionPool;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Pool datagrams for better performance and memory efficiency.

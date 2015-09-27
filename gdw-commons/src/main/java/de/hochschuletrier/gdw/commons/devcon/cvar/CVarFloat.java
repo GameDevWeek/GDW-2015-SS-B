@@ -1,7 +1,8 @@
 package de.hochschuletrier.gdw.commons.devcon.cvar;
 
-import de.hochschuletrier.gdw.commons.utils.QuietUtils;
 import java.util.Locale;
+
+import de.hochschuletrier.gdw.commons.utils.QuietUtils;
 
 /**
  *

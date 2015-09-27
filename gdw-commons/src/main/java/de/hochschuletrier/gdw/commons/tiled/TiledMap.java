@@ -1,21 +1,23 @@
 package de.hochschuletrier.gdw.commons.tiled;
 
-import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXBException;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
-import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 
+import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxDataConverter;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxLayer;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxLayerBase;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxMap;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxObjectGroup;
 import de.hochschuletrier.gdw.commons.tiled.tmx.TmxTileSet;
+import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 
 /**
  * A TilED map loader

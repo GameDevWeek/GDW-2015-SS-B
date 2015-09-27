@@ -1,48 +1,56 @@
 package de.hochschuletrier.gdw.ss15.game.input;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.InputAdapter;
 
-import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
-import de.hochschuletrier.gdw.ss15.events.GoalEvent;
-import de.hochschuletrier.gdw.ss15.game.GameConstants;
-import de.hochschuletrier.gdw.ss15.game.data.GameState;
-import de.hochschuletrier.gdw.ss15.game.data.Team;
+public class InputKeyboard extends InputAdapter {
+    
+    private static boolean up;
+    private static boolean down;
+    private static boolean left;
+    private static boolean right;
 
-public class InputKeyboard implements InputProcessor {
 
+    private void updateDirections() {
+        if(up == down)
+            InputPuffer.vertical = 0;
+        else if(up)
+            InputPuffer.vertical = -1;
+        else if(down)
+            InputPuffer.vertical = 1;
+            
+        if(left == right)
+            InputPuffer.horizontal = 0;
+        else if(left)
+            InputPuffer.horizontal = -1;
+        else if(right)
+            InputPuffer.horizontal = 1;
+    }
+    
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
-			case Input.Keys.W: InputPuffer.vertical += -1.0f; break;
-			case Input.Keys.S: InputPuffer.vertical += 1.0f; break;
-			case Input.Keys.A: InputPuffer.horizontal += -1.0f; break;
-			case Input.Keys.D: InputPuffer.horizontal += 1.0f; break;
-			
-			/* Ausprobieren */
-            case Input.Keys.I: GoalEvent.emit(Team.RED); break;
-			case Input.Keys.O: ChangeGameStateEvent.emit(GameState.GAME, GameConstants.GAME_TIME); break;
-			case Input.Keys.P: GoalEvent.emit(Team.BLUE); break;
-
+			case Input.Keys.W: up = true; break;
+			case Input.Keys.S: down = true; break;
+			case Input.Keys.A: left = true; break;
+			case Input.Keys.D: right = true; break;
+            default: return true;
 		}
+        updateDirections();
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
 		switch (keycode) {
-			case Input.Keys.W: InputPuffer.vertical += 1.0f; break;
-			case Input.Keys.S: InputPuffer.vertical += -1.0f; break;
-			case Input.Keys.A: InputPuffer.horizontal += 1.0f; break;
-			case Input.Keys.D: InputPuffer.horizontal += -1.0f; break;
+			case Input.Keys.W: up = false; break;
+			case Input.Keys.S: down = false; break;
+			case Input.Keys.A: left = false; break;
+			case Input.Keys.D: right = false; break;
+            default: return true;
 		}
+        updateDirections();
 		return true;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -67,23 +75,4 @@ public class InputKeyboard implements InputProcessor {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

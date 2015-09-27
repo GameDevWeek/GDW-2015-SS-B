@@ -2,20 +2,15 @@ package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss15.events.BallDropEvent;
-import de.hochschuletrier.gdw.ss15.events.PullEvent;
 import de.hochschuletrier.gdw.ss15.game.ComponentMappers;
-import de.hochschuletrier.gdw.ss15.game.data.Team;
 import de.hochschuletrier.gdw.ss15.game.components.BallDropComponent;
-import de.hochschuletrier.gdw.ss15.game.components.InputBallComponent;
-import de.hochschuletrier.gdw.ss15.game.components.NotReceptiveComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
+import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class PlayerContactListener extends PhysixContactAdapter {
     private final PooledEngine engine;

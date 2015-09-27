@@ -6,11 +6,13 @@
 
 package de.hochschuletrier.gdw.ss15.game.components;
 
+import java.util.Map;
+
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.ss15.game.data.EntityAnimationState;
-import java.util.Map;
 
 public class StateRelatedAnimationsComponent extends Component implements Pool.Poolable {
 

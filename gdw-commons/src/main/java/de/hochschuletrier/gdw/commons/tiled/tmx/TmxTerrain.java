@@ -2,7 +2,6 @@ package de.hochschuletrier.gdw.commons.tiled.tmx;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import de.hochschuletrier.gdw.commons.utils.SafeProperties;
 
 /**
  *

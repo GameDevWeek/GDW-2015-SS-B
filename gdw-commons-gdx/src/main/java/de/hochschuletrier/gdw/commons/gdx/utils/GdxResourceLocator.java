@@ -1,12 +1,14 @@
 package de.hochschuletrier.gdw.commons.gdx.utils;
 
-import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import de.hochschuletrier.gdw.commons.resourcelocator.IResourceLocator;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
+import de.hochschuletrier.gdw.commons.resourcelocator.IResourceLocator;
 
 /**
  *

@@ -1,31 +1,31 @@
 {
     "textStyles" : {
-        "title": { "color": "FF0000", "font": "verdana_32", "align": "left" },
-        "text": { "color": "0000FF", "font": "verdana_32", "align": "right" }
+        "title": { "color": "FF0000", "font": "railway_24", "align": "left" },
+        "text": { "color": "0000FF", "font": "railway_24", "align": "right" }
     },
     
     "paths" : {
         "title-text": {
             "type": "linear",
             "destinations": [
-                {"x": 50, "y": 120, "speed": 25 },
-                {"x": 350, "y": 700, "speed": 25 }
+                {"x": 50, "y": 120, "speed": 50 },
+                {"x": 350, "y": 700, "speed": 50 }
             ]
         },
         
         "text-text": {
             "type": "linear",
             "destinations": [
-                {"x": 900, "y": 120, "speed": 25 },
-                {"x": 600, "y": 700, "speed": 25 }
+                {"x": 900, "y": 120, "speed": 50 },
+                {"x": 600, "y": 700, "speed": 50 }
             ]
         },
         
         "Gamename": {
             "type": "linear",
             "destinations": [
-                {"x": 350, "y": 120, "speed": 25 },
-                {"x": 350, "y": 700, "speed": 25 }
+                {"x": 350, "y": 120, "speed": 50 },
+                {"x": 350, "y": 700, "speed": 50 }
             ]
         },
         
@@ -64,16 +64,16 @@
         "GDW": {
             "type": "linear",
             "destinations": [
-                {"x": 300, "y": 120, "speed": 25 },
-                {"x": 300, "y": 700, "speed": 25 }
+                {"x": 300, "y": 120, "speed": 50 },
+                {"x": 300, "y": 700, "speed": 50 }
             ]
         },
         
         "Ende": {
             "type": "linear",
             "destinations": [
-                {"x": 500, "y": 120, "speed": 15 },
-                {"x": 500, "y": 700, "speed": 15 }
+                {"x": 500, "y": 120, "speed": 30 },
+                {"x": 500, "y": 700, "speed": 30 }
             ]
         }
     },
@@ -83,52 +83,65 @@
         	"layer": 1,
             "time": 0,
             "items" : [
-                { "type": "text", "path" : "GDW", "style" : "title", "text": "Game Development Week", "delay": "0" },
-                { "type": "text", "path" : "Gamename", "style" : "title", "text": "BALLS OF STEEL", "delay": "1000" },
+                { "type": "text", "path" : "GDW", "style" : "title", "group": "title", "text": "Game Development Week", "delay": "0" },
+                { "type": "text", "path" : "Gamename", "style" : "title", "group": "title", "text": "Balls of Steel", "delay": "1000" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Organisation", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Organisation", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Santo Pfingsten", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Meier", "delay": "1100" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Gamelogic", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Gamelogic", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Thierbach", "delay": "1100" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Özkan", "delay": "1100" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Isik Oezkan", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Bennet Pieper", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Input", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Input", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Tobias Meier", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Erik Antes", "delay": "1100" },
 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Menu/HUD", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Menu/HUD", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Marcel Schillen", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Rendering", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Rendering", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Moritz Goertz", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Physics", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Max Groß", "delay": "1100" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Physics", "delay": "2000" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Max Gross", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Netcode", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Netcode", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Santo Pfingsten", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Level Design", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": " Niklas Schütze", "delay": "1100" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Level Design", "delay": "2000" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": " Niklas Schuetze", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Erik Antes", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Audio Design", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Özgür Tastekin", "delay": "1100" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Audio Design", "delay": "2000" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Oezguer Tastekin", "delay": "1100" },
  
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Graphic Design", "delay": "2000" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Graphic Design", "delay": "2000" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Anja Regnery", "delay": "1100" },
                 { "type": "text", "path" : "text-text", "style" : "text", "text": "Natalie Carl", "delay": "1100" },
                 
-                { "type": "text", "path" : "title-text", "style" : "title", "text": "Credits", "delay": "2000" },
-                { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schütze", "delay": "1100" },
+                { "type": "text", "path" : "title-text", "style" : "title", "group": "title", "text": "Credits", "delay": "2000" },
+                { "type": "text", "path" : "text-text", "style" : "text", "text": "Niklas Schuetze", "delay": "1100" },
                 
                 { "type": "text", "path" : "Ende", "style" : "text", "text": "Ende", "delay": "20000" }
             ],
             
             "animations": [
+                { "time": 0, "animation": "untype_instant", "group": "title" },
+                { "time": 1000, "animation": "construct", "animationTime": 1000, "group": "title",
+                    "minRadius" : 100, "maxRadius" : 300,
+                    "minAngle" : 45, "maxAngle" : 135,
+                    "minCurveAngle": 45, "maxCurveAngle": 135
+                },
+                { "time": 0, "animation": "untype_instant" },
+                { "time": 1000, "animation": "construct_type", "animationTime": 100,
+                    "minRadius" : 100, "maxRadius" : 100,
+                    "minAngle" : -35, "maxAngle" : -35,
+                    "minCurveAngle": 25, "maxCurveAngle": 55,
+                    "trailMaxSteps": 3, "trailStepTime": 50
+                },
     			{ "time": 0, "animation": "fade_in", "animationTime": 1000, "group": "*" }
     		]
     		

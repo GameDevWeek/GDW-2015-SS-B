@@ -1,6 +1,9 @@
 package de.hochschuletrier.gdw.ss15.states;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.graphics.Color;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.transition.FadeTransition;
@@ -12,7 +15,6 @@ import de.hochschuletrier.gdw.ss15.datagrams.ConnectDatagram;
 import de.hochschuletrier.gdw.ss15.datagrams.DatagramFactory;
 import de.hochschuletrier.gdw.ss15.datagrams.WorldSetupDatagram;
 import de.hochschuletrier.gdw.ss15.game.TestGame;
-import java.io.IOException;
 
 /**
  * Connecting to server state

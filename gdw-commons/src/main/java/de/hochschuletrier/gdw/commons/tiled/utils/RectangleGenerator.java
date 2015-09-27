@@ -1,11 +1,11 @@
 package de.hochschuletrier.gdw.commons.tiled.utils;
 
+import java.util.function.Consumer;
+
 import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.TileInfo;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.commons.utils.Rectangle;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /**
  * Tries to combine certain tiles into larger rectangles.

@@ -1,12 +1,13 @@
 package de.hochschuletrier.gdw.commons.netcode.core;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.SocketAddress;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

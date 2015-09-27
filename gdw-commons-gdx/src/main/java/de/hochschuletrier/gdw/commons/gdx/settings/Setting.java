@@ -1,7 +1,8 @@
 package de.hochschuletrier.gdw.commons.gdx.settings;
 
-import com.badlogic.gdx.Preferences;
 import java.util.HashSet;
+
+import com.badlogic.gdx.Preferences;
 
 /**
  *

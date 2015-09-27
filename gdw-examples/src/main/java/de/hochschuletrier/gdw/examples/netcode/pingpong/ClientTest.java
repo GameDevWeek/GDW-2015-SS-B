@@ -1,8 +1,8 @@
 package de.hochschuletrier.gdw.examples.netcode.pingpong;
 
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
-import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetClientSimple;
+import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.utils.QuietUtils;
 import de.hochschuletrier.gdw.examples.netcode.pingpong.datagrams.ChatDatagram;
 import de.hochschuletrier.gdw.examples.netcode.pingpong.datagrams.DatagramFactory;

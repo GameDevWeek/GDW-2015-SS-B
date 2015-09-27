@@ -7,6 +7,7 @@
 package de.hochschuletrier.gdw.ss15.events;
 
 import com.badlogic.gdx.utils.SnapshotArray;
+
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 /**

@@ -1,13 +1,14 @@
 package de.hochschuletrier.gdw.commons.gdx.sceneanimator.text;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
+
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.Animation;
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.Item;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *

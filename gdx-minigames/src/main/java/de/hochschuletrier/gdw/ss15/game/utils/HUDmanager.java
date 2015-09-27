@@ -2,8 +2,7 @@ package de.hochschuletrier.gdw.ss15.game.utils;
 
 
 import java.awt.Font;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import de.hochschuletrier.gdw.ss15.game.data.Team;
 
 public class HUDmanager {

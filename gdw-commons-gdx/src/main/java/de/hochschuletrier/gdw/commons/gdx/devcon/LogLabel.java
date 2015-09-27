@@ -1,9 +1,10 @@
 package de.hochschuletrier.gdw.commons.gdx.devcon;
 
-import ch.qos.logback.classic.Level;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+
+import ch.qos.logback.classic.Level;
 
 /**
  * Extended Label class containing a log-level

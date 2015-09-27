@@ -1,7 +1,8 @@
 package de.hochschuletrier.gdw.commons.gdx.sceneanimator;
 
-import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
+
+import com.badlogic.gdx.math.Vector2;
 
 /**
  *

@@ -1,8 +1,14 @@
 package de.hochschuletrier.gdw.ss14.game;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.*;
-import de.hochschuletrier.gdw.ss14.game.components.*;
+
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
+import de.hochschuletrier.gdw.ss14.game.components.AnimationComponent;
+import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MagneticInfluenceComponent;
+import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 
 public class ComponentMappers {
     public static final ComponentMapper<PositionComponent> position = ComponentMapper.getFor(PositionComponent.class);

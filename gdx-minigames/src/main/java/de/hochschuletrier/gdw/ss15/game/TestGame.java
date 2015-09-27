@@ -4,6 +4,9 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleShader.Inputs;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -14,40 +17,42 @@ import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
-import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss15.game.components.PointLightComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TeamComponent;
 import de.hochschuletrier.gdw.ss15.game.components.TriggerComponent;
+import de.hochschuletrier.gdw.ss15.game.contactlisteners.BallListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.input.InputManager;
+import de.hochschuletrier.gdw.ss15.game.input.InputManager.InputStates;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
+import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.systems.BallDropSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.GoalEffectRenderSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.MagneticFieldRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MovementSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.PullSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.ReceptiveSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientSendInputSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetClientUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerSendSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.network.NetServerUpdateSystem;
 import de.hochschuletrier.gdw.ss15.game.utils.MapLoader;
-import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
-import de.hochschuletrier.gdw.ss15.game.systems.GameStateSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.GoalEffectRenderSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.MagneticFieldRenderSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.PlayerAnimationSystem;
-import de.hochschuletrier.gdw.ss15.game.systems.RenderBallAtPlayerSystem;
 
 public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.Listener{
     private final NetServerSimple netServer;
@@ -74,6 +79,8 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         map = loadMap(mapName);
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
+        
+        InputManager.init();
     }
 
     @Override

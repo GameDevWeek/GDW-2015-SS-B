@@ -1,25 +1,25 @@
 package de.hochschuletrier.gdw.commons.gdx.sceneanimator;
 
-import de.hochschuletrier.gdw.commons.gdx.sceneanimator.text.TextItem;
-import de.hochschuletrier.gdw.commons.gdx.sceneanimator.text.TextStyle;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
-import de.hochschuletrier.gdw.commons.gdx.sceneanimator.sprite.AnimationItem;
-import de.hochschuletrier.gdw.commons.gdx.sceneanimator.sprite.TextureItem;
-import de.hochschuletrier.gdw.commons.gdx.utils.ColorUtil;
-import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+
+import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
+import de.hochschuletrier.gdw.commons.gdx.sceneanimator.sprite.AnimationItem;
+import de.hochschuletrier.gdw.commons.gdx.sceneanimator.sprite.TextureItem;
+import de.hochschuletrier.gdw.commons.gdx.sceneanimator.text.TextItem;
+import de.hochschuletrier.gdw.commons.gdx.sceneanimator.text.TextStyle;
+import de.hochschuletrier.gdw.commons.gdx.utils.ColorUtil;
+import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 
 /**
  * This is alpha, some things might not work yet..

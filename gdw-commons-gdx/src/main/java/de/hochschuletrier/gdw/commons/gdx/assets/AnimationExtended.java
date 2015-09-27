@@ -3,10 +3,11 @@ package de.hochschuletrier.gdw.commons.gdx.assets;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 
 public class AnimationExtended {
 

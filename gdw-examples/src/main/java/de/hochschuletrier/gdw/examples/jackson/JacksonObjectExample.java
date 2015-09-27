@@ -1,9 +1,10 @@
 package de.hochschuletrier.gdw.examples.jackson;
 
-import de.hochschuletrier.gdw.commons.jackson.JacksonList;
-import de.hochschuletrier.gdw.commons.jackson.JacksonMap;
 import java.util.List;
 import java.util.Map;
+
+import de.hochschuletrier.gdw.commons.jackson.JacksonList;
+import de.hochschuletrier.gdw.commons.jackson.JacksonMap;
 
 /**
  * An example object for the Jackson reader/writer

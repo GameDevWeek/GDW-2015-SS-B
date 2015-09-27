@@ -1,5 +1,7 @@
 package de.hochschuletrier.gdw.examples.netcode.game;
 
+import java.util.ArrayList;
+
 import de.hochschuletrier.gdw.commons.netcode.core.NetConnection;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetDatagramHandler;
 import de.hochschuletrier.gdw.commons.netcode.simple.NetServerSimple;
@@ -7,7 +9,6 @@ import de.hochschuletrier.gdw.examples.netcode.game.datagrams.DatagramFactory;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.DestroyEntityDatagram;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.MoveIntentDatagram;
 import de.hochschuletrier.gdw.examples.netcode.game.datagrams.PlayerDatagram;
-import java.util.ArrayList;
 
 /**
  *

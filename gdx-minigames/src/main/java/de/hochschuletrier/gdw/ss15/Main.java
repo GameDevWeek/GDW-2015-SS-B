@@ -1,5 +1,13 @@
 package de.hochschuletrier.gdw.ss15;
 
+import java.io.IOException;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.PosixParser;
+
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,10 +19,12 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
@@ -25,8 +35,8 @@ import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundInstance;
-import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
+import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
@@ -50,19 +60,13 @@ import de.hochschuletrier.gdw.ss15.states.ConnectingState;
 import de.hochschuletrier.gdw.ss15.states.GameplayState;
 import de.hochschuletrier.gdw.ss15.states.LoadGameState;
 import de.hochschuletrier.gdw.ss15.states.MainMenuState;
-import java.io.IOException;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.PosixParser;
 
 /**
  *
  * @author Santo Pfingsten
  */
 public class Main extends StateBasedGame
-    implements DisconnectEvent.Listener, TestGameEvent.Listener,
+        implements DisconnectEvent.Listener, TestGameEvent.Listener,
         CreateServerEvent.Listener, JoinServerEvent.Listener {
 
     public static CommandLine cmdLine;
@@ -81,7 +85,7 @@ public class Main extends StateBasedGame
     public static final InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
-    private final Hotkey toggleFullscreen = new Hotkey(()->ScreenUtil.toggleFullscreen(), Input.Keys.ENTER, HotkeyModifier.ALT);
+    private final Hotkey toggleFullscreen = new Hotkey(() -> ScreenUtil.toggleFullscreen(), Input.Keys.ENTER, HotkeyModifier.ALT);
 
     public Main() {
         super(new BaseGameState());
@@ -150,13 +154,15 @@ public class Main extends StateBasedGame
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
-        
+
         TestGameEvent.register(this);
         DisconnectEvent.register(this);
         CreateServerEvent.register(this);
         JoinServerEvent.register(this);
-        
+
         toggleFullscreen.register();
+        Pixmap pm = new Pixmap(Gdx.files.internal("data/ui/cursor.png"));
+        Gdx.input.setCursorImage(pm, 0, 0);
     }
 
     private void onLoadComplete() {
@@ -202,7 +208,6 @@ public class Main extends StateBasedGame
         console.executeCmdQueue();
         SoundEmitter.updateGlobal();
         MusicManager.update(delta);
-        MusicManager.setMuted(true);//fixme: setting in menu
 
         preRender();
     }
@@ -210,12 +215,6 @@ public class Main extends StateBasedGame
     @Override
     protected void postUpdate(float delta) {
         postRender();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        SoundEmitter.setListenerPosition(width / 2, height / 2, 10, emitterMode.get());
     }
 
     public void onEmitterModeChanged(CVar cvar) {
@@ -240,7 +239,7 @@ public class Main extends StateBasedGame
             changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
         }
     }
-    
+
     @Override
     public void onDisconnectEvent() {
         if (!isTransitioning()) {
@@ -265,18 +264,17 @@ public class Main extends StateBasedGame
         if (!isTransitioning()) {
             try {
                 ConnectingState connectingState = new ConnectingState(assetManager, server, port, userName);
-                if(connectingState.isSuccess())
+                if (connectingState.isSuccess()) {
                     changeState(connectingState);
-                else {
+                } else {
                     connectingState.dispose();
                     DisconnectEvent.emit();
                 }
-            } catch(IOException e) {
+            } catch (IOException e) {
                 DisconnectEvent.emit();
             }
         }
     }
-
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -287,6 +285,10 @@ public class Main extends StateBasedGame
         cfg.vSyncEnabled = true;
         cfg.foregroundFPS = 60;
         cfg.backgroundFPS = 60;
+        cfg.addIcon("data/icon128.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon64.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon32.png", Files.FileType.Internal);
+        cfg.addIcon("data/icon16.png", Files.FileType.Internal);
 
         parseOptions(args);
         new LwjglApplication(getInstance(), cfg);

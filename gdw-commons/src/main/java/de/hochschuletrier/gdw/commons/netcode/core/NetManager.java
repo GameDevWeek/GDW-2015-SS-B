@@ -1,8 +1,5 @@
 package de.hochschuletrier.gdw.commons.netcode.core;
 
-import de.hochschuletrier.gdw.commons.utils.pool.Poolable;
-import de.hochschuletrier.gdw.commons.utils.pool.Pool;
-import de.hochschuletrier.gdw.commons.utils.pool.ReflectionPool;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.CancelledKeyException;
@@ -14,8 +11,13 @@ import java.nio.channels.Selector;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hochschuletrier.gdw.commons.utils.pool.Pool;
+import de.hochschuletrier.gdw.commons.utils.pool.Poolable;
+import de.hochschuletrier.gdw.commons.utils.pool.ReflectionPool;
 
 /**
  * Abstract manager class

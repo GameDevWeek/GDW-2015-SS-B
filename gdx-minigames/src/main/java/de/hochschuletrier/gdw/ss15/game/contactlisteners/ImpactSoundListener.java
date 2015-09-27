@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ss15.game.contactlisteners;
 
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
+
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;

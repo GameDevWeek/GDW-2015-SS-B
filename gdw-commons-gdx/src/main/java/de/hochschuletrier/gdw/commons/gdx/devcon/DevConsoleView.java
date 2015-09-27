@@ -1,10 +1,11 @@
 package de.hochschuletrier.gdw.commons.gdx.devcon;
 
-import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.AppenderBase;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -13,11 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import de.hochschuletrier.gdw.commons.gdx.state.ScreenListener;
-import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.AppenderBase;
 import de.hochschuletrier.gdw.commons.devcon.CCmdFlags;
 import de.hochschuletrier.gdw.commons.devcon.CVarFlags;
 import de.hochschuletrier.gdw.commons.devcon.ConsoleCmd;
@@ -25,10 +28,9 @@ import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarFloat;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarString;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import org.slf4j.LoggerFactory;
+import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
+import de.hochschuletrier.gdw.commons.gdx.state.ScreenListener;
+import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 
 /**
  * Implementation of a view for the DevConsole on libgdx ui

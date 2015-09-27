@@ -1,10 +1,11 @@
 package de.hochschuletrier.gdw.commons.gdx.audio;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.ReflectionPool;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * Music Manager

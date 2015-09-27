@@ -1,9 +1,9 @@
 package de.hochschuletrier.gdw.examples.netcode.game.datagrams;
 
-import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 import de.hochschuletrier.gdw.commons.netcode.core.NetDatagram;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageIn;
 import de.hochschuletrier.gdw.commons.netcode.core.NetMessageOut;
+import de.hochschuletrier.gdw.commons.netcode.core.NetMessageType;
 
 /**
  *

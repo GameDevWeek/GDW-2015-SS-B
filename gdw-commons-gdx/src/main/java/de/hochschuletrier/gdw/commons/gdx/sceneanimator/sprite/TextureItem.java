@@ -1,9 +1,7 @@
 package de.hochschuletrier.gdw.commons.gdx.sceneanimator.sprite;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.Animation;
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.Item;
 import de.hochschuletrier.gdw.commons.gdx.sceneanimator.SceneAnimator.Getter;

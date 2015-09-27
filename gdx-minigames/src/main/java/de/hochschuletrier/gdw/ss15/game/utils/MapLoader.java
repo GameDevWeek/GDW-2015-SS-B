@@ -153,6 +153,9 @@ public class MapLoader {
                                 createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
                                         obj.getY() - obj.getHeight() / 2.0f, team);
                                 break;
+                            case "ball_light_minus":
+                            	createEntity(engine,entitytype,obj.getX()+obj.getWidth() / 2.0f,
+                            			obj.getY() - obj.getHeight() / 2.0f, team);
                             default:
                                 System.out.println(entitytype + "Nicht bekannt");
                         }

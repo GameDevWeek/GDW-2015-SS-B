@@ -85,8 +85,10 @@
             "StateRelatedAnimations": {
                 "animation_idle_plus": "player_idle_plus",
                 "animation_walk_plus": "player_walk_plus",
+                "animation_stunned_plus": "player_stunned_plus",
                 "animation_idle_minus": "player_idle_minus",
                 "animation_walk_minus": "player_walk_minus",
+                "animation_stunned_minus": "player_stunned_minus",
                 "initial_state": "idle_plus",
                 "scale": 1
             },

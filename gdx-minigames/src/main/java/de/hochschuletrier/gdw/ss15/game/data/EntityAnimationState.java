@@ -13,12 +13,10 @@ package de.hochschuletrier.gdw.ss15.game.data;
 public enum EntityAnimationState {
     IDLE_PLUS,
     WALK_PLUS,
-    SHOOT_PLUS,
-    DAZED_PLUS,
+    STUNNED_PLUS,
     IDLE_MINUS,
     WALK_MINUS,
-    SHOOT_MINUS,
-    DAZED,
+    STUNNED_MINUS,
     BALL_NEUTRAL,
     BALL_PLUS,
     BALL_MINUS

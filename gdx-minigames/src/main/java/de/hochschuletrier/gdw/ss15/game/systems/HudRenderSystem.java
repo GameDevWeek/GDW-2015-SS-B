@@ -39,6 +39,8 @@ public class HudRenderSystem extends EntitySystem implements
     private float displayedGoalMessage = 0;
     private Team teamShotGoal;
     private final BitmapFont goalFont;
+    private float goTimer;
+    Integer contdown321 = 0;
 
 	// private PooledEngine engine;
 
@@ -80,7 +82,9 @@ public class HudRenderSystem extends EntitySystem implements
 		String warmup = "WARMUP";
 		String gameover = winner + "!";
 
-		String time = "time:" + (int) Math.ceil(countdown);
+        contdown321 = (int) Math.ceil(countdown);
+		String time = "time:" + contdown321;
+        
 
 		if (gamestate != null) {
 			switch (gamestate) {
@@ -105,11 +109,21 @@ public class HudRenderSystem extends EntitySystem implements
 				font.draw(DrawUtil.batch, scoreBlue,
 						Gdx.graphics.getWidth() - 200, 50);
 				font.setColor(Color.GREEN);
-				font.draw(DrawUtil.batch, time,
-						Gdx.graphics.getWidth() / 2 - 100, 50);
+				//font.draw(DrawUtil.batch, time,Gdx.graphics.getWidth() / 2 - 100, 50);
+                if(contdown321 > 0){
+                    float f = ( countdown - contdown321);
+                    goalFont.setScale( 2 + f);
+                    goalFont.draw(DrawUtil.batch, contdown321.toString() ,Gdx.graphics.getWidth()/2 -20 - 10*f , Gdx.graphics.getHeight() / 2 -20 - 10*f);
+                }else{
+                    goTimer = 1.0f;
+                }
                 goalShot = false;
 				break;
 			case GAME:
+                goTimer -= deltaTime;
+                if(goTimer>0){
+                    goalFont.draw(DrawUtil.batch, "GO!",Gdx.graphics.getWidth()/2 -20 , Gdx.graphics.getHeight() / 2 -20);
+                }
 				font.setColor(Team.RED.color);
 				font.draw(DrawUtil.batch, scoreRed, 50, 50);
 				font.setColor(Team.BLUE.color);

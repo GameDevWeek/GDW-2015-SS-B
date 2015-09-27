@@ -49,6 +49,7 @@ public class PlayerContactListener extends PhysixContactAdapter {
     }
 
     private void stunnPlayer(Entity player) {
+//            if(player.hasComponent)//ggf die NotrecepiveComponent mit der Notstunnable abfragen
             BallDropComponent balldrop =engine.createComponent(BallDropComponent.class);
             player.add(balldrop);
             

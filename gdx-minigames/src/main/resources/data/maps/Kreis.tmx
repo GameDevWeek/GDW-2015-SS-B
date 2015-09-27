@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="61" height="61" tilewidth="64" tileheight="64" nextobjectid="34">
+ <tileset firstgid="1" source="balls_and_magnets.tsx"/>
+ <tileset firstgid="11" source="Bande_Tileset.tsx"/>
+ <tileset firstgid="26" source="Goal_Spawn.tsx"/>
+ <tileset firstgid="41" source="playgroundTileset.tsx"/>
+ <tileset firstgid="53" source="Sanboden.tsx"/>
+ <tileset firstgid="71" source="tileset_ground_SpawnsAndArea.tsx"/>
+ <tileset firstgid="83" source="Krater groß.tsx"/>
+ <layer name="boden" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJzt2kEOwjAMBMA+qNfCARAq/P9P5AEOjRt710568AWhaCfYRDSsy7KsTvXuKK9MkYzZ/F7WqHaUl+1nOVl2tpHhZvvQbrYL7WZ70G62A+1m50e72bnRbnZetJudk+FmZ0Sb2fnQZnY2hpudC+0+ev9W6lbqHiD72Vxa86PUs9QrgLMnl8a8l/qU+gZw9uSaZY615qhzfDZn5jn2zBl1jr1yZulry7xZ+vpsXmlvsvR1S95NeC3LZ9nTA0dmaTas5ttzndraLWZpNqzm23Od2totZmk2rObbc53a2i3m0Uoy177rRjmfd8XejHw+SzXS+WzVL5HKMmeW/m7N2fL7OUt/t+a8npP8r6hzrc2lMUeda00u7bPeqHOtyTXbHYZkHt09433VbHeT1/3z2O4Z/0OjNWd3n/Fmdvd4M7otvJnclt4Mbg9vZLenN6Ib4Y1iR1uZdrYVaWfbEHvgmesHw/tb6A==
+  </data>
+ </layer>
+ <layer name="Krate" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJzt21szglEcR+G+oyIhohBRhA7OOdNJn7h1435Ps2fXvNaaee7/v/u9c7n/2RryKGAdGyhiE6Ul3rVIoVu2sI0dlLGLPVSwn+7cKIVuOUAVNRziCMeo4yTduVEK3XKKBs5wjiZauMBlwntjFLqljStc4wYddNFDP+G9MQrdcos73OMBj3jCMwbpzo1S6JYXvOIN7/jAJ77wne7cKIVu+cEQI4wxwRS/mCW8N0ZZ2mJmZmZmZmZmZmZmZmZmZmZmZmZm9pd/E/yb4N+E1c+/Cf5N8G9Cdt7zZ2lLzOZP6nKB
+  </data>
+ </layer>
+ <layer name="try" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJztmtEKgzAMRf2APYw5xvb/P7oVdkGCWq1Nm9z0QJ8E9fQSalOnSY/5N24F46n4TrWRjp/C+7wn+3MA11LHHJgDC+7arpKe7q1dJa3dk28vV0ly1/a25As0vS36Ag1vy76gprcHX1DD25MvuOLt0ReUeHv2BWe8GXzBUe+79os05pG5zpQxyGXNljHYypoxY7CVNWvGQGbNnDGQWbNnDJZZD2de4ByhlgFqOkrGIGUd0blFH80KqONRz/xErefhzE9U57FWcTPWqjhEredElKwj9wwSEZ0j1PTamsye9dpZBnPWe99drFnvnU0yZn3k25ot69z5c4Ip6zP7Jwbvkv2iZ+8r+2OP3jX6AZ68a/Y/PHhr9Hsse2v2tyx6t+jnWfJu2b9M3q+pn/v8f36Pfm1r956uEm13S64SuGNc+Xd8eR+LrlvIOTg6tB2/mnkThQ==
+  </data>
+ </layer>
+ <layer name="Goals" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJztz7ERwCAQA0EaMQEOTP8VQvgVvGY8u5HC0xgAAAAAAACQNdMBTZ6y31hFr1W2z/9VP+9YRa8vHQAAAAAAAADXAUiFAVo=
+  </data>
+ </layer>
+ <layer name="Spawns" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKgDAMBdCeQ2/UTe9/GCcXSbFCoY28N2YIGf4npQAAAADAu332AQ3b7AMgkVV7/KTXfJEl1zf5hljU5XPQ7jpozxHMdBpi/jN/liXfcg39Vu21HgMAAADQ6wJQQwJh
+  </data>
+ </layer>
+ <layer name="Walls" width="61" height="61">
+  <data encoding="base64" compression="zlib">
+   eJztz8EJACAMBEEL8CE+7L9UaxASCToD9z3Y1gAAAAAgTz8YAPfMpN+R9BtBcxzNtWiOo7kWzXE01/JjM8CL1sEAAAAAINMGt8QC7Q==
+  </data>
+ </layer>
+ <objectgroup name="GoalParticles and Lights">
+  <object id="1" x="61" y="1788">
+   <properties>
+    <property name="Entitytype" value="Chainlight"/>
+    <property name="color" value="F00303"/>
+    <property name="direction" value="-1"/>
+   </properties>
+   <polyline points="0,0 1,321"/>
+  </object>
+  <object id="2" x="3839" y="1789">
+   <properties>
+    <property name="Entitytype" value="Chainlight"/>
+    <property name="color" value="0078E8"/>
+    <property name="direction" value="1"/>
+   </properties>
+   <polyline points="0,0 1,321"/>
+  </object>
+  <object id="3" x="3781" y="1780" width="6" height="6">
+   <properties>
+    <property name="Entitytype" value="goal_particles_bl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="4" x="3780" y="2116" width="5" height="6">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tl"/>
+    <property name="Team" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="5" x="118" y="1781" width="6" height="5">
+   <properties>
+    <property name="Entitytype" value="goal_particles_br"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="6" x="120" y="2116" width="3" height="6">
+   <properties>
+    <property name="Entitytype" value="goal_particles_tr"/>
+    <property name="Team" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Spawns">
+  <object id="9" gid="26" x="3392" y="1984" width="64" height="64"/>
+  <object id="10" gid="26" x="3328" y="1728" width="64" height="64"/>
+  <object id="11" gid="26" x="3328" y="2240" width="64" height="64"/>
+  <object id="12" gid="26" x="3264" y="1536" width="64" height="64"/>
+  <object id="13" gid="26" x="3264" y="2432" width="64" height="64"/>
+  <object id="14" gid="26" x="3136" y="1280" width="64" height="64"/>
+  <object id="15" gid="26" x="3136" y="2688" width="64" height="64"/>
+  <object id="16" gid="27" x="448" y="1984" width="64" height="64"/>
+  <object id="17" gid="27" x="512" y="2240" width="64" height="64"/>
+  <object id="18" gid="27" x="512" y="1728" width="64" height="64"/>
+  <object id="19" gid="27" x="576" y="2432" width="64" height="64"/>
+  <object id="20" gid="27" x="576" y="1536" width="64" height="64"/>
+  <object id="21" gid="27" x="704" y="2688" width="64" height="64"/>
+  <object id="22" gid="27" x="704" y="1280" width="64" height="64"/>
+  <object id="23" gid="74" x="1920" y="1984" width="64" height="64"/>
+  <object id="24" gid="81" x="3072" y="1984" width="64" height="64"/>
+  <object id="25" gid="82" x="768" y="1984" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Goals">
+  <object id="28" x="3810" y="1788" width="36" height="328.667">
+   <properties>
+    <property name="Entitytype" value="goal"/>
+    <property name="Team" value="0"/>
+   </properties>
+  </object>
+  <object id="29" x="57" y="1786" width="33" height="331">
+   <properties>
+    <property name="Entitytype" value="goal"/>
+    <property name="Team" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Magnets">
+  <object id="30" gid="9" x="1216" y="1280" width="64" height="64"/>
+  <object id="31" gid="9" x="2624" y="2688" width="64" height="64"/>
+  <object id="32" gid="10" x="2624" y="1280" width="64" height="64"/>
+  <object id="33" gid="10" x="1216" y="2688" width="64" height="64"/>
+ </objectgroup>
+</map>

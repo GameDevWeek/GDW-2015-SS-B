@@ -16,6 +16,7 @@ import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss15.events.ChangeBallOwnershipEvent;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import static de.hochschuletrier.gdw.ss15.game.GameConstants.PRIORITY_ANIMATIONS;
 import de.hochschuletrier.gdw.ss15.game.components.BallComponent;
 import de.hochschuletrier.gdw.ss15.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss15.game.components.LocalPlayerComponent;
@@ -40,6 +41,7 @@ import de.hochschuletrier.gdw.ss15.game.systems.GoalShotEventSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.HudRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.InputBallSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.LimitedSmoothCameraSystem;
+import de.hochschuletrier.gdw.ss15.game.systems.LocalPlayerMarkerSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticFieldRenderSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MagneticForceSystem;
 import de.hochschuletrier.gdw.ss15.game.systems.MapRenderSystem;
@@ -152,7 +154,8 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         }
         engine.addSystem(new NetHudRenderSystem(assetManager, netClient, netServer, GameConstants.PRIORITY_HUD));
         
-        engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS, assetManager));
+        engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS , assetManager));
+        engine.addSystem(new LocalPlayerMarkerSystem(PRIORITY_ANIMATIONS - 1, assetManager));
         
         /* Camera System muss schon existieren */
         engine.addSystem(new InputBallSystem(0, engine.getSystem(LimitedSmoothCameraSystem.class).getCamera()));

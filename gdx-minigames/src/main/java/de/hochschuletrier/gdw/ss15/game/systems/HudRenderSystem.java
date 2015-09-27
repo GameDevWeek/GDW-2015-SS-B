@@ -10,9 +10,12 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.events.ChangeGameStateEvent;
+import de.hochschuletrier.gdw.ss15.events.GoalShotEvent;
 import de.hochschuletrier.gdw.ss15.events.ScoreChangedEvent;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.Team;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class is rendering the HUD with the update method
@@ -21,7 +24,7 @@ import de.hochschuletrier.gdw.ss15.game.data.Team;
  *
  */
 public class HudRenderSystem extends EntitySystem implements
-		ScoreChangedEvent.Listener, ChangeGameStateEvent.Listener {
+		ScoreChangedEvent.Listener, ChangeGameStateEvent.Listener, GoalShotEvent.Listener {
 	private String winner;
 	private final BitmapFont font;
 	private int scoreRedInt = 0;
@@ -30,12 +33,19 @@ public class HudRenderSystem extends EntitySystem implements
 	private String scoreRed = "0";
 	private float countdown;
 	private GameState gamestate;
+   
+    private boolean goalShot = false;
+    private final float displayGoalMessage = 1.6f;
+    private float displayedGoalMessage = 0;
+    private Team teamShotGoal;
+    private final BitmapFont goalFont;
 
 	// private PooledEngine engine;
 
 	public HudRenderSystem(AssetManagerX assetManager, int priority) {
 		super(priority);
 		font = assetManager.getFont("quartz_50");
+        goalFont = assetManager.getFont("railway_32");
 	}
 
 	@Override
@@ -43,6 +53,7 @@ public class HudRenderSystem extends EntitySystem implements
 		// this.engine=(PooledEngine) engine;
 		ScoreChangedEvent.register(this);
 		ChangeGameStateEvent.register(this);
+        GoalShotEvent.register(this);
 	}
 
 	@Override
@@ -50,6 +61,7 @@ public class HudRenderSystem extends EntitySystem implements
 
 		ScoreChangedEvent.unregister(this);
 		ChangeGameStateEvent.unregister(this);
+        GoalShotEvent.unregister(this);
 		// this.engine=null;
 	}
 
@@ -95,6 +107,7 @@ public class HudRenderSystem extends EntitySystem implements
 				font.setColor(Color.GREEN);
 				font.draw(DrawUtil.batch, time,
 						Gdx.graphics.getWidth() / 2 - 100, 50);
+                goalShot = false;
 				break;
 			case GAME:
 				font.setColor(Team.RED.color);
@@ -105,6 +118,17 @@ public class HudRenderSystem extends EntitySystem implements
 				font.setColor(Color.GREEN);
 				font.draw(DrawUtil.batch, time,
 						Gdx.graphics.getWidth() / 2 - 100, 50);
+                if(goalShot){
+                    displayedGoalMessage += deltaTime;
+                    if(displayedGoalMessage <displayGoalMessage){
+                        goalFont.setScale(0.5f + displayedGoalMessage);
+                        
+                        goalFont.draw(DrawUtil.batch,"GOAL!",Gdx.graphics.getWidth() / 2 - 70 - 50 * displayedGoalMessage, Gdx.graphics.getHeight() / 2 - 20 - 30 * displayedGoalMessage);
+                    }else{
+                        displayedGoalMessage = 0;
+                        goalShot = false;
+                    }
+                }
 				break;
 			case GAME_OVER:
 				if (scoreBlueInt > scoreRedInt) {
@@ -147,4 +171,10 @@ public class HudRenderSystem extends EntitySystem implements
 		this.gamestate = newState;
 
 	}
+
+    @Override
+    public void onGoalShotEvent(Team team) {
+       goalShot = true;
+       teamShotGoal = team;
+    }
 }

@@ -9,6 +9,7 @@
     "texture_dummy_32": "data/images/texture_dummy_32x32px.png",
     "texture_dummy_64": "data/images/texture_dummy_64x64px.png",
     "p_spawn_dummy": "data/images/player_spawn_dummy.png",
+    "local_player_marker": "data/images/local_player_marker1.png",
     
     "data/maps/NiceMap.tmx": "data/maps/NiceMap.png",
     "data/maps/RedBull.tmx": "data/maps/RedBull.png",

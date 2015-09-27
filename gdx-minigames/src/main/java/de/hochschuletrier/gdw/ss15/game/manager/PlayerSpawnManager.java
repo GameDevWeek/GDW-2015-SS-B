@@ -114,9 +114,11 @@ public class PlayerSpawnManager implements GoalEvent.Listener,
             Entity spawnEntity = getPlayerSpawn(player.getId());
             if(spawnEntity != null) {
                 PhysixBodyComponent physixBody=player.getComponent(PhysixBodyComponent.class);
+                
                 physixBody.setX(spawnEntity.getComponent(PositionComponent.class).x);
                 physixBody.setY(spawnEntity.getComponent(PositionComponent.class).y);
                 physixBody.setLinearVelocity(0,0);
+                
                 player.getComponent(InputBallComponent.class).isStunned=isStunning;
             }
         }

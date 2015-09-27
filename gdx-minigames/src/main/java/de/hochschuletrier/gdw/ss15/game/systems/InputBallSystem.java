@@ -48,8 +48,18 @@ public class InputBallSystem extends IteratingSystem {
             float directionY = Gdx.input.getY()
                     - (pos.y - camera.getTopOffset());
             input.view.set(directionX, directionY).nor();
+            
+            if(input.notPullable != 0) {
+                input.notPullable = (input.notPullable - deltaTime > 0) ? input.notPullable - deltaTime : 0;
+            }
+            
+            if (InputPuffer.push) {
+                ShootEvent.emit(entity, input.view);
+                input.notPullable = 0.5f;
+                InputPuffer.push = false;
+            }
 
-            if (input.pull != InputPuffer.pull) { // wechsel hat stattgefunden
+            if (input.pull != InputPuffer.pull && input.notPullable == 0) { // wechsel hat stattgefunden
                 if (InputPuffer.pull) {
                     PullEvent.emitOn(entity, input.view);
                 } else {
@@ -59,11 +69,7 @@ public class InputBallSystem extends IteratingSystem {
                 input.pull = InputPuffer.pull;
             }
 
-            if (InputPuffer.push) {
-                
-                ShootEvent.emit(entity, input.view);
-                InputPuffer.push = false;
-            }
+            
 
             PhysixBodyComponent physBody = ComponentMappers.physixBody
                     .get(entity);

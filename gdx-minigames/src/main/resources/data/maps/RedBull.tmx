@@ -99,16 +99,4 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="ballLight">
-  <object id="50" gid="1" x="704" y="191" width="64" height="64">
-   <properties>
-    <property name="Entitytype" value="ball_light_minus"/>
-   </properties>
-  </object>
-  <object id="51" gid="3" x="578" y="1152" width="64" height="64">
-   <properties>
-    <property name="Entitytype" value="ball_light_minus"/>
-   </properties>
-  </object>
- </objectgroup>
 </map>

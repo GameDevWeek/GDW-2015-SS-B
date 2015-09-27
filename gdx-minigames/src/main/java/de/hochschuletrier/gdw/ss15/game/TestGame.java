@@ -158,7 +158,7 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
             engine.addSystem(new NetClientSendInputSystem(netClient));
             engine.addSystem(new NetClientUpdateSystem(netClient));
         }
-        engine.addSystem(new NetHudRenderSystem(assetManager, netClient, netServer, GameConstants.PRIORITY_HUD));
+        //engine.addSystem(new NetHudRenderSystem(assetManager, netClient, netServer, GameConstants.PRIORITY_HUD));
         
         engine.addSystem(new RenderBallAtPlayerSystem(GameConstants.PRIORITY_ANIMATIONS , assetManager));
         engine.addSystem(new LocalPlayerMarkerSystem(PRIORITY_ANIMATIONS - 1, assetManager));

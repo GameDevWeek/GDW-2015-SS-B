@@ -21,6 +21,7 @@ import de.hochschuletrier.gdw.ss15.Main;
 import de.hochschuletrier.gdw.ss15.game.AbstractGame;
 import de.hochschuletrier.gdw.ss15.game.GameConstants;
 import de.hochschuletrier.gdw.ss15.game.input.InputKeyboard;
+import de.hochschuletrier.gdw.ss15.game.input.InputManager;
 import de.hochschuletrier.gdw.ss15.menu.MenuPageRoot;
 
 /**
@@ -40,7 +41,6 @@ public class GameplayState extends BaseGameState {
     private final MenuManager menuManager = new MenuManager(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT, this::onMenuEmptyPop);
     private final InputForwarder inputForwarder;
     private final InputProcessor menuInputProcessor;
-    private final InputInterceptor gameInputProcessor;
 
     public GameplayState(AssetManagerX assetManager, AbstractGame game) {
         this.game = game;
@@ -52,9 +52,6 @@ public class GameplayState extends BaseGameState {
         final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.INGAME);
         menuManager.addLayer(menuPageRoot);
         menuInputProcessor = menuManager.getInputProcessor();
-        gameInputProcessor = new InputInterceptor( new InputKeyboard() );
-        
-        gameInputProcessor.setActive(true);
 
         menuManager.addLayer(new DecoImage(assetManager.getTexture("menu_fg")));
         menuManager.pushPage(menuPageRoot);
@@ -67,7 +64,7 @@ public class GameplayState extends BaseGameState {
             @Override
             public boolean keyUp(int keycode) {
                 if (keycode == Input.Keys.ESCAPE) {
-                    if (mainProcessor == gameInputProcessor) {
+                    if (mainProcessor == InputManager.getInputProcessor()) {
                         mainProcessor = menuInputProcessor;
                     } else {
                         menuManager.popPage();
@@ -81,7 +78,7 @@ public class GameplayState extends BaseGameState {
     }
 
     private void onMenuEmptyPop() {
-        inputForwarder.set(gameInputProcessor);
+        inputForwarder.set(InputManager.getInputProcessor());
     }
 
     @Override
@@ -107,7 +104,7 @@ public class GameplayState extends BaseGameState {
     @Override
     public void onEnterComplete() {
         Main.inputMultiplexer.addProcessor(inputForwarder);
-        inputForwarder.set(gameInputProcessor);
+        inputForwarder.set(InputManager.getInputProcessor());
     }
 
     @Override

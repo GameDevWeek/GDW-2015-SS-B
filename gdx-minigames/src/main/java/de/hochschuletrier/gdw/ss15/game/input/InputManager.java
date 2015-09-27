@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
 
@@ -15,37 +14,58 @@ public class InputManager {
     }
     
     private static InputStates activeState = InputStates.KEYBOARD_MOUCE;
-    Array<Controller> controller;
+    private static Controller controller;
     
-    private final InputInterceptor impKeyMouce;
-    private final InputGamePad impGamepad;
-    
-    public InputManager(InputStates inputState) {
-        impKeyMouce = new InputInterceptor(new InputKeyboard());
-        controller = Controllers.getControllers();
-        
-        impGamepad = new InputGamePad();
+    private static final InputInterceptor impKeyMouce = new InputInterceptor(new InputKeyboard());;
+    private static final InputGamePad impGamepad = new InputGamePad();;
+
+
+    public static void init() {
+        if(controller == null && Controllers.getControllers().first() != null) {
+            InputManager.controller = Controllers.getControllers().first();
+        }
         
         try {
-            setInputActive(inputState);
+            setInputActive(activeState);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    public static Vector2 getViewDirection() {
+    public static void setActiveSate(InputStates activeState) {
+        InputManager.activeState = activeState;
+    }
+    
+    public static Vector2 getViewDirection(Vector2 playerOnScreen) {
             switch (activeState) {
                 case KEYBOARD_MOUCE: 
-                    return new Vector2(Gdx.input.getX(), Gdx.input.getY());
+                    return new Vector2(Gdx.input.getX() - playerOnScreen.x, Gdx.input.getY() - playerOnScreen.y);
                 case GAMEPAD:
-                    return new Vector2();
+                    if (controller != null){
+                        float zitterKreisJoystick = 0.02f;
+                        
+                        float tmpX = controller.getAxis(3);
+                        if (tmpX < zitterKreisJoystick && tmpX > -zitterKreisJoystick) {
+                            tmpX = 0;
+                        }
+                        
+                        float tmpY = controller.getAxis(4);
+                        if (tmpY < zitterKreisJoystick && tmpY > -zitterKreisJoystick) {
+                            tmpY = 0;
+                        }
+                        return new Vector2(tmpX, tmpY);
+                    }
                 default:
                     return null;
             }
         
     }
     
-    public void setInputActive (InputStates input) throws Exception {
+    public static void setInputActive (InputStates input) throws Exception {
+        
+        if (input == InputStates.GAMEPAD && controller == null) {
+            throw new Exception("kein Controller");
+        }
         
         // deactivate active input
         
@@ -54,9 +74,7 @@ public class InputManager {
                     impKeyMouce.setActive(false);
                     break;
                 case GAMEPAD:
-                    for (Controller contr : controller) {
-                        contr.removeListener(impGamepad);
-                    }
+                    controller.removeListener(impGamepad);
                     break;
                 default:
                     break;
@@ -69,9 +87,7 @@ public class InputManager {
                 impKeyMouce.setActive(true);
                 break;
             case GAMEPAD:
-                for (Controller contr : controller) {
-                    contr.addListener(impGamepad);
-                }
+                controller.addListener(impGamepad);
                 break;
             default: 
                 throw new Exception("Input nicht unterstützt"); 
@@ -80,11 +96,15 @@ public class InputManager {
         activeState = input;
     }
     
-    public InputInterceptor getInputProcessor() {
-        return impKeyMouce;
+    public static void setController(Controller controller) {
+        InputManager.controller = controller;
     }
     
-    public Array<Controller> getController() {
+    public static Controller getController() {
         return controller;
+    }
+    
+    public static InputInterceptor getInputProcessor() {
+        return impKeyMouce;
     }
 }

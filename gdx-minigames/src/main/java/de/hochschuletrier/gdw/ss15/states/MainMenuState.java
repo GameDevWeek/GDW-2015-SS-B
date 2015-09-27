@@ -3,6 +3,7 @@ package de.hochschuletrier.gdw.ss15.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -52,7 +53,8 @@ public class MainMenuState extends BaseGameState {
                 return super.keyUp(keycode);
             }
         };
-
+        
+        System.out.println(Controllers.getControllers());
         Main.inputMultiplexer.addProcessor(inputForwarder);
     }
 

@@ -4,6 +4,9 @@ package de.hochschuletrier.gdw.ss15.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleShader.Inputs;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
@@ -26,6 +29,8 @@ import de.hochschuletrier.gdw.ss15.game.contactlisteners.PlayerContactListener;
 import de.hochschuletrier.gdw.ss15.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss15.game.data.GameState;
 import de.hochschuletrier.gdw.ss15.game.data.GameType;
+import de.hochschuletrier.gdw.ss15.game.input.InputManager;
+import de.hochschuletrier.gdw.ss15.game.input.InputManager.InputStates;
 import de.hochschuletrier.gdw.ss15.game.manager.BallManager;
 import de.hochschuletrier.gdw.ss15.game.manager.PlayerSpawnManager;
 import de.hochschuletrier.gdw.ss15.game.systems.BallDropSystem;
@@ -74,6 +79,8 @@ public class TestGame extends AbstractGame implements ChangeBallOwnershipEvent.L
         map = loadMap(mapName);
         engine.getSystem(LimitedSmoothCameraSystem.class).initMap(map);
         engine.addSystem(new MapRenderSystem(map, GameConstants.PRIORITY_MAP));
+        
+        InputManager.init();
     }
 
     @Override
